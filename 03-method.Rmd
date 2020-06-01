@@ -1,3 +1,3 @@
-# Methods
+# Pacotes do R para análise
 
 We describe our methods in this chapter.
