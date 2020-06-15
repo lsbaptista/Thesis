@@ -22,7 +22,7 @@
 \end{minipage}
 \end{center}
 
-
+\pagenumbering{gobble}% Remove page numbers (and reset to 1)
 %titlepage
 \thispagestyle{empty}
 \begin{center}
@@ -49,4 +49,27 @@
     {\Large 2020}
 \end{minipage}
 \end{center}
+
+\pagenumbering{roman}% Arabic page numbers (and reset to 1)
+\setcounter{page}{2}
+
 \clearpage
+
+\chapter*{Resumo}
+
+\chapter*{Abstract}
+
+\newenvironment{dedication}
+  {\clearpage           % we want a new page
+   \itshape             % the text is in italics
+   \raggedleft          % flush to the right margin
+  }
+  {\par % end the paragraph
+   \vspace{\stretch{3}} % space at bottom is three times that at the top
+   \clearpage           % finish off the page
+  }
+\begin{dedication}
+{\Large Dedicado a minha esposa\par}
+\end{dedication}
+
+\chapter*{Agradecimentos}

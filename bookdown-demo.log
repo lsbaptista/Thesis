@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.1)  1 JUN 2020 17:58
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.6.15)  15 JUN 2020 18:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **bookdown-demo.tex
 (./bookdown-demo.tex
 LaTeX2e <2020-02-02> patch level 5
-L3 programming layer <2020-05-15> (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf
+L3 programming layer <2020-06-03> (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf
 -dist/tex/latex/base/book.cls
 Document Class: book 2019/12/20 v1.4l Standard LaTeX document class
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/bk12.clo
@@ -149,11 +149,11 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unico
 de-math.sty
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2020-05-15 L3 programming layer (loader) 
+Package: expl3 2020-06-03 L3 programming layer (loader) 
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backen
 d-xdvipdfmx.def
-File: l3backend-xdvipdfmx.def 2020-05-05 L3 backend support: xdvipdfmx
+File: l3backend-xdvipdfmx.def 2020-06-03 L3 backend support: xdvipdfmx
 \g__graphics_track_int=\count184
 \l__pdf_internal_box=\box47
 \g__pdf_backend_object_int=\count185
@@ -253,7 +253,7 @@ Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdftexcmds/pdftexc
 mds.sty
-Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2020-06-04 v0.32 Utility functions of pdfTeX for LuaTeX (HO
 )
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwar
@@ -506,13 +506,6 @@ Package graphics Info: Driver file: xetex.def on input line 105.
 )
 \Gin@req@height=\dimen178
 \Gin@req@width=\dimen179
-)
-(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/grffile/grffile.st
-y
-Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
-y)
-Package grffile Info: This package is an empty stub for compatibility on input 
-line 40.
 ) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amscls/amsthm.st
 y
 Package: amsthm 2020/05/21 v2.20.5
@@ -535,9 +528,9 @@ Package inputenc Warning: inputenc package ignored with utf8 based engines.
 
 ) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.st
 y
-Package: babel 2020/05/13 3.44 The Babel package
+Package: babel 2020/06/10 3.45 The Babel package
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2020/05/13 3.44 Babel common definitions
+File: babel.def 2020/06/10 3.45 Babel common definitions
 \babel@savecnt=\count299
 \U@D=\dimen180
 \l@babelnohyphens=\language4
@@ -621,7 +614,7 @@ ex-text;"
 ping=tex-text;"
 
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 128.
+(Font)              scaled to size 12.0pt on input line 129.
 
 Package fontspec Info: Arial scale = 0.9999975478716753.
 
@@ -682,11 +675,11 @@ ge=dflt;"
 ge=dflt;+smcp;"
 
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/Arial(1)/m/n on input line 128.
+(Font)                  OT1/lmr/m/n --> TU/Arial(1)/m/n on input line 129.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/Arial(1)/m/it on input line 128.
+(Font)                  OT1/lmr/m/it --> TU/Arial(1)/m/it on input line 129.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/Arial(1)/b/n on input line 128.
+(Font)                  OT1/lmr/bx/n --> TU/Arial(1)/b/n on input line 129.
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/polyglossia/polygl
 ossia.sty
@@ -834,45 +827,45 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count302
 ) (./bookdown-demo.aux
-LaTeX Info: Redefining \rmfamily on input line 22.
-LaTeX Info: Redefining \sffamily on input line 22.
-LaTeX Info: Redefining \ttfamily on input line 22.
+LaTeX Info: Redefining \rmfamily on input line 23.
+LaTeX Info: Redefining \sffamily on input line 23.
+LaTeX Info: Redefining \ttfamily on input line 23.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-LaTeX Info: Redefining \rmfamily on input line 26.
-LaTeX Info: Redefining \sffamily on input line 26.
-LaTeX Info: Redefining \ttfamily on input line 26.
+LaTeX Info: Redefining \rmfamily on input line 27.
+LaTeX Info: Redefining \sffamily on input line 27.
+LaTeX Info: Redefining \ttfamily on input line 27.
 )
 \openout1 = `bookdown-demo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 147.
+LaTeX Font Info:    ... okay on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 141.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 141.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 141.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 147.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 141.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 147.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -901,7 +894,7 @@ t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 14.43768pt on input line 141.
+(Font)              scaled to size 14.43768pt on input line 147.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -940,18 +933,18 @@ t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 14.43768pt on input line 141.
+(Font)              scaled to size 14.43768pt on input line 147.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 141.
+(Font)              `operators' in the math version `normal' on input line 147.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
- line 141.
+ line 147.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 141.
+(Font)              `operators' in the math version `bold' on input line 147.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
-t line 141.
+t line 147.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -1038,15 +1031,15 @@ t=math;language=dflt;"
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 141.
+(Font)              `symbols' in the math version `normal' on input line 147.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
-t line 141.
+t line 147.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 141.
+(Font)              `symbols' in the math version `bold' on input line 147.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
-t line 141.
+t line 147.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -1116,18 +1109,18 @@ t=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 (Font)              `largesymbols' in the math version `normal' on input line 1
-41.
+47.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 141.
+t line 147.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 141
+(Font)              `largesymbols' in the math version `bold' on input line 147
 .
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
-t line 141.
+t line 147.
 \AtBeginShipoutBox=\box55
-Package hyperref Info: Link coloring OFF on input line 141.
+Package hyperref Info: Link coloring OFF on input line 147.
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.s
 ty
@@ -1143,9 +1136,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count303
 )
-LaTeX Info: Redefining \ref on input line 141.
-LaTeX Info: Redefining \pageref on input line 141.
-LaTeX Info: Redefining \nameref on input line 141.
+LaTeX Info: Redefining \ref on input line 147.
+LaTeX Info: Redefining \pageref on input line 147.
+LaTeX Info: Redefining \nameref on input line 147.
 (./bookdown-demo.out) (./bookdown-demo.out)
 \@outlinefile=\write4
 \openout4 = `bookdown-demo.out'.
@@ -1184,45 +1177,45 @@ LaTeX Info: Redefining \nameref on input line 141.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \rmfamily on input line 141.
-LaTeX Info: Redefining \sffamily on input line 141.
-LaTeX Info: Redefining \ttfamily on input line 141.
+LaTeX Info: Redefining \rmfamily on input line 147.
+LaTeX Info: Redefining \sffamily on input line 147.
+LaTeX Info: Redefining \ttfamily on input line 147.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-LaTeX Info: Redefining \rmfamily on input line 141.
-LaTeX Info: Redefining \sffamily on input line 141.
-LaTeX Info: Redefining \ttfamily on input line 141.
+LaTeX Info: Redefining \rmfamily on input line 147.
+LaTeX Info: Redefining \sffamily on input line 147.
+LaTeX Info: Redefining \ttfamily on input line 147.
 File: image/biglogo.png Graphic file (type bmp)
 <image/biglogo.png>
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 17.28pt on input line 152.
+(Font)              scaled to size 17.28pt on input line 158.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.10637pt on input line 164.
+(Font)              scaled to size 10.10637pt on input line 170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.21884pt on input line 164.
+(Font)              scaled to size 7.21884pt on input line 170.
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-64.
+70.
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 14.43915pt on input line 164.
+(Font)              scaled to size 14.43915pt on input line 170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.10739pt on input line 164.
+(Font)              scaled to size 10.10739pt on input line 170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.21957pt on input line 164.
+(Font)              scaled to size 7.21957pt on input line 170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 14.43622pt on input line 164.
+(Font)              scaled to size 14.43622pt on input line 170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 10.10533pt on input line 164.
+(Font)              scaled to size 10.10533pt on input line 170.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.21811pt on input line 164.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 164
+(Font)              scaled to size 7.21811pt on input line 170.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 170
 .
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 164
+LaTeX Font Info:    Trying to load font information for U+msb on input line 170
 .
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1234,20 +1227,31 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [1
 
+
 ]
 Overfull \vbox (2.18854pt too high) has occurred while \output is active []
 
-LaTeX Font Info:    Font shape `TU/Arial(0)/m/sl' in size <12> not available
-(Font)              Font shape `TU/Arial(0)/m/it' tried instead on input line 1
-93.
-LaTeX Font Info:    Font shape `TU/Arial(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 193.
 [2]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 24.88pt on input line 199.
+(Font)              scaled to size 24.88pt on input line 206.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 24.88pt on input line 199.
-(./bookdown-demo.toc
+(Font)              scaled to size 24.88pt on input line 206.
+[2
+
+
+] [3
+
+]
+LaTeX Font Info:    Font shape `TU/Arial(0)/m/it' will be
+(Font)              scaled to size 12.0pt on input line 219.
+LaTeX Font Info:    Font shape `TU/Arial(0)/m/it' will be
+(Font)              scaled to size 17.28pt on input line 220.
+[4
+
+] [5
+
+
+] (./bookdown-demo.toc
 LaTeX Info: Redefining \rmfamily on input line 1.
 LaTeX Info: Redefining \sffamily on input line 1.
 LaTeX Info: Redefining \ttfamily on input line 1.
@@ -1262,8 +1266,7 @@ LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
 \tf@toc=\write5
 \openout5 = `bookdown-demo.toc'.
 
-[3
-
+[6
 
 ] (./bookdown-demo.lot
 LaTeX Info: Redefining \rmfamily on input line 1.
@@ -1278,7 +1281,7 @@ LaTeX Info: Redefining \ttfamily on input line 2.
 \tf@lot=\write6
 \openout6 = `bookdown-demo.lot'.
 
-[4
+[7
 
 ] (./bookdown-demo.lof
 LaTeX Info: Redefining \rmfamily on input line 1.
@@ -1293,47 +1296,40 @@ LaTeX Info: Redefining \ttfamily on input line 2.
 \tf@lof=\write7
 \openout7 = `bookdown-demo.lof'.
 
-[5
+[8
+
+] [9
+
+] [10
 
 ]
+
+Package hyperref Warning: Suppressing empty link on input line 242.
+
+
+LaTeX Warning: Reference `methods' on page 1 undefined on input line 242.
+
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 214.
-[6
-
-]
-
-Package hyperref Warning: Suppressing empty link on input line 230.
-
-
-LaTeX Warning: Reference `methods' on page 7 undefined on input line 230.
-
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 248.
 File: bookdown-demo_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/nice-fig-1.pdf>
-[7
+[1
 
-]
-LaTeX Info: Redefining \rmfamily on input line 299.
-LaTeX Info: Redefining \sffamily on input line 299.
-LaTeX Info: Redefining \ttfamily on input line 299.
-[8]
-LaTeX Info: Redefining \rmfamily on input line 299.
-LaTeX Info: Redefining \sffamily on input line 299.
-LaTeX Info: Redefining \ttfamily on input line 299.
-[9]
+] [2] [3]
 Capítulo 1.
-[10
+[4
 
 ]
 Capítulo 2.
-[11
+[5
 
 ]
 Capítulo 3.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 314.
-[12
+(Font)              scaled to size 17.28pt on input line 326.
+[6
 
-] (./bookdown-demo.bbl [13
+] (./bookdown-demo.bbl [7
 
 ])
 The property list \polyglossia@langsetup contains the pairs (without outer
@@ -1370,37 +1366,37 @@ braces):
 >  {portuguese/babelname}  =>  {brazil}
 >  {portuguese/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {portuguese/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 327.
-[14
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 339.
+[8
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 327.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 339.
 (./bookdown-demo.aux
-LaTeX Info: Redefining \rmfamily on input line 22.
-LaTeX Info: Redefining \sffamily on input line 22.
-LaTeX Info: Redefining \ttfamily on input line 22.
+LaTeX Info: Redefining \rmfamily on input line 23.
+LaTeX Info: Redefining \sffamily on input line 23.
+LaTeX Info: Redefining \ttfamily on input line 23.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-LaTeX Info: Redefining \rmfamily on input line 26.
-LaTeX Info: Redefining \sffamily on input line 26.
-LaTeX Info: Redefining \ttfamily on input line 26.
+LaTeX Info: Redefining \rmfamily on input line 27.
+LaTeX Info: Redefining \sffamily on input line 27.
+LaTeX Info: Redefining \ttfamily on input line 27.
 )
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 327.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 327.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 339.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 339.
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
-(rerunfilecheck)             Checksum: D37CE74F189D93FA4A1688442C411A85;1225.
+(rerunfilecheck)             Checksum: 1B794D4C610FD9448B5FC97EE29F9D40;1116.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 327.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 339.
  ) 
 Here is how much of TeX's memory you used:
- 19567 strings out of 481258
- 347977 string characters out of 5922762
- 791258 words of memory out of 5000000
- 36778 multiletter control sequences out of 15000+600000
+ 19564 strings out of 481260
+ 347784 string characters out of 5922765
+ 791536 words of memory out of 5000000
+ 36779 multiletter control sequences out of 15000+600000
  535959 words of font info for 68 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 53i,8n,121p,907b,391s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,8n,121p,907b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (14 pages).
+Output written on bookdown-demo.pdf (19 pages).
