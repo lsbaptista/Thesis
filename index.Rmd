@@ -3,7 +3,7 @@ lang: "pt-br"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-biblio-style: apalike
+biblio-style: apa
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 classoption: openany

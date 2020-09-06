@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.6)  6 SEP 2020 15:33
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.6)  6 SEP 2020 18:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -820,52 +820,323 @@ Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Default language is portuguese.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
-Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip61
-\bibsep=\skip62
-LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count303
-) (./bookdown-demo.aux
-LaTeX Info: Redefining \rmfamily on input line 23.
-LaTeX Info: Redefining \sffamily on input line 23.
-LaTeX Info: Redefining \ttfamily on input line 23.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.
+sty
+Package: biblatex 2020/08/23 v3.15a programmable bibliographies (PK/MW)
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count303
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+)) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@tabx@nest=\count304
+\c@listtotal=\count305
+\c@listcount=\count306
+\c@liststart=\count307
+\c@liststop=\count308
+\c@citecount=\count309
+\c@citetotal=\count310
+\c@multicitecount=\count311
+\c@multicitetotal=\count312
+\c@instcount=\count313
+\c@maxnames=\count314
+\c@minnames=\count315
+\c@maxitems=\count316
+\c@minitems=\count317
+\c@citecounter=\count318
+\c@maxcitecounter=\count319
+\c@savedcitecounter=\count320
+\c@uniquelist=\count321
+\c@uniquename=\count322
+\c@refsection=\count323
+\c@refsegment=\count324
+\c@maxextratitle=\count325
+\c@maxextratitleyear=\count326
+\c@maxextraname=\count327
+\c@maxextradate=\count328
+\c@maxextraalpha=\count329
+\c@abbrvpenalty=\count330
+\c@highnamepenalty=\count331
+\c@lownamepenalty=\count332
+\c@maxparens=\count333
+\c@parenlevel=\count334
+\blx@tempcnta=\count335
+\blx@tempcntb=\count336
+\blx@tempcntc=\count337
+\blx@maxsection=\count338
+\blx@maxsegment@0=\count339
+\blx@notetype=\count340
+\blx@parenlevel@text=\count341
+\blx@parenlevel@foot=\count342
+\blx@sectionciteorder@0=\count343
+\blx@entrysetcounter=\count344
+\blx@biblioinstance=\count345
+\labelnumberwidth=\skip61
+\labelalphawidth=\skip62
+\biblabelsep=\skip63
+\bibitemsep=\skip64
+\bibnamesep=\skip65
+\bibinitsep=\skip66
+\bibparsep=\skip67
+\bibhang=\skip68
+\blx@bcfin=\read4
+\blx@bcfout=\write4
+\blx@langwohyphens=\language5
+\c@mincomprange=\count346
+\c@maxcomprange=\count347
+\c@mincompwidth=\count348
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/blx-dm.de
+f
+File: blx-dm.def 2020/08/23 v3.15a biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'apa.dbx' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex-apa/apa.d
+bx
+File: apa.dbx 2020/08/28 v9.14 APA biblatex style data model
+)
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count349
+\c@savedafterword=\count350
+\c@annotator=\count351
+\c@savedannotator=\count352
+\c@author=\count353
+\c@savedauthor=\count354
+\c@bookauthor=\count355
+\c@savedbookauthor=\count356
+\c@commentator=\count357
+\c@savedcommentator=\count358
+\c@editor=\count359
+\c@savededitor=\count360
+\c@editora=\count361
+\c@savededitora=\count362
+\c@editorb=\count363
+\c@savededitorb=\count364
+\c@editorc=\count365
+\c@savededitorc=\count366
+\c@foreword=\count367
+\c@savedforeword=\count368
+\c@holder=\count369
+\c@savedholder=\count370
+\c@introduction=\count371
+\c@savedintroduction=\count372
+\c@namea=\count373
+\c@savednamea=\count374
+\c@nameb=\count375
+\c@savednameb=\count376
+\c@namec=\count377
+\c@savednamec=\count378
+\c@translator=\count379
+\c@savedtranslator=\count380
+\c@shortauthor=\count381
+\c@savedshortauthor=\count382
+\c@shorteditor=\count383
+\c@savedshorteditor=\count384
+\c@groupauthor=\count385
+\c@savedgroupauthor=\count386
+\c@narrator=\count387
+\c@savednarrator=\count388
+\c@execproducer=\count389
+\c@savedexecproducer=\count390
+\c@execdirector=\count391
+\c@savedexecdirector=\count392
+\c@with=\count393
+\c@savedwith=\count394
+\c@labelname=\count395
+\c@savedlabelname=\count396
+\c@institution=\count397
+\c@savedinstitution=\count398
+\c@lista=\count399
+\c@savedlista=\count400
+\c@listb=\count401
+\c@savedlistb=\count402
+\c@listc=\count403
+\c@savedlistc=\count404
+\c@listd=\count405
+\c@savedlistd=\count406
+\c@liste=\count407
+\c@savedliste=\count408
+\c@listf=\count409
+\c@savedlistf=\count410
+\c@location=\count411
+\c@savedlocation=\count412
+\c@organization=\count413
+\c@savedorganization=\count414
+\c@origlocation=\count415
+\c@savedoriglocation=\count416
+\c@origpublisher=\count417
+\c@savedorigpublisher=\count418
+\c@publisher=\count419
+\c@savedpublisher=\count420
+\c@language=\count421
+\c@savedlanguage=\count422
+\c@origlanguage=\count423
+\c@savedoriglanguage=\count424
+\c@citation=\count425
+\c@savedcitation=\count426
+\c@pageref=\count427
+\c@savedpageref=\count428
+\shorthandwidth=\skip69
+\shortjournalwidth=\skip70
+\shortserieswidth=\skip71
+\shorttitlewidth=\skip72
+\shortauthorwidth=\skip73
+\shorteditorwidth=\skip74
+\locallabelnumberwidth=\skip75
+\locallabelalphawidth=\skip76
+\localshorthandwidth=\skip77
+\localshortjournalwidth=\skip78
+\localshortserieswidth=\skip79
+\localshorttitlewidth=\skip80
+\localshortauthorwidth=\skip81
+\localshorteditorwidth=\skip82
+Package biblatex Info: Trying to load enhanced support for Unicode engines...
+Package biblatex Info: ... file 'blx-unicode.def' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/blx-unico
+de.def)
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/blx-compa
+t.def
+File: blx-compat.def 2020/08/23 v3.15a biblatex compatibility (PK/MW)
+)
+Package biblatex Info: expl3
+(biblatex)             2020-09-03 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+Package biblatex Info: Trying to load expl3 case changing code...
+Package biblatex Info: ... file 'blx-case-expl3.def' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/blx-case-
+expl3.def
+File: blx-case-expl3 2020/08/23 v3.15a expl3 case changing code for biblatex
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.
+def
+File: biblatex.def 2020/08/23 v3.15a biblatex compatibility (PK/MW)
+\c@textcitecount=\count429
+\c@textcitetotal=\count430
+\c@textcitemaxnames=\count431
+\c@biburlbigbreakpenalty=\count432
+\c@biburlbreakpenalty=\count433
+\c@biburlnumpenalty=\count434
+\c@biburlucpenalty=\count435
+\c@biburllcpenalty=\count436
+\biburlbigskip=\muskip19
+\biburlnumskip=\muskip20
+\biburlucskip=\muskip21
+\biburllcskip=\muskip22
+\c@smartand=\count437
+)
+Package biblatex Info: Trying to load bibliography style 'apa'...
+Package biblatex Info: ... file 'apa.bbx' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex-apa/apa.b
+bx
+File: apa.bbx 2020/08/28 v9.14 APA biblatex references style
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/bbx/stand
+ard.bbx
+File: standard.bbx 2020/08/23 v3.15a biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count438
+\c@bbx:relatedtotal=\count439
+))
+Package biblatex Info: Trying to load citation style 'apa'...
+Package biblatex Info: ... file 'apa.cbx' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex-apa/apa.c
+bx
+File: apa.cbx 2020/08/28 v9.14 APA biblatex citation style
+Package biblatex Info: Delimiter 'nameyeardelim' in context '' already defined,
+ overwriting.
+Package biblatex Info: Delimiter 'nameyeardelim' in context 'textcite' already 
+defined, overwriting.
+Package biblatex Info: Delimiter 'andothersdelim' in context '' already defined
+, overwriting.
+Package biblatex Info: Redefining '\fullcite'.
+Package biblatex Info: Redefining '\citeauthor'.
+Package biblatex Info: Redefining '\citeyear'.
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcites'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\footcitetexts'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\smartcites'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.
+cfg
+File: biblatex.cfg 
+))
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
+\@quotelevel=\count440
+\@quotereset=\count441
+(./bookdown-demo.aux
+LaTeX Info: Redefining \rmfamily on input line 26.
+LaTeX Info: Redefining \sffamily on input line 26.
+LaTeX Info: Redefining \ttfamily on input line 26.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-LaTeX Info: Redefining \rmfamily on input line 27.
-LaTeX Info: Redefining \sffamily on input line 27.
-LaTeX Info: Redefining \ttfamily on input line 27.
+LaTeX Info: Redefining \rmfamily on input line 30.
+LaTeX Info: Redefining \sffamily on input line 30.
+LaTeX Info: Redefining \ttfamily on input line 30.
 )
 \openout1 = `bookdown-demo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 147.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 148.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 147.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 148.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 147.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 148.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 147.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 148.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -894,7 +1165,7 @@ t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 14.43768pt on input line 147.
+(Font)              scaled to size 14.43768pt on input line 148.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -933,18 +1204,18 @@ t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 14.43768pt on input line 147.
+(Font)              scaled to size 14.43768pt on input line 148.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 147.
+(Font)              `operators' in the math version `normal' on input line 148.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
- line 147.
+ line 148.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 147.
+(Font)              `operators' in the math version `bold' on input line 148.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
-t line 147.
+t line 148.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -1031,15 +1302,15 @@ t=math;language=dflt;"
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 147.
+(Font)              `symbols' in the math version `normal' on input line 148.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
-t line 147.
+t line 148.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 147.
+(Font)              `symbols' in the math version `bold' on input line 148.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
-t line 147.
+t line 148.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -1109,18 +1380,18 @@ t=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 (Font)              `largesymbols' in the math version `normal' on input line 1
-47.
+48.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 147.
+t line 148.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 147
+(Font)              `largesymbols' in the math version `bold' on input line 148
 .
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
-t line 147.
+t line 148.
 \AtBeginShipoutBox=\box55
-Package hyperref Info: Link coloring OFF on input line 147.
+Package hyperref Info: Link coloring OFF on input line 148.
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.s
 ty
@@ -1134,14 +1405,14 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count304
+\c@section@level=\count442
 )
-LaTeX Info: Redefining \ref on input line 147.
-LaTeX Info: Redefining \pageref on input line 147.
-LaTeX Info: Redefining \nameref on input line 147.
+LaTeX Info: Redefining \ref on input line 148.
+LaTeX Info: Redefining \pageref on input line 148.
+LaTeX Info: Redefining \nameref on input line 148.
 (./bookdown-demo.out) (./bookdown-demo.out)
-\@outlinefile=\write4
-\openout4 = `bookdown-demo.out'.
+\@outlinefile=\write5
+\openout5 = `bookdown-demo.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1177,45 +1448,94 @@ LaTeX Info: Redefining \nameref on input line 147.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \rmfamily on input line 147.
-LaTeX Info: Redefining \sffamily on input line 147.
-LaTeX Info: Redefining \ttfamily on input line 147.
+LaTeX Info: Redefining \rmfamily on input line 148.
+LaTeX Info: Redefining \sffamily on input line 148.
+LaTeX Info: Redefining \ttfamily on input line 148.
+
+Package biblatex Warning: File 'brazil-apa.lbx' not found!
+(biblatex)                Ignoring mapping 'brazil' -> 'brazil-apa'.
+
+Package biblatex Info: Trying to load language 'brazil'...
+Package biblatex Info: ... file 'brazil.lbx' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/lbx/brazi
+l.lbx
+File: brazil.lbx 2020/08/23 v3.15a biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'brazilian' -> 'brazilian-apa'..
+.
+Package biblatex Info: ... file 'brazilian-apa.lbx' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex-apa/brazi
+lian-apa.lbx
+File: brazilian-apa.lbx 2020/08/28 v9.14 APA biblatex localisation
+Package biblatex Info: Trying to load language 'brazilian'...
+Package biblatex Info: ... file 'brazilian.lbx' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/lbx/brazi
+lian.lbx
+File: brazilian.lbx 2020/08/23 v3.15a biblatex localization (PK/MW)
+))
+Package biblatex Info: Trying to load language 'brazilian' -> 'brazilian-apa'..
+.
+Package biblatex Info: ... file 'brazilian-apa.lbx' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex-apa/brazi
+lian-apa.lbx
+File: brazilian-apa.lbx 2020/08/28 v9.14 APA biblatex localisation
+Package biblatex Info: Trying to load language 'brazilian'...
+Package biblatex Info: ... file 'brazilian.lbx' found.
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/lbx/brazi
+lian.lbx
+File: brazilian.lbx 2020/08/23 v3.15a biblatex localization (PK/MW)
+)))
+Package biblatex Info: XeTeX detected.
+(biblatex)             Assuming input encoding 'utf8'.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout4 = `bookdown-demo.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'bookdown-demo.bbl' found.
+(./bookdown-demo.bbl)
+Package biblatex Info: Reference section=0 on input line 148.
+Package biblatex Info: Reference segment=0 on input line 148.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-LaTeX Info: Redefining \rmfamily on input line 147.
-LaTeX Info: Redefining \sffamily on input line 147.
-LaTeX Info: Redefining \ttfamily on input line 147.
+LaTeX Info: Redefining \rmfamily on input line 148.
+LaTeX Info: Redefining \sffamily on input line 148.
+LaTeX Info: Redefining \ttfamily on input line 148.
 File: image/biglogo.png Graphic file (type bmp)
 <image/biglogo.png>
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 17.28pt on input line 158.
+(Font)              scaled to size 17.28pt on input line 159.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.10637pt on input line 170.
+(Font)              scaled to size 10.10637pt on input line 171.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.21884pt on input line 170.
+(Font)              scaled to size 7.21884pt on input line 171.
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-70.
+71.
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 14.43915pt on input line 170.
+(Font)              scaled to size 14.43915pt on input line 171.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.10739pt on input line 170.
+(Font)              scaled to size 10.10739pt on input line 171.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.21957pt on input line 170.
+(Font)              scaled to size 7.21957pt on input line 171.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 14.43622pt on input line 170.
+(Font)              scaled to size 14.43622pt on input line 171.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 10.10533pt on input line 170.
+(Font)              scaled to size 10.10533pt on input line 171.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.21811pt on input line 170.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 170
+(Font)              scaled to size 7.21811pt on input line 171.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 171
 .
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 170
+LaTeX Font Info:    Trying to load font information for U+msb on input line 171
 .
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1233,9 +1553,9 @@ Overfull \vbox (2.18854pt too high) has occurred while \output is active []
 
 [2]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 24.88pt on input line 206.
+(Font)              scaled to size 24.88pt on input line 207.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 24.88pt on input line 206.
+(Font)              scaled to size 24.88pt on input line 207.
 [2
 
 
@@ -1243,58 +1563,58 @@ LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
 
 ]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 219.
+(Font)              scaled to size 12.0pt on input line 220.
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/it' will be
-(Font)              scaled to size 17.28pt on input line 220.
+(Font)              scaled to size 17.28pt on input line 221.
 [4
 
 ] [5
 
 
 ] (./bookdown-demo.toc
-LaTeX Info: Redefining \rmfamily on input line 1.
-LaTeX Info: Redefining \sffamily on input line 1.
-LaTeX Info: Redefining \ttfamily on input line 1.
+LaTeX Info: Redefining \rmfamily on input line 3.
+LaTeX Info: Redefining \sffamily on input line 3.
+LaTeX Info: Redefining \ttfamily on input line 3.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-LaTeX Info: Redefining \rmfamily on input line 2.
-LaTeX Info: Redefining \sffamily on input line 2.
-LaTeX Info: Redefining \ttfamily on input line 2.
+LaTeX Info: Redefining \rmfamily on input line 5.
+LaTeX Info: Redefining \sffamily on input line 5.
+LaTeX Info: Redefining \ttfamily on input line 5.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 3.
+(Font)              scaled to size 12.0pt on input line 7.
 )
-\tf@toc=\write5
-\openout5 = `bookdown-demo.toc'.
+\tf@toc=\write6
+\openout6 = `bookdown-demo.toc'.
 
 [6
 
 ] (./bookdown-demo.lot
-LaTeX Info: Redefining \rmfamily on input line 1.
-LaTeX Info: Redefining \sffamily on input line 1.
-LaTeX Info: Redefining \ttfamily on input line 1.
+LaTeX Info: Redefining \rmfamily on input line 3.
+LaTeX Info: Redefining \sffamily on input line 3.
+LaTeX Info: Redefining \ttfamily on input line 3.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-LaTeX Info: Redefining \rmfamily on input line 2.
-LaTeX Info: Redefining \sffamily on input line 2.
-LaTeX Info: Redefining \ttfamily on input line 2.
+LaTeX Info: Redefining \rmfamily on input line 5.
+LaTeX Info: Redefining \sffamily on input line 5.
+LaTeX Info: Redefining \ttfamily on input line 5.
 )
-\tf@lot=\write6
-\openout6 = `bookdown-demo.lot'.
+\tf@lot=\write7
+\openout7 = `bookdown-demo.lot'.
 
 [7
 
 ] (./bookdown-demo.lof
-LaTeX Info: Redefining \rmfamily on input line 1.
-LaTeX Info: Redefining \sffamily on input line 1.
-LaTeX Info: Redefining \ttfamily on input line 1.
+LaTeX Info: Redefining \rmfamily on input line 3.
+LaTeX Info: Redefining \sffamily on input line 3.
+LaTeX Info: Redefining \ttfamily on input line 3.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-LaTeX Info: Redefining \rmfamily on input line 2.
-LaTeX Info: Redefining \sffamily on input line 2.
-LaTeX Info: Redefining \ttfamily on input line 2.
+LaTeX Info: Redefining \rmfamily on input line 5.
+LaTeX Info: Redefining \sffamily on input line 5.
+LaTeX Info: Redefining \ttfamily on input line 5.
 )
-\tf@lof=\write7
-\openout7 = `bookdown-demo.lof'.
+\tf@lof=\write8
+\openout8 = `bookdown-demo.lof'.
 
 [8
 
@@ -1304,13 +1624,13 @@ LaTeX Info: Redefining \ttfamily on input line 2.
 
 ]
 
-Package hyperref Warning: Suppressing empty link on input line 242.
+Package hyperref Warning: Suppressing empty link on input line 243.
 
 
-LaTeX Warning: Reference `methods' on page 1 undefined on input line 242.
+LaTeX Warning: Reference `methods' on page 1 undefined on input line 243.
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 248.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 249.
 File: bookdown-demo_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/nice-fig-1.pdf>
 [1
@@ -1326,12 +1646,12 @@ Capítulo 2.
 ]
 Capítulo 3.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 326.
+(Font)              scaled to size 17.28pt on input line 327.
 [6
 
-] (./bookdown-demo.bbl [7
+] [7
 
-])
+]
 The property list \polyglossia@langsetup contains the pairs (without outer
 braces):
 >  {latex/script}  =>  {latin}
@@ -1366,37 +1686,44 @@ braces):
 >  {portuguese/babelname}  =>  {brazil}
 >  {portuguese/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {portuguese/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 339.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 340.
 [8
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 339.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 340.
 (./bookdown-demo.aux
-LaTeX Info: Redefining \rmfamily on input line 23.
-LaTeX Info: Redefining \sffamily on input line 23.
-LaTeX Info: Redefining \ttfamily on input line 23.
+LaTeX Info: Redefining \rmfamily on input line 26.
+LaTeX Info: Redefining \sffamily on input line 26.
+LaTeX Info: Redefining \ttfamily on input line 26.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-LaTeX Info: Redefining \rmfamily on input line 27.
-LaTeX Info: Redefining \sffamily on input line 27.
-LaTeX Info: Redefining \ttfamily on input line 27.
+LaTeX Info: Redefining \rmfamily on input line 30.
+LaTeX Info: Redefining \sffamily on input line 30.
+LaTeX Info: Redefining \ttfamily on input line 30.
 )
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 339.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 339.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 340.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 340.
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
 (rerunfilecheck)             Checksum: 1B794D4C610FD9448B5FC97EE29F9D40;1116.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 339.
+
+Package biblatex Warning: Please rerun LaTeX.
+(biblatex)                Page breaks have changed.
+
+Package logreq Info: Writing requests to 'bookdown-demo.run.xml'.
+\openout1 = `bookdown-demo.run.xml'.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 340.
  ) 
 Here is how much of TeX's memory you used:
- 19609 strings out of 481662
- 348577 string characters out of 5930875
- 796604 words of memory out of 5000000
- 36422 multiletter control sequences out of 15000+600000
+ 26939 strings out of 481662
+ 505409 string characters out of 5930875
+ 1410094 words of memory out of 5000000
+ 43693 multiletter control sequences out of 15000+600000
  538709 words of font info for 73 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 52i,8n,121p,907b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,8n,121p,907b,5461s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on bookdown-demo.pdf (19 pages).
