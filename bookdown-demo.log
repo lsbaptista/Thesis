@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.6)  6 SEP 2020 18:07
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.6)  9 SEP 2020 18:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1718,10 +1718,10 @@ Package logreq Info: Writing requests to 'bookdown-demo.run.xml'.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 340.
  ) 
 Here is how much of TeX's memory you used:
- 26939 strings out of 481662
- 505409 string characters out of 5930875
- 1410094 words of memory out of 5000000
- 43693 multiletter control sequences out of 15000+600000
+ 26946 strings out of 481662
+ 505627 string characters out of 5930875
+ 1410136 words of memory out of 5000000
+ 43700 multiletter control sequences out of 15000+600000
  538709 words of font info for 73 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  53i,8n,121p,907b,5461s stack positions out of 5000i,500n,10000p,200000b,80000s
