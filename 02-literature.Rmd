@@ -1,3 +1,6 @@
+\begingroup
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries\centering}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
 # Modelação Estatística na Otimização de Portfólios
-
+\newpage
 Here is a review of existing methods.

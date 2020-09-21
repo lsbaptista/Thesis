@@ -18,6 +18,7 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{Arial}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -110,6 +111,7 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
+\pagestyle{plain}
 \usepackage{booktabs}
 \usepackage{amsthm}
 
@@ -125,11 +127,12 @@
 \usepackage[portuguese]{babel}
 
 \usepackage{fontspec}
-\setmainfont{Arial}
-
-\pagestyle{plain}
 
 \frontmatter
+
+\usepackage{titlesec}
+
+\usepackage{lipsum}
 
 \ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
@@ -205,6 +208,18 @@
 \clearpage
 
 \chapter*{Resumo}
+\fontsize{12}{21}\selectfont
+O problema a ser tratado nesta dissertação será o impacto dos vários métodos de cálculo da volatilidade no cálculo da rentabilidade ótima do portfolio para um determinado nível de risco.
+Desta forma, ao definir o portfolio de ativos financeiros, será analisado o método da média variância na construção dos portfolios, assim como o impacto do número de ativos no valor da volatilidade final do portfolio. O cálculo da variância dos ativos será calculado com base nos dados históricos, na volatilidade implícita, no modelo GARCH e ARCH noutros métodos que possam ser de interesse ao longo do estudo teórico.
+
+historical volatility, EWMA and GARCH.
+Será realizada uma análise do VaR (Value at Risk) e do ES (Expected Shortfal) para cada um dos ativos e portfolios obtidos, utilizando diferentes métodos para cálculo do VaR e ES, classificando-se estes em métodos paramétricos e não paramétricos. Desta forma, a análise da otimização dos portfolios será enquadrada com a gestão de risco, VaR e ES, sendo que esta métrica combina duas características, a suposição do tipo de distribuição dos retornos e a previsão da variância.
+A análise dos valores obtidos nos portfolios será realizado comparando a rentabilidade obtida nos diferentes portfolios com a rentabilidade obtida no benchmark – ou índice de referência - sendo este um ponto de referência para identificar e comparar o desempenho dos investimentos realizados.
+Este trabalho será realizado tendo como ferramenta de apoio a linguagem de programação R.
+
+Este trabalho demonstra que os modelos da família GARCH são mais apropriados para se modelar a variância condicional (volatilidade) de séries de retornos financeiros que apresentam variância condicional evoluindo no tempo em comparação com os modelos ARIMA tradicionais.  ARIMA-GARCH
+
+
 
 \chapter*{Abstract}
 
@@ -308,18 +323,29 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 
 You can write citations,\autocite{Volatility2001} too. For example, we are using the \textbf{bookdown} package \autocite{R-bookdown} in this sample book,\autocite{Markowitz1952} which was built on top of R Markdown and \textbf{knitr} \autocite{OptVaR2000}.
 
+\begingroup
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries\centering}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+
 \hypertarget{modelauxe7uxe3o-estatuxedstica-na-otimizauxe7uxe3o-de-portfuxf3lios}{%
 \chapter{Modelação Estatística na Otimização de Portfólios}\label{modelauxe7uxe3o-estatuxedstica-na-otimizauxe7uxe3o-de-portfuxf3lios}}
+
+\newpage
 
 Here is a review of existing methods.
 
 \hypertarget{pacotes-do-r-para-anuxe1lise}{%
 \chapter{Pacotes do R para análise}\label{pacotes-do-r-para-anuxe1lise}}
 
+\newpage
+
 We describe our methods in this chapter.
 
 \hypertarget{aplicauxe7uxe3o-a-dados-do-modelo}{%
 \chapter{Aplicação a dados do modelo}\label{aplicauxe7uxe3o-a-dados-do-modelo}}
+
+\endgroup
+\newpage
 
 Some \emph{significant} applications are demonstrated in this chapter.
 

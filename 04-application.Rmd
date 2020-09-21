@@ -1,4 +1,6 @@
 # Aplicação a dados do modelo
+\endgroup
+\newpage
 
 Some _significant_ applications are demonstrated in this chapter.
 
