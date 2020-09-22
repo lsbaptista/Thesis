@@ -11,6 +11,9 @@ mainfont: Arial
 fontsize: 12pt
 linestretch: 1.5
 geometry: "left=3.5cm,right=2cm,top=3cm,bottom=3cm, asymmetric"
+indent: true
+header-includes:
+  - \usepackage{indentfirst}
 pagestyle: plain
 papersize: a4
 toc: true
