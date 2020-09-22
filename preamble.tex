@@ -1,22 +1,15 @@
 \usepackage{booktabs}
 \usepackage{amsthm}
 
-\makeatletter
-\def\thm@space@setup{%
-  \thm@preskip=8pt plus 2pt minus 4pt
-  \thm@postskip=\thm@preskip
-}
-
-\makeatother
-
 \usepackage[utf8]{inputenc}
 \usepackage[portuguese]{babel}
 
-\usepackage{fontspec}
-
-\frontmatter
-
 \usepackage{titlesec}
 
-\usepackage{lipsum}
+\usepackage{etoolbox}
+
+\makeatletter
+\titlespacing*{\chapter}{0mm}{3em}{1em}
+\patchcmd{\ttl@save@mkschap}{*}{}{}{}
+\makeatother
 
