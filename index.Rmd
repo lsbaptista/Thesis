@@ -23,6 +23,6 @@ lof:  True
 lot: True
 ---
 
-# Simbologia e notações {.unlisted .unnumbered}
+# Simbologia e notações{.unlisted .unnumbered}
 
 \mainmatter 

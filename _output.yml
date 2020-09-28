@@ -5,6 +5,6 @@ bookdown::pdf_book:
   latex_engine: xelatex
   papaja::apa6_pdf:
   citation_package: biblatex
-  keep_tex: no
+  keep_tex: yes
 
 
