@@ -1,12 +1,12 @@
 # Introdução {- #intro}
 
+A estatística aplicada ao sector financeiro têm sido pratica comum nas últimas décadas, sendo que a sua aplicação não se pode resumir apenas a estatística descritiva, tendo vindo a beneficiar dos avanços verificados na aplicação de ferramentas estatísticas para analise preditiva dos dados, devido essencialmente aos avanços tecnológicos no hardware de equipamentos informáticos que permitem a aplicação de algoritmos mais complexos que de outro modo não seria possível utilizar, pelo menos em tempo útil.
 
+Um dos sectores com grande aplicabilidade dos métodos matemáticos e estatísticos nas finanças é a analise quantitativa, sendo as principais áreas de aplicação a estruturação de derivados, gestão do risco, trading automático e gestão de investimentos.
 
+Historicamente, a analise quantitativa iniciou-se em 1900 com Louis Jean-Baptiste Alphonse Bachelier, onde a sua tese de doutoramento forneceu um modelo para estipular o preço de opções considerando uma distribuição normal (https://en.wikipedia.org/wiki/Quantitative_analysis_(finance)).
 
-
-
-
-
+Na década de 50, Harry Markowitz escreveu um artigo intitulado “Portfolio Selection” que viria a revolucionar o modo como selecionar uma carteira de instrumentos financeiros, aplicando princípios de correlação e variância de modo a constituir portfolios de ações minimizando o risco a que o investidor estaria exposto, providenciando modelos que demonstravam que só com a diversificação de investimentos é que se conseguiria atingir a eficiência, embora só bastante mais tarde esta teoria começa-se a ver a sua aplicabilidade nas instituições financeiras. A aplicabilidade de técnicas estatísticas fica saliente quando Markowitz estipula que “para usar a regra da média-variância na seleção de ações devemos ter procedimentos para encontrar $\symbf{\mu_i}$ e $\symbf{\sigma_{ij}}$ razoáveis. Estes procedimentos, eu acredito, devem combinar técnicas estatísticas e julgamento prático do Homem”[@Markowitz1952,pp.91]
 
 
 You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
@@ -27,6 +27,6 @@ knitr::kable(
 )
 ```
 
-You can write citations,[@Volatility2001]
+You can write citations,[@Volatility2001,pp.33-85]
 
 

@@ -1,0 +1,19 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\selectlanguage *{portuguese}
+\defcounter {refsection}{0}\relax 
+\selectlanguage *[variant=brazilian,]{portuguese}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Introdução}{1}{chapter*.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Modelação Estatística na Otimização de Portfólios}{4}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Pacotes do R para análise}{6}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Aplicação a dados do modelo}{8}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Example one}{9}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Example two}{9}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Conclusão}{10}{chapter*.9}%

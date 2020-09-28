@@ -5,6 +5,7 @@
 \documentclass[
   12pt,
   brazil,
+  a4paper,
   openany]{book}
 \usepackage{lmodern}
 \usepackage{setspace}
@@ -26,16 +27,6 @@
   \usepackage[]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
 \usepackage{xcolor}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
@@ -113,33 +104,29 @@
 \setcounter{secnumdepth}{5}
 \pagestyle{plain}
 \usepackage{booktabs}
-\usepackage{amsthm}
-
-\makeatletter
-\def\thm@space@setup{%
-  \thm@preskip=8pt plus 2pt minus 4pt
-  \thm@postskip=\thm@preskip
-}
-
-\makeatother
-
+\usepackage{amsmath,amsfonts,amsthm,bm} % Math packages
+\usepackage{fontspec}
 \usepackage[utf8]{inputenc}
 \usepackage[portuguese]{babel}
 
-\usepackage{fontspec}
-
-\frontmatter
+\usepackage{etoolbox}
 
 \usepackage{titlesec}
 
-\usepackage{lipsum}
+\makeatletter
+\patchcmd{\ttl@save@mkschap}{*}{}{}{}
+\makeatother
 
+\usepackage{indentfirst}
 \ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
   \setmainlanguage[]{brazil}
 \else
   \usepackage[shorthands=off,main=brazil]{babel}
+\fi
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \usepackage[style=apa,]{biblatex}
 \addbibresource{book.bib}
@@ -174,7 +161,7 @@
 \end{minipage}
 \end{center}
 
-\pagenumbering{gobble}% Remove page numbers (and reset to 1)
+
 %titlepage
 \thispagestyle{empty}
 \begin{center}
@@ -202,26 +189,42 @@
 \end{minipage}
 \end{center}
 
-\pagenumbering{roman}% Arabic page numbers (and reset to 1)
-\setcounter{page}{2}
+\pagenumbering{gobble}% Remove page numbers (and reset to 1)
 
 \clearpage
 
 \chapter*{Resumo}
 \fontsize{12}{21}\selectfont
-O problema a ser tratado nesta dissertação será o impacto dos vários métodos de cálculo da volatilidade no cálculo da rentabilidade ótima do portfolio para um determinado nível de risco.
-Desta forma, ao definir o portfolio de ativos financeiros, será analisado o método da média variância na construção dos portfolios, assim como o impacto do número de ativos no valor da volatilidade final do portfolio. O cálculo da variância dos ativos será calculado com base nos dados históricos, na volatilidade implícita, no modelo GARCH e ARCH noutros métodos que possam ser de interesse ao longo do estudo teórico.
+A presente dissertação têm como âmbito a análise de três métodos diferentes de obter a volatilidade de instrumentos financeiros, nomeadamente valores mobiliários, e seu consequente impacto no resultado da rentabilidade de portfolios constituídos utilizando como pressuposto a média variância, assim como a sua exposição ao risco, sendo que a volatilidade constitui uma peça central na constituição de determinados instrumentos financeiros e respetivo calculo de exposição ao risco.
 
-historical volatility, EWMA and GARCH.
-Será realizada uma análise do VaR (Value at Risk) e do ES (Expected Shortfal) para cada um dos ativos e portfolios obtidos, utilizando diferentes métodos para cálculo do VaR e ES, classificando-se estes em métodos paramétricos e não paramétricos. Desta forma, a análise da otimização dos portfolios será enquadrada com a gestão de risco, VaR e ES, sendo que esta métrica combina duas características, a suposição do tipo de distribuição dos retornos e a previsão da variância.
-A análise dos valores obtidos nos portfolios será realizado comparando a rentabilidade obtida nos diferentes portfolios com a rentabilidade obtida no benchmark – ou índice de referência - sendo este um ponto de referência para identificar e comparar o desempenho dos investimentos realizados.
-Este trabalho será realizado tendo como ferramenta de apoio a linguagem de programação R.
+Os métodos analisados para calculo da volatilidade são a Média Movel Exponencial (EWMA), o modelo da heteroscedasticidade condicional auto-regressiva generalizada (GARCH) e a volatilidade implícita. Os dois primeiros métodos têm como subjacentes dados históricos dos instrumentos financeiros, sendo que a volatilidade implícita é a volatilidade esperada pelo mercado, sendo obtida através da cotação das opções dos respetivos subjacentes.
 
-Este trabalho demonstra que os modelos da família GARCH são mais apropriados para se modelar a variância condicional (volatilidade) de séries de retornos financeiros que apresentam variância condicional evoluindo no tempo em comparação com os modelos ARIMA tradicionais.  ARIMA-GARCH
+A análise de risco é efetuada aplicando dois métodos complementares de análise. O Value at Risk (VaR), que contempla a percentagem de perdas que excedem o VaR e o Expected shortfall (ES), que contempla a magnitude dessas perdas.
+
+Este trabalho é realizado tendo como ferramenta de apoio a linguagem de programação R.
+\bigbreak
+
+\noindent\textbf{Palavras chave:} Volatilidade, portfolio, rentabilidade, risco, R
 
 
+
+
+\pagenumbering{roman}% Arabic page numbers (and reset to 1)
+\setcounter{page}{2}
 
 \chapter*{Abstract}
+\fontsize{12}{21}\selectfont
+The scope of this dissertation is to analyze three different methods of obtaining the volatility of financial instruments, namely securities, and their consequent impact on the profitability of portfolios constituted using the assumption of mean-variance, as well as their exposure to risk, volatility is a central element in the constitution of certain financial instruments and the respective calculation of exposure to risk.
+
+The methods analyzed for calculating the volatility are the Exponential Moving Average (EWMA), the generalized autoregressive conditional heteroscedasticity model (GARCH) and the implied volatility. The first two methods are based on historical data on financial instruments, the implied volatility being the volatility expected by the market, being obtained through the quotation of the options of the respective underlying.
+
+The risk analysis is carried out using two complementary methods of analysis. Value at Risk (VaR), which includes the percentage of losses that exceed VaR and Expected shortfall (ES), which considers the magnitude of these losses.
+
+This work is carried out using the R programming language as a support tool.
+
+\bigbreak
+
+\noindent\textbf{Keywords:} Volatility, portfolio, profitability, risk, R
 
 \newenvironment{dedication}
   {\clearpage           % we want a new page
@@ -255,9 +258,17 @@ Este trabalho demonstra que os modelos da família GARCH são mais apropriados p
 \chapter*{Introdução}\label{intro}}
 \addcontentsline{toc}{chapter}{Introdução}
 
+A estatística aplicada ao sector financeiro têm sido pratica comum nas últimas décadas, sendo que a sua aplicação não se pode resumir apenas a estatística descritiva, tendo vindo a beneficiar dos avanços verificados na aplicação de ferramentas estatísticas para analise preditiva dos dados, devido essencialmente aos avanços tecnológicos no hardware de equipamentos informáticos que permitem a aplicação de algoritmos mais complexos que de outro modo não seria possível utilizar, pelo menos em tempo útil.
+
+Um dos sectores com grande aplicabilidade dos métodos matemáticos e estatísticos nas finanças é a analise quantitativa, sendo as principais áreas de aplicação a estruturação de derivados, gestão do risco, trading automático e gestão de investimentos.
+
+Historicamente, a analise quantitativa iniciou-se em 1900 com Louis Jean-Baptiste Alphonse Bachelier, onde a sua tese de doutoramento forneceu um modelo para estipular o preço de opções considerando uma distribuição normal (\url{https://en.wikipedia.org/wiki/Quantitative_analysis_(finance)}).
+
+Na década de 50, Harry Markowitz escreveu um artigo intitulado ``Portfolio Selection'' que viria a revolucionar o modo como selecionar uma carteira de instrumentos financeiros, aplicando princípios de correlação e variância de modo a constituir portfolios de ações minimizando o risco a que o investidor estaria exposto, providenciando modelos que demonstravam que só com a diversificação de investimentos é que se conseguiria atingir a eficiência, embora só bastante mais tarde esta teoria começa-se a ver a sua aplicabilidade nas instituições financeiras. A aplicabilidade de técnicas estatísticas fica saliente quando Markowitz estipula que ``para usar a regra da média-variância na seleção de ações devemos ter procedimentos para encontrar \(\symbf{\mu_i}\) e \(\symbf{\sigma_{ij}}\) razoáveis. Estes procedimentos, eu acredito, devem combinar técnicas estatísticas e julgamento prático do Homem''\autocite[pp.91]{Markowitz1952}
+
 You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{methods}.
 
-Figures and tables\autocite{SeriesR} with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively\autocite{Vladimir2014}
+Figures and tables with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -275,7 +286,7 @@ Figures and tables\autocite{SeriesR} with captions will be placed in \texttt{fig
 \caption{Here is a nice figure!}\label{fig:nice-fig}
 \end{figure}
 
-Reference a figure by its code chunk\autocite{Dimitris2004} label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables\autocite{Jose2011} generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
+Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -321,7 +332,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{tabular}
 \end{table}
 
-You can write citations,\autocite{Volatility2001} too. For example, we are using the \textbf{bookdown} package \autocite{R-bookdown} in this sample book,\autocite{Markowitz1952} which was built on top of R Markdown and \textbf{knitr} \autocite{OptVaR2000}.
+You can write citations,\autocite[pp.33-85]{Volatility2001}
 
 \begingroup
 \titleformat{\chapter}[display]
