@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.25)  28 SEP 2020 17:39
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.25)  30 SEP 2020 13:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1654,25 +1654,24 @@ LaTeX Info: Redefining \ttfamily on input line 5.
 
 ] [10
 
-]
+] [1
 
-Package hyperref Warning: Suppressing empty link on input line 269.
-
-
-LaTeX Warning: Reference `methods' on page 1 undefined on input line 269.
-
-[1
+] [2]
+Capítulo 1.
+[3
 
 ]
+
+Package hyperref Warning: Suppressing empty link on input line 282.
+
+
+LaTeX Warning: Reference `methods' on page 4 undefined on input line 282.
+
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 275.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 288.
 File: bookdown-demo_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/nice-fig-1.pdf>
-[2] [3]
-Capítulo 1.
-[4
-
-] [5]
+[4] [5]
 Capítulo 2.
 [6
 
@@ -1682,7 +1681,7 @@ Capítulo 3.
 
 ]
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 364.
+(Font)              scaled to size 17.28pt on input line 366.
 [9] [10
 
 ]
@@ -1720,11 +1719,11 @@ braces):
 >  {portuguese/babelname}  =>  {brazil}
 >  {portuguese/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {portuguese/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 377.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 379.
 [11
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 377.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 379.
 (./bookdown-demo.aux
 LaTeX Info: Redefining \rmfamily on input line 26.
 LaTeX Info: Redefining \sffamily on input line 26.
@@ -1735,8 +1734,8 @@ LaTeX Info: Redefining \rmfamily on input line 30.
 LaTeX Info: Redefining \sffamily on input line 30.
 LaTeX Info: Redefining \ttfamily on input line 30.
 )
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 377.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 377.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 379.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 379.
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
 (rerunfilecheck)             Checksum: 1B794D4C610FD9448B5FC97EE29F9D40;1116.
 
@@ -1749,15 +1748,15 @@ Package biblatex Warning: Please rerun LaTeX.
 Package logreq Info: Writing requests to 'bookdown-demo.run.xml'.
 \openout1 = `bookdown-demo.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 377.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 379.
  ) 
 Here is how much of TeX's memory you used:
- 27335 strings out of 481657
- 510980 string characters out of 5930736
- 1417507 words of memory out of 5000000
- 44070 multiletter control sequences out of 15000+600000
+ 27337 strings out of 481657
+ 511065 string characters out of 5930736
+ 1418533 words of memory out of 5000000
+ 44072 multiletter control sequences out of 15000+600000
  549511 words of font info for 82 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 53i,8n,121p,1003b,5461s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,8n,121p,1346b,5499s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on bookdown-demo.pdf (22 pages).

@@ -264,7 +264,20 @@ Um dos sectores com grande aplicabilidade dos métodos matemáticos e estatísti
 
 Historicamente, a analise quantitativa iniciou-se em 1900 com Louis Jean-Baptiste Alphonse Bachelier, onde a sua tese de doutoramento forneceu um modelo para estipular o preço de opções considerando uma distribuição normal (\url{https://en.wikipedia.org/wiki/Quantitative_analysis_(finance)}).
 
-Na década de 50, Harry Markowitz escreveu um artigo intitulado ``Portfolio Selection'' que viria a revolucionar o modo como selecionar uma carteira de instrumentos financeiros, aplicando princípios de correlação e variância de modo a constituir portfolios de ações minimizando o risco a que o investidor estaria exposto, providenciando modelos que demonstravam que só com a diversificação de investimentos é que se conseguiria atingir a eficiência, embora só bastante mais tarde esta teoria começa-se a ver a sua aplicabilidade nas instituições financeiras. A aplicabilidade de técnicas estatísticas fica saliente quando Markowitz estipula que ``para usar a regra da média-variância na seleção de ações devemos ter procedimentos para encontrar \(\symbf{\mu_i}\) e \(\symbf{\sigma_{ij}}\) razoáveis. Estes procedimentos, eu acredito, devem combinar técnicas estatísticas e julgamento prático do Homem''\autocite[pp.91]{Markowitz1952}
+Na década de 50, Harry Markowitz escreveu um artigo intitulado ``Portfolio Selection'' que viria a revolucionar o modo como selecionar uma carteira de instrumentos financeiros, aplicando princípios de correlação e variância de modo a constituir portfolios de ações , onde a ``fronteira eficiente'' representa portfolios que maximizam retornos de acordo com o risco assumido, providenciando modelos que demonstravam que só com a diversificação de investimentos é que se conseguiria atingir a eficiência, embora só bastante mais tarde esta teoria começa-se a ver a sua aplicabilidade nas instituições financeiras. A aplicabilidade de técnicas estatísticas fica saliente quando Markowitz estipula que ``para usar a regra da média-variância na seleção de ações devemos ter procedimentos para encontrar \(\symbf{\mu_i}\) e \(\symbf{\sigma_{ij}}\) razoáveis. Estes procedimentos, eu acredito, devem combinar técnicas estatísticas e julgamento prático do Homem'' \autocite[pp.91]{Markowitz1952}. As limitações do modelo prendem-se com pressuposto que não representam exatamente a realidade, como o pressuposto de que os retornos das ações seguem uma distribuição normal, sendo que a distribuição dos retornos segue muitas vezes uma curtose leptocúrtica, apresentando caudas pesadas.
+
+Na década de 60, Sharpe, Lintner and Mossin desenvolveram um modelo para equilíbrio de mercado, definido como ``Capital Asset Pricing Model''(CAPM), descrevendo a relação entre risco sistemático e o retorno esperado. O modelo pressupõe que, se todos os investidores contêm o mesmo portfolio, então, em equilíbrio esse deve ser o portfolio de mercado. De acordo com \textcite{Sharpe1964} em equilíbrio os preços dos ativos de capital foram ajustados de forma que o investidor consiga atingir qualquer ponto desejado ao longo da reta do mercado capital, ou ``capital market line'' (CMP), pressupondo que o investidor siga uma estratégia de diversificação do investimento. O CMP pode ser utilizado de modo a otimizar um portfolio, sendo o ponto tangente a curva denominada de fronteira eficiente.
+
+Também na década de 60 foi apresentado pela primeira vez o modelo de Black-Scholes-Merton, fornecendo uma solução para valorizar opções europeias e outros derivados. O modelo assume que os preços têm uma distribuição lognormal e que a volatilidade é constante ao longo do tempo. A volatilidade que é assumida neste modelo é a volatilidade implícita da opção, ou seja, a volatilidade para o qual o valor dado pelo modelo Black-Scholes-Merton iguala o preço de mercado. Outros modelos foram desenvolvidos de modo a valorizar opções e outros derivados financeiros, entre eles a arvore binomial e simulação de Monte Carlo.
+
+\begingroup
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries\centering}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+
+\hypertarget{modelauxe7uxe3o-estatuxedstica-na-otimizauxe7uxe3o-de-portfuxf3lios}{%
+\chapter{Modelação Estatística na Otimização de Portfólios}\label{modelauxe7uxe3o-estatuxedstica-na-otimizauxe7uxe3o-de-portfuxf3lios}}
+
+\newpage
 
 You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{methods}.
 
@@ -333,17 +346,6 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{table}
 
 You can write citations,\autocite[pp.33-85]{Volatility2001}
-
-\begingroup
-\titleformat{\chapter}[display]
-{\normalfont\huge\bfseries\centering}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
-
-\hypertarget{modelauxe7uxe3o-estatuxedstica-na-otimizauxe7uxe3o-de-portfuxf3lios}{%
-\chapter{Modelação Estatística na Otimização de Portfólios}\label{modelauxe7uxe3o-estatuxedstica-na-otimizauxe7uxe3o-de-portfuxf3lios}}
-
-\newpage
-
-Here is a review of existing methods.
 
 \hypertarget{pacotes-do-r-para-anuxe1lise}{%
 \chapter{Pacotes do R para análise}\label{pacotes-do-r-para-anuxe1lise}}
