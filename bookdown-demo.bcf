@@ -2821,7 +2821,15 @@
     <bcf:citekey order="1">Markowitz1952</bcf:citekey>
     <bcf:citekey order="2">Sharpe1964</bcf:citekey>
     <bcf:citekey order="3">Sharpe1964</bcf:citekey>
-    <bcf:citekey order="4">Volatility2001</bcf:citekey>
+    <bcf:citekey order="4">HistVaR</bcf:citekey>
+    <bcf:citekey order="5">HistVaR</bcf:citekey>
+    <bcf:citekey order="6">Markowitz1952</bcf:citekey>
+    <bcf:citekey order="7">Markowitz1952</bcf:citekey>
+    <bcf:citekey order="8">Markowitz1952</bcf:citekey>
+    <bcf:citekey order="9">Markowitz1952</bcf:citekey>
+    <bcf:citekey order="10">OptVaR2000</bcf:citekey>
+    <bcf:citekey order="11">OptVaR2000</bcf:citekey>
+    <bcf:citekey order="12">Volatility2001</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">

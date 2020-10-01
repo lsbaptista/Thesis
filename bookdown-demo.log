@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.25)  30 SEP 2020 13:06
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.9.25)  1 OCT 2020 19:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -729,8 +729,12 @@ File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/filehook/filehook.
 sty
-Package: filehook 2020/02/03 v0.7 Hooks for input files
-)
+Package: filehook 2020/09/29 v0.8a Hooks for input files
+
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/filehook/filehook-
+2019.sty
+Package: filehook-2019 2020/09/29 v0.8a Hooks for input files
+))
 \xpg@normalclass=\XeTeXcharclass1
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/polyglossia/gloss-
@@ -1656,33 +1660,42 @@ LaTeX Info: Redefining \ttfamily on input line 5.
 
 ] [1
 
-] [2]
+]
+LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
+(Font)              scaled to size 8.4pt on input line 273.
+
+Underfull \vbox (badness 3514) has occurred while \output is active []
+
+[2]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[3] [4]
 Capítulo 1.
-[3
+[5
 
 ]
 
-Package hyperref Warning: Suppressing empty link on input line 282.
+Package hyperref Warning: Suppressing empty link on input line 296.
 
 
-LaTeX Warning: Reference `methods' on page 4 undefined on input line 282.
+LaTeX Warning: Reference `methods' on page 6 undefined on input line 296.
 
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 288.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 302.
 File: bookdown-demo_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/nice-fig-1.pdf>
-[4] [5]
+[6] [7]
 Capítulo 2.
-[6
-
-] [7]
-Capítulo 3.
 [8
+
+] [9]
+Capítulo 3.
+[10
 
 ]
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 366.
-[9] [10
+(Font)              scaled to size 17.28pt on input line 380.
+[11] [12
 
 ]
 The property list \polyglossia@langsetup contains the pairs (without outer
@@ -1719,11 +1732,11 @@ braces):
 >  {portuguese/babelname}  =>  {brazil}
 >  {portuguese/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {portuguese/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 379.
-[11
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 393.
+[13
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 379.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 393.
 (./bookdown-demo.aux
 LaTeX Info: Redefining \rmfamily on input line 26.
 LaTeX Info: Redefining \sffamily on input line 26.
@@ -1734,8 +1747,8 @@ LaTeX Info: Redefining \rmfamily on input line 30.
 LaTeX Info: Redefining \sffamily on input line 30.
 LaTeX Info: Redefining \ttfamily on input line 30.
 )
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 379.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 379.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 393.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 393.
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
 (rerunfilecheck)             Checksum: 1B794D4C610FD9448B5FC97EE29F9D40;1116.
 
@@ -1748,15 +1761,15 @@ Package biblatex Warning: Please rerun LaTeX.
 Package logreq Info: Writing requests to 'bookdown-demo.run.xml'.
 \openout1 = `bookdown-demo.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 379.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 393.
  ) 
 Here is how much of TeX's memory you used:
- 27337 strings out of 481657
- 511065 string characters out of 5930736
- 1418533 words of memory out of 5000000
- 44072 multiletter control sequences out of 15000+600000
- 549511 words of font info for 82 fonts, out of 8000000 for 9000
+ 27354 strings out of 481657
+ 511652 string characters out of 5930736
+ 1422681 words of memory out of 5000000
+ 44085 multiletter control sequences out of 15000+600000
+ 549519 words of font info for 83 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 53i,8n,121p,1346b,5499s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,8n,121p,1872b,5499s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (22 pages).
+Output written on bookdown-demo.pdf (24 pages).

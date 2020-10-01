@@ -6,14 +6,14 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Introdução}{1}{chapter*.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {1}Modelação Estatística na Otimização de Portfólios}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {1}Modelação Estatística na Otimização de Portfólios}{5}{chapter.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Pacotes do R para análise}{6}{chapter.2}%
+\contentsline {chapter}{\numberline {2}Pacotes do R para análise}{8}{chapter.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Aplicação a dados do modelo}{8}{chapter.3}%
+\contentsline {chapter}{\numberline {3}Aplicação a dados do modelo}{10}{chapter.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Example one}{9}{section.3.1}%
+\contentsline {section}{\numberline {3.1}Example one}{11}{section.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Example two}{9}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Example two}{11}{section.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Conclusão}{10}{chapter*.9}%
+\contentsline {chapter}{Conclusão}{12}{chapter*.9}%
