@@ -1,4 +1,5 @@
 bookdown::pdf_book:
+  pandoc_args: --listings
   includes:
     in_header: preamble.tex
     before_body: frontpage.tex

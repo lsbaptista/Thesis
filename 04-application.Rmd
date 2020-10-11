@@ -2,8 +2,127 @@
 \endgroup
 \newpage
 
-Some _significant_ applications are demonstrated in this chapter.
+## Aplicação a dados do modelo
+```{r,include=FALSE}
+rm(list = ls())
+#install.packages("xlsx")
+#install.packages("kableExtra")
+#install.packages("quantmod")
+#install.packages("MASS")
+#install.packages("arsenal")
+library(arsenal)
+library(MASS)
+library(quantmod)
+library(kableExtra)
+library(xlsx)
+library(tidyverse)
+```
 
-## Example one
+A primeira fase consiste em extrair de forma aleatória 14 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na tabela \@ref(tab:nice-tab).
 
-## Example two
+```{r,nice-tab,tidy=FALSE,echo=FALSE}
+mydata <- read.xlsx("data/IndexConstituentsstoxx_50.xlsx", 1)
+set.seed(14)
+dt <- sample(mydata$Full.name, size = 14,replace = F)
+d <- knitr::kable(
+  dt, caption = 'Empresas extraidas do Euro Stoxx 50',
+  booktabs = TRUE
+)
+kable_styling(d, latex_options = "hold_position", position = "center")
+```
+
+
+```{r,include=FALSE}
+#leitura de simbolos dos activos financeiros
+symbolsEU <- c("TEF.MC","UNA.AS",'GLE.PA','ENEL.MI',"BAYN.DE","DTE.DE","ABI.BR","DAI.DE","ORA.PA","SAN.PA","AIR.PA","ISP.MI","AD.AS","ASML.AS")
+stocks <- getSymbols(symbolsEU,src="yahoo", from="2012-06-18", to="2020-06-02",auto.assign = TRUE)
+
+```
+
+Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). 
+
+```{r,nice-fig,echo=FALSE,fig.cap='Here is a nice figure!',out.width = "30%",fig.show="hold"}
+
+par(mar = c(1,1,1,1))
+ plot(TEF.MC[,6], main = "TEF.MC")
+ plot(UNA.AS[,6], main = "UNA.AS")
+ plot(GLE.PA[,6], main = "GLE.PA")
+ plot(ENEL.MI[,6], main = "ENEL.MI")
+ plot(BAYN.DE[,6], main = "BAYN.DE")
+ plot(DTE.DE[,6], main = "DTE.DE")
+ plot(ABI.BR[,6], main = "ABI.BR")
+ plot(DAI.DE[,6], main = "DAI.DE")
+ plot(ORA.PA[,6], main = "ORA.PA")
+ plot(SAN.PA[,6], main = "SAN.PA")
+ plot(AIR.PA[,6], main = "AIR.PA")
+ plot(ISP.MI[,6], main = "ISP.MI")
+ plot(AD.AS[,6], main = "AD.AS")
+ plot(ASML.AS[,6], main = "ASML.AS")
+```
+
+
+Calculo do retorno diario logaritmico
+
+```{r include=FALSE}
+adjustedPrices <- data.frame(cbind(TEF.MC$TEF.MC.Adjusted,UNA.AS$UNA.AS.Adjusted,GLE.PA$GLE.PA.Adjusted,ENEL.MI$ENEL.MI.Adjusted,BAYN.DE$BAYN.DE.Adjusted,DTE.DE$DTE.DE.Adjusted,ABI.BR$ABI.BR.Adjusted,DAI.DE$DAI.DE.Adjusted,ORA.PA$ORA.PA.Adjusted,SAN.PA$SAN.PA.Adjusted,AIR.PA$AIR.PA.Adjusted,ISP.MI$ISP.MI.Adjusted,AD.AS$AD.AS.Adjusted,ASML.AS$ASML.AS.Adjusted))
+
+adjustedPrices <- na.omit(adjustedPrices)
+
+returns <- na.omit(cbind(dailyReturn(Ad(TEF.MC),type ="log"),dailyReturn(Ad(UNA.AS),type ="log"),dailyReturn(Ad(GLE.PA),type ="log"),dailyReturn(Ad(ENEL.MI),type = "log"),dailyReturn(Ad(BAYN.DE),type = "log"),dailyReturn(Ad(DTE.DE),type = "log"),dailyReturn(Ad(ABI.BR),type = "log"),dailyReturn(Ad(DAI.DE),type = "log"),dailyReturn(Ad(ORA.PA),type = "log"),dailyReturn(Ad(SAN.PA),type = "log"),dailyReturn(Ad(AIR.PA),type = "log"),dailyReturn(Ad(ISP.MI),type = "log"),dailyReturn(Ad(AD.AS),type = "log"),dailyReturn(Ad(ASML.AS),type = "log")))
+
+colnames(returns) <- c("TELEFONICA","UNILEVER","SOCGEN","BAYER","ENEL","DEUTSCHE TELEKOM","AB INBEV","DAIMLER","ORANGE","SANOFI","AIRBUS","INTESA","AHOLD","ASML")
+head(returns)
+```
+
+Correlação entre activos
+```{r}
+cor(returns)
+```
+
+
+
+```{r,out.width = "30%",fig.show="hold"}
+
+par(mar = c(1,1,1,1))
+
+ plot(returns$TELEFONICA, main = "TEF.MC",col="red")
+ plot(returns$UNILEVER, main = "UNA.AS",col="red")
+ plot(returns$SOCGEN, main = "GLE.PA",col="red")
+ plot(returns$BAYER, main = "ENEL.MI",col="red")
+ plot(returns$ENEL, main = "BAYN.DE",col="red")
+ plot(returns$`DEUTSCHE TELEKOM`, main = "DTE.DE",col="red")
+ plot(returns$`AB INBEV`, main = "ABI.BR",col="red")
+ plot(returns$DAIMLER, main = "DAI.DE",col="red")
+ plot(returns$ORANGE, main = "ORA.PA",col="red")
+ plot(returns$SANOFI, main = "SAN.PA",col="red")
+ plot(returns$AIRBUS, main = "AIR.PA",col="red")
+ plot(returns$INTESA, main = "ISP.MI",col="red")
+ plot(returns$AHOLD, main = "AD.AS",col="red")
+ plot(returns$ASML, main = "ASML.AS",col="red")
+ 
+```
+
+
+
+```{r,out.width = "30%",fig.show="hold"}
+
+ par(mar = c(2,2,2,2))
+ hist(returns$TELEFONICA,probability=T, main="TELEFONICA - daily.returns",xlab="Approximately normally distributed data",breaks=100)
+ lines(density(na.omit(returns$TELEFONICA)),col=2)
+ curve(dnorm(x,0,0.01640906), from = -0.15,to=0.15, col='blue',add = TRUE)
+ qqnorm(returns$TELEFONICA,main="QQ plot of normal data",pch=19)
+ qqline(returns$TELEFONICA)
+ TELTestNOR <- shapiro.test(as.numeric(returns$TELEFONICA))
+ TELSha <- matrix(c(TELTestNOR$statistic,TELTestNOR$p.value),ncol = 2)
+ colnames(TELSha) <- c("Estatistica","p-value")
+ rownames(TELSha) <- c("Shapiro-Wilk normality test")
+ TELSha <- as.table(TELSha)
+ TELSha
+
+```
+
+
+
+```{r}
+sd(returns$TELEFONICA)
+```

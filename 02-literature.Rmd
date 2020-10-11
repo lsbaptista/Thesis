@@ -4,26 +4,42 @@
 # Modelação Estatística na Otimização de Portfólios
 \newpage
 
+## Series Temporais
+
+
+
+## Portfolios média-variância
+A otimização de portfolios através da diversificação é um conceito básico que teve origem em Markowitz, criando o conceito de fronteira eficiente. Existem vários pressupostos definidos na obtenção deste modelo, não sendo, no entanto, o âmbito aqui analisar esses mesmos pressupostos, considerando que independentemente disso esses mesmos pressupostos são verificados. De acordo com @Modern2013, “todas os pressupostos acerca da analise de portfolio foram demonstradas serem simplistas, e em alguns casos demasiado simplistas.[...]Pessoas necessitam apenas de se comportar como se fossem descritas pelos pressupostos para uma teoria ser válida” [@Modern2013,pp.5]. 
+
+Para aplicação deste modelo deve-se obter os seguintes dados dos instrumentos financeiros que vão constituir o portfolio:
+
+- A taxa do retorno esperado, E(r);
+- O desvio padrão dos retornos, $\sigma$;
+- O coeficiente de correlação,$\rho$, entre cada um dos activos.
+
+As séries dos retornos diários para cada um dos activos é calculada de acordo com a seguinte formula:
+
+\begin{equation} 
+  R_i = ln\Big(\frac{V_f}{V_i}\Big)
+  (\#eq:log)
+\end{equation} 
+
+A média dos retornos de cada um dos activos é calculada de acordo com a sua média aritmética:
+
+\begin{equation} 
+  \overline{R} = \frac{\displaystyle\sum_{i=1}^n R_i}{n}
+  (\#eq:mean)
+\end{equation} 
+
+A variância de cada um dos activos é calculada usando 3 métodos diferentes que passamos seguidamente a descrever:
+
+- \textbf{Média Móvel Exponencial (EWMA)}
+
+A média móvel exponencial, referida a partir de agora como EWMA, é um método de calculo da variância, sendo um método que utiliza os dados históricos associando mais peso aos retornos mais recentes no calculo da variância.
+
+
+- \textbf{Heteroscedasticidade condicional auto-regressiva generalizada (GARCH)}
 
 
 
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
-
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively
-
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
-```
-
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
-
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
-```
-
-You can write citations,[@Volatility2001,pp.33-85]

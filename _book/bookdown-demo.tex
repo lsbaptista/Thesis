@@ -36,46 +36,10 @@
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 \usepackage[left=3.5cm,right=2cm,top=3cm,bottom=3cm, asymmetric]{geometry}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
 \usepackage{longtable,booktabs}
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -108,6 +72,10 @@
 \usepackage{fontspec}
 \usepackage[utf8]{inputenc}
 \usepackage[portuguese]{babel}
+\lstset{
+  breaklines=true
+}
+
 
 \usepackage{etoolbox}
 
@@ -118,6 +86,20 @@
 \makeatother
 
 \usepackage{indentfirst}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
 \ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
@@ -293,73 +275,55 @@ A aplicação pratica dos métodos aos dados do mercado será realizado com o ap
 
 \newpage
 
-You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{methods}.
+\hypertarget{series-temporais}{%
+\section{Series Temporais}\label{series-temporais}}
 
-Figures and tables with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively
+\hypertarget{portfolios-muxe9dia-variuxe2ncia}{%
+\section{Portfolios média-variância}\label{portfolios-muxe9dia-variuxe2ncia}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\FloatTok{.1}\NormalTok{, }\FloatTok{.1}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(pressure, }\DataTypeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+A otimização de portfolios através da diversificação é um conceito básico que teve origem em Markowitz, criando o conceito de fronteira eficiente. Existem vários pressupostos definidos na obtenção deste modelo, não sendo, no entanto, o âmbito aqui analisar esses mesmos pressupostos, considerando que independentemente disso esses mesmos pressupostos são verificados. De acordo com \textcite{Modern2013}, ``todas os pressupostos acerca da analise de portfolio foram demonstradas serem simplistas, e em alguns casos demasiado simplistas.{[}\ldots{]}Pessoas necessitam apenas de se comportar como se fossem descritas pelos pressupostos para uma teoria ser válida'' \autocite[pp.5]{Modern2013}.
 
-\begin{figure}
+Para aplicação deste modelo deve-se obter os seguintes dados dos instrumentos financeiros que vão constituir o portfolio:
 
-{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/nice-fig-1} 
+\begin{itemize}
+\tightlist
+\item
+  A taxa do retorno esperado, E(r);
+\item
+  O desvio padrão dos retornos, \(\sigma\);
+\item
+  O coeficiente de correlação,\(\rho\), entre cada um dos activos.
+\end{itemize}
 
-}
+As séries dos retornos diários para cada um dos activos é calculada de acordo com a seguinte formula:
 
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
+\begin{equation} 
+  R_i = ln\Big(\frac{V_f}{V_i}\Big)
+  \label{eq:log}
+\end{equation}
 
-Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
+A média dos retornos de cada um dos activos é calculada de acordo com a sua média aritmética:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}
-  \KeywordTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\DataTypeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \DataTypeTok{booktabs =} \OtherTok{TRUE}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{equation} 
+  \overline{R} = \frac{\displaystyle\sum_{i=1}^n R_i}{n}
+  \label{eq:mean}
+\end{equation}
 
-\begin{table}
+A variância de cada um dos activos é calculada usando 3 métodos diferentes que passamos seguidamente a descrever:
 
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rrrrl}
-\toprule
-Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
-\midrule
-5.1 & 3.5 & 1.4 & 0.2 & setosa\\
-4.9 & 3.0 & 1.4 & 0.2 & setosa\\
-4.7 & 3.2 & 1.3 & 0.2 & setosa\\
-4.6 & 3.1 & 1.5 & 0.2 & setosa\\
-5.0 & 3.6 & 1.4 & 0.2 & setosa\\
-\addlinespace
-5.4 & 3.9 & 1.7 & 0.4 & setosa\\
-4.6 & 3.4 & 1.4 & 0.3 & setosa\\
-5.0 & 3.4 & 1.5 & 0.2 & setosa\\
-4.4 & 2.9 & 1.4 & 0.2 & setosa\\
-4.9 & 3.1 & 1.5 & 0.1 & setosa\\
-\addlinespace
-5.4 & 3.7 & 1.5 & 0.2 & setosa\\
-4.8 & 3.4 & 1.6 & 0.2 & setosa\\
-4.8 & 3.0 & 1.4 & 0.1 & setosa\\
-4.3 & 3.0 & 1.1 & 0.1 & setosa\\
-5.8 & 4.0 & 1.2 & 0.2 & setosa\\
-\addlinespace
-5.7 & 4.4 & 1.5 & 0.4 & setosa\\
-5.4 & 3.9 & 1.3 & 0.4 & setosa\\
-5.1 & 3.5 & 1.4 & 0.3 & setosa\\
-5.7 & 3.8 & 1.7 & 0.3 & setosa\\
-5.1 & 3.8 & 1.5 & 0.3 & setosa\\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Média Móvel Exponencial (EWMA)}
+\end{itemize}
 
-You can write citations,\autocite[pp.33-85]{Volatility2001}
+A média móvel exponencial, referida a partir de agora como EWMA, é um método de calculo da variância, sendo um método que utiliza os dados históricos associando mais peso aos retornos mais recentes no calculo da variância.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Heteroscedasticidade condicional auto-regressiva generalizada (GARCH)}
+\end{itemize}
 
 \hypertarget{pacotes-do-r-para-anuxe1lise}{%
 \chapter{Pacotes do R para análise}\label{pacotes-do-r-para-anuxe1lise}}
@@ -374,13 +338,151 @@ We describe our methods in this chapter.
 \endgroup
 \newpage
 
-Some \emph{significant} applications are demonstrated in this chapter.
+\hypertarget{aplicauxe7uxe3o-a-dados-do-modelo-1}{%
+\section{Aplicação a dados do modelo}\label{aplicauxe7uxe3o-a-dados-do-modelo-1}}
 
-\hypertarget{example-one}{%
-\section{Example one}\label{example-one}}
+A primeira fase consiste em extrair de forma aleatória 14 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na tabela \ref{tab:nice-tab}.
 
-\hypertarget{example-two}{%
-\section{Example two}\label{example-two}}
+\begin{table}[!h]
+
+\caption{\label{tab:nice-tab}Empresas extraidas do Euro Stoxx 50}
+\centering
+\begin{tabular}[t]{l}
+\toprule
+x\\
+\midrule
+UNILEVER ORD\\
+SOCIETE GENERALE ORD\\
+BAYER N ORD\\
+TELEFONICA ORD\\
+ENEL ORD\\
+\addlinespace
+DEUTSCHE TELEKOM N ORD\\
+AB INBEV ORD\\
+DAIMLER N ORD\\
+ORANGE ORD\\
+SANOFI ORD\\
+\addlinespace
+AIRBUS ORD\\
+INTESA SANPAOLO ORD\\
+AHOLD DEL ORD\\
+ASML HOLDING ORD\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Reference a figure by its code chunk label with the \passthrough{\lstinline!fig:!} prefix, e.g., see Figure \ref{fig:nice-fig}.
+
+\begin{figure}
+\includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-1} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-2} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-3} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-4} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-5} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-6} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-7} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-8} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-9} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-10} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-11} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-12} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-13} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/nice-fig-14} \caption{Here is a nice figure!}\label{fig:nice-fig}
+\end{figure}
+
+Calculo do retorno diario logaritmico
+
+Correlação entre activos
+
+\begin{lstlisting}[language=R]
+cor(returns)
+\end{lstlisting}
+
+\begin{lstlisting}
+##                  TELEFONICA  UNILEVER    SOCGEN     BAYER      ENEL
+## TELEFONICA        1.0000000 0.4424126 0.6117442 0.6410991 0.5038660
+## UNILEVER          0.4424126 1.0000000 0.2973260 0.4372588 0.4401667
+## SOCGEN            0.6117442 0.2973260 1.0000000 0.5607855 0.5056762
+## BAYER             0.6410991 0.4372588 0.5607855 1.0000000 0.4962673
+## ENEL              0.5038660 0.4401667 0.5056762 0.4962673 1.0000000
+## DEUTSCHE TELEKOM  0.6164856 0.4861206 0.4951897 0.5892044 0.5751642
+## AB INBEV          0.4567942 0.4748401 0.4887377 0.4612602 0.5266856
+## DAIMLER           0.5714944 0.3770780 0.6711539 0.5390019 0.6159233
+## ORANGE            0.6711857 0.4175865 0.4873755 0.6019032 0.4907272
+## SANOFI            0.4859927 0.4720770 0.4047847 0.5037108 0.5685078
+## AIRBUS            0.3725871 0.3383565 0.5167281 0.3721095 0.4449917
+## INTESA            0.6296856 0.3094075 0.7600133 0.6756706 0.4945083
+## AHOLD             0.3623656 0.3639984 0.2836877 0.3756120 0.3664813
+## ASML              0.3619936 0.3287217 0.3843967 0.3624049 0.4757841
+##                  DEUTSCHE TELEKOM  AB INBEV   DAIMLER    ORANGE    SANOFI
+## TELEFONICA              0.6164856 0.4567942 0.5714944 0.6711857 0.4859927
+## UNILEVER                0.4861206 0.4748401 0.3770780 0.4175865 0.4720770
+## SOCGEN                  0.4951897 0.4887377 0.6711539 0.4873755 0.4047847
+## BAYER                   0.5892044 0.4612602 0.5390019 0.6019032 0.5037108
+## ENEL                    0.5751642 0.5266856 0.6159233 0.4907272 0.5685078
+## DEUTSCHE TELEKOM        1.0000000 0.5150677 0.5688911 0.6770446 0.5048925
+## AB INBEV                0.5150677 1.0000000 0.5411385 0.4447014 0.4266473
+## DAIMLER                 0.5688911 0.5411385 1.0000000 0.4968570 0.4429070
+## ORANGE                  0.6770446 0.4447014 0.4968570 1.0000000 0.4656332
+## SANOFI                  0.5048925 0.4266473 0.4429070 0.4656332 1.0000000
+## AIRBUS                  0.4386247 0.5037180 0.5308221 0.3383876 0.3564244
+## INTESA                  0.5049104 0.4287855 0.6008106 0.5260441 0.4111681
+## AHOLD                   0.4161850 0.3105371 0.3300496 0.3907452 0.3871515
+## ASML                    0.4245982 0.4294115 0.4963008 0.3513143 0.4125347
+##                     AIRBUS    INTESA     AHOLD      ASML
+## TELEFONICA       0.3725871 0.6296856 0.3623656 0.3619936
+## UNILEVER         0.3383565 0.3094075 0.3639984 0.3287217
+## SOCGEN           0.5167281 0.7600133 0.2836877 0.3843967
+## BAYER            0.3721095 0.6756706 0.3756120 0.3624049
+## ENEL             0.4449917 0.4945083 0.3664813 0.4757841
+## DEUTSCHE TELEKOM 0.4386247 0.5049104 0.4161850 0.4245982
+## AB INBEV         0.5037180 0.4287855 0.3105371 0.4294115
+## DAIMLER          0.5308221 0.6008106 0.3300496 0.4963008
+## ORANGE           0.3383876 0.5260441 0.3907452 0.3513143
+## SANOFI           0.3564244 0.4111681 0.3871515 0.4125347
+## AIRBUS           1.0000000 0.4317871 0.2223268 0.4525017
+## INTESA           0.4317871 1.0000000 0.3028476 0.3510794
+## AHOLD            0.2223268 0.3028476 1.0000000 0.2605924
+## ASML             0.4525017 0.3510794 0.2605924 1.0000000
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+par(mar = c(1,1,1,1))
+
+ plot(returns$TELEFONICA, main = "TEF.MC",col="red")
+ plot(returns$UNILEVER, main = "UNA.AS",col="red")
+ plot(returns$SOCGEN, main = "GLE.PA",col="red")
+ plot(returns$BAYER, main = "ENEL.MI",col="red")
+ plot(returns$ENEL, main = "BAYN.DE",col="red")
+ plot(returns$`DEUTSCHE TELEKOM`, main = "DTE.DE",col="red")
+ plot(returns$`AB INBEV`, main = "ABI.BR",col="red")
+ plot(returns$DAIMLER, main = "DAI.DE",col="red")
+ plot(returns$ORANGE, main = "ORA.PA",col="red")
+ plot(returns$SANOFI, main = "SAN.PA",col="red")
+ plot(returns$AIRBUS, main = "AIR.PA",col="red")
+ plot(returns$INTESA, main = "ISP.MI",col="red")
+ plot(returns$AHOLD, main = "AD.AS",col="red")
+ plot(returns$ASML, main = "ASML.AS",col="red")
+\end{lstlisting}
+
+\includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-1} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-2} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-3} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-4} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-5} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-6} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-7} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-8} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-9} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-10} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-11} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-12} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-13} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-5-14}
+
+\begin{lstlisting}[language=R]
+ par(mar = c(2,2,2,2))
+ hist(returns$TELEFONICA,probability=T, main="TELEFONICA - daily.returns",xlab="Approximately normally distributed data",breaks=100)
+ lines(density(na.omit(returns$TELEFONICA)),col=2)
+ curve(dnorm(x,0,0.01640906), from = -0.15,to=0.15, col='blue',add = TRUE)
+ qqnorm(returns$TELEFONICA,main="QQ plot of normal data",pch=19)
+ qqline(returns$TELEFONICA)
+ TELTestNOR <- shapiro.test(as.numeric(returns$TELEFONICA))
+ TELSha <- matrix(c(TELTestNOR$statistic,TELTestNOR$p.value),ncol = 2)
+ colnames(TELSha) <- c("Estatistica","p-value")
+ rownames(TELSha) <- c("Shapiro-Wilk normality test")
+ TELSha <- as.table(TELSha)
+ TELSha
+\end{lstlisting}
+
+\begin{lstlisting}
+##                              Estatistica      p-value
+## Shapiro-Wilk normality test 8.894250e-01 1.178638e-35
+\end{lstlisting}
+
+\includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-6-1} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-6-2}
+
+\begin{lstlisting}[language=R]
+sd(returns$TELEFONICA)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 0.01640906
+\end{lstlisting}
 
 \hypertarget{conclusuxe3o}{%
 \chapter*{Conclusão}\label{conclusuxe3o}}

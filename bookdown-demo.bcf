@@ -2829,7 +2829,9 @@
     <bcf:citekey order="9">Markowitz1952</bcf:citekey>
     <bcf:citekey order="10">OptVaR2000</bcf:citekey>
     <bcf:citekey order="11">OptVaR2000</bcf:citekey>
-    <bcf:citekey order="12">Volatility2001</bcf:citekey>
+    <bcf:citekey order="12">Modern2013</bcf:citekey>
+    <bcf:citekey order="13">Modern2013</bcf:citekey>
+    <bcf:citekey order="14">Modern2013</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">
