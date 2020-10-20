@@ -5,6 +5,7 @@
 ## Aplicação a dados do modelo
 ```{r,include=FALSE}
 rm(list = ls())
+knitr::opts_chunk$set(tidy=TRUE, tidy.opts=list(width.cutoff=50),encoding = 'UTF-8',force_v1 = TRUE)
 #install.packages("xlsx")
 #install.packages("kableExtra")
 #install.packages("quantmod")
@@ -20,12 +21,12 @@ library(tidyverse)
 
 A primeira fase consiste em extrair de forma aleatória 14 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na tabela \@ref(tab:nice-tab).
 
-```{r,nice-tab,tidy=FALSE,echo=FALSE}
+```{r,nice-tab}
 mydata <- read.xlsx("data/IndexConstituentsstoxx_50.xlsx", 1)
 set.seed(14)
 dt <- sample(mydata$Full.name, size = 14,replace = F)
 d <- knitr::kable(
-  dt, caption = 'Empresas extraidas do Euro Stoxx 50',
+  dt, caption = "Empresas extraidas do Euro Stoxx 50",
   booktabs = TRUE
 )
 kable_styling(d, latex_options = "hold_position", position = "center")
@@ -75,7 +76,8 @@ head(returns)
 ```
 
 Correlação entre activos
-```{r}
+```{r, comment=""}
+#do not print hash
 cor(returns)
 ```
 
@@ -112,17 +114,25 @@ par(mar = c(1,1,1,1))
  curve(dnorm(x,0,0.01640906), from = -0.15,to=0.15, col='blue',add = TRUE)
  qqnorm(returns$TELEFONICA,main="QQ plot of normal data",pch=19)
  qqline(returns$TELEFONICA)
+
+
+```
+
+```{r,class.output="bg-warning"}
  TELTestNOR <- shapiro.test(as.numeric(returns$TELEFONICA))
  TELSha <- matrix(c(TELTestNOR$statistic,TELTestNOR$p.value),ncol = 2)
  colnames(TELSha) <- c("Estatistica","p-value")
  rownames(TELSha) <- c("Shapiro-Wilk normality test")
  TELSha <- as.table(TELSha)
- TELSha
-
+ d <- knitr::kable(
+  TELSha, caption = 'Empresas extraidas do Euro Stoxx 50',
+  booktabs = TRUE
+)
+kable_styling(d, latex_options = "hold_position", position = "center")
 ```
-
 
 
 ```{r}
 sd(returns$TELEFONICA)
+y <- "my name is my name"
 ```

@@ -14,7 +14,6 @@ geometry: "left=3.5cm,right=2cm,top=3cm,bottom=3cm, asymmetric"
 indent: true
 header-includes:
   - \usepackage{indentfirst}
-  - \usepackage{float}
 pagestyle: plain
 papersize: a4
 toc: true

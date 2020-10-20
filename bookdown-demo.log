@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.10)  11 OCT 2020 18:03
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.10.18)  20 OCT 2020 19:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -543,52 +543,42 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutvoffset=\dimen162
 \Gm@dimlist=\toks22
 )
-(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/listings/listings.
+(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.
 sty
-\lst@mode=\count290
-\lst@gtempboxa=\box51
-\lst@token=\toks23
-\lst@length=\count291
-\lst@currlwidth=\dimen163
-\lst@column=\count292
-\lst@pos=\count293
-\lst@lostspace=\dimen164
-\lst@width=\dimen165
-\lst@newlines=\count294
-\lst@lineno=\count295
-\lst@maxwidth=\dimen166
-
-(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/listings/lstmisc.s
-ty
-File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-\c@lstnumber=\count296
-\lst@skipnumbers=\count297
-\lst@framebox=\box52
+Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count290
+\FV@InFile=\read2
+\FV@TabBox=\box51
+\c@FancyVerbLine=\count291
+\FV@StepNumber=\count292
+\FV@OutFile=\write3
+) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/framed/framed.st
+y
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip53
+\fb@frw=\dimen163
+\fb@frh=\dimen164
+\FrameRule=\dimen165
+\FrameSep=\dimen166
 )
-(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/listings/listings.
-cfg
-File: listings.cfg 2020/03/24 1.8d listings configuration
-))
-Package: listings 2020/03/24 1.8d (Carsten Heinz)
-
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.st
 y
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip53
-\LTright=\skip54
-\LTpre=\skip55
-\LTpost=\skip56
-\LTchunksize=\count298
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count293
 \LTcapwidth=\dimen167
-\LT@head=\box53
-\LT@firsthead=\box54
-\LT@foot=\box55
-\LT@lastfoot=\box56
-\LT@cols=\count299
-\LT@rows=\count300
-\c@LT@tables=\count301
-\c@LT@chunks=\count302
-\LT@p@ftn=\toks24
+\LT@head=\box52
+\LT@firsthead=\box53
+\LT@foot=\box54
+\LT@lastfoot=\box55
+\LT@cols=\count294
+\LT@rows=\count295
+\c@LT@tables=\count296
+\c@LT@chunks=\count297
+\LT@p@ftn=\toks23
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.
 sty
@@ -603,23 +593,23 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen175
 \cmidrulekern=\dimen176
 \defaultaddspace=\dimen177
-\@cmidla=\count303
-\@cmidlb=\count304
+\@cmidla=\count298
+\@cmidlb=\count299
 \@aboverulesep=\dimen178
 \@belowrulesep=\dimen179
-\@thisruleclass=\count305
-\@lastruleclass=\count306
+\@thisruleclass=\count300
+\@lastruleclass=\count301
 \@thisrulewidth=\dimen180
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.
 sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count307
+\etb@tempcnta=\count302
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.
 sty
 Package: footnote 1997/01/28 1.13 Save footnotes around boxes
-\fn@notes=\box57
+\fn@notes=\box56
 \fn@width=\dimen181
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.
@@ -643,15 +633,15 @@ Package graphics Info: Driver file: xetex.def on input line 105.
 ) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amscls/amsthm.st
 y
 Package: amsthm 2020/05/21 v2.20.5
-\thm@style=\toks25
-\thm@bodyfont=\toks26
-\thm@headfont=\toks27
-\thm@notefont=\toks28
-\thm@headpunct=\toks29
-\thm@preskip=\skip57
-\thm@postskip=\skip58
-\thm@headsep=\skip59
-\dth@everypar=\toks30
+\thm@style=\toks24
+\thm@bodyfont=\toks25
+\thm@headfont=\toks26
+\thm@notefont=\toks27
+\thm@headpunct=\toks28
+\thm@preskip=\skip58
+\thm@postskip=\skip59
+\thm@headsep=\skip60
+\dth@everypar=\toks29
 ) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup6
@@ -662,8 +652,8 @@ LaTeX Info: Redefining \bm on input line 209.
 ) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/inputenc.st
 y
 Package: inputenc 2020/08/01 v1.3d Input encoding file
-\inpenc@prehook=\toks31
-\inpenc@posthook=\toks32
+\inpenc@prehook=\toks30
+\inpenc@posthook=\toks31
 
 Package inputenc Warning: inputenc package ignored with utf8 based engines.
 
@@ -672,7 +662,7 @@ y
 Package: babel 2020/10/06 3.50 The Babel package
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2020/10/06 3.50 Babel common definitions
-\babel@savecnt=\count308
+\babel@savecnt=\count303
 \U@D=\dimen184
 \l@babelnohyphens=\language4
 
@@ -680,9 +670,9 @@ File: babel.def 2020/10/06 3.50 Babel common definitions
 f
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/txtbabel.d
 ef))
-\bbl@readstream=\read2
+\bbl@readstream=\read3
 )
-\bbl@dirlevel=\count309
+\bbl@dirlevel=\count304
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-portuges/b
 razil.ldf
@@ -698,12 +688,12 @@ Language: portuges 2020/05/04 v1.2r Portuguese support from the babel system
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/titlesec/titlesec.
 sty
 Package: titlesec 2019/10/16 v2.13 Sectioning titles
-\ttl@box=\box58
-\beforetitleunit=\skip60
-\aftertitleunit=\skip61
+\ttl@box=\box57
+\beforetitleunit=\skip61
+\aftertitleunit=\skip62
 \ttl@plus=\dimen185
 \ttl@minus=\dimen186
-\ttl@toksa=\toks33
+\ttl@toksa=\toks32
 \titlewidth=\dimen187
 \titlewidthlast=\dimen188
 \titlewidthfirst=\dimen189
@@ -711,45 +701,45 @@ Package: titlesec 2019/10/16 v2.13 Sectioning titles
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/indentfirst.
 sty
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
-) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count310
-\float@exts=\toks34
-\float@box=\box59
-\@float@everytoks=\toks35
-\@floatcapt=\box60
 ) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
 Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
 \col@sep=\dimen190
-\ar@mcellbox=\box61
+\ar@mcellbox=\box58
 \extrarowheight=\dimen191
-\NC@list=\toks36
-\extratabsurround=\skip62
-\backup@length=\skip63
-\ar@cellbox=\box62
+\NC@list=\toks33
+\extratabsurround=\skip63
+\backup@length=\skip64
+\ar@cellbox=\box59
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.
 sty
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
-\multirow@colwidth=\skip64
-\multirow@cntb=\count311
-\multirow@dima=\skip65
+\multirow@colwidth=\skip65
+\multirow@cntb=\count305
+\multirow@dima=\skip66
 \bigstrutjot=\dimen192
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.st
 y
 \wrapoverhang=\dimen193
 \WF@size=\dimen194
-\c@WF@wrappedlines=\count312
-\WF@box=\box63
-\WF@everypar=\toks37
+\c@WF@wrappedlines=\count306
+\WF@box=\box60
+\WF@everypar=\toks34
 Package: wrapfig 2003/01/31  v 3.6
+) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count307
+\float@exts=\toks35
+\float@box=\box61
+\@float@everytoks=\toks36
+\@floatcapt=\box62
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.
 sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
-\everycr=\toks38
-\minrowclearance=\skip66
+\everycr=\toks37
+\minrowclearance=\skip67
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscap
 e.sty
@@ -767,17 +757,17 @@ Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.
 sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box64
-\sift@deathcycles=\count313
+\@vwid@box=\box63
+\sift@deathcycles=\count308
 \@vwid@loff=\dimen195
 \@vwid@roff=\dimen196
 )
-\c@taburow=\count314
-\tabu@nbcols=\count315
-\tabu@cnt=\count316
-\tabu@Xcol=\count317
-\tabu@alloc=\count318
-\tabu@nested=\count319
+\c@taburow=\count309
+\tabu@nbcols=\count310
+\tabu@cnt=\count311
+\tabu@Xcol=\count312
+\tabu@alloc=\count313
+\tabu@nested=\count314
 \tabu@target=\dimen197
 \tabu@spreadtarget=\dimen198
 \tabu@naturalX=\dimen199
@@ -787,18 +777,18 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \abovetabulinesep=\dimen259
 \belowtabulinesep=\dimen260
 \tabustrutrule=\dimen261
-\tabu@thebody=\toks39
-\tabu@footnotes=\toks40
-\tabu@box=\box65
-\tabu@arstrutbox=\box66
-\tabu@hleads=\box67
-\tabu@vleads=\box68
-\tabu@cellskip=\skip67
+\tabu@thebody=\toks38
+\tabu@footnotes=\toks39
+\tabu@box=\box64
+\tabu@arstrutbox=\box65
+\tabu@hleads=\box66
+\tabu@vleads=\box67
+\tabu@cellskip=\skip68
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttable/thr
 eeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box69
+\@tempboxb=\box68
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttablex/th
 reeparttablex.sty
@@ -812,16 +802,16 @@ Package: environ 2014/05/04 v0.3 A new way to define environments
 ces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
-\TPTL@width=\skip68
+\TPTL@width=\skip69
 ) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box70
-\UL@hyphenbox=\box71
-\UL@skip=\skip69
-\UL@hook=\toks41
+\UL@box=\box69
+\UL@hyphenbox=\box70
+\UL@skip=\skip70
+\UL@hook=\toks40
 \UL@height=\dimen262
-\UL@pe=\count320
+\UL@pe=\count315
 \UL@pixel=\dimen263
-\ULC@box=\box72
+\ULC@box=\box71
 Package: ulem 2019/11/18
 \ULdepth=\dimen264
 )
@@ -829,8 +819,8 @@ Package: ulem 2019/11/18
 sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen265
-\c@nlinenum=\count321
-\TeXr@lab=\toks42
+\c@nlinenum=\count316
+\TeXr@lab=\toks41
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/polyglossia/polygl
 ossia.sty
@@ -849,10 +839,10 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 tex
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils
 .tex
-\XKV@toks=\toks43
-\XKV@tempa@toks=\toks44
+\XKV@toks=\toks42
+\XKV@tempa@toks=\toks43
 )
-\XKV@depth=\count322
+\XKV@depth=\count317
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/filehook/filehook.
@@ -981,68 +971,68 @@ sty
 Package: biblatex 2020/08/23 v3.15a programmable bibliographies (PK/MW)
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count323
+\lrq@indent=\count318
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 )) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\c@tabx@nest=\count324
-\c@listtotal=\count325
-\c@listcount=\count326
-\c@liststart=\count327
-\c@liststop=\count328
-\c@citecount=\count329
-\c@citetotal=\count330
-\c@multicitecount=\count331
-\c@multicitetotal=\count332
-\c@instcount=\count333
-\c@maxnames=\count334
-\c@minnames=\count335
-\c@maxitems=\count336
-\c@minitems=\count337
-\c@citecounter=\count338
-\c@maxcitecounter=\count339
-\c@savedcitecounter=\count340
-\c@uniquelist=\count341
-\c@uniquename=\count342
-\c@refsection=\count343
-\c@refsegment=\count344
-\c@maxextratitle=\count345
-\c@maxextratitleyear=\count346
-\c@maxextraname=\count347
-\c@maxextradate=\count348
-\c@maxextraalpha=\count349
-\c@abbrvpenalty=\count350
-\c@highnamepenalty=\count351
-\c@lownamepenalty=\count352
-\c@maxparens=\count353
-\c@parenlevel=\count354
-\blx@tempcnta=\count355
-\blx@tempcntb=\count356
-\blx@tempcntc=\count357
-\blx@maxsection=\count358
-\blx@maxsegment@0=\count359
-\blx@notetype=\count360
-\blx@parenlevel@text=\count361
-\blx@parenlevel@foot=\count362
-\blx@sectionciteorder@0=\count363
-\blx@entrysetcounter=\count364
-\blx@biblioinstance=\count365
-\labelnumberwidth=\skip70
-\labelalphawidth=\skip71
-\biblabelsep=\skip72
-\bibitemsep=\skip73
-\bibnamesep=\skip74
-\bibinitsep=\skip75
-\bibparsep=\skip76
-\bibhang=\skip77
-\blx@bcfin=\read3
-\blx@bcfout=\write3
+\c@tabx@nest=\count319
+\c@listtotal=\count320
+\c@listcount=\count321
+\c@liststart=\count322
+\c@liststop=\count323
+\c@citecount=\count324
+\c@citetotal=\count325
+\c@multicitecount=\count326
+\c@multicitetotal=\count327
+\c@instcount=\count328
+\c@maxnames=\count329
+\c@minnames=\count330
+\c@maxitems=\count331
+\c@minitems=\count332
+\c@citecounter=\count333
+\c@maxcitecounter=\count334
+\c@savedcitecounter=\count335
+\c@uniquelist=\count336
+\c@uniquename=\count337
+\c@refsection=\count338
+\c@refsegment=\count339
+\c@maxextratitle=\count340
+\c@maxextratitleyear=\count341
+\c@maxextraname=\count342
+\c@maxextradate=\count343
+\c@maxextraalpha=\count344
+\c@abbrvpenalty=\count345
+\c@highnamepenalty=\count346
+\c@lownamepenalty=\count347
+\c@maxparens=\count348
+\c@parenlevel=\count349
+\blx@tempcnta=\count350
+\blx@tempcntb=\count351
+\blx@tempcntc=\count352
+\blx@maxsection=\count353
+\blx@maxsegment@0=\count354
+\blx@notetype=\count355
+\blx@parenlevel@text=\count356
+\blx@parenlevel@foot=\count357
+\blx@sectionciteorder@0=\count358
+\blx@entrysetcounter=\count359
+\blx@biblioinstance=\count360
+\labelnumberwidth=\skip71
+\labelalphawidth=\skip72
+\biblabelsep=\skip73
+\bibitemsep=\skip74
+\bibnamesep=\skip75
+\bibinitsep=\skip76
+\bibparsep=\skip77
+\bibhang=\skip78
+\blx@bcfin=\read4
+\blx@bcfout=\write4
 \blx@langwohyphens=\language5
-\c@mincomprange=\count366
-\c@maxcomprange=\count367
-\c@mincompwidth=\count368
+\c@mincomprange=\count361
+\c@maxcomprange=\count362
+\c@mincompwidth=\count363
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -1059,100 +1049,100 @@ File: apa.dbx 2020/08/28 v9.14 APA biblatex style data model
 )
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count369
-\c@savedafterword=\count370
-\c@annotator=\count371
-\c@savedannotator=\count372
-\c@author=\count373
-\c@savedauthor=\count374
-\c@bookauthor=\count375
-\c@savedbookauthor=\count376
-\c@commentator=\count377
-\c@savedcommentator=\count378
-\c@editor=\count379
-\c@savededitor=\count380
-\c@editora=\count381
-\c@savededitora=\count382
-\c@editorb=\count383
-\c@savededitorb=\count384
-\c@editorc=\count385
-\c@savededitorc=\count386
-\c@foreword=\count387
-\c@savedforeword=\count388
-\c@holder=\count389
-\c@savedholder=\count390
-\c@introduction=\count391
-\c@savedintroduction=\count392
-\c@namea=\count393
-\c@savednamea=\count394
-\c@nameb=\count395
-\c@savednameb=\count396
-\c@namec=\count397
-\c@savednamec=\count398
-\c@translator=\count399
-\c@savedtranslator=\count400
-\c@shortauthor=\count401
-\c@savedshortauthor=\count402
-\c@shorteditor=\count403
-\c@savedshorteditor=\count404
-\c@groupauthor=\count405
-\c@savedgroupauthor=\count406
-\c@narrator=\count407
-\c@savednarrator=\count408
-\c@execproducer=\count409
-\c@savedexecproducer=\count410
-\c@execdirector=\count411
-\c@savedexecdirector=\count412
-\c@with=\count413
-\c@savedwith=\count414
-\c@labelname=\count415
-\c@savedlabelname=\count416
-\c@institution=\count417
-\c@savedinstitution=\count418
-\c@lista=\count419
-\c@savedlista=\count420
-\c@listb=\count421
-\c@savedlistb=\count422
-\c@listc=\count423
-\c@savedlistc=\count424
-\c@listd=\count425
-\c@savedlistd=\count426
-\c@liste=\count427
-\c@savedliste=\count428
-\c@listf=\count429
-\c@savedlistf=\count430
-\c@location=\count431
-\c@savedlocation=\count432
-\c@organization=\count433
-\c@savedorganization=\count434
-\c@origlocation=\count435
-\c@savedoriglocation=\count436
-\c@origpublisher=\count437
-\c@savedorigpublisher=\count438
-\c@publisher=\count439
-\c@savedpublisher=\count440
-\c@language=\count441
-\c@savedlanguage=\count442
-\c@origlanguage=\count443
-\c@savedoriglanguage=\count444
-\c@citation=\count445
-\c@savedcitation=\count446
-\c@pageref=\count447
-\c@savedpageref=\count448
-\shorthandwidth=\skip78
-\shortjournalwidth=\skip79
-\shortserieswidth=\skip80
-\shorttitlewidth=\skip81
-\shortauthorwidth=\skip82
-\shorteditorwidth=\skip83
-\locallabelnumberwidth=\skip84
-\locallabelalphawidth=\skip85
-\localshorthandwidth=\skip86
-\localshortjournalwidth=\skip87
-\localshortserieswidth=\skip88
-\localshorttitlewidth=\skip89
-\localshortauthorwidth=\skip90
-\localshorteditorwidth=\skip91
+\c@afterword=\count364
+\c@savedafterword=\count365
+\c@annotator=\count366
+\c@savedannotator=\count367
+\c@author=\count368
+\c@savedauthor=\count369
+\c@bookauthor=\count370
+\c@savedbookauthor=\count371
+\c@commentator=\count372
+\c@savedcommentator=\count373
+\c@editor=\count374
+\c@savededitor=\count375
+\c@editora=\count376
+\c@savededitora=\count377
+\c@editorb=\count378
+\c@savededitorb=\count379
+\c@editorc=\count380
+\c@savededitorc=\count381
+\c@foreword=\count382
+\c@savedforeword=\count383
+\c@holder=\count384
+\c@savedholder=\count385
+\c@introduction=\count386
+\c@savedintroduction=\count387
+\c@namea=\count388
+\c@savednamea=\count389
+\c@nameb=\count390
+\c@savednameb=\count391
+\c@namec=\count392
+\c@savednamec=\count393
+\c@translator=\count394
+\c@savedtranslator=\count395
+\c@shortauthor=\count396
+\c@savedshortauthor=\count397
+\c@shorteditor=\count398
+\c@savedshorteditor=\count399
+\c@groupauthor=\count400
+\c@savedgroupauthor=\count401
+\c@narrator=\count402
+\c@savednarrator=\count403
+\c@execproducer=\count404
+\c@savedexecproducer=\count405
+\c@execdirector=\count406
+\c@savedexecdirector=\count407
+\c@with=\count408
+\c@savedwith=\count409
+\c@labelname=\count410
+\c@savedlabelname=\count411
+\c@institution=\count412
+\c@savedinstitution=\count413
+\c@lista=\count414
+\c@savedlista=\count415
+\c@listb=\count416
+\c@savedlistb=\count417
+\c@listc=\count418
+\c@savedlistc=\count419
+\c@listd=\count420
+\c@savedlistd=\count421
+\c@liste=\count422
+\c@savedliste=\count423
+\c@listf=\count424
+\c@savedlistf=\count425
+\c@location=\count426
+\c@savedlocation=\count427
+\c@organization=\count428
+\c@savedorganization=\count429
+\c@origlocation=\count430
+\c@savedoriglocation=\count431
+\c@origpublisher=\count432
+\c@savedorigpublisher=\count433
+\c@publisher=\count434
+\c@savedpublisher=\count435
+\c@language=\count436
+\c@savedlanguage=\count437
+\c@origlanguage=\count438
+\c@savedoriglanguage=\count439
+\c@citation=\count440
+\c@savedcitation=\count441
+\c@pageref=\count442
+\c@savedpageref=\count443
+\shorthandwidth=\skip79
+\shortjournalwidth=\skip80
+\shortserieswidth=\skip81
+\shorttitlewidth=\skip82
+\shortauthorwidth=\skip83
+\shorteditorwidth=\skip84
+\locallabelnumberwidth=\skip85
+\locallabelalphawidth=\skip86
+\localshorthandwidth=\skip87
+\localshortjournalwidth=\skip88
+\localshortserieswidth=\skip89
+\localshorttitlewidth=\skip90
+\localshortauthorwidth=\skip91
+\localshorteditorwidth=\skip92
 Package biblatex Info: Trying to load enhanced support for Unicode engines...
 Package biblatex Info: ... file 'blx-unicode.def' found.
 
@@ -1182,19 +1172,19 @@ Package biblatex Info: ... file 'biblatex.def' found.
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.
 def
 File: biblatex.def 2020/08/23 v3.15a biblatex compatibility (PK/MW)
-\c@textcitecount=\count449
-\c@textcitetotal=\count450
-\c@textcitemaxnames=\count451
-\c@biburlbigbreakpenalty=\count452
-\c@biburlbreakpenalty=\count453
-\c@biburlnumpenalty=\count454
-\c@biburlucpenalty=\count455
-\c@biburllcpenalty=\count456
+\c@textcitecount=\count444
+\c@textcitetotal=\count445
+\c@textcitemaxnames=\count446
+\c@biburlbigbreakpenalty=\count447
+\c@biburlbreakpenalty=\count448
+\c@biburlnumpenalty=\count449
+\c@biburlucpenalty=\count450
+\c@biburllcpenalty=\count451
 \biburlbigskip=\muskip19
 \biburlnumskip=\muskip20
 \biburlucskip=\muskip21
 \biburllcskip=\muskip22
-\c@smartand=\count457
+\c@smartand=\count452
 )
 Package biblatex Info: Trying to load bibliography style 'apa'...
 Package biblatex Info: ... file 'apa.bbx' found.
@@ -1208,8 +1198,8 @@ Package biblatex Info: ... file 'standard.bbx' found.
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/bbx/stand
 ard.bbx
 File: standard.bbx 2020/08/23 v3.15a biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count458
-\c@bbx:relatedtotal=\count459
+\c@bbx:relatedcount=\count453
+\c@bbx:relatedtotal=\count454
 ))
 Package biblatex Info: Trying to load citation style 'apa'...
 Package biblatex Info: ... file 'apa.cbx' found.
@@ -1250,8 +1240,8 @@ File: biblatex.cfg
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
 
-\@quotelevel=\count460
-\@quotereset=\count461
+\@quotelevel=\count455
+\@quotereset=\count456
 (./bookdown-demo.aux
 LaTeX Info: Redefining \rmfamily on input line 26.
 LaTeX Info: Redefining \sffamily on input line 26.
@@ -1264,34 +1254,34 @@ LaTeX Info: Redefining \ttfamily on input line 30.
 )
 \openout1 = `bookdown-demo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 151.
+LaTeX Font Info:    ... okay on input line 151.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 151.
+LaTeX Font Info:    ... okay on input line 151.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 151.
+LaTeX Font Info:    ... okay on input line 151.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 151.
+LaTeX Font Info:    ... okay on input line 151.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 151.
+LaTeX Font Info:    ... okay on input line 151.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 151.
+LaTeX Font Info:    ... okay on input line 151.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 151.
+LaTeX Font Info:    ... okay on input line 151.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 151.
+LaTeX Font Info:    ... okay on input line 151.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 151.
+LaTeX Font Info:    ... okay on input line 151.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 151.
+LaTeX Font Info:    ... okay on input line 151.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 120.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 151.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 120.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 151.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 120.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 151.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 120.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 151.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -1320,7 +1310,7 @@ t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 14.43768pt on input line 120.
+(Font)              scaled to size 14.43768pt on input line 151.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -1359,18 +1349,18 @@ t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 14.43768pt on input line 120.
+(Font)              scaled to size 14.43768pt on input line 151.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 120.
+(Font)              `operators' in the math version `normal' on input line 151.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
- line 120.
+ line 151.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 120.
+(Font)              `operators' in the math version `bold' on input line 151.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
-t line 120.
+t line 151.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -1457,15 +1447,15 @@ t=math;language=dflt;"
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 120.
+(Font)              `symbols' in the math version `normal' on input line 151.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
-t line 120.
+t line 151.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 120.
+(Font)              `symbols' in the math version `bold' on input line 151.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
-t line 120.
+t line 151.
 
 Package fontspec Info: latinmodern-math scale = 1.203140258383906.
 
@@ -1535,17 +1525,17 @@ t=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 (Font)              `largesymbols' in the math version `normal' on input line 1
-20.
+51.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 120.
+t line 151.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 120
+(Font)              `largesymbols' in the math version `bold' on input line 151
 .
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
-t line 120.
-Package hyperref Info: Link coloring OFF on input line 120.
+t line 151.
+Package hyperref Info: Link coloring OFF on input line 151.
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.s
 ty
@@ -1559,14 +1549,14 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count462
+\c@section@level=\count457
 )
-LaTeX Info: Redefining \ref on input line 120.
-LaTeX Info: Redefining \pageref on input line 120.
-LaTeX Info: Redefining \nameref on input line 120.
+LaTeX Info: Redefining \ref on input line 151.
+LaTeX Info: Redefining \pageref on input line 151.
+LaTeX Info: Redefining \nameref on input line 151.
 (./bookdown-demo.out) (./bookdown-demo.out)
-\@outlinefile=\write4
-\openout4 = `bookdown-demo.out'.
+\@outlinefile=\write5
+\openout5 = `bookdown-demo.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1602,10 +1592,9 @@ LaTeX Info: Redefining \nameref on input line 120.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count463
-LaTeX Info: Redefining \rmfamily on input line 120.
-LaTeX Info: Redefining \sffamily on input line 120.
-LaTeX Info: Redefining \ttfamily on input line 120.
+LaTeX Info: Redefining \rmfamily on input line 151.
+LaTeX Info: Redefining \sffamily on input line 151.
+LaTeX Info: Redefining \ttfamily on input line 151.
 
 Package biblatex Warning: File 'brazil-apa.lbx' not found!
 (biblatex)                Ignoring mapping 'brazil' -> 'brazil-apa'.
@@ -1648,60 +1637,60 @@ Package biblatex Info: XeTeX detected.
 (biblatex)             Assuming input encoding 'utf8'.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout3 = `bookdown-demo.bcf'.
+\openout4 = `bookdown-demo.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'bookdown-demo.bbl' found.
 (./bookdown-demo.bbl)
-Package biblatex Info: Reference section=0 on input line 120.
-Package biblatex Info: Reference segment=0 on input line 120.
+Package biblatex Info: Reference section=0 on input line 151.
+Package biblatex Info: Reference segment=0 on input line 151.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
 Package polyglossia Info: Option: portuguese, variant=brazilian.
-LaTeX Info: Redefining \rmfamily on input line 120.
-LaTeX Info: Redefining \sffamily on input line 120.
-LaTeX Info: Redefining \ttfamily on input line 120.
+LaTeX Info: Redefining \rmfamily on input line 151.
+LaTeX Info: Redefining \sffamily on input line 151.
+LaTeX Info: Redefining \ttfamily on input line 151.
 File: image/biglogo.png Graphic file (type bmp)
 <image/biglogo.png>
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 17.28pt on input line 131.
+(Font)              scaled to size 17.28pt on input line 162.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.10637pt on input line 143.
+(Font)              scaled to size 10.10637pt on input line 174.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.21884pt on input line 143.
+(Font)              scaled to size 7.21884pt on input line 174.
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-43.
+74.
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 14.43915pt on input line 143.
+(Font)              scaled to size 14.43915pt on input line 174.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.10739pt on input line 143.
+(Font)              scaled to size 10.10739pt on input line 174.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.21957pt on input line 143.
+(Font)              scaled to size 7.21957pt on input line 174.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 14.43622pt on input line 143.
+(Font)              scaled to size 14.43622pt on input line 174.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 10.10533pt on input line 143.
+(Font)              scaled to size 10.10533pt on input line 174.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.21811pt on input line 143.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 143
+(Font)              scaled to size 7.21811pt on input line 174.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 174
 .
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 143
+LaTeX Font Info:    Trying to load font information for U+msb on input line 174
 .
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-43.
+74.
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-143.
+174.
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1717,11 +1706,11 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [1]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 24.88pt on input line 178.
+(Font)              scaled to size 24.88pt on input line 209.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 24.88pt on input line 178.
+(Font)              scaled to size 24.88pt on input line 209.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 189.
+(Font)              scaled to size 12.0pt on input line 220.
 [2
 
 
@@ -1729,9 +1718,9 @@ LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
 
 ]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 220.
+(Font)              scaled to size 12.0pt on input line 251.
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/it' will be
-(Font)              scaled to size 17.28pt on input line 221.
+(Font)              scaled to size 17.28pt on input line 252.
 [4
 
 ] [5
@@ -1747,8 +1736,8 @@ LaTeX Info: Redefining \rmfamily on input line 5.
 LaTeX Info: Redefining \sffamily on input line 5.
 LaTeX Info: Redefining \ttfamily on input line 5.
 )
-\tf@toc=\write5
-\openout5 = `bookdown-demo.toc'.
+\tf@toc=\write6
+\openout6 = `bookdown-demo.toc'.
 
 [6
 
@@ -1762,8 +1751,8 @@ LaTeX Info: Redefining \rmfamily on input line 5.
 LaTeX Info: Redefining \sffamily on input line 5.
 LaTeX Info: Redefining \ttfamily on input line 5.
 )
-\tf@lot=\write6
-\openout6 = `bookdown-demo.lot'.
+\tf@lot=\write7
+\openout7 = `bookdown-demo.lot'.
 
 [7
 
@@ -1777,8 +1766,8 @@ LaTeX Info: Redefining \rmfamily on input line 5.
 LaTeX Info: Redefining \sffamily on input line 5.
 LaTeX Info: Redefining \ttfamily on input line 5.
 )
-\tf@lof=\write7
-\openout7 = `bookdown-demo.lof'.
+\tf@lof=\write8
+\openout8 = `bookdown-demo.lof'.
 
 [8
 
@@ -1790,7 +1779,7 @@ LaTeX Info: Redefining \ttfamily on input line 5.
 
 ]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 8.4pt on input line 255.
+(Font)              scaled to size 8.4pt on input line 286.
 
 Underfull \vbox (badness 3514) has occurred while \output is active []
 
@@ -1803,9 +1792,9 @@ Capítulo 1.
 
 ]
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 279.
+(Font)              scaled to size 17.28pt on input line 310.
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
+Underfull \hbox (badness 10000) in paragraph at lines 356--357
 []\TU/Arial(0)/b/n/12 Heteroscedasticidade condicional auto-regressiva generali
 zada
  []
@@ -1819,6 +1808,8 @@ Capítulo 3.
 [10
 
 ]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 379.
 File: bookdown-demo_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/nice-fig-1.pdf>
 File: bookdown-demo_files/figure-latex/nice-fig-2.pdf Graphic file (type pdf)
@@ -1848,42 +1839,114 @@ File: bookdown-demo_files/figure-latex/nice-fig-13.pdf Graphic file (type pdf)
 File: bookdown-demo_files/figure-latex/nice-fig-14.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/nice-fig-14.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--377
+Underfull \hbox (badness 10000) in paragraph at lines 421--421
 [][] [] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--377
+Underfull \hbox (badness 10000) in paragraph at lines 421--421
 [] [] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--377
+Underfull \hbox (badness 10000) in paragraph at lines 421--421
 [] [] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--377
+Underfull \hbox (badness 10000) in paragraph at lines 421--421
 [] [] []
  []
 
+[11] [12]
+Overfull \hbox (10.12202pt too wide) in paragraph at lines 481--481
+[]                 \TU/lmtt/m/n/12 DEUTSCHE TELEKOM  AB INBEV   DAIMLER    ORAN
+GE    SANOFI[] 
+ []
 
-(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/listings/lstlang1.
-sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
-)
-(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/listings/lstlang2.
-sty
-File: lstlang2.sty 2020/03/24 1.8d listings language file
-)
-(c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/listings/lstlang3.
-sty
-File: lstlang3.sty 2020/03/24 1.8d listings language file
-) [11] [12]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Overfull \hbox (10.01416pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 TELEFONICA              0.6164856 0.4567942 0.5714944 0.67118
+57 0.4859927[] 
+ []
+
+
+Overfull \hbox (10.08612pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 UNILEVER                0.4861206 0.4748401 0.3770780 0.41758
+65 0.4720770[] 
+ []
+
+
+Overfull \hbox (10.07411pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 SOCGEN                  0.4951897 0.4887377 0.6711539 0.48737
+55 0.4047847[] 
+ []
+
+
+Overfull \hbox (10.03812pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 BAYER                   0.5892044 0.4612602 0.5390019 0.60190
+32 0.5037108[] 
+ []
+
+
+Overfull \hbox (10.02611pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 ENEL                    0.5751642 0.5266856 0.6159233 0.49072
+72 0.5685078[] 
+ []
+
+
+Overfull \hbox (10.05019pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 DEUTSCHE TELEKOM        1.0000000 0.5150677 0.5688911 0.67704
+46 0.5048925[] 
+ []
+
+
+Overfull \hbox (10.0861pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 AB INBEV                0.5150677 1.0000000 0.5411385 0.44470
+14 0.4266473[] 
+ []
+
+
+Overfull \hbox (10.06212pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 DAIMLER                 0.5688911 0.5411385 1.0000000 0.49685
+70 0.4429070[] 
+ []
+
+
+Overfull \hbox (10.05013pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 ORANGE                  0.6770446 0.4447014 0.4968570 1.00000
+00 0.4656332[] 
+ []
+
+
+Overfull \hbox (10.05013pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 SANOFI                  0.5048925 0.4266473 0.4429070 0.46563
+32 1.0000000[] 
+ []
+
+
+Overfull \hbox (10.0861pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 AIRBUS                  0.4386247 0.5037180 0.5308221 0.33838
+76 0.3564244[] 
+ []
+
+
+Overfull \hbox (10.06212pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 INTESA                  0.5049104 0.4287855 0.6008106 0.52604
+41 0.4111681[] 
+ []
+
+
+Overfull \hbox (10.0741pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 AHOLD                   0.4161850 0.3105371 0.3300496 0.39074
+52 0.3871515[] 
+ []
 
 [13]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (10.0741pt too wide) in paragraph at lines 481--481
+[]\TU/lmtt/m/n/12 ASML                    0.4245982 0.4294115 0.4963008 0.35131
+43 0.4125347[] 
+ []
 
 [14]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type
@@ -1929,62 +1992,33 @@ File: bookdown-demo_files/figure-latex/unnamed-chunk-5-14.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-5-14.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 455--456
+Underfull \hbox (badness 10000) in paragraph at lines 504--505
 [][] [] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 455--456
+Underfull \hbox (badness 10000) in paragraph at lines 504--505
 [] [] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 455--456
+Underfull \hbox (badness 10000) in paragraph at lines 504--505
 [] [] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 455--456
+Underfull \hbox (badness 10000) in paragraph at lines 504--505
 [] [] []
  []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [15]
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[16]
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
-Missing character: There is no ␣ in font Arial/OT:script=latn;language=dflt;map
-ping=tex-text;!
 File: bookdown-demo_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type
  pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-6-1.pdf>
 File: bookdown-demo_files/figure-latex/unnamed-chunk-6-2.pdf Graphic file (type
  pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-6-2.pdf>
-[17] [18
+[16] [17
 
 ]
 The property list \polyglossia@langsetup contains the pairs (without outer
@@ -2021,7 +2055,7 @@ braces):
 >  {portuguese/babelname}  =>  {brazil}
 >  {portuguese/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {portuguese/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-[19
+[18
 
 ] (./bookdown-demo.aux
 LaTeX Info: Redefining \rmfamily on input line 26.
@@ -2044,12 +2078,12 @@ Package logreq Info: Writing requests to 'bookdown-demo.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 30033 strings out of 479450
- 551531 string characters out of 5879919
- 1663301 words of memory out of 5000000
- 48868 multiletter control sequences out of 15000+600000
- 549609 words of font info for 82 fonts, out of 8000000 for 9000
+ 28557 strings out of 479450
+ 532536 string characters out of 5879919
+ 1486352 words of memory out of 5000000
+ 47400 multiletter control sequences out of 15000+600000
+ 549633 words of font info for 85 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  84i,9n,121p,1872b,5506s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (30 pages).
+Output written on bookdown-demo.pdf (29 pages).
