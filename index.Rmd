@@ -1,9 +1,9 @@
 --- 
-lang: "pt-br"
 site: bookdown::bookdown_site
+output: bookdown::gitbook
 documentclass: book
 bibliography: [book.bib, packages.bib]
-biblio-style: apa
+biblio-style: apalike
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 classoption: openany
