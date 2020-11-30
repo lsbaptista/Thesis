@@ -6,7 +6,48 @@
 
 ## Series Temporais
 
+A cotação de activos financeiros, como acções ou opções, são representados de forma sequencial ao longo do tempo, considerando determinado intervalo, que pode ser segundos, minutos, dias, semanas ou outro intervalo considerado útil para representação dos dados ao longo do tempo. Quando tal acontece estamos em presença de series temporais.
 
+Os preços de activos financeiros ao longo do tempo formam o que é denominado por processos estocásticos. Processos estocásticos são uma classe de series temporais onde o valor da variável muda ao longo de tempo de forma aleatória. Os processo estocásticos podem ser classificados de discretos ou contínuos, sendo que na análise de activos financeiros, embora estes sigam processos discretos, serão considerados processos estocásticos contínuos ao longo do tempo, sendo que os modelos utilizados acabam por ser bastante úteis na modelização dos preços de activos financeiros de acordo com @Hull2018.
+
+### Simulação do preço de acções
+
+Os preços das acções seguem habitualmente o que é conhecido por um processo de Markov, onde apenas o valor presente importa para prever o valor futuro. Desta forma a única informação relevante é o preço no momento, sendo que os valores e trajecto verificado no passado não irão ter importância na definição da distribuição probabilística do preço no futuro (@Hull2018).
+
+O modelo representado aqui e que será utilizado para simular preços de activos financeiros atravessou vários pressupostos até a sua conclusão final, sendo apresentado de uma forma muita sucinta as principais etapas de desenvolvimento desse modelo.
+
+Um dos primeiros modelos era representado por um processo de Wiener, sendo este um processo particular do processo estocástico Markov, referido como movimento Browniano, descrevendo a evolução de uma variável com distribuição normal padrão. A modelação pressupõe que a variável z possa ser dada pela seguinte equação:
+
+\begin{equation} 
+  dz = \varepsilon \sqrt{dt}\qquad   \varepsilon \sim N(0,1);
+  (\#eq:wiener)
+\end{equation} 
+
+A variável z segue um processo de Wiener, sendo uma variável independente e identicamente distribuída (i.i.d). 
+
+Como este modelo não preenchia todos os pressupostos, aplicou-se um processo generalizado de Wiener, onde é incluindo um amplificador/redutor na parte aleatória do processo de forma a ajustar o processo a propriedades especificas de cada acção, ilustrado na equação \@ref(eq:gwiener). Este processo descreve a evolução de um processo de uma variável com distribuição normal, com um desvio \mu por unidade de tempo e uma taxa de variância de \sigma^2 por unidade de tempo.
+
+\begin{equation} 
+  \delta S = \mu\delta t +\sigma\varepsilon\sqrt{\delta t}\qquad\varepsilon \sim N(0,1);
+  (\#eq:gwiener)
+\end{equation} 
+
+Outro processo estocástico conhecido como processo Itô foi desenvolvido, representando um processo generalizado de Wiener onde o valor dos parâmetros $\mu$ e $\sigma$ são funções do valor subjacente da variável S e do tempo t. Este modelo é o que vai ser utilizado para simulação do preço das acções sendo representado pelas seguintes formulas:
+
+\begin{equation} 
+  \frac{\delta S}{S} = \mu\delta t +\sigma\varepsilon\sqrt{\delta t}\qquad\varepsilon \sim N(0,1);
+  (\#eq:ito)
+\end{equation} 
+\begin{equation} 
+  In S_1 - InS_0 \approx\phi\Big[\Big(\mu-\frac{\sigma^2}{2}\Big)\delta t, \sigma\sqrt{\delta t}\Big]
+  (\#eq:Inito)
+\end{equation} 
+\begin{equation} 
+  S_1 =S_0 e^{\Big(\mu-\frac{\sigma^2}{2}\Big)\delta t + \sigma\varepsilon\sqrt{\delta t}}
+  (\#eq:logprice)
+\end{equation} 
+
+Nesta equação o $\mu$ representa a taxa de retorno anual esperado, sendo que $\sigma$ representa o desvio padrão ou volatilidade da acção, sendo este um parâmetro muito importante para a determinação do valor de vários derivados, havendo várias formas de calcular este valor como veremos mais adiante. Estes valores são função do corrente valor de S e do tempo actual t.Numa economia neutra face ao risco $\mu$ é igual a taxa de juro sem risco. O $\varepsilon$ representa uma variável com distribuição normal(N(0,1)).
 
 ## Portfolios média-variância
 A otimização de portfolios através da diversificação é um conceito básico que teve origem em Markowitz, criando o conceito de fronteira eficiente. Existem vários pressupostos definidos na obtenção deste modelo, não sendo, no entanto, o âmbito aqui analisar esses mesmos pressupostos, considerando que independentemente disso esses mesmos pressupostos são verificados. De acordo com @Modern2013, “todas os pressupostos acerca da analise de portfolio foram demonstradas serem simplistas, e em alguns casos demasiado simplistas.[...]Pessoas necessitam apenas de se comportar como se fossem descritas pelos pressupostos para uma teoria ser válida” [@Modern2013,pp.5]. 
@@ -21,14 +62,14 @@ As séries dos retornos diários para cada um dos activos é calculada de acordo
 
 \begin{equation} 
   R_i = ln\Big(\frac{V_f}{V_i}\Big)
-  (\#eq:log)
+  (\#eq:logRet)
 \end{equation} 
 
 A média dos retornos de cada um dos activos é calculada de acordo com a sua média aritmética:
 
 \begin{equation} 
   \overline{R} = \frac{\displaystyle\sum_{i=1}^n R_i}{n}
-  (\#eq:mean)
+  (\#eq:meanRet)
 \end{equation} 
 
 A variância de cada um dos activos é calculada usando 3 métodos diferentes que passamos seguidamente a descrever:

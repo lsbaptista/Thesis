@@ -12,10 +12,12 @@ knitr::opts_chunk$set(tidy=FALSE,message = FALSE,warning = FALSE)
 #install.packages("MASS")
 #install.packages("arsenal")
 #install.packages("formatR")
-library(formatR)
+#install.packages("tidyquant")
+#install.packages("rugarch")
+library(tidyquant)
+library(rugarch)
 library(arsenal)
 library(MASS)
-library(quantmod)
 library(kableExtra)
 library(xlsx)
 library(tidyverse)
@@ -37,72 +39,76 @@ kable_styling(d, latex_options = "hold_position", position = "center")
 
 ```{r,include=FALSE}
 #leitura de simbolos dos activos financeiros
-symbolsEU <- c("TEF.MC","UNA.AS",'GLE.PA','ENEL.MI',"BAYN.DE","DTE.DE","ABI.BR","DAI.DE","ORA.PA","SAN.PA","AIR.PA","ISP.MI","AD.AS","ASML.AS")
-stocks <- getSymbols(symbolsEU,src="yahoo", from="2012-06-18", to="2020-06-02",auto.assign = TRUE)
-
+#symbolsEU <- c("TEF.MC","UNA.AS",'GLE.PA','ENEL.MI',"BAYN.DE","DTE.DE","ABI.BR","DAI.DE","ORA.PA","SAN.PA","AIR.PA","ISP.MI","AD.AS","ASML.AS")
+getSymbols('GLE.PA',src = "yahoo", from="2012-06-18", to="2020-06-02")
+view(GLE.PA)
 ```
 \normalsize
 Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). 
 \scriptsize
 ```{r,nice-fig,echo=FALSE,fig.cap='Here is a nice figure!',out.width = "30%",fig.show="hold"}
 
-par(mar = c(1,1,1,1))
- plot(TEF.MC[,6], main = "TEF.MC")
- plot(UNA.AS[,6], main = "UNA.AS")
- plot(GLE.PA[,6], main = "GLE.PA")
- plot(ENEL.MI[,6], main = "ENEL.MI")
- plot(BAYN.DE[,6], main = "BAYN.DE")
- plot(DTE.DE[,6], main = "DTE.DE")
- plot(ABI.BR[,6], main = "ABI.BR")
- plot(DAI.DE[,6], main = "DAI.DE")
- plot(ORA.PA[,6], main = "ORA.PA")
- plot(SAN.PA[,6], main = "SAN.PA")
- plot(AIR.PA[,6], main = "AIR.PA")
- plot(ISP.MI[,6], main = "ISP.MI")
- plot(AD.AS[,6], main = "AD.AS")
- plot(ASML.AS[,6], main = "ASML.AS")
+#par(mar = c(1,1,1,1))
+ #plot(TEF.MC[,6], main = "TEF.MC")
+ #plot(UNA.AS[,6], main = "UNA.AS")
+ #plot(GLE.PA[,6], main = "GLE.PA")
+ #plot(ENEL.MI[,6], main = "ENEL.MI")
+ #plot(BAYN.DE[,6], main = "BAYN.DE")
+ #plot(DTE.DE[,6], main = "DTE.DE")
+ #plot(ABI.BR[,6], main = "ABI.BR")
+ #plot(DAI.DE[,6], main = "DAI.DE")
+ #plot(ORA.PA[,6], main = "ORA.PA")
+ #plot(SAN.PA[,6], main = "SAN.PA")
+ #plot(AIR.PA[,6], main = "AIR.PA")
+ #plot(ISP.MI[,6], main = "ISP.MI")
+ #plot(AD.AS[,6], main = "AD.AS")
+ #plot(ASML.AS[,6], main = "ASML.AS")
+chartSeries(GLE.PA)
 ```
 
 
 Calculo do retorno diario logaritmico
 \scriptsize
 ```{r include=FALSE}
-adjustedPrices <- data.frame(cbind(TEF.MC$TEF.MC.Adjusted,UNA.AS$UNA.AS.Adjusted,GLE.PA$GLE.PA.Adjusted,ENEL.MI$ENEL.MI.Adjusted,BAYN.DE$BAYN.DE.Adjusted,DTE.DE$DTE.DE.Adjusted,ABI.BR$ABI.BR.Adjusted,DAI.DE$DAI.DE.Adjusted,ORA.PA$ORA.PA.Adjusted,SAN.PA$SAN.PA.Adjusted,AIR.PA$AIR.PA.Adjusted,ISP.MI$ISP.MI.Adjusted,AD.AS$AD.AS.Adjusted,ASML.AS$ASML.AS.Adjusted))
+#adjustedPrices <- data.frame(cbind(TEF.MC$TEF.MC.Adjusted,UNA.AS$UNA.AS.Adjusted,GLE.PA$GLE.PA.Adjusted,ENEL.MI$ENEL.MI.Adjusted,BAYN.DE$BAYN.DE.Adjusted,DTE.DE$DTE.DE.Adjusted,ABI.BR$ABI.BR.Adjusted,DAI.DE$DAI.DE.Adjusted,ORA.PA$ORA.PA.Adjusted,SAN.PA$SAN.PA.Adjusted,AIR.PA$AIR.PA.Adjusted,ISP.MI$ISP.MI.Adjusted,AD.AS$AD.AS.Adjusted,ASML.AS$ASML.AS.Adjusted))
 
-adjustedPrices <- na.omit(adjustedPrices)
+#adjustedPrices <- na.omit(adjustedPrices)
 
-returns <- na.omit(cbind(dailyReturn(Ad(TEF.MC),type ="log"),dailyReturn(Ad(UNA.AS),type ="log"),dailyReturn(Ad(GLE.PA),type ="log"),dailyReturn(Ad(ENEL.MI),type = "log"),dailyReturn(Ad(BAYN.DE),type = "log"),dailyReturn(Ad(DTE.DE),type = "log"),dailyReturn(Ad(ABI.BR),type = "log"),dailyReturn(Ad(DAI.DE),type = "log"),dailyReturn(Ad(ORA.PA),type = "log"),dailyReturn(Ad(SAN.PA),type = "log"),dailyReturn(Ad(AIR.PA),type = "log"),dailyReturn(Ad(ISP.MI),type = "log"),dailyReturn(Ad(AD.AS),type = "log"),dailyReturn(Ad(ASML.AS),type = "log")))
+#returns <- na.omit(cbind(dailyReturn(Ad(TEF.MC),type ="log"),dailyReturn(Ad(UNA.AS),type ="log"),dailyReturn(Ad(GLE.PA),type ="log"),dailyReturn(Ad(ENEL.MI),type = "log"),dailyReturn(Ad(BAYN.DE),type = "log"),dailyReturn(Ad(DTE.DE),type = "log"),dailyReturn(Ad(ABI.BR),type = "log"),dailyReturn(Ad(DAI.DE),type = "log"),dailyReturn(Ad(ORA.PA),type = "log"),dailyReturn(Ad(SAN.PA),type = "log"),dailyReturn(Ad(AIR.PA),type = "log"),dailyReturn(Ad(ISP.MI),type = "log"),dailyReturn(Ad(AD.AS),type = "log"),dailyReturn(Ad(ASML.AS),type = "log")))
 
-colnames(returns) <- c("TELEFONICA","UNILEVER","SOCGEN","BAYER","ENEL","DEUTSCHE TELEKOM","AB INBEV","DAIMLER","ORANGE","SANOFI","AIRBUS","INTESA","AHOLD","ASML")
-head(returns)
+#colnames(returns) <- c("TELEFONICA","UNILEVER","SOCGEN","BAYER","ENEL","DEUTSCHE TELEKOM","AB INBEV","DAIMLER","ORANGE","SANOFI","AIRBUS","INTESA","AHOLD","ASML")
+#head(returns)
+
+return <- CalculateReturns(GLE.PA$GLE.PA.Adjusted)
+view(return)
 ```
 \normalsize
 Correlação entre activos
 \scriptsize
 ```{r, comment=""}
 #do not print hash
-options(width = 70)
-cor(returns)
+#options(width = 70)
+#cor(returns)
 ```
 \normalsize
 
 \scriptsize
 ```{r,out.width = "30%",fig.show="hold"}
-par(mar = c(1,1,1,1))
-plot(returns$TELEFONICA, main = "TEF.MC",col="red")
-plot(returns$UNILEVER, main = "UNA.AS",col="red")
-plot(returns$SOCGEN, main = "GLE.PA",col="red")
-plot(returns$BAYER, main = "ENEL.MI",col="red")
-plot(returns$ENEL, main = "BAYN.DE",col="red")
-plot(returns$`DEUTSCHE TELEKOM`, main = "DTE.DE",col="red")
-plot(returns$`AB INBEV`, main = "ABI.BR",col="red")
-plot(returns$DAIMLER, main = "DAI.DE",col="red")
-plot(returns$ORANGE, main = "ORA.PA",col="red")
-plot(returns$SANOFI, main = "SAN.PA",col="red")
-plot(returns$AIRBUS, main = "AIR.PA",col="red")
-plot(returns$INTESA, main = "ISP.MI",col="red")
-plot(returns$AHOLD, main = "AD.AS",col="red")
-plot(returns$ASML, main = "ASML.AS",col="red")
+#par(mar = c(1,1,1,1))
+#plot(returns$TELEFONICA, main = "TEF.MC",col="red")
+#plot(returns$UNILEVER, main = "UNA.AS",col="red")
+#plot(returns$SOCGEN, main = "GLE.PA",col="red")
+#plot(returns$BAYER, main = "ENEL.MI",col="red")
+#plot(returns$ENEL, main = "BAYN.DE",col="red")
+#plot(returns$`DEUTSCHE TELEKOM`, main = "DTE.DE",col="red")
+#plot(returns$`AB INBEV`, main = "ABI.BR",col="red")
+#plot(returns$DAIMLER, main = "DAI.DE",col="red")
+#plot(returns$ORANGE, main = "ORA.PA",col="red")
+#plot(returns$SANOFI, main = "SAN.PA",col="red")
+#plot(returns$AIRBUS, main = "AIR.PA",col="red")
+#plot(returns$INTESA, main = "ISP.MI",col="red")
+#plot(returns$AHOLD, main = "AD.AS",col="red")
+#plot(returns$ASML, main = "ASML.AS",col="red")
  
 ```
 \normalsize
@@ -110,36 +116,99 @@ plot(returns$ASML, main = "ASML.AS",col="red")
 \scriptsize
 ```{r,out.width = "30%",fig.show="hold"}
 
- par(mar = c(2,2,2,2))
- hist(returns$TELEFONICA,probability=T, main="TELEFONICA - daily.
-      returns",xlab="Approximately normally distributed data",breaks=100)
- lines(density(na.omit(returns$TELEFONICA)),col=2)
- curve(dnorm(x,0,0.01640906), from = -0.15,to=0.15, col='blue',add = TRUE)
- qqnorm(returns$TELEFONICA,main="QQ plot of normal data",pch=19)
- qqline(returns$TELEFONICA)
+ #par(mar = c(2,2,2,2))
+ #hist(returns$TELEFONICA,probability=T, main="TELEFONICA - daily.
+      #returns",xlab="Approximately normally distributed data",breaks=100)
+ #lines(density(na.omit(returns$TELEFONICA)),col=2)
+ #curve(dnorm(x,0,0.01640906), from = -0.15,to=0.15, col='blue',add = TRUE)
+ #qqnorm(returns$TELEFONICA,main="QQ plot of normal data",pch=19)
+ #qqline(returns$TELEFONICA)
 
-
+return<-return[-1]
+hist(return,breaks=100)
+chart.Histogram(return,methods = c("add.density","add.normal"),colorset = c("blue","green","red"))
+chartSeries(return,theme="white")
 ```
 \normalsize
 
 \scriptsize
 ```{r,class.output="bg-warning"}
- TELTestNOR <- shapiro.test(as.numeric(returns$TELEFONICA))
- TELSha <- matrix(c(TELTestNOR$statistic,TELTestNOR$p.value),ncol = 2)
- colnames(TELSha) <- c("Estatistica","p-value")
- rownames(TELSha) <- c("Shapiro-Wilk normality test")
- TELSha <- as.table(TELSha)
- d <- knitr::kable(
-  TELSha, caption = 'Empresas extraidas do Euro Stoxx 50',
-  booktabs = TRUE
-)
-kable_styling(d, latex_options = "hold_position", position = "center")
+ #TELTestNOR <- shapiro.test(as.numeric(returns$TELEFONICA))
+ #TELSha <- matrix(c(TELTestNOR$statistic,TELTestNOR$p.value),ncol = 2)
+ #colnames(TELSha) <- c("Estatistica","p-value")
+ #rownames(TELSha) <- c("Shapiro-Wilk normality test")
+ #TELSha <- as.table(TELSha)
+ #d <- knitr::kable(
+  #TELSha, caption = 'Empresas extraidas do Euro Stoxx 50',
+  #booktabs = TRUE
+#)
+#kable_styling(d, latex_options = "hold_position", position = "center")
 ```
 \normalsize
+
+Annualized volatility
 \scriptsize
 ```{r,include=FALSE}
-sd <- sd(returns$TELEFONICA)
+sqrt(252)*sd(return)
+sqrt(252)*sd(return["2020"])
 
+chart.RollingPerformance(R=return,width = 22,FUN = "sd.annualized",scale=252,main = "GLE monthly rolling volatility")
+chart.RollingPerformance(R=return,width = 252,FUN = "sd.annualized",scale=252,main = "GLE monthly rolling volatility")
 ```
 \normalsize
-Como se pode verificar, o desvio padrão da empresa telecomunicação "Telefonica" é `r sd`
+Como se pode verificar, o desvio padrão da empresa telecomunicação "Telefonica" é 
+
+sGARCH model with contant mean
+```{r}
+
+s<-ugarchspec(mean.model = list(armaOrder=c(0,0)),variance.model = list(model="sGARCH"),distribution.model = "norm")
+m<-ugarchfit(data=return,spec=s)
+m
+plot(m,which = "all")
+f<-ugarchforecast(fitORspec = m,n.ahead = 60)
+plot(fitted(f))
+plot(sigma(f))
+```
+
+
+Application example - potfolio allocation
+```{r}
+v<-sqrt(252)*sigma(m)
+w<-0.05/v
+plot(merge(v,w),multi.panel=TRUE)
+
+
+```
+
+GARCH with sstd
+
+```{r}
+s<-ugarchspec(mean.model = list(armaOrder=c(0,0)),variance.model = list(model="sGARCH"),distribution.model = "sstd")
+m<-ugarchfit(data=return,spec=s)
+m
+plot(m,which = "all")
+f<-ugarchforecast(fitORspec = m,n.ahead = 60)
+plot(fitted(f))
+plot(sigma(f))
+```
+GJR-GARCH
+```{r}
+s<-ugarchspec(mean.model = list(armaOrder=c(0,0)),variance.model = list(model="gjrGARCH"),distribution.model = "sstd")
+m<-ugarchfit(data=return,spec=s)
+m
+plot(m,which = "all")
+f<-ugarchforecast(fitORspec = m,n.ahead = 60)
+plot(fitted(f))
+plot(sigma(f))
+```
+GJR-GARCH in mean
+```{r}
+s<-ugarchspec(mean.model = list(armaOrder=c(0,0),archm=T,archpow=2),variance.model = list(model="sGARCH"),distribution.model = "sstd")
+m<-ugarchfit(data=return,spec=s)
+m
+plot(m,which = "all")
+f<-ugarchforecast(fitORspec = m,n.ahead = 60)
+plot(fitted(f))
+plot(sigma(f))
+```
+
