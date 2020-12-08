@@ -4,11 +4,12 @@
 \contentsline {chapter}{Introdução}{1}{chapter*.8}%
 \contentsline {chapter}{\numberline {1}Modelação Estatística na Otimização de Portfólios}{5}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Series Temporais}{6}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Simulação do preço de acções}{6}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Modelação do preço de acções}{6}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Simulação de Monte Carlo}{8}{subsection.1.1.2}%
 \contentsline {section}{\numberline {1.2}Portfolios média-variância}{8}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Pacotes do R para análise}{10}{chapter.2}%
 \contentsline {chapter}{\numberline {3}Aplicação a dados do modelo}{12}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Aplicação a dados do modelo}{13}{section.3.1}%
 \contentsline {chapter}{Conclusão}{37}{chapter*.9}%
 \contentsline {chapter}{Bibliografia}{38}{chapter*.10}%
-\contentsline {chapter}{Apêndice}{39}{chapter*.11}%
+\contentsline {part}{Apêndice}{40}{part*.11}%

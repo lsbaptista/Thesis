@@ -306,14 +306,14 @@ A aplicação pratica dos métodos aos dados do mercado será realizado com o ap
 
 A cotação de activos financeiros, como acções ou opções, são representados de forma sequencial ao longo do tempo, considerando determinado intervalo, que pode ser segundos, minutos, dias, semanas ou outro intervalo considerado útil para representação dos dados ao longo do tempo. Quando tal acontece estamos em presença de series temporais.
 
-Os preços de activos financeiros ao longo do tempo formam o que é denominado por processos estocásticos. Processos estocásticos são uma classe de series temporais onde o valor da variável muda ao longo de tempo de forma aleatória. Os processo estocásticos podem ser classificados de discretos ou contínuos, sendo que na análise de activos financeiros, embora estes sigam processos discretos, serão considerados processos estocásticos contínuos ao longo do tempo, sendo que os modelos utilizados acabam por ser bastante úteis na modelização dos preços de activos financeiros de acordo com \citet{Hull2018}.
+Os preços de activos financeiros ao longo do tempo formam o que é denominado por processos estocásticos. Processos estocásticos são uma classe de series temporais onde o valor da variável muda ao longo de tempo de forma aleatória. Os processo estocásticos podem ser classificados de discretos ou contínuos, sendo que na análise de activos financeiros, embora estes sigam processos discretos, serão considerados processos estocásticos contínuos ao longo do tempo, sendo que estes modelos acabam por ser bastante úteis na modelização dos preços de activos financeiros de acordo com \citet{Hull2018}.
 
-\hypertarget{simulauxe7uxe3o-do-preuxe7o-de-acuxe7uxf5es}{%
-\subsection{Simulação do preço de acções}\label{simulauxe7uxe3o-do-preuxe7o-de-acuxe7uxf5es}}
+\hypertarget{modelauxe7uxe3o-do-preuxe7o-de-acuxe7uxf5es}{%
+\subsection{Modelação do preço de acções}\label{modelauxe7uxe3o-do-preuxe7o-de-acuxe7uxf5es}}
 
-Os preços das acções seguem habitualmente o que é conhecido por um processo de Markov, onde apenas o valor presente importa para prever o valor futuro. Desta forma a única informação relevante é o preço no momento, sendo que os valores e trajecto verificado no passado não irão ter importância na definição da distribuição probabilística do preço no futuro (\citet{Hull2018}).
+Os preços das acções seguem habitualmente o que é conhecido por um processo de Markov, onde apenas o valor presente importa para prever o valor futuro. Desta forma a única informação relevante é o seu valor no momento, sendo que os valores e trajecto verificado no passado não irão ter importância na definição da distribuição probabilística do preço no futuro \citep{Hull2018}.Desta forma as propriedades de Markov no preço das acções é consistente com a eficiência dos mercados na forma fraca, constituindo esta uma das três formas de eficiência de mercado definidas por Eugene Fama\footnote{Ver ``\url{https://pt.wikipedia.org/wiki/Eugene_Fama}''}.
 
-O modelo representado aqui e que será utilizado para simular preços de activos financeiros atravessou vários pressupostos até a sua conclusão final, sendo apresentado de uma forma muita sucinta as principais etapas de desenvolvimento desse modelo.
+O modelo representado aqui e que será utilizado para simular preços de activos financeiros atravessou vários pressupostos até a sua conclusão final, sendo apresentado de uma forma muito sucinta as principais etapas de desenvolvimento desse modelo.
 
 Um dos primeiros modelos era representado por um processo de Wiener, sendo este um processo particular do processo estocástico Markov, referido como movimento Browniano, descrevendo a evolução de uma variável com distribuição normal padrão. A modelação pressupõe que a variável z possa ser dada pela seguinte equação:
 
@@ -322,16 +322,18 @@ Um dos primeiros modelos era representado por um processo de Wiener, sendo este 
   \label{eq:wiener}
 \end{equation}
 
-A variável z segue um processo de Wiener, sendo uma variável independente e identicamente distribuída (i.i.d).
+Desta forma a variável z segue um processo de Wiener, sendo uma variável independente e identicamente distribuída (i.i.d).
 
-Como este modelo não preenchia todos os pressupostos, aplicou-se um processo generalizado de Wiener, onde é incluindo um amplificador/redutor na parte aleatória do processo de forma a ajustar o processo a propriedades especificas de cada acção, ilustrado na equação \eqref{eq:gwiener}. Este processo descreve a evolução de um processo de uma variável com distribuição normal, com um desvio \mu por unidade de tempo e uma taxa de variância de \sigma\^{}2 por unidade de tempo.
+Como este modelo não preenchia todos os pressupostos, aplicou-se um processo generalizado de Wiener (também conhecido como movimento Browniano (BM)), onde é incluindo um amplificador/redutor na parte aleatória do processo de forma a ajustar o processo a propriedades especificas de cada acção, ilustrado na equação \eqref{eq:gwiener}. Este processo descreve a evolução de um processo de uma variável com distribuição normal, com um desvio \(\mu\) por unidade de tempo e uma taxa de variância de \(\sigma^2\) também por unidade de tempo.
 
 \begin{equation} 
   \delta S = \mu\delta t +\sigma\varepsilon\sqrt{\delta t}\qquad\varepsilon \sim N(0,1);
   \label{eq:gwiener}
 \end{equation}
 
-Outro processo estocástico conhecido como processo Itô foi desenvolvido, representando um processo generalizado de Wiener onde o valor dos parâmetros \(\mu\) e \(\sigma\) são funções do valor subjacente da variável S e do tempo t. Este modelo é o que vai ser utilizado para simulação do preço das acções sendo representado pelas seguintes formulas:
+A diferença relativo a um processo de Wiener é que no processo generalizado de Wiener a taxa de desvio e variância pode ter como valor qualquer constante, sendo que no processo de Wiener esses valores são de 0 e 1 respectivamente.
+
+Outro processo estocástico, conhecido como processo Itô, foi desenvolvido, representando um processo generalizado de Wiener, sendo que neste caso o valor dos parâmetros \(\mu\) e \(\sigma\) são funções do valor subjacente da variável S e do tempo t. Este modelo é o que vai ser utilizado para simulação do preço das acções sendo representado pelas seguintes formulas:
 
 \begin{equation} 
   \frac{\delta S}{S} = \mu\delta t +\sigma\varepsilon\sqrt{\delta t}\qquad\varepsilon \sim N(0,1);
@@ -347,6 +349,15 @@ Outro processo estocástico conhecido como processo Itô foi desenvolvido, repre
 \end{equation}
 
 Nesta equação o \(\mu\) representa a taxa de retorno anual esperado, sendo que \(\sigma\) representa o desvio padrão ou volatilidade da acção, sendo este um parâmetro muito importante para a determinação do valor de vários derivados, havendo várias formas de calcular este valor como veremos mais adiante. Estes valores são função do corrente valor de S e do tempo actual t.Numa economia neutra face ao risco \(\mu\) é igual a taxa de juro sem risco. O \(\varepsilon\) representa uma variável com distribuição normal(N(0,1)).
+
+Este processo é conhecido como movimento Browniano geométrico (GBM). De acordo com \citet{AppliedFinancial} um ``GBM pode ser considerado como um movimento probabilístico contínuo no qual o logaritmo da quantidade que varia aleatoriamente segue um movimento Browniano (processo de Wiener) com desvio.'' Este modelo é a base do modelo de Black-Scholes, que será revisto mais adiante, aquando do cálculo da volatilidade implícita nas opções.
+
+Tendo em consideração a equação \eqref{eq:logprice}, S segue uma distribuição lognormal. Uma distribuição lognormal é mais realístico de acordo com o movimento do preço das acções, prevenindo que o valor se torne negativo.
+
+Em simulação, este processo é realizado considerando uma distribuição normal com média e variância dada pela equação \eqref{eq:Inito} \citep{FRM1}.
+
+\hypertarget{simulauxe7uxe3o-de-monte-carlo}{%
+\subsection{Simulação de Monte Carlo}\label{simulauxe7uxe3o-de-monte-carlo}}
 
 \hypertarget{portfolios-muxe9dia-variuxe2ncia}{%
 \section{Portfolios média-variância}\label{portfolios-muxe9dia-variuxe2ncia}}
@@ -545,7 +556,8 @@ sGARCH model with contant mean
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"sGARCH"}\NormalTok{),}\DataTypeTok{distribution.model =} \StringTok{"norm"}\NormalTok{)}
+\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"sGARCH"}\NormalTok{),}
+              \DataTypeTok{distribution.model =} \StringTok{"norm"}\NormalTok{)}
 \NormalTok{m\textless{}{-}}\KeywordTok{ugarchfit}\NormalTok{(}\DataTypeTok{data=}\NormalTok{return,}\DataTypeTok{spec=}\NormalTok{s)}
 \NormalTok{m}
 \end{Highlighting}
@@ -643,7 +655,7 @@ sGARCH model with contant mean
 ## 4    50    115.42    2.788e-07
 ## 
 ## 
-## Elapsed time : 0.1693511
+## Elapsed time : 0.1804919
 \end{verbatim}
 
 \begin{Shaded}
@@ -692,7 +704,8 @@ GARCH with sstd
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"sGARCH"}\NormalTok{),}\DataTypeTok{distribution.model =} \StringTok{"sstd"}\NormalTok{)}
+\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"sGARCH"}\NormalTok{),}
+              \DataTypeTok{distribution.model =} \StringTok{"sstd"}\NormalTok{)}
 \NormalTok{m\textless{}{-}}\KeywordTok{ugarchfit}\NormalTok{(}\DataTypeTok{data=}\NormalTok{return,}\DataTypeTok{spec=}\NormalTok{s)}
 \NormalTok{m}
 \end{Highlighting}
@@ -796,7 +809,7 @@ GARCH with sstd
 ## 4    50     49.75      0.44312
 ## 
 ## 
-## Elapsed time : 0.7304101
+## Elapsed time : 0.7260351
 \end{verbatim}
 
 \begin{Shaded}
@@ -832,7 +845,8 @@ GJR-GARCH
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"gjrGARCH"}\NormalTok{),}\DataTypeTok{distribution.model =} \StringTok{"sstd"}\NormalTok{)}
+\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"gjrGARCH"}\NormalTok{),}
+              \DataTypeTok{distribution.model =} \StringTok{"sstd"}\NormalTok{)}
 \NormalTok{m\textless{}{-}}\KeywordTok{ugarchfit}\NormalTok{(}\DataTypeTok{data=}\NormalTok{return,}\DataTypeTok{spec=}\NormalTok{s)}
 \NormalTok{m}
 \end{Highlighting}
@@ -939,7 +953,7 @@ GJR-GARCH
 ## 4    50     60.89       0.1187
 ## 
 ## 
-## Elapsed time : 1.218729
+## Elapsed time : 1.208746
 \end{verbatim}
 
 \begin{Shaded}
@@ -975,7 +989,8 @@ GJR-GARCH in mean
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{archm=}\NormalTok{T,}\DataTypeTok{archpow=}\DecValTok{2}\NormalTok{),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"sGARCH"}\NormalTok{),}\DataTypeTok{distribution.model =} \StringTok{"sstd"}\NormalTok{)}
+\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{archm=}\NormalTok{T,}\DataTypeTok{archpow=}\DecValTok{2}\NormalTok{),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"sGARCH"}\NormalTok{)}
+\NormalTok{              ,}\DataTypeTok{distribution.model =} \StringTok{"sstd"}\NormalTok{)}
 \NormalTok{m\textless{}{-}}\KeywordTok{ugarchfit}\NormalTok{(}\DataTypeTok{data=}\NormalTok{return,}\DataTypeTok{spec=}\NormalTok{s)}
 \NormalTok{m}
 \end{Highlighting}
@@ -1082,7 +1097,7 @@ GJR-GARCH in mean
 ## 4    50     63.60      0.07853
 ## 
 ## 
-## Elapsed time : 1.109891
+## Elapsed time : 1.116996
 \end{verbatim}
 
 \begin{Shaded}
@@ -1123,8 +1138,14 @@ We have finished a nice book.
 
   \bibliography{book.bib,packages.bib}
 
-\chapter*{Apêndice}
-\addcontentsline{toc}{chapter}{Apêndice}
+\part*{Apêndices}
+\addcontentsline{toc}{part}{Apêndice}
 
+\newpage
+\part*{\normalfont\huge\bfseries\centering Apêndice I}
+\newpage
+
+\part*{\normalfont\huge\bfseries\centering Apêndice II}
+\newpage
 
 \end{document}
