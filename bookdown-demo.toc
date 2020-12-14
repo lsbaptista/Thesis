@@ -12,4 +12,4 @@
 \contentsline {section}{\numberline {3.1}Aplicação a dados do modelo}{13}{section.3.1}%
 \contentsline {chapter}{Conclusão}{37}{chapter*.9}%
 \contentsline {chapter}{Bibliografia}{38}{chapter*.10}%
-\contentsline {part}{Apêndice}{40}{part*.11}%
+\contentsline {part}{Apêndices}{40}{part*.11}%
