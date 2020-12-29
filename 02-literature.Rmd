@@ -105,10 +105,7 @@ onde
 \end{equation}
 
 A função N(x) representa a função distribuição para uma distribuição normal padrão, sendo a probabilidade de uma variável ser menor que x (ver exemplo na figura \@ref(fig:fdistribuicao)). O valor de N(x) pode ser obtido com a função do R pnorm(). A variável T representa o tempo medido em dias de negociação que faltam até a expiração da opção dividido pelos dias de negociação nesse ano, sendo S~0~ o valor do activo subjacente no tempo 0, r a taxa de juro sem risco, $\sigma$ a volatilidade anual e K o preço de exercício da opção.
-
-\bigskip
-```{r, fdistribuicao,echo=FALSE,fig.cap='Função distribuição N(x)',out.width = "55%"}
-
+```{r, fdistribuicao,echo=FALSE,fig.cap='Função distribuição N(x)',out.width="50%"}
 knitr::include_graphics("image/fdistribuicao.png")
 ```
 \centering 
@@ -117,13 +114,12 @@ Fonte: Elaboração própria.
 \justifying
 \bigskip
 
-O parâmetro da volatilidade não é um parâmetro que se consiga obter ou observar directamente, sendo um valor que representa a volatilidade esperada pelos investidores no futuro, conhecido como **volatilidade implícita**. Um modo de obter este valor é a partir dos restantes parâmetros, ou seja, tendo o valor de uma opção de compra, e considerando os valores de S~0~, k, r e T, substituir estes pelos respectivos valores e obter o valor de $\sigma$ que iguale o valor da *call* utilizando as equações \@ref(eq:call) e \@ref(eq:d1) através de processos por aproximação iterativo. 
+O parâmetro da volatilidade não é um parâmetro que se consiga obter ou observar directamente, sendo um valor que representa a volatilidade esperada pelos investidores no futuro, conhecido como **volatilidade implícita**. Um modo de obter este valor é a partir dos restantes parâmetros, ou seja, tendo o valor de uma opção de compra, e considerando os valores de S~0~, K, r e T, substituir estes pelos respectivos valores e obter o valor de $\sigma$ que iguale o valor da *call* utilizando as equações \@ref(eq:call) e \@ref(eq:d1) através de processos por aproximação iterativo. 
 
 A volatilidade implícita será diferente consoante o preço de exercício da opção, considerando todos os outros parâmetros iguais. Da conjugação dos valore de volatilidade obtidos para cada um dos preços de exercício da opção obtêm-se um gráfico conhecido como *volatility smile*(figura \@ref(fig:volatilitysmile)). Este gráfico será o mesmo, quer se esteja a considerar uma opção do tipo *call* ou a mesma equivalente opção do tipo *put*.
 
 \bigskip
 ```{r, volatilitysmile,echo=FALSE,fig.cap='Volatility Smile',out.width = "60%"}
-
 knitr::include_graphics("image/volatilitysmile.png")
 ```
 \centering 
@@ -131,6 +127,8 @@ Fonte: [@volatilitysmile, pp.182]
 
 \justifying
 \bigskip
+
+Como de pode ver pela figura \@ref(fig:volatilitysmile) a opção é considerada *out-the-money* se o seu valor for inferior ao do respectivo subjacente, *at-the-money* se for superior e *in-the-money* se o valor for igual. No calculo do valor da volatilidade será utilizado o valor de preço de exercício *in-the-money* de opções do tipo *call*, ou na impossibilidade do valor do subjacente ser o mesmo do K, o mais próximo deste.
 
 Quando comparado com outros métodos para calcular a volatilidade onde os dados utilizados são dados históricos, este método incorpora o sentimento presente dos investidores relativo a volatilidade futura de um determinado ativo ou instrumento financeiro.
 

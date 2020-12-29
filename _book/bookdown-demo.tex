@@ -412,10 +412,9 @@ onde
 
 A função N(x) representa a função distribuição para uma distribuição normal padrão, sendo a probabilidade de uma variável ser menor que x (ver exemplo na figura \ref{fig:fdistribuicao}). O valor de N(x) pode ser obtido com a função do R pnorm(). A variável T representa o tempo medido em dias de negociação que faltam até a expiração da opção dividido pelos dias de negociação nesse ano, sendo S\textsubscript{0} o valor do activo subjacente no tempo 0, r a taxa de juro sem risco, \(\sigma\) a volatilidade anual e K o preço de exercício da opção.
 
-\bigskip
 \begin{figure}
 
-{\centering \includegraphics[width=0.55\linewidth]{image/fdistribuicao} 
+{\centering \includegraphics[width=0.5\linewidth]{image/fdistribuicao} 
 
 }
 
@@ -428,7 +427,7 @@ Fonte: Elaboração própria.
 \justifying
 \bigskip
 
-O parâmetro da volatilidade não é um parâmetro que se consiga obter ou observar directamente, sendo um valor que representa a volatilidade esperada pelos investidores no futuro, conhecido como \textbf{volatilidade implícita}. Um modo de obter este valor é a partir dos restantes parâmetros, ou seja, tendo o valor de uma opção de compra, e considerando os valores de S\textsubscript{0}, k, r e T, substituir estes pelos respectivos valores e obter o valor de \(\sigma\) que iguale o valor da \emph{call} utilizando as equações \eqref{eq:call} e \eqref{eq:d1} através de processos por aproximação iterativo.
+O parâmetro da volatilidade não é um parâmetro que se consiga obter ou observar directamente, sendo um valor que representa a volatilidade esperada pelos investidores no futuro, conhecido como \textbf{volatilidade implícita}. Um modo de obter este valor é a partir dos restantes parâmetros, ou seja, tendo o valor de uma opção de compra, e considerando os valores de S\textsubscript{0}, K, r e T, substituir estes pelos respectivos valores e obter o valor de \(\sigma\) que iguale o valor da \emph{call} utilizando as equações \eqref{eq:call} e \eqref{eq:d1} através de processos por aproximação iterativo.
 
 A volatilidade implícita será diferente consoante o preço de exercício da opção, considerando todos os outros parâmetros iguais. Da conjugação dos valore de volatilidade obtidos para cada um dos preços de exercício da opção obtêm-se um gráfico conhecido como \emph{volatility smile}(figura \ref{fig:volatilitysmile}). Este gráfico será o mesmo, quer se esteja a considerar uma opção do tipo \emph{call} ou a mesma equivalente opção do tipo \emph{put}.
 
@@ -447,6 +446,8 @@ Fonte: \citep[pp.182]{volatilitysmile}
 
 \justifying
 \bigskip
+
+Como de pode ver pela figura \ref{fig:volatilitysmile} a opção é considerada \emph{out-the-money} se o seu valor for inferior ao do respectivo subjacente, \emph{at-the-money} se for superior e \emph{in-the-money} se o valor for igual. No calculo do valor da volatilidade será utilizado o valor de preço de exercício \emph{in-the-money} de opções do tipo \emph{call}, ou na impossibilidade do valor do subjacente ser o mesmo do K, o mais próximo deste.
 
 Quando comparado com outros métodos para calcular a volatilidade onde os dados utilizados são dados históricos, este método incorpora o sentimento presente dos investidores relativo a volatilidade futura de um determinado ativo ou instrumento financeiro.
 
@@ -747,7 +748,7 @@ sGARCH model with contant mean
 ## 4    50    115.42    2.788e-07
 ## 
 ## 
-## Elapsed time : 0.1505978
+## Elapsed time : 0.191498
 \end{verbatim}
 
 \begin{Shaded}
@@ -892,7 +893,7 @@ GARCH with sstd
 ## 4    50     49.75      0.44312
 ## 
 ## 
-## Elapsed time : 0.712095
+## Elapsed time : 0.70509
 \end{verbatim}
 
 \begin{Shaded}
@@ -1028,7 +1029,7 @@ GJR-GARCH
 ## 4    50     60.89       0.1187
 ## 
 ## 
-## Elapsed time : 1.259633
+## Elapsed time : 1.220759
 \end{verbatim}
 
 \begin{Shaded}
@@ -1164,7 +1165,7 @@ GJR-GARCH in mean
 ## 4    50     63.60      0.07853
 ## 
 ## 
-## Elapsed time : 1.189436
+## Elapsed time : 1.129956
 \end{verbatim}
 
 \begin{Shaded}
