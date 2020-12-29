@@ -4,6 +4,10 @@
 # Modelação Estatística na Otimização de Portfólios
 \newpage
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(tidy=FALSE, message = FALSE,warning =  FALSE,fig.align = "center",fig.show = "hold")
+```
+
 ## Series Temporais
 
 O valor da cotação de activos financeiros, como acções ou opções, são representados de forma sequencial ao longo do tempo, considerando determinado intervalo, que pode ser segundos, minutos, dias, semanas ou outro intervalo considerado útil para representação dos dados ao longo do tempo. Quando tal acontece estamos em presença de series temporais.
@@ -34,7 +38,7 @@ Como este modelo não preenchia todos os pressupostos, aplicou-se um processo ge
 
 A diferença relativo a um processo de Wiener é que no processo generalizado de Wiener a taxa de desvio e variância pode ter como valor qualquer constante, sendo que no processo de Wiener esses valores são de 0 e 1 respectivamente.
 
-Outro processo estocástico, conhecido como processo Itô, foi desenvolvido, representando um processo generalizado de Wiener, sendo que neste caso o valor dos parâmetros $\mu$ e $\sigma$ são funções do valor subjacente da variável S e do tempo t. Este modelo é o que vai ser utilizado para simulação do preço das acções sendo representado pelas seguintes formulas:
+Outro processo estocástico, conhecido como processo Itô, foi desenvolvido, representando um processo generalizado de Wiener, sendo que neste caso o valor dos parâmetros $\mu$ e $\sigma$ são funções do valor subjacente da variável S e do tempo t. Este modelo é o que vai ser utilizado para simulação do preço das acções sendo representado pelas seguintes equações:
 
 \begin{equation} 
   \frac{\delta S}{S} = \mu\delta t +\sigma\varepsilon\sqrt{\delta t}\qquad\varepsilon \sim N(0,1);
@@ -49,7 +53,7 @@ Outro processo estocástico, conhecido como processo Itô, foi desenvolvido, rep
   (\#eq:logprice)
 \end{equation} 
 
-Nesta equação o $\mu$ representa a taxa de retorno anual esperado, sendo que $\sigma$ representa o desvio padrão ou volatilidade da acção, parâmetro muito importante para a determinação do valor de vários derivados, havendo várias formas de calcular este valor como veremos mais adiante. Estes valores são função do corrente valor de S e do tempo actual t.Numa economia neutra face ao risco $\mu$ é igual a taxa de juro sem risco. O $\varepsilon$ representa uma variável com distribuição normal(N(0,1)). 
+Nesta equação o $\mu$ representa a taxa de retorno anual esperado, sendo que $\sigma$ representa o desvio padrão ou volatilidade da acção, parâmetro muito importante para a determinação do valor de vários derivados, havendo várias formas de calcular este valor como veremos mais adiante. Estes valores são função do corrente valor de S e do tempo actual t. Numa economia neutra face ao risco $\mu$ é igual a taxa de juro sem risco. O $\varepsilon$ representa uma variável com distribuição normal(N(0,1)). 
 
 Este processo é conhecido como movimento Browniano geométrico (GBM). De acordo com @AppliedFinancial um "GBM pode ser considerado como um movimento probabilístico contínuo no qual o logaritmo da quantidade que varia aleatoriamente segue um movimento Browniano (processo de Wiener) com desvio." Este modelo é a base do modelo de Black-Scholes, que será revisto mais adiante, aquando do cálculo da volatilidade implícita nas opções.
 
@@ -63,8 +67,75 @@ A simulação de Monte Carlo consiste na geração de valores a partir de uma de
 
 Ao simular os preços dos activos financeiros iremos utilizar a técnica de Monte Carlo de modo a gerar amostras aleatórias de acordo com a equação \@ref(eq:logprice). Os preços serão simulados criando várias amostras com valores aleatórios para $\varepsilon$ a partir de $\phi$(0,1).
 
+## Volatilidade
+
+### Média Móvel Exponencial (EWMA)
+
+A média móvel exponencial, referida a partir de agora como EWMA, é um método de calculo da variância, sendo um método que utiliza os dados históricos associando mais peso aos retornos mais recentes no calculo da variância.
+
+### Heteroscedasticidade condicional auto-regressiva generalizada (GARCH)
+
+### Volatilidade implícita
+
+O modelo de Black-Scholes-Merton^[Os autores, Robert Merton e Myron Scholes, foram reconhecidos com o Nobel da economia em 1997] foi um modelo desenvolvido nos anos 70, considerado um ponto de ruptura na definição do preço de opções sobre acções europeias. 
+
+De entre os pressupostos^[Para mais informação ver @BlackScholes,pp. 640, capitulo "The valuation formula"] utilizados para derivar a equação diferencial, importa salientar de que a taxa de juro sem risco, r, é constante e a mesma ao longo do tempo. De acordo com @Hull2018 "É importante considerar que a avaliação sem risco (ou o pressuposto de que todos os investidores são neutros ao risco) é meramente um artifício para obter solução para a equação diferencial de Black-Scholes-Merton"(p.312).
+
+O processo que se assume ser aplicado ao preço dos activos é o descrito pela equação \@ref(eq:ito). De salientar de que nenhumas das variáveis da equação é afectada pelas preferências de risco dos investidores, sendo que as variáveis que aparecem na equação são o valor presente do activo financeiro, tempo, volatilidade e a taxa de juro sem risco. 
+
+As soluções obtidas a partir da equação diferenciável de interesse para calculo da volatilidade implícita, são as aqui apresentadas para valorizar opções de compra (*call*) e opções de venda (*put*) do tipo europeias:
+
+\begin{equation} 
+  c = S_0N(d_1) - Ke^{-rT}N(d_2);
+  (\#eq:call)
+\end{equation} 
+e
+\begin{equation} 
+  p = Ke^{-rT}N(-d_2) - S_0N(-d_1);
+  (\#eq:put)
+\end{equation} 
+onde
+\begin{equation} 
+  d_1 = \frac{In(S_0/K)+(r+\sigma^2/2)T}{\sigma\sqrt{T}}
+  (\#eq:d1)
+\end{equation}
+\begin{equation} 
+  d_2 = \frac{In(S_0/K)+(r-\sigma^2/2)T}{\sigma\sqrt{T}}=d_1-\sigma\sqrt{T}
+  (\#eq:d2)
+\end{equation}
+
+A função N(x) representa a função distribuição para uma distribuição normal padrão, sendo a probabilidade de uma variável ser menor que x (ver exemplo na figura \@ref(fig:fdistribuicao)). O valor de N(x) pode ser obtido com a função do R pnorm(). A variável T representa o tempo medido em dias de negociação que faltam até a expiração da opção dividido pelos dias de negociação nesse ano, sendo S~0~ o valor do activo subjacente no tempo 0, r a taxa de juro sem risco, $\sigma$ a volatilidade anual e K o preço de exercício da opção.
+
+\bigskip
+```{r, fdistribuicao,echo=FALSE,fig.cap='Função distribuição N(x)',out.width = "55%"}
+
+knitr::include_graphics("image/fdistribuicao.png")
+```
+\centering 
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
+
+O parâmetro da volatilidade não é um parâmetro que se consiga obter ou observar directamente, sendo um valor que representa a volatilidade esperada pelos investidores no futuro, conhecido como **volatilidade implícita**. Um modo de obter este valor é a partir dos restantes parâmetros, ou seja, tendo o valor de uma opção de compra, e considerando os valores de S~0~, k, r e T, substituir estes pelos respectivos valores e obter o valor de $\sigma$ que iguale o valor da *call* utilizando as equações \@ref(eq:call) e \@ref(eq:d1) através de processos por aproximação iterativo. 
+
+A volatilidade implícita será diferente consoante o preço de exercício da opção, considerando todos os outros parâmetros iguais. Da conjugação dos valore de volatilidade obtidos para cada um dos preços de exercício da opção obtêm-se um gráfico conhecido como *volatility smile*(figura \@ref(fig:volatilitysmile)). Este gráfico será o mesmo, quer se esteja a considerar uma opção do tipo *call* ou a mesma equivalente opção do tipo *put*.
+
+\bigskip
+```{r, volatilitysmile,echo=FALSE,fig.cap='Volatility Smile',out.width = "60%"}
+
+knitr::include_graphics("image/volatilitysmile.png")
+```
+\centering 
+Fonte: [@volatilitysmile, pp.182]
+
+\justifying
+\bigskip
+
+Quando comparado com outros métodos para calcular a volatilidade onde os dados utilizados são dados históricos, este método incorpora o sentimento presente dos investidores relativo a volatilidade futura de um determinado ativo ou instrumento financeiro.
 
 ## Portfolios média-variância
+
 A otimização de portfolios através da diversificação é um conceito básico que teve origem em Markowitz, criando o conceito de fronteira eficiente. Existem vários pressupostos definidos na obtenção deste modelo, não sendo, no entanto, o âmbito aqui analisar esses mesmos pressupostos, considerando que independentemente disso esses mesmos pressupostos são verificados. De acordo com @Modern2013, “todas os pressupostos acerca da analise de portfolio foram demonstradas serem simplistas, e em alguns casos demasiado simplistas.[...]Pessoas necessitam apenas de se comportar como se fossem descritas pelos pressupostos para uma teoria ser válida” [@Modern2013,pp.5]. 
 
 Para aplicação deste modelo deve-se obter os seguintes dados dos instrumentos financeiros que vão constituir o portfolio:
@@ -73,6 +144,7 @@ Para aplicação deste modelo deve-se obter os seguintes dados dos instrumentos 
 - O desvio padrão dos retornos, $\sigma$;
 - O coeficiente de correlação,$\rho$, entre cada um dos activos.
 
+O retorno esperado vai depender de vários factores, essencialmente a taxa de retorno sem risco que se verifica no mercado, a taxa de inflação e o risco a que o investidor estará sujeito, sendo que quanto maior o risco, maior será o retorno esperado.
 As séries dos retornos diários para cada um dos activos é calculada de acordo com a seguinte formula:
 
 \begin{equation} 
@@ -85,16 +157,18 @@ A média dos retornos de cada um dos activos é calculada de acordo com a sua m�
 \begin{equation} 
   \overline{R} = \frac{\displaystyle\sum_{i=1}^n R_i}{n}
   (\#eq:meanRet)
+\end{equation}  
+
+O desvio padrão representa a volatilidade, ou risco, associada ao activo. Considerando que essa volatilidade é calculada com base nos dados históricos e as formulas acima, então a estatística da amostra para o desvio padrão representa-se pela seguinte formulas:
+
+\begin{equation} 
+  \hat{\sigma} = \sqrt\frac{\displaystyle\sum_{i=1}^n (R_i-\overline{R})^2}{n-1}
+  (\#eq:estdesviopadrao)
 \end{equation} 
 
-A variância de cada um dos activos é calculada usando 3 métodos diferentes que passamos seguidamente a descrever:
+A escolha do tamanho da amostra (n) deve ser grande o suficiente de modo a garantir uma melhor precisão nas estatísticas obtidas, sendo que neste caso devemos considerar que a volatilidade não é constante ao longo do tempo e que valores mais antigos podem não ser tão relevantes como os valores mais recentes. De acordo com [@Hull2018] esse valor deve ser compreendido entre 90 a 180 dias para a cotação de activos. 
 
-- \textbf{Média Móvel Exponencial (EWMA)}
-
-A média móvel exponencial, referida a partir de agora como EWMA, é um método de calculo da variância, sendo um método que utiliza os dados históricos associando mais peso aos retornos mais recentes no calculo da variância.
-
-
-- \textbf{Heteroscedasticidade condicional auto-regressiva generalizada (GARCH)}
+Para o calculo da volatilidade anual utiliza-se os número de dias de negociação, sendo considerado 252 dias por ano como valor de referência.
 
 
 

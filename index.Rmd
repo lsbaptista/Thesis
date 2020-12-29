@@ -14,6 +14,9 @@ geometry: "left=3.5cm,right=2cm,top=3cm,bottom=3cm, asymmetric"
 indent: true
 header-includes:
   - \usepackage{indentfirst}
+  - \usepackage{floatrow}
+  - \floatsetup[figure]{capposition=top}
+  - \floatsetup[table]{capposition=top}
 pagestyle: plain
 papersize: a4
 toc: true
@@ -23,6 +26,6 @@ lof:  True
 lot: True
 ---
 
-# Simbologia e notações{.unlisted .unnumbered}
+# Simbologia e notações{.unnumbered}
 
 \mainmatter 

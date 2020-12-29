@@ -1,15 +1,20 @@
 \babel@toc {portuguese}{}
 \contentsline {chapter}{Lista de Tabelas}{vii}{chapter*.5}%
 \contentsline {chapter}{Lista de Figuras}{viii}{chapter*.6}%
+\contentsline {chapter}{Simbologia e notações}{ix}{chapter*.7}%
 \contentsline {chapter}{Introdução}{1}{chapter*.8}%
 \contentsline {chapter}{\numberline {1}Modelação Estatística na Otimização de Portfólios}{5}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Series Temporais}{6}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Modelação do preço de acções}{6}{subsection.1.1.1}%
 \contentsline {subsection}{\numberline {1.1.2}Simulação de Monte Carlo}{8}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}Portfolios média-variância}{8}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Pacotes do R para análise}{10}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Aplicação a dados do modelo}{12}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Aplicação a dados do modelo}{13}{section.3.1}%
-\contentsline {chapter}{Conclusão}{37}{chapter*.9}%
-\contentsline {chapter}{Bibliografia}{38}{chapter*.10}%
-\contentsline {part}{Apêndices}{40}{part*.11}%
+\contentsline {section}{\numberline {1.2}Volatilidade}{9}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Média Móvel Exponencial (EWMA)}{9}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Heteroscedasticidade condicional auto-regressiva generalizada (GARCH)}{9}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Volatilidade implícita}{9}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Portfolios média-variância}{12}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Pacotes do R para análise}{14}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Aplicação a dados do modelo}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Aplicação a dados do modelo}{17}{section.3.1}%
+\contentsline {chapter}{Conclusão}{41}{chapter*.9}%
+\contentsline {chapter}{Bibliografia}{42}{chapter*.10}%
+\contentsline {part}{Apêndices}{44}{part*.11}%
