@@ -65,7 +65,7 @@ Em simulação, este processo é realizado considerando uma distribuição norma
 
 A simulação de Monte Carlo consiste na geração de valores a partir de uma determinada distribuição ou amostra, sendo que "o termo Monte Carlo é usado para se referir a técnicas que envolvem simulação computacional"[@ProgSim,pp.457]. 
 
-Ao simular os preços dos activos financeiros iremos utilizar a técnica de Monte Carlo de modo a gerar amostras aleatórias de acordo com a equação \@ref(eq:logprice). Os preços serão simulados criando várias amostras com valores aleatórios para $\varepsilon$ a partir de $\phi$(0,1).
+Ao simular os preços dos activos financeiros iremos utilizar a técnica de Monte Carlo de modo a gerar amostras aleatórias de acordo com a equação \@ref(eq:logprice). Os preços serão simulados criando várias tentativas com valores aleatórios para $\varepsilon$ a partir de $\phi$(0,1). A precisão dos valores obtidos na simulação depende do número de tentativas efectuadas, sendo considerado 1000 tentativas por cada dia e considerar o valor médio dessas tentativas como o valor simulado para cada um dos dias simulados.
 
 ## Volatilidade
 
@@ -168,6 +168,7 @@ A escolha do tamanho da amostra (n) deve ser grande o suficiente de modo a garan
 
 Para o calculo da volatilidade anual utiliza-se os número de dias de negociação, sendo considerado 252 dias por ano como valor de referência.
 
+## Value at Risk
 
-
-
+O VaR (Value at Risk) é a perda máxima provável de uma carteira para um nível de confiança determinado,
+num horizonte temporal especificado.
