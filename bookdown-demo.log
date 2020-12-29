@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.12.27)  29 DEC 2020 11:03
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.12.27)  29 DEC 2020 11:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1467,18 +1467,6 @@ LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
 Underfull \vbox (badness 1648) has occurred while \output is active []
 
 [8] [9]
-LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 8.4pt on input line 413.
-Missing character: There is no 𝜎 in font Arial Bold/OT:script=latn;language=dfl
-t;mapping=tex-text;!
-Missing character: There is no 𝜎 in font Arial Bold/OT:script=latn;language=dfl
-t;mapping=tex-text;!
-Missing character: There is no 𝜎 in font Arial Bold/OT:script=latn;language=dfl
-t;mapping=tex-text;!
-LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 413.
-Missing character: There is no 𝜎 in font Arial Bold/OT:script=latn;language=dfl
-t;mapping=tex-text;!
 File: image/fdistribuicao.png Graphic file (type bmp)
 <image/fdistribuicao.png>
 [10]
@@ -1610,11 +1598,11 @@ Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
 (rerunfilecheck)             Checksum: 754F4FAFE76AE3C6900D5229F399B59C;3427.
  ) 
 Here is how much of TeX's memory you used:
- 22458 strings out of 479308
- 392497 string characters out of 5876064
+ 22452 strings out of 479308
+ 392278 string characters out of 5876064
  878119 words of memory out of 5000000
- 41484 multiletter control sequences out of 15000+600000
- 431746 words of font info for 120 fonts, out of 8000000 for 9000
+ 41481 multiletter control sequences out of 15000+600000
+ 431722 words of font info for 117 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  94i,9n,121p,1844b,554s stack positions out of 5000i,500n,10000p,200000b,80000s
 

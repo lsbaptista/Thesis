@@ -410,7 +410,7 @@ onde
   \label{eq:d2}
 \end{equation}
 
-A função \textbf{N(x)} representa a função distribuição para uma distribuição normal padrão, sendo a probabilidade de uma variável ser menor que \textbf{x} (ver exemplo na figura \ref{fig:fdistribuicao}). O valor de \textbf{N(x)} pode ser obtido com a função do R pnorm(). A variável \textbf{T} representa o tempo medido em dias de negociação que faltam até a expiração da opção dividido pelos dias de negociação nesse ano, sendo \textbf{S\textsubscript{0}} o valor do activo subjacente no tempo 0, \textbf{r} a taxa de juro sem risco, \(\textbf\sigma\) a volatilidade anual e \textbf{K} o preço de exercício da opção.
+A função N(x) representa a função distribuição para uma distribuição normal padrão, sendo a probabilidade de uma variável ser menor que x (ver exemplo na figura \ref{fig:fdistribuicao}). O valor de N(x) pode ser obtido com a função do R pnorm(). A variável T representa o tempo medido em dias de negociação que faltam até a expiração da opção dividido pelos dias de negociação nesse ano, sendo S\textsubscript{0} o valor do activo subjacente no tempo 0, r a taxa de juro sem risco, \(\sigma\) a volatilidade anual e K o preço de exercício da opção.
 
 \bigskip
 \begin{figure}
@@ -428,9 +428,9 @@ Fonte: Elaboração própria.
 \justifying
 \bigskip
 
-O parâmetro da volatilidade não é um parâmetro que se consiga obter ou observar directamente, sendo um valor que representa a volatilidade esperada pelos investidores no futuro, conhecido como \emph{volatilidade implícita}. Um modo de obter este valor é a partir dos restantes parâmetros, ou seja, tendo o valor de uma opção de compra, e considerando os valores de \textbf{S\textsubscript{0}}, \textbf{k}, \textbf{r} e \textbf{T}, substituir estes pelos respectivos valores e obter o valor de \textbf{\(\sigma\)} que iguale o valor da \emph{call} utilizando as equações \eqref{eq:call} e \eqref{eq:d1} através de processos por aproximação iterativo.
+O parâmetro da volatilidade não é um parâmetro que se consiga obter ou observar directamente, sendo um valor que representa a volatilidade esperada pelos investidores no futuro, conhecido como \textbf{volatilidade implícita}. Um modo de obter este valor é a partir dos restantes parâmetros, ou seja, tendo o valor de uma opção de compra, e considerando os valores de S\textsubscript{0}, k, r e T, substituir estes pelos respectivos valores e obter o valor de \(\sigma\) que iguale o valor da \emph{call} utilizando as equações \eqref{eq:call} e \eqref{eq:d1} através de processos por aproximação iterativo.
 
-A \emph{volatilidade implícita} será diferente consoante o preço de exercício da opção, considerando todos os outros parâmetros iguais. Da conjugação dos valore de volatilidade obtidos para cada um dos preços de exercício da opção obtêm-se um gráfico conhecido como \emph{volatility smile}(figura \ref{fig:volatilitysmile}). Este gráfico será o mesmo, que se esteja a considerar uma opção do tipo \emph{call} ou a mesma equivalente opção do tipo \emph{put}.
+A volatilidade implícita será diferente consoante o preço de exercício da opção, considerando todos os outros parâmetros iguais. Da conjugação dos valore de volatilidade obtidos para cada um dos preços de exercício da opção obtêm-se um gráfico conhecido como \emph{volatility smile}(figura \ref{fig:volatilitysmile}). Este gráfico será o mesmo, quer se esteja a considerar uma opção do tipo \emph{call} ou a mesma equivalente opção do tipo \emph{put}.
 
 \bigskip
 \begin{figure}
@@ -747,7 +747,7 @@ sGARCH model with contant mean
 ## 4    50    115.42    2.788e-07
 ## 
 ## 
-## Elapsed time : 0.1765218
+## Elapsed time : 0.1505978
 \end{verbatim}
 
 \begin{Shaded}
@@ -892,7 +892,7 @@ GARCH with sstd
 ## 4    50     49.75      0.44312
 ## 
 ## 
-## Elapsed time : 0.719053
+## Elapsed time : 0.712095
 \end{verbatim}
 
 \begin{Shaded}
@@ -1028,7 +1028,7 @@ GJR-GARCH
 ## 4    50     60.89       0.1187
 ## 
 ## 
-## Elapsed time : 1.294536
+## Elapsed time : 1.259633
 \end{verbatim}
 
 \begin{Shaded}
@@ -1164,7 +1164,7 @@ GJR-GARCH in mean
 ## 4    50     63.60      0.07853
 ## 
 ## 
-## Elapsed time : 1.157881
+## Elapsed time : 1.189436
 \end{verbatim}
 
 \begin{Shaded}
