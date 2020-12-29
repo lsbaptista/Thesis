@@ -128,9 +128,9 @@ Fonte: [@volatilitysmile, pp.182]
 \justifying
 \bigskip
 
-Como de pode ver pela figura \@ref(fig:volatilitysmile) a opção é considerada *out-the-money* se o seu valor for inferior ao do respectivo subjacente, *at-the-money* se for superior e *in-the-money* se o valor for igual. No calculo do valor da volatilidade será utilizado o valor de preço de exercício *in-the-money* de opções do tipo *call*, ou na impossibilidade do valor do subjacente ser o mesmo do K, o mais próximo deste.k
+Como de pode ver pela figura \@ref(fig:volatilitysmile) a opção é considerada *out-the-money* se o seu valor for inferior ao do respectivo subjacente, *at-the-money* se for superior e *in-the-money* se o valor for igual. No calculo do valor da volatilidade será utilizado o valor de preço de exercício *in-the-money* de opções do tipo *call*, ou na impossibilidade do valor do subjacente ser o mesmo do K, o mais próximo deste.
 
-Quando comparado com outros métodos para calcular a volatilidade onde os dados utilizados são dados históricos, este método incorpora o sentimento presente dos investidores relativo a volatilidade futura de um determinado ativo ou instrumento financeiro.k
+Quando comparado com outros métodos para calcular a volatilidade onde os dados utilizados são dados históricos, este método incorpora o sentimento presente dos investidores relativo a volatilidade futura de um determinado ativo ou instrumento financeiro.
 
 ## Portfolios média-variância
 
