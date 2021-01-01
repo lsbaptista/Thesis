@@ -105,7 +105,7 @@ onde
 \end{equation}
 
 A função N(x) representa a função distribuição para uma distribuição normal padrão, sendo a probabilidade de uma variável ser menor que x (ver exemplo na figura \@ref(fig:fdistribuicao)). O valor de N(x) pode ser obtido com a função do R pnorm(). A variável T representa o tempo medido em dias de negociação que faltam até a expiração da opção dividido pelos dias de negociação nesse ano, sendo S~0~ o valor do activo subjacente no tempo 0, r a taxa de juro sem risco, $\sigma$ a volatilidade anual e K o preço de exercício da opção.
-```{r, fdistribuicao,echo=FALSE,fig.cap='Função distribuição N(x)',out.width="50%"}
+```{r, fdistribuicao,echo=FALSE,fig.cap='Função distribuição N(x)',out.width="45%"}
 knitr::include_graphics("image/fdistribuicao.png")
 ```
 \centering 
@@ -170,5 +170,39 @@ Para o calculo da volatilidade anual utiliza-se os número de dias de negociaç�
 
 ## Value at Risk
 
-O VaR (Value at Risk) é a perda máxima provável de uma carteira para um nível de confiança determinado,
-num horizonte temporal especificado.
+A quantificação do risco é fundamental para a gestão e atenuação de perdas no valor da carteira ao longo do tempo. Na gestão da carteira a aplicação de métricas de risco permite a adaptação contínua do portfólio aos fatores de risco quantificáveis, podendo-se, através de uma gestão ativa, manter o investidor devidamente informado relativamente ao risco que o seu investimento incorpora e poder tomar medidas proactivas de adaptação do investimento ao nível de risco verificado, tendo em consideração o perfil do investidor.O Value at Risk (VaR) é uma dessas métricas de risco.
+
+O Value at Risk (VaR)^[Markowitz foi dos primeiros autores a contemplar a análise de risco em investimentos, como se pode verificar em @Markowitz1952] é uma medida probabilística para a perda máxima provável de uma carteira para um nível de confiança determinado,num horizonte temporal especificado. Pode-se definir o VaR como "descrevendo o quantil da distribuição de ganhos e perdas projectado ao longo do horizonte alvo. Se *c* for o intervalo de confiança selecionado, VaR corresponde ao nível inferior da cauda 1-*c* "[@philippe,pp.17]. Este valor é sempre positivo.
+
+O calculo do valor do VaR é de carácter obrigatório para entidades financeiras e seguradoras, sendo que os reguladores, dependendo da sua jurisdição, determinam os parâmetros quantitativos a serem utilizados.
+No caso do Banco Central Europeu^[ver relatório técnico @ecb], esses parâmetros são de que o cálculo deve ser efectuado para um intervalo temporal de 10 dias de negociação e para um intervalo de confiança de 99%, sendo considerado para esses cálculos pelo menos 250 dias negociação de observação de valores históricos.
+
+O cálculo do VaR pode ser realizado de modos diferentes, existindo vários métodos, sendo considerados métodos de tipo não paramétrico, como o método histórico em que não se assume nenhum pressuposto na distribuição desses dados, ou métodos do tipo paramétrico, onde se assume um determinado tipo de distribuição dos dados. Para efeito desta tese será utilizado um método paramétrico para cálculo do VaR, sendo apresentado seguidamente.
+
+### VaR paramétrico (Gaussiana)
+
+O VaR paramétrico pressupõe que os retornos diários apresentem uma distribuição normal (figura \@ref(fig:var)), sendo que a sua representação matemática se encontra definida na equação \@ref(eq:var).
+
+
+(ref:var) VaR com intervalo confiança 95% e 99%. 
+```{r, var, echo=FALSE, fig.cap="(ref:var)", out.width="60%"}
+knitr::include_graphics("image/VaR.png")
+```
+\FloatBarrier
+
+\centering 
+Fonte: [@phdthesis, pp.13]
+
+\justifying
+\bigskip
+
+\begin{equation} 
+  VaR_{t+1}^{z} = -\sigma_{t+1}\Phi_{z}^{-1}
+  (\#eq:var)
+\end{equation} 
+
+O $\Phi (z)$ representa a função distribuição sendo $\Phi^{-1} (z)$ a sua inversa, sendo que, por exemplo para um intervalo de confiança de 99% o valor de $\Phi^{-1} (z)$ corresponde a -2.33. Se considerarmos que a volatilidade prevista a 1 dia é de 2%, teremos um VaR = -0.020*(-2.33), o que corresponde a um valor de 0.0466. Podemos interpretar o VaR como sendo a existência de 1% de probabilidade de perder mais do que 4.66% do valor investido no activo no dia de hoje. 
+
+### VaR paramétrico (Aproximação Cornish-Fisher)
+
+sendo que caso a distribuição dos dados não sejam a de uma distribuição normal se pode proceder à aproximação Cornish-Fisher para considerar o excesso de *Kurtosis* e a respectiva assimetria (*Skewness*).

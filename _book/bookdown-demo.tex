@@ -114,6 +114,9 @@
 
 \usepackage{titlesec}
 
+\usepackage{graphicx}
+\usepackage{placeins}
+
 \usepackage{makeidx}
 \makeindex
 \usepackage[nottoc]{tocbibind}
@@ -125,6 +128,7 @@
 \usepackage{floatrow}
 \floatsetup[figure]{capposition=top}
 \floatsetup[table]{capposition=top}
+\usepackage{subfig}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -367,7 +371,7 @@ Em simulação, este processo é realizado considerando uma distribuição norma
 
 A simulação de Monte Carlo consiste na geração de valores a partir de uma determinada distribuição ou amostra, sendo que ``o termo Monte Carlo é usado para se referir a técnicas que envolvem simulação computacional''\citep[pp.457]{ProgSim}.
 
-Ao simular os preços dos activos financeiros iremos utilizar a técnica de Monte Carlo de modo a gerar amostras aleatórias de acordo com a equação \eqref{eq:logprice}. Os preços serão simulados criando várias amostras com valores aleatórios para \(\varepsilon\) a partir de \(\phi\)(0,1).
+Ao simular os preços dos activos financeiros iremos utilizar a técnica de Monte Carlo de modo a gerar amostras aleatórias de acordo com a equação \eqref{eq:logprice}. Os preços serão simulados criando várias tentativas com valores aleatórios para \(\varepsilon\) a partir de \(\phi\)(0,1). A precisão dos valores obtidos na simulação depende do número de tentativas efectuadas, sendo considerado 1000 tentativas por cada dia e considerar o valor médio dessas tentativas como o valor simulado para cada um dos dias simulados.
 
 \hypertarget{volatilidade}{%
 \section{Volatilidade}\label{volatilidade}}
@@ -414,7 +418,7 @@ A função N(x) representa a função distribuição para uma distribuição nor
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.5\linewidth]{image/fdistribuicao} 
+{\centering \includegraphics[width=0.45\linewidth]{image/fdistribuicao} 
 
 }
 
@@ -493,6 +497,54 @@ O desvio padrão representa a volatilidade, ou risco, associada ao activo. Consi
 A escolha do tamanho da amostra (n) deve ser grande o suficiente de modo a garantir uma melhor precisão nas estatísticas obtidas, sendo que neste caso devemos considerar que a volatilidade não é constante ao longo do tempo e que valores mais antigos podem não ser tão relevantes como os valores mais recentes. De acordo com \citep{Hull2018} esse valor deve ser compreendido entre 90 a 180 dias para a cotação de activos.
 
 Para o calculo da volatilidade anual utiliza-se os número de dias de negociação, sendo considerado 252 dias por ano como valor de referência.
+
+\hypertarget{value-at-risk}{%
+\section{Value at Risk}\label{value-at-risk}}
+
+A quantificação do risco é fundamental para a gestão e atenuação de perdas no valor da carteira ao longo do tempo. Na gestão da carteira a aplicação de métricas de risco permite a adaptação contínua do portfólio aos fatores de risco quantificáveis, podendo-se, através de uma gestão ativa, manter o investidor devidamente informado relativamente ao risco que o seu investimento incorpora e poder tomar medidas proactivas de adaptação do investimento ao nível de risco verificado, tendo em consideração o perfil do investidor.O Value at Risk (VaR) é uma dessas métricas de risco.
+
+O Value at Risk (VaR)\footnote{Markowitz foi dos primeiros autores a contemplar a análise de risco em investimentos, como se pode verificar em \citet{Markowitz1952}} é uma medida probabilística para a perda máxima provável de uma carteira para um nível de confiança determinado,num horizonte temporal especificado. Pode-se definir o VaR como ``descrevendo o quantil da distribuição de ganhos e perdas projectado ao longo do horizonte alvo. Se \emph{c} for o intervalo de confiança selecionado, VaR corresponde ao nível inferior da cauda 1-\emph{c}''\citep[pp.17]{philippe}. Este valor é sempre positivo.
+
+O calculo do valor do VaR é de carácter obrigatório para entidades financeiras e seguradoras, sendo que os reguladores, dependendo da sua jurisdição, determinam os parâmetros quantitativos a serem utilizados.
+No caso do Banco Central Europeu\footnote{ver relatório técnico \citet{ecb}}, esses parâmetros são de que o cálculo deve ser efectuado para um intervalo temporal de 10 dias de negociação e para um intervalo de confiança de 99\%, sendo considerado para esses cálculos pelo menos 250 dias negociação de observação de valores históricos.
+
+O cálculo do VaR pode ser realizado de modos diferentes, existindo vários métodos, sendo considerados métodos de tipo não paramétrico, como o método histórico em que não se assume nenhum pressuposto na distribuição desses dados, ou métodos do tipo paramétrico, onde se assume um determinado tipo de distribuição dos dados. Para efeito desta tese será utilizado um método paramétrico para cálculo do VaR, sendo apresentado seguidamente.
+
+\hypertarget{var-paramuxe9trico-gaussiana}{%
+\subsection{VaR paramétrico (Gaussiana)}\label{var-paramuxe9trico-gaussiana}}
+
+O VaR paramétrico pressupõe que os retornos diários apresentem uma distribuição normal (figura \ref{fig:var}), sendo que a sua representação matemática se encontra definida na equação \eqref{eq:var}.
+
+
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{image/VaR} 
+
+}
+
+\caption{VaR com intervalo confiança 95\% e 99\%.}\label{fig:var}
+\end{figure}
+\FloatBarrier
+
+\centering
+
+Fonte: \citep[pp.13]{phdthesis}
+
+\justifying
+\bigskip
+
+\begin{equation} 
+  VaR_{t+1}^{z} = -\sigma_{t+1}\Phi_{z}^{-1}
+  \label{eq:var}
+\end{equation}
+
+O \(\Phi (z)\) representa a função distribuição sendo \(\Phi^{-1} (z)\) a sua inversa, sendo que, por exemplo para um intervalo de confiança de 99\% o valor de \(\Phi^{-1} (z)\) corresponde a -2.33. Se considerarmos que a volatilidade prevista a 1 dia é de 2\%, teremos um VaR = -0.020*(-2.33), o que corresponde a um valor de 0.0466. Podemos interpretar o VaR como sendo a existência de 1\% de probabilidade de perder mais do que 4.66\% do valor investido no activo no dia de hoje.
+
+\hypertarget{var-paramuxe9trico-aproximauxe7uxe3o-cornish-fisher}{%
+\subsection{VaR paramétrico (Aproximação Cornish-Fisher)}\label{var-paramuxe9trico-aproximauxe7uxe3o-cornish-fisher}}
+
+sendo que caso a distribuição dos dados não sejam a de uma distribuição normal se pode proceder à aproximação Cornish-Fisher para considerar o excesso de \emph{Kurtosis} e a respectiva assimetria (\emph{Skewness}).
 
 \hypertarget{pacotes-do-r-para-anuxe1lise}{%
 \chapter{Pacotes do R para análise}\label{pacotes-do-r-para-anuxe1lise}}
@@ -748,7 +800,7 @@ sGARCH model with contant mean
 ## 4    50    115.42    2.788e-07
 ## 
 ## 
-## Elapsed time : 0.2361259
+## Elapsed time : 0.213429
 \end{verbatim}
 
 \begin{Shaded}
@@ -893,7 +945,7 @@ GARCH with sstd
 ## 4    50     49.75      0.44312
 ## 
 ## 
-## Elapsed time : 0.6966321
+## Elapsed time : 0.733021
 \end{verbatim}
 
 \begin{Shaded}
@@ -1029,7 +1081,7 @@ GJR-GARCH
 ## 4    50     60.89       0.1187
 ## 
 ## 
-## Elapsed time : 1.220947
+## Elapsed time : 1.181841
 \end{verbatim}
 
 \begin{Shaded}
@@ -1165,7 +1217,7 @@ GJR-GARCH in mean
 ## 4    50     63.60      0.07853
 ## 
 ## 
-## Elapsed time : 1.117286
+## Elapsed time : 1.098063
 \end{verbatim}
 
 \begin{Shaded}

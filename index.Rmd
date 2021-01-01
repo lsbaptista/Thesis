@@ -1,6 +1,8 @@
 --- 
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: 
+  bookdown::gitbook:
+     extra_dependencies: ["flafter"]
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
@@ -17,6 +19,7 @@ header-includes:
   - \usepackage{floatrow}
   - \floatsetup[figure]{capposition=top}
   - \floatsetup[table]{capposition=top}
+  - \usepackage{subfig}
 pagestyle: plain
 papersize: a4
 toc: true
