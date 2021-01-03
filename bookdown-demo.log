@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.1)  1 JAN 2021 20:39
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.1)  3 JAN 2021 12:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1516,22 +1516,28 @@ File: image/volatilitysmile.png Graphic file (type bmp)
 [11] [12] [13]
 File: image/VaR.png Graphic file (type bmp)
 <image/VaR.png>
-[14] [15]
+[14]
+LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 543.
+[15]
+File: image/kurtosis.png Graphic file (type bmp)
+<image/kurtosis.png>
+[16] [17]
 Cap\'{\i }tulo 2.
-[16
-
-] [17]
-Cap\'{\i }tulo 3.
 [18
+
+] [19]
+Cap\'{\i }tulo 3.
+[20
 
 ]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 566.
+(Font)              scaled to size 8.0pt on input line 628.
 File: bookdown-demo_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/nice-fig-1.pdf>
-[19]
+[21]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 664.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 726.
 File: bookdown-demo_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type
  pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-7-1.pdf>
@@ -1541,16 +1547,16 @@ File: bookdown-demo_files/figure-latex/unnamed-chunk-7-2.pdf Graphic file (type
 File: bookdown-demo_files/figure-latex/unnamed-chunk-7-3.pdf Graphic file (type
  pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-7-3.pdf>
-[20]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 704.
-[21]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [22]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 766.
+[23]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[23]
+[24]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[25]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf>
@@ -1560,17 +1566,17 @@ e pdf)
 File: bookdown-demo_files/figure-latex/unnamed-chunk-10-3.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-10-3.pdf>
-[24] [25]
+[26] [27]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf>
-[26]
+[28]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[27]
+[29]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[28] [29]
+[30] [31]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-12-1.pdf>
@@ -1583,13 +1589,13 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[30] [31] [32]
+[32] [33] [34]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[33]
+[35]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[34]
+[36]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf>
@@ -1602,19 +1608,19 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[35]
+[37]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[36] [37]
+[38] [39]
 Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[38]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[39]
-Underfull \vbox (badness 2393) has occurred while \output is active []
 
 [40]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[41]
+Underfull \vbox (badness 2393) has occurred while \output is active []
+
+[42]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf>
@@ -1627,7 +1633,7 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[41] [42] (./bookdown-demo.bbl [43
+[43] [44] (./bookdown-demo.bbl [45
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 16--21
@@ -1643,25 +1649,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--21
 ] [][][][] []
  []
 
-[44
+[46
 
-]) [45] [46
+]) [47] [48
 
-] [47
+] [49
 
-] [48
+] [50
 
 ] (./bookdown-demo.aux)
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
-(rerunfilecheck)             Checksum: 6163960655CC1E27340744F79DFBC095;4072.
+(rerunfilecheck)             Checksum: 7189F4DDDA8A061A0013095FBF84799A;4072.
  ) 
 Here is how much of TeX's memory you used:
- 23183 strings out of 479240
- 405293 string characters out of 5874259
- 896006 words of memory out of 5000000
- 42264 multiletter control sequences out of 15000+600000
- 431722 words of font info for 117 fonts, out of 8000000 for 9000
+ 23209 strings out of 479240
+ 405706 string characters out of 5874259
+ 896685 words of memory out of 5000000
+ 42288 multiletter control sequences out of 15000+600000
+ 431730 words of font info for 118 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 94i,9n,121p,1844b,580s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 94i,9n,121p,1844b,588s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (59 pages).
+Output written on bookdown-demo.pdf (61 pages).

@@ -508,13 +508,16 @@ O Value at Risk (VaR)\footnote{Markowitz foi dos primeiros autores a contemplar 
 O calculo do valor do VaR é de carácter obrigatório para entidades financeiras e seguradoras, sendo que os reguladores, dependendo da sua jurisdição, determinam os parâmetros quantitativos a serem utilizados.
 No caso do Banco Central Europeu\footnote{ver relatório técnico \citet{ecb}}, esses parâmetros são de que o cálculo deve ser efectuado para um intervalo temporal de 10 dias de negociação e para um intervalo de confiança de 99\%, sendo considerado para esses cálculos pelo menos 250 dias negociação de observação de valores históricos.
 
-O cálculo do VaR pode ser realizado de modos diferentes, existindo vários métodos, sendo considerados métodos de tipo não paramétrico, como o método histórico em que não se assume nenhum pressuposto na distribuição desses dados, ou métodos do tipo paramétrico, onde se assume um determinado tipo de distribuição dos dados. Para efeito desta tese será utilizado um método paramétrico para cálculo do VaR, sendo apresentado seguidamente.
+O cálculo do VaR pode ser realizado de modos diferentes, existindo vários métodos, sendo considerados métodos de tipo não paramétrico, como o método histórico em que não se assume nenhum pressuposto na distribuição desses dados, ou métodos do tipo paramétrico, onde se assume um determinado tipo de distribuição dos dados. Para efeito desta dissertação será aplicado um método paramétrico para cálculo do VaR.
 
 \hypertarget{var-paramuxe9trico-gaussiana}{%
-\subsection{VaR paramétrico (Gaussiana)}\label{var-paramuxe9trico-gaussiana}}
+\subsection{VaR Paramétrico (Gaussiana)}\label{var-paramuxe9trico-gaussiana}}
 
 O VaR paramétrico pressupõe que os retornos diários apresentem uma distribuição normal (figura \ref{fig:var}), sendo que a sua representação matemática se encontra definida na equação \eqref{eq:var}.
-
+\begin{equation} 
+  VaR_{t+1}^{p} = -\sigma_{t+1}\Phi_{p}^{-1}
+  \label{eq:var}
+\end{equation}
 
 
 \begin{figure}
@@ -526,7 +529,6 @@ O VaR paramétrico pressupõe que os retornos diários apresentem uma distribui�
 \caption{VaR com intervalo confiança 95\% e 99\%.}\label{fig:var}
 \end{figure}
 \FloatBarrier
-
 \centering
 
 Fonte: \citep[pp.13]{phdthesis}
@@ -534,17 +536,77 @@ Fonte: \citep[pp.13]{phdthesis}
 \justifying
 \bigskip
 
+O \(\Phi (p)\) representa a função distribuição e \(\Phi^{-1} (p)\) a sua inversa, sendo que, por exemplo, para um intervalo de confiança de 99\% o valor de \(\Phi^{-1} (p)\) corresponde a -2.33. Se considerarmos que a volatilidade prevista a 1 dia é de 2\%, teremos um VaR = -0.020*(-2.33), o que corresponde a um valor de 0.0466. Podemos interpretar o VaR como sendo a existência de 1\% de probabilidade de perder mais do que 4.66\% do valor investido no activo no dia de hoje.
+
+O \emph{Daily Value at Risk} (DEaR) é o valor diariamente em risco, sendo calculado de acordo com a equação \eqref{eq:dear}.
 \begin{equation} 
-  VaR_{t+1}^{z} = -\sigma_{t+1}\Phi_{z}^{-1}
-  \label{eq:var}
+  €DEaR = € \textnormal{Valor de mercado do investimento} * VaR
+  \label{eq:dear}  
 \end{equation}
 
-O \(\Phi (z)\) representa a função distribuição sendo \(\Phi^{-1} (z)\) a sua inversa, sendo que, por exemplo para um intervalo de confiança de 99\% o valor de \(\Phi^{-1} (z)\) corresponde a -2.33. Se considerarmos que a volatilidade prevista a 1 dia é de 2\%, teremos um VaR = -0.020*(-2.33), o que corresponde a um valor de 0.0466. Podemos interpretar o VaR como sendo a existência de 1\% de probabilidade de perder mais do que 4.66\% do valor investido no activo no dia de hoje.
+O valor do VaR a mais de um dia pode-se calcular a partir do DEaR a um dia, de acordo com a equação \eqref{eq:vardays}, onde N representa o número de dias.
+\begin{equation} 
+  VaR = DEaR*\sqrt{N}
+  \label{eq:vardays}
+\end{equation}
+
+Se estivermos a analisar o VaR de um portfolio, esse é calculado da mesma forma que a variância de um portfolio (equação \eqref{eq:varport}), considerando o DEaR individual de cada componente.
+\begin{equation} 
+  DEaR_{portfolio} = \sum_{i=1}^{N}\sum_{j=1}^{N}Cov(DEaR_i,DEaR_j)
+  \label{eq:varport}
+\end{equation}
+onde
+\begin{equation} 
+  Cov(DEaR_i,DEaR_j) = DEaR_{i}DEaR_{j}\rho(DEaR_i,DEaR_j)
+  \label{eq:covport}
+\end{equation}
+
+Por exemplo, considerando 2 activos, A e B, constituintes de um portfolio, teríamos:
+\begin{equation} 
+  DEaR_{A+B}^{2} = DEar_{A}^{2}+DEaR_{B}^{2}+2\rho_{AB} DEaR_{A} DEaR_B
+  \label{eq:ab}
+\end{equation}
 
 \hypertarget{var-paramuxe9trico-aproximauxe7uxe3o-cornish-fisher}{%
-\subsection{VaR paramétrico (Aproximação Cornish-Fisher)}\label{var-paramuxe9trico-aproximauxe7uxe3o-cornish-fisher}}
+\subsection{VaR Paramétrico (Aproximação Cornish-Fisher)}\label{var-paramuxe9trico-aproximauxe7uxe3o-cornish-fisher}}
 
-sendo que caso a distribuição dos dados não sejam a de uma distribuição normal se pode proceder à aproximação Cornish-Fisher para considerar o excesso de \emph{Kurtosis} e a respectiva assimetria (\emph{Skewness}).
+Quando a distribuição dos retornos apresentam excesso de curtose\footnote{medida de dispersão que caracteriza o achatamento da curva da função de distribuição} (\emph{Kurtosis}) e/ou assimetria\footnote{permite distinguir as distribuições assimétricas} (\emph{Skewness}) relativamente a uma distribuição normal pode-se proceder à aproximação Cornish-Fisher, permitindo desta forma uma aproximação ao VaR. Por exemplo, na figura \ref{fig:quant} temos uma distribuição do tipo leptocúrtica, sendo caracterizada por um pico mais alto e caudas mais pesadas que uma distribuição normal.
+\bigskip
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{image/kurtosis} 
+
+}
+
+\caption{Kurtosis}\label{fig:quant}
+\end{figure}
+\centering
+
+Fonte: \citep[pp.46]{quant}
+
+\justifying
+
+O cálculo do VaR com aproximação Cornish-Fisher efectua-se de acordo com a equação \eqref{eq:varcf}, sendo que para calcular o valor referente a CF se aplica a equação \eqref{eq:cf}.
+\begin{equation} 
+  VaR_{t+1}^{p} = -\sigma_{t+1}*CF_{p}^{-1}
+  \label{eq:varcf}
+\end{equation}
+onde
+\begin{equation} 
+  CF_{p}^{-1} = \Phi_{p}^{-1} + \frac{\zeta_{1}}{6}[(\Phi_{p}^{-1})^2-1] + \frac{\zeta_{2}}{24}[(\Phi_{p}^{-1})^3-3\Phi_{p}^{-1}] - \frac{\zeta_{1}^{2}}{36}[2(\Phi_{p}^{-1})^3-5\Phi_{p}^{-1}]
+  \label{eq:cf}
+\end{equation}
+
+Os parâmetros referentes a \(\zeta_1\) e \(\zeta_2\) são respectivamente os valores da assimetria e do excesso de curtose. Esses valores são obtidos de acordo com as equações \eqref{eq:assimetria} e \eqref{eq:curtose}.
+\begin{equation} 
+ \zeta_1 = \frac{1}{n}\sum\bigg[\frac{X_i - \overline{X}}{\sigma}\bigg]^3
+  \label{eq:assimetria}
+\end{equation}
+\begin{equation} 
+ \zeta_2 = \frac{1}{n}\sum\bigg[\frac{X_i - \overline{X}}{\sigma}\bigg]^4 - 3
+  \label{eq:curtose}
+\end{equation}
 
 \hypertarget{pacotes-do-r-para-anuxe1lise}{%
 \chapter{Pacotes do R para análise}\label{pacotes-do-r-para-anuxe1lise}}
@@ -800,7 +862,7 @@ sGARCH model with contant mean
 ## 4    50    115.42    2.788e-07
 ## 
 ## 
-## Elapsed time : 0.213429
+## Elapsed time : 0.180541
 \end{verbatim}
 
 \begin{Shaded}
@@ -945,7 +1007,7 @@ GARCH with sstd
 ## 4    50     49.75      0.44312
 ## 
 ## 
-## Elapsed time : 0.733021
+## Elapsed time : 0.773948
 \end{verbatim}
 
 \begin{Shaded}
@@ -1081,7 +1143,7 @@ GJR-GARCH
 ## 4    50     60.89       0.1187
 ## 
 ## 
-## Elapsed time : 1.181841
+## Elapsed time : 1.27297
 \end{verbatim}
 
 \begin{Shaded}
@@ -1217,7 +1279,7 @@ GJR-GARCH in mean
 ## 4    50     63.60      0.07853
 ## 
 ## 
-## Elapsed time : 1.098063
+## Elapsed time : 1.176525
 \end{verbatim}
 
 \begin{Shaded}

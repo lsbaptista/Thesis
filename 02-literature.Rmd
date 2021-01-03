@@ -177,32 +177,85 @@ O Value at Risk (VaR)^[Markowitz foi dos primeiros autores a contemplar a análi
 O calculo do valor do VaR é de carácter obrigatório para entidades financeiras e seguradoras, sendo que os reguladores, dependendo da sua jurisdição, determinam os parâmetros quantitativos a serem utilizados.
 No caso do Banco Central Europeu^[ver relatório técnico @ecb], esses parâmetros são de que o cálculo deve ser efectuado para um intervalo temporal de 10 dias de negociação e para um intervalo de confiança de 99%, sendo considerado para esses cálculos pelo menos 250 dias negociação de observação de valores históricos.
 
-O cálculo do VaR pode ser realizado de modos diferentes, existindo vários métodos, sendo considerados métodos de tipo não paramétrico, como o método histórico em que não se assume nenhum pressuposto na distribuição desses dados, ou métodos do tipo paramétrico, onde se assume um determinado tipo de distribuição dos dados. Para efeito desta tese será utilizado um método paramétrico para cálculo do VaR, sendo apresentado seguidamente.
+O cálculo do VaR pode ser realizado de modos diferentes, existindo vários métodos, sendo considerados métodos de tipo não paramétrico, como o método histórico em que não se assume nenhum pressuposto na distribuição desses dados, ou métodos do tipo paramétrico, onde se assume um determinado tipo de distribuição dos dados. Para efeito desta dissertação será aplicado um método paramétrico para cálculo do VaR.
 
-### VaR paramétrico (Gaussiana)
+### VaR Paramétrico (Gaussiana)
 
 O VaR paramétrico pressupõe que os retornos diários apresentem uma distribuição normal (figura \@ref(fig:var)), sendo que a sua representação matemática se encontra definida na equação \@ref(eq:var).
-
-
+\begin{equation} 
+  VaR_{t+1}^{p} = -\sigma_{t+1}\Phi_{p}^{-1}
+  (\#eq:var)
+\end{equation} 
 (ref:var) VaR com intervalo confiança 95% e 99%. 
 ```{r, var, echo=FALSE, fig.cap="(ref:var)", out.width="60%"}
 knitr::include_graphics("image/VaR.png")
 ```
 \FloatBarrier
-
 \centering 
 Fonte: [@phdthesis, pp.13]
 
 \justifying
 \bigskip
+O $\Phi (p)$ representa a função distribuição e $\Phi^{-1} (p)$ a sua inversa, sendo que, por exemplo, para um intervalo de confiança de 99% o valor de $\Phi^{-1} (p)$ corresponde a -2.33. Se considerarmos que a volatilidade prevista a 1 dia é de 2%, teremos um VaR = -0.020*(-2.33), o que corresponde a um valor de 0.0466. Podemos interpretar o VaR como sendo a existência de 1% de probabilidade de perder mais do que 4.66% do valor investido no activo no dia de hoje. 
 
+O *Daily Value at Risk* (DEaR) é o valor diariamente em risco, sendo calculado de acordo com a equação \@ref(eq:dear).
 \begin{equation} 
-  VaR_{t+1}^{z} = -\sigma_{t+1}\Phi_{z}^{-1}
-  (\#eq:var)
+  €DEaR = € \textnormal{Valor de mercado do investimento} * VaR
+  (\#eq:dear)  
 \end{equation} 
 
-O $\Phi (z)$ representa a função distribuição sendo $\Phi^{-1} (z)$ a sua inversa, sendo que, por exemplo para um intervalo de confiança de 99% o valor de $\Phi^{-1} (z)$ corresponde a -2.33. Se considerarmos que a volatilidade prevista a 1 dia é de 2%, teremos um VaR = -0.020*(-2.33), o que corresponde a um valor de 0.0466. Podemos interpretar o VaR como sendo a existência de 1% de probabilidade de perder mais do que 4.66% do valor investido no activo no dia de hoje. 
+O valor do VaR a mais de um dia pode-se calcular a partir do DEaR a um dia, de acordo com a equação \@ref(eq:vardays), onde N representa o número de dias.
+\begin{equation} 
+  VaR = DEaR*\sqrt{N}
+  (\#eq:vardays)
+\end{equation} 
 
-### VaR paramétrico (Aproximação Cornish-Fisher)
+Se estivermos a analisar o VaR de um portfolio, esse é calculado da mesma forma que a variância de um portfolio (equação \@ref(eq:varport)), considerando o DEaR individual de cada componente.
+\begin{equation} 
+  DEaR_{portfolio} = \sum_{i=1}^{N}\sum_{j=1}^{N}Cov(DEaR_i,DEaR_j)
+  (\#eq:varport)
+\end{equation} 
+onde
+\begin{equation} 
+  Cov(DEaR_i,DEaR_j) = DEaR_{i}DEaR_{j}\rho(DEaR_i,DEaR_j)
+  (\#eq:covport)
+\end{equation}
 
-sendo que caso a distribuição dos dados não sejam a de uma distribuição normal se pode proceder à aproximação Cornish-Fisher para considerar o excesso de *Kurtosis* e a respectiva assimetria (*Skewness*).
+Por exemplo, considerando 2 activos, A e B, constituintes de um portfolio, teríamos:
+\begin{equation} 
+  DEaR_{A+B}^{2} = DEar_{A}^{2}+DEaR_{B}^{2}+2\rho_{AB} DEaR_{A} DEaR_B
+  (\#eq:ab)
+\end{equation}
+
+### VaR Paramétrico (Aproximação Cornish-Fisher)
+
+Quando a distribuição dos retornos apresentam excesso de curtose^[medida de dispersão que caracteriza o achatamento da curva da função de distribuição] (*Kurtosis*) e/ou assimetria^[permite distinguir as distribuições assimétricas] (*Skewness*) relativamente a uma distribuição normal pode-se proceder à aproximação Cornish-Fisher, permitindo desta forma uma aproximação ao VaR. Por exemplo, na figura \@ref(fig:quant) temos uma distribuição do tipo leptocúrtica, sendo caracterizada por um pico mais alto e caudas mais pesadas que uma distribuição normal.
+\bigskip
+```{r, quant,echo=FALSE,fig.cap='Kurtosis',out.width = "60%"}
+knitr::include_graphics("image/kurtosis.png")
+```
+\centering 
+Fonte: [@quant, pp.46]
+
+\justifying
+O cálculo do VaR com aproximação Cornish-Fisher efectua-se de acordo com a equação \@ref(eq:varcf), sendo que para calcular o valor referente a CF se aplica a equação \@ref(eq:cf).
+\begin{equation} 
+  VaR_{t+1}^{p} = -\sigma_{t+1}*CF_{p}^{-1}
+  (\#eq:varcf)
+\end{equation} 
+onde
+\begin{equation} 
+  CF_{p}^{-1} = \Phi_{p}^{-1} + \frac{\zeta_{1}}{6}[(\Phi_{p}^{-1})^2-1] + \frac{\zeta_{2}}{24}[(\Phi_{p}^{-1})^3-3\Phi_{p}^{-1}] - \frac{\zeta_{1}^{2}}{36}[2(\Phi_{p}^{-1})^3-5\Phi_{p}^{-1}]
+  (\#eq:cf)
+\end{equation}
+
+Os parâmetros referentes a $\zeta_1$ e $\zeta_2$ são respectivamente os valores da assimetria e do excesso de curtose. Esses valores são obtidos de acordo com as equações \@ref(eq:assimetria) e \@ref(eq:curtose).
+\begin{equation} 
+ \zeta_1 = \frac{1}{n}\sum\bigg[\frac{X_i - \overline{X}}{\sigma}\bigg]^3
+  (\#eq:assimetria)
+\end{equation} 
+\begin{equation} 
+ \zeta_2 = \frac{1}{n}\sum\bigg[\frac{X_i - \overline{X}}{\sigma}\bigg]^4 - 3
+  (\#eq:curtose)
+\end{equation} 
+
