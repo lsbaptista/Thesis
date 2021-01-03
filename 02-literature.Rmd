@@ -69,9 +69,20 @@ Ao simular os preços dos activos financeiros iremos utilizar a técnica de Mont
 
 ## Volatilidade
 
-### Média Móvel Exponencial (EWMA)
+Na indústria financeira o desvio padrão associado a instrumentos financeiros é definido como volatilidade. Desta forma quando estamos a falar de volatilidade estamos a considerar o desvio padrão observado.
 
-A média móvel exponencial, referida a partir de agora como EWMA, é um método de calculo da variância, sendo um método que utiliza os dados históricos associando mais peso aos retornos mais recentes no calculo da variância.
+De acordo com @HullRisk2018:
+\begin{spacing}{1}
+\begin{adjustwidth}{28.3464pt}{28.3464pt}\footnotesize
+"A variável volatilidade, $\sigma$, é definida como o desvio padrão do retorno fornecido pela variável por unidade de tempo quando o retorno é expresso usando juros compostos. Quando a volatilidade é usada para valorizar opções, a unidade de tempo é normalmente 1 ano, sendo a volatilidade o desvio padrão do retorno compostos por ano. Quando a volatilidade é usada para a gestão de risco, a unidade de tempo usual é 1 dia de forma a que a volatilidade é o desvio padrão do retorno composto por dia." (pp.213-214)
+\normalsize\end{adjustwidth}
+\end{spacing}
+
+Vários são os modelos para calculo da volatilidade, sendo que um dos modelos mais simples é o do cálculo da variância de acordo com a equação \@ref(eq:estdesviopadrao) utilizando os dados históricos dos retornos, sendo que neste modelo o peso atribuído aos dados é o mesmo independentemente da sua antiguidade. Outros modelos como a Média Móvel Exponencial Ponderada (EWMA) e Heteroscedasticidade condicional auto-regressiva generalizada (GARCH) são modelos, que embora utilizem dados históricos, reconhecem que tanto a volatilidade como a correlação não são constantes ao longo do tempo, atribuindo maior peso aos dados mais recentes. Por fim, um dos modelos que não integra dados históricos mas sim as expectativas futuras para o cálculo da volatilidade é o da volatilidade implícita, utilizando o modelo de Black-Scholes-Merton na valorização das respectivas opções relativamente ao subjacente.
+
+### Média Móvel Exponencial Ponderada (EWMA)
+
+A média móvel exponencial ponderada (EWMA) é um estimador calculado a partir de amostras sequenciais da população
 
 ### Heteroscedasticidade condicional auto-regressiva generalizada (GARCH)
 
@@ -118,7 +129,12 @@ O parâmetro da volatilidade não é um parâmetro que se consiga obter ou obser
 
 A volatilidade implícita será diferente consoante o preço de exercício da opção, considerando todos os outros parâmetros iguais. Da conjugação dos valore de volatilidade obtidos para cada um dos preços de exercício da opção obtêm-se um gráfico conhecido como *volatility smile*(figura \@ref(fig:volatilitysmile)). Este gráfico será o mesmo, quer se esteja a considerar uma opção do tipo *call* ou a mesma equivalente opção do tipo *put*.
 
-\bigskip
+A variável volatilidade, 𝜎, é definida como o desvio padrão do retorno fornecido pela
+variável por unidade de tempo quando o retorno é expresso usando juros compostos.
+Quando a volatilidade é usada para valorizar opções, a unidade de tempo é normalmente 1 ano, sendo a volatilidade o desvio padrão do retorno compostos por ano.
+Quando a volatilidade é usada para a gestão de risco, a unidade de tempo usual é 1 dia
+de forma a que a volatilidade é o desvio padrão do retorno composto por dia.”(pp.213-
+214)
 ```{r, volatilitysmile,echo=FALSE,fig.cap='Volatility Smile',out.width = "60%"}
 knitr::include_graphics("image/volatilitysmile.png")
 ```
@@ -146,7 +162,7 @@ O retorno esperado vai depender de vários factores, essencialmente a taxa de re
 As séries dos retornos diários para cada um dos activos é calculada de acordo com a seguinte formula:
 
 \begin{equation} 
-  R_i = ln\Big(\frac{V_f}{V_i}\Big)
+  R_i = ln\Big(\frac{S_f}{S_i}\Big)
   (\#eq:logRet)
 \end{equation} 
 
@@ -212,7 +228,7 @@ O valor do VaR a mais de um dia pode-se calcular a partir do DEaR a um dia, de a
 
 Se estivermos a analisar o VaR de um portfolio, esse é calculado da mesma forma que a variância de um portfolio (equação \@ref(eq:varport)), considerando o DEaR individual de cada componente.
 \begin{equation} 
-  DEaR_{portfolio} = \sum_{i=1}^{N}\sum_{j=1}^{N}Cov(DEaR_i,DEaR_j)
+  DEaR_{portfolio}^{2} = \sum_{i=1}^{N}\sum_{j=1}^{N}Cov(DEaR_i,DEaR_j)
   (\#eq:varport)
 \end{equation} 
 onde
@@ -258,4 +274,3 @@ Os parâmetros referentes a $\zeta_1$ e $\zeta_2$ são respectivamente os valore
  \zeta_2 = \frac{1}{n}\sum\bigg[\frac{X_i - \overline{X}}{\sigma}\bigg]^4 - 3
   (\#eq:curtose)
 \end{equation} 
-
