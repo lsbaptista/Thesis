@@ -395,10 +395,42 @@ Vários são os modelos para calculo da volatilidade, sendo que um dos modelos m
 \hypertarget{muxe9dia-muxf3vel-exponencial-ponderada-ewma}{%
 \subsection{Média Móvel Exponencial Ponderada (EWMA)}\label{muxe9dia-muxf3vel-exponencial-ponderada-ewma}}
 
-A média móvel exponencial ponderada (EWMA) é um estimador calculado a partir de amostras sequenciais da população
+O modelo da média móvel exponencial ponderada (EWMA) é um estimador calculado a partir de amostras sequenciais da população onde é atribuindo maior peso aos valores mais recentes, sendo que esse peso diminui exponencialmente a medida que vamos recuando no tempo. A formula utilizada para actualizar o valor para a volatilidade é
+
+\begin{equation} 
+  \sigma_{n}^{2} = \lambda\sigma_{n-1}^{2}+(1-\lambda)\mu_{n-1}^{2} 
+  \label{eq:ewma}
+\end{equation}
+
+onde 0\textless{}\(\lambda\leq1\) é uma constante, sendo \(\sigma_{n-1}\) a estimativa da volatilidade realizada no dia n-2 para o dia n-1, e \(\mu_{n-1}\) a mudança percentual diária mais recente. Ao valor de \(\lambda\) atribuido ``estudos empíricos mostram que o \emph{decay factor} (\(\lambda\)) 0,94 fornece uma boa estimativa para todos os ativos.''\citep[p.4]{riskmetrics}
+
+De modo a entender porque à volatilidade obtida através da EWMA correspondem pesos que diminuem exponencialmente vamos substituir \(\sigma_{n-1}^{2}\) na equação \eqref{eq:ewma} de modo a obter
+
+\begin{equation} 
+  \sigma_{n}^{2} = (1-\lambda)(\mu_{n-1}^{2}+\lambda\mu_{n-2}^{2})+\lambda^{2}\sigma_{n-2}^{2}
+  \label{eq:ewma1}
+\end{equation}
+
+Continuando a substituir acabamos por obter
+
+\begin{equation} 
+  \sigma_{n}^{2} = (1-\lambda)\sum_{i=1}^{m}\lambda^{i-1}\mu_{n-1}^{2}+\lambda^{m}\mu_{n-m}^{2}
+  \label{eq:ewma2}
+\end{equation}
+
+Como podemos ver pela equação @(eq:ewma2) o ``peso de \(\mu_{i}\) decresce a uma taxa \(\lambda\) a medida que vamos recuando no tempo. Cada peso é \(\lambda\) vezes o peso anterior.'' \citep[p.226]{HullRisk2018}. Como os pesos diminuem geometricamente, o EWMA também é referido como média móvel geométrica.
 
 \hypertarget{heteroscedasticidade-condicional-auto-regressiva-generalizada-garch}{%
 \subsection{Heteroscedasticidade condicional auto-regressiva generalizada (GARCH)}\label{heteroscedasticidade-condicional-auto-regressiva-generalizada-garch}}
+
+Quando a variância e a covariância variam ao longo do tempo falamos de heteroscedasticidade condicional.
+
+O facto da variância condicional puder mudar de forma heteroscedastica, não implica necessariamente que a serie é não estacionária ou divergente.
+
+Em finanças uma das classes de modelos mais utilizada para prever a volatilidade são os modelos \emph{AutoRegressive Conditional Heteroscedasticity} (ARCH)\footnote{Introduzido por Robert F.Engle em 1982, tendo-lhe sido atribuído o prémio Nobel da economia em 2003} e \emph{Generalized} (GARCH)\footnote{Introduzido por Bollerslev(1986)}.
+Auto-regressivo significa que a variância presente depende do seu próprio passado e não num regressor exógeno. O facto de ser condicional significa que a variância de amanhã depende das variâncias mais recentes. Já a heteroscedasticidade significa que a variância não é constante ao longo do tempo. O pressuposto destes modelos é de que a variância dos retornos seguem um processo previsível, sendo que os modelos ARCH são menos convincentes na previsão quando a volatilidade têm alterações bruscas.
+
+Um modelo mais flexível que o modelo ARCH foi proposto, sendo este o modelo GARCH
 
 \hypertarget{volatilidade-impluxedcita}{%
 \subsection{Volatilidade implícita}\label{volatilidade-impluxedcita}}
@@ -884,7 +916,7 @@ sGARCH model with contant mean
 ## 4    50    115.42    2.788e-07
 ## 
 ## 
-## Elapsed time : 0.1895111
+## Elapsed time : 0.3480611
 \end{verbatim}
 
 \begin{Shaded}
@@ -1029,7 +1061,7 @@ GARCH with sstd
 ## 4    50     49.75      0.44312
 ## 
 ## 
-## Elapsed time : 0.759968
+## Elapsed time : 0.738028
 \end{verbatim}
 
 \begin{Shaded}
@@ -1165,7 +1197,7 @@ GJR-GARCH
 ## 4    50     60.89       0.1187
 ## 
 ## 
-## Elapsed time : 1.349364
+## Elapsed time : 1.235719
 \end{verbatim}
 
 \begin{Shaded}
@@ -1301,7 +1333,7 @@ GJR-GARCH in mean
 ## 4    50     63.60      0.07853
 ## 
 ## 
-## Elapsed time : 1.160895
+## Elapsed time : 1.133967
 \end{verbatim}
 
 \begin{Shaded}
