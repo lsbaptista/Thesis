@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.1)  16 JAN 2021 19:30
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.17)  17 JAN 2021 20:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **bookdown-demo.tex
 (./bookdown-demo.tex
-LaTeX2e <2020-10-01> patch level 3
-L3 programming layer <2020-12-07> xparse <2020-03-03> (c:/Users/lsbap/AppData/R
+LaTeX2e <2020-10-01> patch level 4
+L3 programming layer <2021-01-09> xparse <2020-03-03> (c:/Users/lsbap/AppData/R
 oaming/TinyTeX/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2020/04/10 v1.4m Standard LaTeX document class
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/bk12.clo
@@ -149,15 +149,20 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unico
 de-math.sty
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2020-12-07 L3 programming layer (loader) 
+Package: expl3 2021-01-09 L3 programming layer (loader) 
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backen
 d-xetex.def
-File: l3backend-xetex.def 2020-09-24 L3 backend support: XeTeX
-\g__graphics_track_int=\count194
+File: l3backend-xetex.def 2021-01-09 L3 backend support: XeTeX
+(|extractbb --version)
+\c__kernel_sys_dvipdfmx_version_int=\count194
+\g__color_stack_int=\count195
+\l__kernel_color_stack_int=\count196
+\g__graphics_track_int=\count197
 \l__pdf_internal_box=\box49
-\g__pdf_backend_object_int=\count195
-\g__pdf_backend_annotation_int=\count196
+\g__pdf_backend_object_int=\count198
+\g__pdf_backend_annotation_int=\count199
+\g__pdf_backend_link_int=\count266
 ))
 Package: unicode-math 2020/01/31 v0.8q Unicode maths in XeLaTeX and LuaLaTeX
 
@@ -184,17 +189,17 @@ Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
 xetex.sty
 Package: fontspec-xetex 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTe
 X
-\l__fontspec_script_int=\count197
-\l__fontspec_language_int=\count198
-\l__fontspec_strnum_int=\count199
-\l__fontspec_tmp_int=\count266
-\l__fontspec_tmpa_int=\count267
-\l__fontspec_tmpb_int=\count268
-\l__fontspec_tmpc_int=\count269
-\l__fontspec_em_int=\count270
-\l__fontspec_emdef_int=\count271
-\l__fontspec_strong_int=\count272
-\l__fontspec_strongdef_int=\count273
+\l__fontspec_script_int=\count267
+\l__fontspec_language_int=\count268
+\l__fontspec_strnum_int=\count269
+\l__fontspec_tmp_int=\count270
+\l__fontspec_tmpa_int=\count271
+\l__fontspec_tmpb_int=\count272
+\l__fontspec_tmpc_int=\count273
+\l__fontspec_em_int=\count274
+\l__fontspec_emdef_int=\count275
+\l__fontspec_strong_int=\count276
+\l__fontspec_strongdef_int=\count277
 \l__fontspec_tmpa_dim=\dimen148
 \l__fontspec_tmpb_dim=\dimen149
 \l__fontspec_tmpc_dim=\dimen150
@@ -209,9 +214,9 @@ Package: fix-cm 2015/01/14 v1.1t fixes to LaTeX
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
 ))
-\g__um_fam_int=\count274
-\g__um_fonts_used_int=\count275
-\l__um_primecount_int=\count276
+\g__um_fam_int=\count278
+\g__um_fonts_used_int=\count279
+\l__um_primecount_int=\count280
 \g__um_primekern_muskip=\muskip17
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unico
@@ -419,8 +424,8 @@ s.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
 \@linkdim=\dimen151
-\Hy@linkcounter=\count277
-\Hy@pagecounter=\count278
+\Hy@linkcounter=\count281
+\Hy@pagecounter=\count282
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.de
 f
@@ -434,7 +439,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 s.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count279
+\Hy@SavedSpaceFactor=\count283
 Package hyperref Info: Option `unicode' set `true' on input line 4338.
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
@@ -447,7 +452,7 @@ Package hyperref Info: Plain pages OFF on input line 4479.
 Package hyperref Info: Backreferencing OFF on input line 4484.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4717.
-\c@Hy@tempcnt=\count280
+\c@Hy@tempcnt=\count284
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -464,7 +469,7 @@ tcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count281
+\Fld@menulength=\count285
 \Field@Width=\dimen153
 \Fld@charsize=\dimen154
 Package hyperref Info: Hyper figures OFF on input line 6347.
@@ -483,9 +488,9 @@ Package: atbegshi-ltx 2020/08/17 v1.0a Emulation of the original atbegshi packa
 ge
 with kernel methods
 )
-\Hy@abspage=\count282
-\c@Item=\count283
-\c@Hfootnote=\count284
+\Hy@abspage=\count286
+\c@Item=\count287
+\c@Hfootnote=\count288
 )
 Package hyperref Info: Driver (autodetected): hxetex.
 
@@ -499,10 +504,10 @@ Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
 \pdfm@box=\box50
-\c@Hy@AnnotLevel=\count285
-\HyField@AnnotCount=\count286
-\Fld@listcount=\count287
-\c@bookmark@seq@number=\count288
+\c@Hy@AnnotLevel=\count289
+\HyField@AnnotCount=\count290
+\Fld@listcount=\count291
+\c@bookmark@seq@number=\count292
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rer
 unfilecheck.sty
@@ -530,9 +535,9 @@ Package: geometry 2020/01/02 v5.9 Page Geometry
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count289
-\Gm@cntv=\count290
-\c@Gm@tempcnt=\count291
+\Gm@cnth=\count293
+\Gm@cntv=\count294
+\c@Gm@tempcnt=\count295
 \Gm@bindingoffset=\dimen155
 \Gm@wd@mp=\dimen156
 \Gm@odd@mp=\dimen157
@@ -546,11 +551,11 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.
 sty
 Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count292
+\FV@CodeLineNo=\count296
 \FV@InFile=\read2
 \FV@TabBox=\box51
-\c@FancyVerbLine=\count293
-\FV@StepNumber=\count294
+\c@FancyVerbLine=\count297
+\FV@StepNumber=\count298
 \FV@OutFile=\write3
 ) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/framed/framed.st
 y
@@ -568,16 +573,16 @@ Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
 \LTright=\skip55
 \LTpre=\skip56
 \LTpost=\skip57
-\LTchunksize=\count295
+\LTchunksize=\count299
 \LTcapwidth=\dimen167
 \LT@head=\box52
 \LT@firsthead=\box53
 \LT@foot=\box54
 \LT@lastfoot=\box55
-\LT@cols=\count296
-\LT@rows=\count297
-\c@LT@tables=\count298
-\c@LT@chunks=\count299
+\LT@cols=\count300
+\LT@rows=\count301
+\c@LT@tables=\count302
+\c@LT@chunks=\count303
 \LT@p@ftn=\toks23
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.
@@ -593,18 +598,18 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen175
 \cmidrulekern=\dimen176
 \defaultaddspace=\dimen177
-\@cmidla=\count300
-\@cmidlb=\count301
+\@cmidla=\count304
+\@cmidlb=\count305
 \@aboverulesep=\dimen178
 \@belowrulesep=\dimen179
-\@thisruleclass=\count302
-\@lastruleclass=\count303
+\@thisruleclass=\count306
+\@lastruleclass=\count307
 \@thisrulewidth=\dimen180
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.
 sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count304
+\etb@tempcnta=\count308
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.
 sty
@@ -655,15 +660,15 @@ s.sty
 Package: mathtools 2020/03/24 v1.24 mathematical typesetting tools
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count305
-\calc@Bcount=\count306
+\calc@Acount=\count309
+\calc@Bcount=\count310
 \calc@Adimen=\dimen184
 \calc@Bdimen=\dimen185
 \calc@Askip=\skip61
 \calc@Bskip=\skip62
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count307
+\calc@Ccount=\count311
 \calc@Cskip=\skip63
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mathtools/mhsetup.
@@ -674,7 +679,7 @@ LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
-\g_MT_multlinerow_int=\count308
+\g_MT_multlinerow_int=\count312
 \l_MT_multwidth_dim=\dimen186
 \origjot=\skip64
 \l_MT_shortvdotswithinadjustabove_dim=\dimen187
@@ -701,7 +706,7 @@ y
 Package: babel 2020/12/16 3.52 The Babel package
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2020/12/16 3.52 Babel common definitions
-\babel@savecnt=\count309
+\babel@savecnt=\count313
 \U@D=\dimen195
 \l@babelnohyphens=\language4
 
@@ -711,7 +716,7 @@ f
 ef))
 \bbl@readstream=\read3
 )
-\bbl@dirlevel=\count310
+\bbl@dirlevel=\count314
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-portuges/p
 ortuguese.ldf
@@ -755,8 +760,8 @@ Package: titlesec 2019/10/16 v2.13 Sectioning titles
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/changepage/changep
 age.sty
 Package: changepage 2009/10/20 v1.0c check page and change page layout
-\c@cp@cntr=\count311
-\cp@tempcnt=\count312
+\c@cp@cntr=\count315
+\cp@tempcnt=\count316
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/placeins/placeins.
 sty
@@ -797,7 +802,7 @@ Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
 \caption@hangindent=\dimen263
 Package caption Info: Standard document class detected.
 )
-\c@float@type=\count313
+\c@float@type=\count317
 \float@exts=\toks33
 \float@box=\box59
 \@floatcapt=\box60
@@ -815,18 +820,18 @@ Package floatrow Info: Modified rotfloat package code loaded on input line 473.
 \FBo@max=\skip84
 \FBc@max=\skip85
 \FBf@max=\skip86
-\c@FBl@b=\count314
-\floatbox@depth=\count315
-\c@FRobj=\count316
-\c@FRsobj=\count317
+\c@FBl@b=\count318
+\floatbox@depth=\count319
+\c@FRobj=\count320
+\c@FRsobj=\count321
 \Xhsize=\skip87
 \sXhsize=\skip88
 \Zhsize=\skip89
 \sZhsize=\skip90
 \flrow@rowbox=\box61
 \FR@Zunitlength=\dimen267
-\c@FBcnt=\count318
-\FPOScnt=\count319
+\c@FBcnt=\count322
+\FPOScnt=\count323
 \LTleft=\skip91
 \LTright=\skip92
 \LTleft=\skip93
@@ -839,8 +844,8 @@ Package: subfig 2005/06/28 ver: 1.3 subfig package
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption.st
 y
 Package: caption 2020/10/26 v3.5g Customizing captions (AR)
-\c@caption@flags=\count320
-\c@continuedfloat=\count321
+\c@caption@flags=\count324
+\c@continuedfloat=\count325
 Package caption Info: changepage package is loaded.
 \caption@adjustwidth@hsize=\dimen268
 \caption@adjustwidth@linewidth=\dimen269
@@ -853,17 +858,17 @@ Package caption Info: longtable package is loaded.
 sty
 Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 ))
-\c@KVtest=\count322
+\c@KVtest=\count326
 \sf@farskip=\skip95
 \sf@captopadj=\dimen270
 \sf@capskip=\skip96
 \sf@nearskip=\skip97
-\c@subfigure=\count323
-\c@subfigure@save=\count324
-\c@lofdepth=\count325
-\c@subtable=\count326
-\c@subtable@save=\count327
-\c@lotdepth=\count328
+\c@subfigure=\count327
+\c@subfigure@save=\count328
+\c@lofdepth=\count329
+\c@subtable=\count330
+\c@subtable@save=\count331
+\c@lotdepth=\count332
 \sf@top=\skip98
 \sf@bottom=\skip99
 ) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
@@ -878,9 +883,9 @@ Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.
 sty
-Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
+Package: multirow 2021/01/02 v2.6 Span multiple rows of a table
 \multirow@colwidth=\skip102
-\multirow@cntb=\count329
+\multirow@cntb=\count333
 \multirow@dima=\skip103
 \bigstrutjot=\dimen273
 )
@@ -888,7 +893,7 @@ Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 y
 \wrapoverhang=\dimen274
 \WF@size=\dimen275
-\c@WF@wrappedlines=\count330
+\c@WF@wrappedlines=\count334
 \WF@box=\box64
 \WF@everypar=\toks37
 Package: wrapfig 2003/01/31  v 3.6
@@ -916,16 +921,16 @@ Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box65
-\sift@deathcycles=\count331
+\sift@deathcycles=\count335
 \@vwid@loff=\dimen276
 \@vwid@roff=\dimen277
 )
-\c@taburow=\count332
-\tabu@nbcols=\count333
-\tabu@cnt=\count334
-\tabu@Xcol=\count335
-\tabu@alloc=\count336
-\tabu@nested=\count337
+\c@taburow=\count336
+\tabu@nbcols=\count337
+\tabu@cnt=\count338
+\tabu@Xcol=\count339
+\tabu@alloc=\count340
+\tabu@nested=\count341
 \tabu@target=\dimen278
 \tabu@spreadtarget=\dimen279
 \tabu@naturalX=\dimen280
@@ -967,7 +972,7 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \UL@skip=\skip107
 \UL@hook=\toks41
 \UL@height=\dimen287
-\UL@pe=\count338
+\UL@pe=\count342
 \UL@pixel=\dimen288
 \ULC@box=\box73
 Package: ulem 2019/11/18
@@ -977,7 +982,7 @@ Package: ulem 2019/11/18
 sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen290
-\c@nlinenum=\count339
+\c@nlinenum=\count343
 \TeXr@lab=\toks42
 ) (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.st
 y
@@ -985,7 +990,7 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip108
 \bibsep=\skip109
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count340
+\c@NAT@ctr=\count344
 ) (./bookdown-demo.aux)
 \openout1 = `bookdown-demo.aux'.
 
@@ -1302,7 +1307,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count341
+\c@section@level=\count345
 )
 LaTeX Info: Redefining \ref on input line 159.
 LaTeX Info: Redefining \pageref on input line 159.
@@ -1366,7 +1371,7 @@ Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
 
 \flrow@LT@lasthead=\box74
 \flrow@LT@prelastfoot=\box75
-\c@FBLTpage=\count342
+\c@FBLTpage=\count346
 )
 File: image/biglogo.png Graphic file (type bmp)
 <image/biglogo.png>
@@ -1446,15 +1451,15 @@ LaTeX Font Info:    Font shape `TU/Arial(0)/m/it' will be
 
 
 ] (./bookdown-demo.toc
-Underfull \hbox (badness 1237) in paragraph at lines 12--12
- [][] [][]\TU/Arial(0)/m/n/12 Heteroscedasticidade condicional auto-regressiva 
-generali- 
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+ [][] [][]\TU/Arial(0)/m/n/12 Generalized autoregressive conditional heterosked
+asti- 
  []
 
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 23.
+(Font)              scaled to size 14.4pt on input line 24.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 23.
+(Font)              scaled to size 14.4pt on input line 24.
 )
 \tf@toc=\write6
 \openout6 = `bookdown-demo.toc'.
@@ -1517,46 +1522,49 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
 (Font)              scaled to size 7.0pt on input line 328.
 [6] [7] [8] [9] [10] [11]
+Underfull \hbox (badness 1642) in paragraph at lines 453--453
+|[]\TU/Arial(0)/b/n/14.4 Generalized autoregressive conditional heteroskedasti-
+
+ []
+
+[12] [13]
 File: image/fdistribuicao.png Graphic file (type bmp)
 <image/fdistribuicao.png>
-
-Underfull \vbox (badness 3199) has occurred while \output is active []
-
-[12]
+[14]
 Missing character: There is no 𝜎 in font Arial/OT:script=latn;language=dflt;map
 ping=tex-text;!
 File: image/volatilitysmile.png Graphic file (type bmp)
 <image/volatilitysmile.png>
-[13] [14]
+[15] [16]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[15] [16]
+[17] [18]
 File: image/VaR.png Graphic file (type bmp)
 <image/VaR.png>
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 597.
+(Font)              scaled to size 6.0pt on input line 643.
 
 Underfull \vbox (badness 1308) has occurred while \output is active []
 
-[17]
+[19]
 File: image/kurtosis.png Graphic file (type bmp)
 <image/kurtosis.png>
-[18] [19]
+[20] [21]
 Cap\'{\i }tulo 2.
-[20
-
-] [21]
-Cap\'{\i }tulo 3.
 [22
+
+] [23]
+Cap\'{\i }tulo 3.
+[24
 
 ]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 682.
+(Font)              scaled to size 8.0pt on input line 728.
 File: bookdown-demo_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/nice-fig-1.pdf>
-[23]
+[25]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 780.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 826.
 File: bookdown-demo_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type
  pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-7-1.pdf>
@@ -1566,16 +1574,16 @@ File: bookdown-demo_files/figure-latex/unnamed-chunk-7-2.pdf Graphic file (type
 File: bookdown-demo_files/figure-latex/unnamed-chunk-7-3.pdf Graphic file (type
  pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-7-3.pdf>
-[24]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 820.
-[25]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [26]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 866.
+[27]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[27]
+[28]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[29]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf>
@@ -1585,17 +1593,17 @@ e pdf)
 File: bookdown-demo_files/figure-latex/unnamed-chunk-10-3.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-10-3.pdf>
-[28] [29]
+[30] [31]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf>
-[30]
+[32]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[31]
+[33]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[32] [33]
+[34] [35]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-12-1.pdf>
@@ -1608,13 +1616,13 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[34] [35] [36]
+[36] [37] [38]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[37]
+[39]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[38]
+[40]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf>
@@ -1627,19 +1635,19 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[39]
+[41]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[40] [41]
+[42] [43]
 Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[42]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[43]
-Underfull \vbox (badness 2393) has occurred while \output is active []
 
 [44]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[45]
+Underfull \vbox (badness 2393) has occurred while \output is active []
+
+[46]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf>
@@ -1652,7 +1660,7 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[45] [46] (./bookdown-demo.bbl [47
+[47] [48] (./bookdown-demo.bbl [49
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 16--21
@@ -1668,25 +1676,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--21
 ] [][][][] []
  []
 
-[48
+[50
 
-]) [49] [50
+]) [51] [52
 
-] [51
+] [53
 
-] [52
+] [54
 
 ] (./bookdown-demo.aux)
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
-(rerunfilecheck)             Checksum: 3777F284683F304DE1F12783A30EBF6C;4125.
+(rerunfilecheck)             Checksum: DD448127BB8960B4F7D52B19E9D321B9;4432.
  ) 
 Here is how much of TeX's memory you used:
- 23272 strings out of 479240
- 406783 string characters out of 5874259
- 898790 words of memory out of 5000000
- 42347 multiletter control sequences out of 15000+600000
+ 23295 strings out of 479234
+ 407255 string characters out of 5874137
+ 901635 words of memory out of 5000000
+ 42373 multiletter control sequences out of 15000+600000
  431730 words of font info for 118 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 94i,9n,121p,1844b,588s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,9n,125p,1844b,598s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (63 pages).
+Output written on bookdown-demo.pdf (65 pages).

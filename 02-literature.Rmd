@@ -57,7 +57,7 @@ Nesta equação o $\mu$ representa a taxa de retorno anual esperado, sendo que $
 
 Este processo é conhecido como movimento Browniano geométrico (GBM). De acordo com @AppliedFinancial um "GBM pode ser considerado como um movimento probabilístico contínuo no qual o logaritmo da quantidade que varia aleatoriamente segue um movimento Browniano (processo de Wiener) com desvio." Este modelo é a base do modelo de Black-Scholes, que será revisto mais adiante, aquando do cálculo da volatilidade implícita nas opções.
 
-Tendo em consideração a equação \@ref(eq:logprice), S segue uma distribuição lognormal. Uma distribuição lognormal é mais realístico de acordo com o movimento do preço das acções, prevenindo que o valor se torne negativo.
+Tendo em consideração a equação \@ref(eq:logprice), *S* segue uma distribuição lognormal. Uma distribuição lognormal é mais realístico de acordo com o movimento do preço das acções, prevenindo que o valor se torne negativo.
 
 Em simulação, este processo é realizado considerando uma distribuição normal com média e variância dada pela equação \@ref(eq:Inito) [@FRM1].
 
@@ -77,10 +77,39 @@ De acordo com @HullRisk2018:
 "A variável volatilidade, $\sigma$, é definida como o desvio padrão do retorno fornecido pela variável por unidade de tempo quando o retorno é expresso usando juros compostos. Quando a volatilidade é usada para valorizar opções, a unidade de tempo é normalmente 1 ano, sendo a volatilidade o desvio padrão do retorno compostos por ano. Quando a volatilidade é usada para a gestão de risco, a unidade de tempo usual é 1 dia de forma a que a volatilidade é o desvio padrão do retorno composto por dia." (pp.213-214)
 \normalsize\end{adjustwidth}
 \end{spacing}
-
+\medskip
 Vários são os modelos para calculo da volatilidade, sendo que um dos modelos mais simples é o do cálculo da variância de acordo com a equação \@ref(eq:estdesviopadrao) utilizando os dados históricos dos retornos, sendo que neste modelo o peso atribuído aos dados é o mesmo independentemente da sua antiguidade. Outros modelos como a Média Móvel Exponencial Ponderada (EWMA) e Heteroscedasticidade condicional auto-regressiva generalizada (GARCH) são modelos, que embora utilizem dados históricos, reconhecem que tanto a volatilidade como a correlação não são constantes ao longo do tempo, atribuindo maior peso aos dados mais recentes. Por fim, um dos modelos que não integra dados históricos mas sim as expectativas futuras para o cálculo da volatilidade é o da volatilidade implícita, utilizando o modelo de Black-Scholes-Merton na valorização das respectivas opções relativamente ao subjacente.
 
-### Média Móvel Exponencial Ponderada (EWMA)
+### AutoRegressive Conditional Heteroscedasticity (ARCH)
+
+Existem equações para o cálculo da variância que atribuem igual peso aos valores passados independentemente da sua antiguidade. Outros métodos atribuem mais peso aos dados mais recentes, pois pressupõem-se que esses carregam mais informação útil acerca da variável em estudo, criando modelos que prevêem com menor erro os valores futuros em estudo.
+
+Uma das formas de cálculo da volatilidade tendo em consideração os valores mais recentes dos retornos é aplicando a equação
+
+\begin{equation} 
+  \sigma_{n}^{2} =\sum_{i=1}^{m}\alpha_i\mu_{n-1}^{2}
+  (\#eq:weight)
+\end{equation} 
+
+A variável $\alpha$ representa o peso associado a observação *i* dos retornos, sendo que a soma dos respectivos pesos deve ser igual a 1.
+
+Tendo em consideração @Hull2018 se a média a longo prazo da taxa de variância for considerada e assignado um peso a ela então teremos
+
+\begin{equation} 
+  \sigma_{n}^{2} =\gamma\mathcal{V}_{L}+\sum_{i=1}^{m}\alpha_i\mu_{n-1}^{2}
+  (\#eq:arch)
+\end{equation} 
+
+sendo que $\mathcal{V}_{L}$ é a taxa de variância de longo prazo e $\gamma$ é o peso associado a cada $\mathcal{V}_{L}$, sendo que os repectivos pesos devem somar 1, de acordo com $$\gamma + \sum_{i=1}^{m}\alpha_i = 1$$
+
+
+A equação \@ref(eq:arch) é conhecida como um modelo *AutoRegressive Conditional Heteroscedasticity* ou ARCH(m)^[Introduzido por Robert F.Engle em 1982, tendo-lhe sido atribuído o prémio Nobel da economia em 2003], sendo que em finanças é uma das classes de modelos mais utilizada para prever a volatilidade. O *m* representa o número de observações, sendo que a variável aleatória $\mu$ segue uma distribuição normal, sendo no entanto prática comum considerar outros tipos de distribuições como a distribuição t-student, devido ao factos da distribuição dos retornos apresentarem caudas mais pesadas que uma distribuição normal.
+
+Auto-regressivo significa que a variância presente depende do seu próprio passado e não num regressor exógeno. O facto de ser condicional significa que a variância de amanhã depende das variâncias mais recentes. Já a heteroscedasticidade significa que a variância não é constante ao longo do tempo. Quando a variância e a covariância variam ao longo do tempo falamos de heteroscedasticidade condicional.
+
+O pressuposto destes modelos é de que a variância dos retornos seguem um processo previsível, sendo que os modelos ARCH são menos convincentes na previsão quando a volatilidade têm alterações bruscas. A apresentação do modelo ARCH serve como forma introdutória de apresentação aos modelos *exponentially weighted moving average* (EWMA) e *generalized autoregressive conditional heteroskedasticity* (GARCH).
+
+### Exponentially weighted moving average (EWMA)
 
 O modelo da média móvel exponencial ponderada (EWMA) é um estimador calculado a partir de amostras sequenciais da população onde é atribuindo maior peso aos valores mais recentes, sendo que esse peso diminui exponencialmente a medida que vamos recuando no tempo. A formula utilizada para actualizar o valor para a volatilidade é
 
@@ -88,8 +117,7 @@ O modelo da média móvel exponencial ponderada (EWMA) é um estimador calculado
   \sigma_{n}^{2} = \lambda\sigma_{n-1}^{2}+(1-\lambda)\mu_{n-1}^{2} 
   (\#eq:ewma)
 \end{equation} 
-
-onde 0<$\lambda\leq1$ é uma constante, sendo $\sigma_{n-1}$ a estimativa da volatilidade realizada no dia n-2 para o dia n-1, e $\mu_{n-1}$ a mudança percentual diária mais recente. Ao valor de $\lambda$ atribuido "estudos empíricos mostram que o *decay factor* ($\lambda$) 0,94 fornece uma boa estimativa para todos os ativos."[@riskmetrics,p.4]
+sendo um caso particular da equação \@ref(eq:weight). Neste caso $\gamma_{i+1} = \lambda\gamma_{i}$, onde 0<$\lambda\leq1$ é uma constante, sendo $\sigma_{n-1}$ a estimativa da volatilidade realizada no dia n-2 para o dia n-1, e $\mu_{n-1}$ a mudança percentual diária mais recente. Ao valor de $\lambda$ atribuido "estudos empíricos mostram que o *decay factor* ($\lambda$) 0,94 fornece uma boa estimativa para todos os ativos."[@riskmetrics,p.4]
 
 De modo a entender porque à volatilidade obtida através da EWMA correspondem pesos que diminuem exponencialmente vamos substituir $\sigma_{n-1}^{2}$ na equação \@ref(eq:ewma) de modo a obter
 
@@ -105,18 +133,36 @@ Continuando a substituir acabamos por obter
   (\#eq:ewma2)
 \end{equation} 
 
-Como podemos ver pela equação \@(eq:ewma2) o "peso de $\mu_{i}$ decresce a uma taxa $\lambda$ a medida que vamos recuando no tempo. Cada peso é $\lambda$ vezes o peso anterior." [@HullRisk2018,p.226]. Como os pesos diminuem geometricamente, o EWMA também é referido como média móvel geométrica. 
+Como podemos ver pela equação \@ref(eq:ewma2) o "peso de $\mu_{i}$ decresce a uma taxa $\lambda$ a medida que vamos recuando no tempo. Cada peso é $\lambda$ vezes o peso anterior." [@HullRisk2018,p.226]. Como os pesos diminuem geometricamente, o EWMA também é referido como média móvel geométrica. 
 
-### Heteroscedasticidade condicional auto-regressiva generalizada (GARCH)
+### Generalized autoregressive conditional heteroskedasticity (GARCH)
 
-Quando a variância e a covariância variam ao longo do tempo falamos de heteroscedasticidade condicional.
+Em 1986 um modelo mais flexível que o modelo ARCH foi proposto, sendo este o modelo *Generalized* ARCH^[Introduzido por Bollerslev(1986)]. De acordo com @volatilitymodels "Uma grande vantagem dos modelos GARCH é que os retornos não são assumidos independentes, e mesmo se forem assumidos condicionais gaussianos para retornos anteriores, incondicionalmente, eles não são gaussianos, porque o agrupamento de volatilidade gera leptocurtose"(p.2). A equação que define o modelo GARCH(1,1) é
 
-O facto da variância condicional puder mudar de forma heteroscedastica, não implica necessariamente que a serie é não estacionária ou divergente.
+\begin{equation} 
+  \sigma_{n}^{2} = \gamma\mathcal{V}_{L} + \alpha\mu_{n-1}^{2} + \beta\sigma_{n-1}^{2}
+  (\#eq:garch)
+\end{equation}
 
-Em finanças uma das classes de modelos mais utilizada para prever a volatilidade são os modelos *AutoRegressive Conditional Heteroscedasticity* (ARCH)^[Introduzido por Robert F.Engle em 1982, tendo-lhe sido atribuído o prémio Nobel da economia em 2003] e *Generalized* (GARCH)^[Introduzido por Bollerslev(1986)].
-Auto-regressivo significa que a variância presente depende do seu próprio passado e não num regressor exógeno. O facto de ser condicional significa que a variância de amanhã depende das variâncias mais recentes. Já a heteroscedasticidade significa que a variância não é constante ao longo do tempo. O pressuposto destes modelos é de que a variância dos retornos seguem um processo previsível, sendo que os modelos ARCH são menos convincentes na previsão quando a volatilidade têm alterações bruscas.
+Nesta equação, verifica-se que $\sigma_{n}^{2}$ é calculado a partir da taxa de variação média de longo prazo $\mathcal{V}_{L}$, como também a partir de $\sigma_{n-1}$ e $\mu_{n-1}$, sendo que o modelo EWMA é um caso particular do modelo GARCH(1,1) onde $\gamma=0$, $\alpha=1-\lambda$ e $\beta=\lambda$. Tal como referido nos modelos anteriores, a soma dos diferentes pesos deve ser igual a 1, sendo $$\gamma+\sigma+\beta=1$$
 
-Um modelo mais flexível que o modelo ARCH foi proposto, sendo este o modelo GARCH
+O modelo genérico de GARCH é GARCH(p,q) onde o modelo calcula $\sigma_{n}^{2}$ a partir das observações *p* mais recentes de $\mu^2$ e as mais recentes estimações *q* da taxa de variância. Desta forma, o modelo ""(1,1) em GARCH(1,1) indica que $\sigma_{n}^{2}$ é baseado nas mais recentes observações de $\mu^2$ e nas mais recentes estimações da taxa de variância."[@Hull2018,p.227]
+
+Considerando $\omega=\gamma\mathcal{V}_{L}$, o modelo GARCH(1,1) pode ser definido como
+
+\begin{equation} 
+  \sigma_{n}^{2} = \omega + \alpha\mu_{n-1}^{2} + \beta\sigma_{n-1}^{2}
+  (\#eq:garch2)
+\end{equation}
+
+A equação \@ref(eq:garch2) é a que costuma ser utilizada de forma a estimar os parâmetros. De notar de que para obter um processo estável GARCH(1,1) é necessário que $\sigma+\beta<1$, ou então o peso aplicado a variância de longo prazo é negativa.
+
+A estimação dos parâmetros, tanto para o modelo EWMA como para o modelo GARCH(1,1), é realizado utilizando um processo conhecido como *maximum likelihood method*, onde se utilizam os dados históricos de modo a escolher os parâmetros que maximizem a probabilidade de ocorrência dos dados, de acordo com a equação
+
+\begin{equation} 
+  \sum_{i=1}^{m}=\bigg[-ln(\sigma_{i}^{2})-\frac{\mu_{i}^{2}}{\sigma_{i}^{2}}\bigg]
+  (\#eq:mgarch)
+\end{equation}
 
 ### Volatilidade implícita
 
@@ -157,7 +203,7 @@ Fonte: Elaboração própria.
 \justifying
 \bigskip
 
-O parâmetro da volatilidade não é um parâmetro que se consiga obter ou observar directamente, sendo um valor que representa a volatilidade esperada pelos investidores no futuro, conhecido como **volatilidade implícita**. Um modo de obter este valor é a partir dos restantes parâmetros, ou seja, tendo o valor de uma opção de compra, e considerando os valores de S~0~, K, r e T, substituir estes pelos respectivos valores e obter o valor de $\sigma$ que iguale o valor da *call* utilizando as equações \@ref(eq:call) e \@ref(eq:d1) através de processos por aproximação iterativo. 
+O parâmetro da volatilidade não é um parâmetro que se consiga obter ou observar directamente, sendo um valor que representa a volatilidade esperada pelos investidores no futuro, conhecido como *volatilidade implícita*. Um modo de obter este valor é a partir dos restantes parâmetros, ou seja, tendo o valor de uma opção de compra, e considerando os valores de S~0~, K, r e T, substituir estes pelos respectivos valores e obter o valor de $\sigma$ que iguale o valor da *call* utilizando as equações \@ref(eq:call) e \@ref(eq:d1) através de processos por aproximação iterativo. 
 
 A volatilidade implícita será diferente consoante o preço de exercício da opção, considerando todos os outros parâmetros iguais. Da conjugação dos valore de volatilidade obtidos para cada um dos preços de exercício da opção obtêm-se um gráfico conhecido como *volatility smile*(figura \@ref(fig:volatilitysmile)). Este gráfico será o mesmo, quer se esteja a considerar uma opção do tipo *call* ou a mesma equivalente opção do tipo *put*.
 
