@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.17)  20 JAN 2021 19:23
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.17)  20 JAN 2021 20:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1572,13 +1572,21 @@ Cap\'{\i }tulo 3.
 [27
 
 ]
+File: image/cotacao.png Graphic file (type bmp)
+<image/cotacao.png>
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 823.
-File: bookdown-demo_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/nice-fig-1.pdf>
-[28]
+(Font)              scaled to size 8.0pt on input line 839.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 921.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 844.
+File: bookdown-demo_files/figure-latex/cotacao-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/cotacao-1.pdf>
+File: bookdown-demo_files/figure-latex/cotacao-2.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/cotacao-2.pdf>
+File: bookdown-demo_files/figure-latex/cotacao-3.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/cotacao-3.pdf>
+File: bookdown-demo_files/figure-latex/cotacao-4.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/cotacao-4.pdf>
+[28] [29]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type
  pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-7-1.pdf>
@@ -1588,9 +1596,8 @@ File: bookdown-demo_files/figure-latex/unnamed-chunk-7-2.pdf Graphic file (type
 File: bookdown-demo_files/figure-latex/unnamed-chunk-7-3.pdf Graphic file (type
  pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-7-3.pdf>
-[29]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 961.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 977.
 [30]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1598,6 +1605,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [32]
+Underfull \vbox (badness 2393) has occurred while \output is active []
+
+[33]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf>
@@ -1607,17 +1617,20 @@ e pdf)
 File: bookdown-demo_files/figure-latex/unnamed-chunk-10-3.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-10-3.pdf>
-[33] [34]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[34] [35]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf>
-[35]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [36]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[37] [38]
+[37]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[38] [39]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-12-1.pdf>
@@ -1630,13 +1643,13 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[39] [40] [41]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[42]
+[40] [41] [42]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [43]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[44]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf>
@@ -1649,19 +1662,19 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[44]
+[45]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[45] [46]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[47]
+[46] [47]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [48]
-Underfull \vbox (badness 2393) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [49]
+Underfull \vbox (badness 2393) has occurred while \output is active []
+
+[50]
 File: bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf>
@@ -1674,7 +1687,7 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[50] [51] (./bookdown-demo.bbl [52
+[51] [52] (./bookdown-demo.bbl [53
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 21--26
@@ -1690,13 +1703,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--26
 ] [][][][] []
  []
 
-[53
+[54
 
-]) [54] [55
-
-] [56
+]) [55] [56
 
 ] [57
+
+] [58
 
 ] (./bookdown-demo.aux)
 
@@ -1706,12 +1719,12 @@ Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
 (rerunfilecheck)             Checksum: 7D6A0363D589B6AF6C0E8C1292D1C630;4456.
  ) 
 Here is how much of TeX's memory you used:
- 23335 strings out of 479234
- 407931 string characters out of 5874137
- 902211 words of memory out of 5000000
- 42411 multiletter control sequences out of 15000+600000
+ 23365 strings out of 479234
+ 409014 string characters out of 5874137
+ 902228 words of memory out of 5000000
+ 42437 multiletter control sequences out of 15000+600000
  431730 words of font info for 118 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 98i,9n,125p,1844b,598s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,8n,125p,1844b,598s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (68 pages).
+Output written on bookdown-demo.pdf (69 pages).

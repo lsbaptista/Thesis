@@ -5,7 +5,7 @@
 ## Aplicação a dados do modelo
 ```{r,include=FALSE}
 rm(list = ls())
-knitr::opts_chunk$set(tidy=FALSE,message = FALSE,warning = FALSE)
+knitr::opts_chunk$set(tidy=FALSE, message = FALSE,warning =  FALSE,fig.align = "center",fig.show = "hold")
 #install.packages("xlsx")
 #install.packages("kableExtra")
 #install.packages("quantmod")
@@ -23,49 +23,37 @@ library(xlsx)
 library(tidyverse)
 ```
 
-A primeira fase consiste em extrair de forma aleatória 14 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na tabela \@ref(tab:nice-tab).
-\scriptsize
-```{r,nice-tab, echo=FALSE}
-mydata <- read.xlsx("data/IndexConstituentsstoxx_50.xlsx", 1)
-set.seed(14)
-dt <- sample(mydata$Full.name, size = 14,replace = F)
-d <- knitr::kable(
-  dt, caption = "Empresas extraidas do Euro Stoxx 50",
-  booktabs = TRUE
-)
-kable_styling(d, latex_options = "hold_position", position = "center")
+A primeira fase consiste em extrair de forma aleatória 14 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na figura \@ref(fig:empresas).
+
+```{r, empresas,echo=FALSE,fig.cap='Empresas extraidas do Euro Stoxx 50',out.width="80%"}
+knitr::include_graphics("image/cotacao.png")
 ```
+\FloatBarrier
+\centering 
+Fonte: Elaboração própria.
 
-
-```{r,include=FALSE}
+\justifying
+\bigskip
+\scriptsize
+```{r}
 #leitura de simbolos dos activos financeiros
-#symbolsEU <- c("TEF.MC","UNA.AS",'GLE.PA','ENEL.MI',"BAYN.DE","DTE.DE","ABI.BR","DAI.DE","ORA.PA","SAN.PA","AIR.PA","ISP.MI","AD.AS","ASML.AS")
-getSymbols('GLE.PA',src = "yahoo", from="2012-06-18", to="2020-06-02")
-view(GLE.PA)
+symbolsEU <- c("TEF.MC","UNA.AS",'GLE.PA',"AIR.PA")
+getSymbols(symbolsEU,src = "yahoo", from="2018-06-01", to="2020-06-02")
 ```
 \normalsize
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). 
-\scriptsize
-```{r,nice-fig,echo=FALSE,fig.cap='Here is a nice figure!',fig.topcaption = TRUE,out.width = "30%",fig.show="hold"}
-
-#par(mar = c(1,1,1,1))
- #plot(TEF.MC[,6], main = "TEF.MC")
- #plot(UNA.AS[,6], main = "UNA.AS")
- #plot(GLE.PA[,6], main = "GLE.PA")
- #plot(ENEL.MI[,6], main = "ENEL.MI")
- #plot(BAYN.DE[,6], main = "BAYN.DE")
- #plot(DTE.DE[,6], main = "DTE.DE")
- #plot(ABI.BR[,6], main = "ABI.BR")
- #plot(DAI.DE[,6], main = "DAI.DE")
- #plot(ORA.PA[,6], main = "ORA.PA")
- #plot(SAN.PA[,6], main = "SAN.PA")
- #plot(AIR.PA[,6], main = "AIR.PA")
- #plot(ISP.MI[,6], main = "ISP.MI")
- #plot(AD.AS[,6], main = "AD.AS")
- #plot(ASML.AS[,6], main = "ASML.AS")
-chartSeries(GLE.PA)
+```{r,cotacao,echo=FALSE, fig.cap='Evolução das cotações nos últimos 2 anos',fig.topcaption = TRUE,out.width = "40%"}
+par(mfrow  = c(2,2))
+  chartSeries(TEF.MC,theme = chartTheme("white"))
+  chartSeries(UNA.AS,theme = chartTheme("white"))
+  chartSeries(GLE.PA,theme = chartTheme("white"))
+  chartSeries(AIR.PA,theme = chartTheme("white"))
 ```
+\FloatBarrier
+\centering 
+Fonte: Elaboração própria.
 
+\justifying
+\bigskip
 
 Calculo do retorno diario logaritmico
 \scriptsize
