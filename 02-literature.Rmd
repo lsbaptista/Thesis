@@ -80,6 +80,10 @@ De acordo com @HullRisk2018:
 \medskip
 Vários são os modelos para calculo da volatilidade, sendo que um dos modelos mais simples é o do cálculo da variância de acordo com a equação \@ref(eq:estdesviopadrao) utilizando os dados históricos dos retornos, sendo que neste modelo o peso atribuído aos dados é o mesmo independentemente da sua antiguidade. Outros modelos como a Média Móvel Exponencial Ponderada (EWMA) e Heteroscedasticidade condicional auto-regressiva generalizada (GARCH) são modelos, que embora utilizem dados históricos, reconhecem que tanto a volatilidade como a correlação não são constantes ao longo do tempo, atribuindo maior peso aos dados mais recentes. Por fim, um dos modelos que não integra dados históricos mas sim as expectativas futuras para o cálculo da volatilidade é o da volatilidade implícita, utilizando o modelo de Black-Scholes-Merton na valorização das respectivas opções relativamente ao subjacente.
 
+Nos cálculos que utilizem dados históricos a escolha do tamanho da amostra *n* deve ser grande o suficiente de modo a garantir uma melhor precisão nas estatísticas obtidas, sendo que neste caso devemos considerar que a volatilidade não é constante ao longo do tempo e que valores mais antigos podem não ser tão relevantes como os valores mais recentes. De acordo com [@Hull2018] esse valor deve ser compreendido entre 90 a 180 dias para a cotação de activos. 
+
+Para o calculo da volatilidade anual utiliza-se os número de dias de negociação, sendo considerado 252 dias por ano como valor de referência.
+
 ### AutoRegressive Conditional Heteroscedasticity (ARCH)
 
 Existem equações para o cálculo da variância que atribuem igual peso aos valores passados independentemente da sua antiguidade. Outros métodos atribuem mais peso aos dados mais recentes, pois pressupõem-se que esses carregam mais informação útil acerca da variável em estudo, criando modelos que prevêem com menor erro os valores futuros em estudo.
@@ -137,7 +141,9 @@ Como podemos ver pela equação \@ref(eq:ewma2) o "peso de $\mu_{i}$ decresce a 
 
 ### Generalized autoregressive conditional heteroskedasticity (GARCH)
 
-Em 1986 um modelo mais flexível que o modelo ARCH foi proposto, sendo este o modelo *Generalized* ARCH^[Introduzido por Bollerslev(1986)]. De acordo com @volatilitymodels "Uma grande vantagem dos modelos GARCH é que os retornos não são assumidos independentes, e mesmo se forem assumidos condicionais gaussianos para retornos anteriores, incondicionalmente, eles não são gaussianos, porque o agrupamento de volatilidade gera leptocurtose"(p.2). A equação que define o modelo GARCH(1,1) é
+Em 1986 um modelo mais flexível que o modelo ARCH foi proposto, sendo este o modelo *Generalized* ARCH^[Introduzido por Bollerslev(1986)]. De acordo com @volatilitymodels "Uma grande vantagem dos modelos GARCH é que os retornos não são assumidos independentes, e mesmo se forem assumidos condicionais gaussianos para retornos anteriores, incondicionalmente, eles não são gaussianos, porque o agrupamento de volatilidade gera leptocurtose"(p.2). Também, e de acordo com @portanalyse, "A volatilidade agora depende de ambos, uma combinação linear dos erros quadráticos da previsão (um termo autoregressivo) e variâncias condicional passada (um termo de média móvel)."(p.136)
+
+A equação que define o modelo GARCH(1,1) é
 
 \begin{equation} 
   \sigma_{n}^{2} = \gamma\mathcal{V}_{L} + \alpha\mu_{n-1}^{2} + \beta\sigma_{n-1}^{2}
@@ -197,6 +203,7 @@ A função N(x) representa a função distribuição para uma distribuição nor
 ```{r, fdistribuicao,echo=FALSE,fig.cap='Função distribuição N(x)',out.width="45%"}
 knitr::include_graphics("image/fdistribuicao.png")
 ```
+\FloatBarrier
 \centering 
 Fonte: Elaboração própria.
 
@@ -207,7 +214,7 @@ O parâmetro da volatilidade não é um parâmetro que se consiga obter ou obser
 
 A volatilidade implícita será diferente consoante o preço de exercício da opção, considerando todos os outros parâmetros iguais. Da conjugação dos valore de volatilidade obtidos para cada um dos preços de exercício da opção obtêm-se um gráfico conhecido como *volatility smile*(figura \@ref(fig:volatilitysmile)). Este gráfico será o mesmo, quer se esteja a considerar uma opção do tipo *call* ou a mesma equivalente opção do tipo *put*.
 
-A variável volatilidade, 𝜎, é definida como o desvio padrão do retorno fornecido pela
+A variável volatilidade, $\sigma$, é definida como o desvio padrão do retorno fornecido pela
 variável por unidade de tempo quando o retorno é expresso usando juros compostos.
 Quando a volatilidade é usada para valorizar opções, a unidade de tempo é normalmente 1 ano, sendo a volatilidade o desvio padrão do retorno compostos por ano.
 Quando a volatilidade é usada para a gestão de risco, a unidade de tempo usual é 1 dia
@@ -216,12 +223,12 @@ de forma a que a volatilidade é o desvio padrão do retorno composto por dia.�
 ```{r, volatilitysmile,echo=FALSE,fig.cap='Volatility Smile',out.width = "60%"}
 knitr::include_graphics("image/volatilitysmile.png")
 ```
+\FloatBarrier
 \centering 
 Fonte: [@volatilitysmile, pp.182]
 
 \justifying
 \bigskip
-
 Como de pode ver pela figura \@ref(fig:volatilitysmile) a opção é considerada *out-the-money* se o seu valor for inferior ao do respectivo subjacente, *at-the-money* se for superior e *in-the-money* se o valor for igual. No calculo do valor da volatilidade será utilizado o valor de preço de exercício *in-the-money* de opções do tipo *call*, ou na impossibilidade do valor do subjacente ser o mesmo do K, o mais próximo deste.
 
 Quando comparado com outros métodos para calcular a volatilidade onde os dados utilizados são dados históricos, este método incorpora o sentimento presente dos investidores relativo a volatilidade futura de um determinado ativo ou instrumento financeiro.
@@ -237,6 +244,7 @@ Para aplicação deste modelo deve-se obter os seguintes dados dos instrumentos 
 - O coeficiente de correlação,$\rho$, entre cada um dos activos.
 
 O retorno esperado vai depender de vários factores, essencialmente a taxa de retorno sem risco que se verifica no mercado, a taxa de inflação e o risco a que o investidor estará sujeito, sendo que quanto maior o risco, maior será o retorno esperado.
+
 As séries dos retornos diários para cada um dos activos é calculada de acordo com a seguinte formula:
 
 \begin{equation} 
@@ -251,16 +259,85 @@ A média dos retornos de cada um dos activos é calculada de acordo com a sua m�
   (\#eq:meanRet)
 \end{equation}  
 
-O desvio padrão representa a volatilidade, ou risco, associada ao activo. Considerando que essa volatilidade é calculada com base nos dados históricos e as formulas acima, então a estatística da amostra para o desvio padrão representa-se pela seguinte formulas:
+O retorno de um portfolio de activos financeiros será uma média ponderada do retorno dos activos individuais, de acordo com a seguinte equação
+
+\begin{equation} 
+    R_{p} = \sum_{i=1}^{N}(X_{i}R_{ij})
+  (\#eq:retp)
+\end{equation}
+onde $X_{i}$ representa a fracção investida no activo *i*.
+
+O desvio padrão representa a volatilidade, ou risco, associada ao activo. Considerando que essa volatilidade é calculada com base nos dados históricos e nas formulas acima, então a estatística da amostra para o desvio padrão representa-se pela seguinte formula:
 
 \begin{equation} 
   \hat{\sigma} = \sqrt\frac{\displaystyle\sum_{i=1}^n (R_i-\overline{R})^2}{n-1}
   (\#eq:estdesviopadrao)
 \end{equation} 
 
-A escolha do tamanho da amostra (n) deve ser grande o suficiente de modo a garantir uma melhor precisão nas estatísticas obtidas, sendo que neste caso devemos considerar que a volatilidade não é constante ao longo do tempo e que valores mais antigos podem não ser tão relevantes como os valores mais recentes. De acordo com [@Hull2018] esse valor deve ser compreendido entre 90 a 180 dias para a cotação de activos. 
+A variância para o portfolio é um pouco mais complicada a calcular do que o calculo para o retorno e para as variância individuais de cada um dos activos, como podemos verificar pela seguinte equação
 
-Para o calculo da volatilidade anual utiliza-se os número de dias de negociação, sendo considerado 252 dias por ano como valor de referência.
+\begin{equation} 
+  \sigma_{p}^{2} = \sum_{j=1}^{N}(X_{j}^{2}\sigma_{j}^{2})+\sum_{j=1}^{N}\sum_{k=1}^{N}(X_{j}X_{k}\sigma_{jk})
+  (\#eq:estdesviopadraop)
+\end{equation} 
+onde $k\neq j$. O termo $\sigma_{jk}$ designa-se por covariância representando o modo como 2 activos se movem conjuntamente, sendo o valor calculado do seguinte modo,
+
+\begin{equation} 
+  Cov(R_{i},R_{j}) = E([R_{i}-E(R_{i})][R_{j}-E(R_{j})])
+  (\#eq:covariancia)
+\end{equation} 
+
+Se todos os termos forem independentes, isto é, a covariância for igual a 0, então apenas se mantêm o primeiro termo/somátorio na equação\#ref(eq:estdesviopadraop).
+
+Quando se pretende interpretar o valor da covariância é prática comum utilizar o que se designa por coeficiente de correlação, sendo que o valor obtido varia entre -1 e +1, sendo que o -1 representa uma correlação negativa perfeita e o +1 uma correlação positiva perfeita. Se o valor for 0 então não existe relação linear entre as variáveis. De forma genérica podemos afirmar que a correlação mede a força da relação linear entre 2 variáveis, sendo a sua forma matemática $$\rho_{ij}=\frac{\sigma_{ij}}{\sigma_{i}\sigma_{j}}$$
+Aos incluir-mos mais activos no nosso portfolio estamos a diversificar o risco e a diminuir a variância esperada do portfolio. De acordo com @Goetzmann2014:
+\begin{spacing}{1}
+\begin{adjustwidth}{28.3464pt}{28.3464pt}\footnotesize
+"A contribuição para a variância da carteira da variância dos títulos individuais vai para zero à medida que N fica muito grande. No entanto, a contribuição dos termos de covariância aproxima-se do valor da covariância média conforme N aumenta.O risco individual dos activos pode ser diversificados, mas a contribuição para o risco total causado pelos termos de covariância não podem ser diversificados" (pp.56-57).
+\normalsize\end{adjustwidth}
+\end{spacing}
+\medskip
+Na (figura \@ref(fig:covusa)) podemos ver que a partir de um determinado número de activos, normalmente compreendido entre 15 e 20, a percentagem de risco que pode ser eliminada pela diversificação estabiliza.
+(ref:covusa) Evolução da covariância a medida que se aumenta os activos no portfolio.
+```{r, covusa, echo=FALSE, fig.cap="(ref:covusa)", out.width="60%"}
+knitr::include_graphics("image/covusa.png")
+```
+\FloatBarrier
+\centering 
+Fonte: [@Goetzmann2014, pp.58]
+
+\justifying
+\bigskip
+
+Com base no apresentado até agora, o que se propõe é optimizar um portfolio em que os activos que o constituem apresentem pesos de modo a minimizar o risco, ou seja, minimizar a variância total, sem a possibilidade de vendas a descoberto e de activo sem risco, determinando a carteira eficiente. O problema a que se propõe é minimizar  $\sigma_{p}^{2}$ de acordo com a equação \#ref(eq:estdesviopadraop), sujeito ás seguintes restrições:
+
+\begin{equation} 
+  \sum_{i=1}^{N}X_{i}\overline{R}_{i}=\overline{R}_{p}
+  (\#eq:und)
+\end{equation} 
+$$X_{i}\geq0$$ e $$\sum_{i=1}^{N}X_{i}=1$$
+O problema pode ser resolvido construindo a função Lagrangeana
+
+\begin{equation} 
+  \mathcal{L} = \sum_{j=1}^{N}\sum_{k=1}^{N}(X_{j}X_{k}\sigma_{jk})+\lambda_{1}(\overline{R}_{p}-\sum_{j=1}^{N}X_{j}\overline{R}_{j})+\lambda_{2}(1-\sum_{j=1}^{N}X_{j})
+  (\#eq:estdesviopadraop)
+\end{equation} 
+embora a sua resolução envolva normalmente métodos computacionais. 
+
+Desta forma, se considerar-mos a figura \@ref(fig:eficient) a fronteira eficiente para o conjunto de portfolios encontra-se entre o ponto II e o ponto III, sendo que de acordo com os pressupostos de minimização do risco o ponto referente a II é o que apresenta um menor risco na fronteira eficiente definida.
+
+(ref:eficient) Fronteira eficiente
+```{r, eficient, echo=FALSE, fig.cap="(ref:eficient)", out.width="60%"}
+knitr::include_graphics("image/eficient.png")
+```
+\FloatBarrier
+\centering 
+Fonte: [@invest, p.33]
+
+\justifying
+\medskip
+
+A definição e optimização de portfolios está sujeita a outras restrições que não serão aqui apresentadas, tais como custos de *trading*, custos de oportunidade ou custos associados a regulamentação e fiscalidade^[O artigo @Fabozzi2014 "60 Years of portfolio optimization:Practical challenges and current trends" aborda várias outras restrições na abordagem da optimização na média-variância proposta por Markowitz].
 
 ## Value at Risk
 
