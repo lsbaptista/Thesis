@@ -2,11 +2,13 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Função distribuição N(x)\relax }}{15}{figure.caption.9}%
 \contentsline {figure}{\numberline {1.2}{\ignorespaces Volatility Smile\relax }}{16}{figure.caption.10}%
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Evolução da covariância a medida que se aumenta os activos no portfolio.\relax }}{19}{figure.caption.11}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Evolução da covariância ao aumentar a diversificação no portfolio.\relax }}{19}{figure.caption.11}%
 \contentsline {figure}{\numberline {1.4}{\ignorespaces Fronteira eficiente\relax }}{20}{figure.caption.12}%
 \contentsline {figure}{\numberline {1.5}{\ignorespaces VaR com intervalo confiança 95\% e 99\%.\relax }}{22}{figure.caption.13}%
 \contentsline {figure}{\numberline {1.6}{\ignorespaces Kurtosis\relax }}{24}{figure.caption.14}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Empresas extraidas do Euro Stoxx 50\relax }}{28}{figure.caption.15}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Evolução da cotação nos últimos 2 anos\relax }}{29}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Evolução das cotações nos últimos 5 anos\relax }}{29}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Volatilidade nos últimos 4 anos\relax }}{31}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Teste a normalidade das distribuições\relax }}{32}{figure.caption.24}%

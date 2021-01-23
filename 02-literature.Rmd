@@ -298,7 +298,8 @@ Aos incluir-mos mais activos no nosso portfolio estamos a diversificar o risco e
 \end{spacing}
 \medskip
 Na (figura \@ref(fig:covusa)) podemos ver que a partir de um determinado número de activos, normalmente compreendido entre 15 e 20, a percentagem de risco que pode ser eliminada pela diversificação estabiliza.
-(ref:covusa) Evolução da covariância a medida que se aumenta os activos no portfolio.
+
+(ref:covusa) Evolução da covariância ao aumentar a diversificação no portfolio.
 ```{r, covusa, echo=FALSE, fig.cap="(ref:covusa)", out.width="60%"}
 knitr::include_graphics("image/covusa.png")
 ```

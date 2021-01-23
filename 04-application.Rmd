@@ -2,7 +2,7 @@
 \endgroup
 \newpage
 
-## Aplicação a dados do modelo
+## Introdução
 ```{r,include=FALSE}
 rm(list = ls())
 knitr::opts_chunk$set(tidy=FALSE, message = FALSE,warning =  FALSE,fig.align = "center",fig.show = "hold")
@@ -14,6 +14,8 @@ knitr::opts_chunk$set(tidy=FALSE, message = FALSE,warning =  FALSE,fig.align = "
 #install.packages("formatR")
 #install.packages("tidyquant")
 #install.packages("rugarch")
+#install.packages("ggfortify")
+library(ggfortify)
 library(tidyquant)
 library(rugarch)
 library(arsenal)
@@ -23,9 +25,10 @@ library(xlsx)
 library(tidyverse)
 ```
 
-A primeira fase consiste em extrair de forma aleatória 14 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na figura \@ref(fig:empresas).
+## Análise descritiva dos dados
+A primeira fase consiste em extrair de forma aleatória 4 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na figura \@ref(fig:empresas).
 
-```{r, empresas,echo=FALSE,fig.cap='Empresas extraidas do Euro Stoxx 50',out.width="80%"}
+```{r, empresas,echo=FALSE,fig.cap='Empresas extraidas do Euro Stoxx 50',out.width="100%"}
 knitr::include_graphics("image/cotacao.png")
 ```
 \FloatBarrier
@@ -38,10 +41,25 @@ Fonte: Elaboração própria.
 ```{r}
 #leitura de simbolos dos activos financeiros
 symbolsEU <- c("TEF.MC","UNA.AS",'GLE.PA',"AIR.PA")
-getSymbols(symbolsEU,src = "yahoo", from="2018-06-01", to="2020-06-02")
+getSymbols(symbolsEU,src = "yahoo", from="2016-06-01", to="2020-06-02")
 ```
 \normalsize
-```{r,cotacao,echo=FALSE, fig.cap='Evolução das cotações nos últimos 2 anos',fig.topcaption = TRUE,out.width = "40%"}
+
+```{r,echo=FALSE}
+gle<-tail(GLE.PA)
+gle <- knitr::kable(
+gle, caption = "Société Générale.Euronext Paris-25-05-2020/01-06-2020",
+booktabs = TRUE)
+kable_styling(gle, latex_options = c("hold_position","scale_down"), position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:https://finance.yahoo.com/
+
+\justifying
+\bigskip
+
+```{r,cotacao,echo=FALSE, fig.cap='Evolução das cotações nos últimos 5 anos',fig.topcaption = TRUE,out.width = "45%"}
 par(mfrow  = c(2,2))
   chartSeries(TEF.MC,theme = chartTheme("white"))
   chartSeries(UNA.AS,theme = chartTheme("white"))
@@ -55,155 +73,151 @@ Fonte: Elaboração própria.
 \justifying
 \bigskip
 
-Calculo do retorno diario logaritmico
-\scriptsize
-```{r include=FALSE}
-#adjustedPrices <- data.frame(cbind(TEF.MC$TEF.MC.Adjusted,UNA.AS$UNA.AS.Adjusted,GLE.PA$GLE.PA.Adjusted,ENEL.MI$ENEL.MI.Adjusted,BAYN.DE$BAYN.DE.Adjusted,DTE.DE$DTE.DE.Adjusted,ABI.BR$ABI.BR.Adjusted,DAI.DE$DAI.DE.Adjusted,ORA.PA$ORA.PA.Adjusted,SAN.PA$SAN.PA.Adjusted,AIR.PA$AIR.PA.Adjusted,ISP.MI$ISP.MI.Adjusted,AD.AS$AD.AS.Adjusted,ASML.AS$ASML.AS.Adjusted))
-
-#adjustedPrices <- na.omit(adjustedPrices)
-
-#returns <- na.omit(cbind(dailyReturn(Ad(TEF.MC),type ="log"),dailyReturn(Ad(UNA.AS),type ="log"),dailyReturn(Ad(GLE.PA),type ="log"),dailyReturn(Ad(ENEL.MI),type = "log"),dailyReturn(Ad(BAYN.DE),type = "log"),dailyReturn(Ad(DTE.DE),type = "log"),dailyReturn(Ad(ABI.BR),type = "log"),dailyReturn(Ad(DAI.DE),type = "log"),dailyReturn(Ad(ORA.PA),type = "log"),dailyReturn(Ad(SAN.PA),type = "log"),dailyReturn(Ad(AIR.PA),type = "log"),dailyReturn(Ad(ISP.MI),type = "log"),dailyReturn(Ad(AD.AS),type = "log"),dailyReturn(Ad(ASML.AS),type = "log")))
-
-#colnames(returns) <- c("TELEFONICA","UNILEVER","SOCGEN","BAYER","ENEL","DEUTSCHE TELEKOM","AB INBEV","DAIMLER","ORANGE","SANOFI","AIRBUS","INTESA","AHOLD","ASML")
-#head(returns)
-
-return <- CalculateReturns(GLE.PA$GLE.PA.Adjusted)
-view(return)
+```{r,echo=FALSE}
+newdata <- merge(TEF.MC$TEF.MC.Adjusted,UNA.AS$UNA.AS.Adjusted,GLE.PA$GLE.PA.Adjusted,AIR.PA$AIR.PA.Adjusted)
+newdata <- na.omit(newdata)
+adj <- tail(newdata)
+adj <- knitr::kable(
+adj, caption = "Cotações a preços ajustados-25-05-2020/01-06-2020",
+booktabs = TRUE)
+kable_styling(adj, latex_options = "hold_position", position = "center")
 ```
-\normalsize
-Correlação entre activos
-\scriptsize
-```{r, comment=""}
-#do not print hash
-#options(width = 70)
-#cor(returns)
+\FloatBarrier
+\centering 
+Fonte:https://finance.yahoo.com/
+
+\justifying
+\bigskip
+
+```{r, echo=FALSE}
+pt <-summary(as.data.frame(newdata))
+p <- knitr::kable(
+pt, caption = "Estatísticas das cotações",
+booktabs = TRUE)
+kable_styling(p, latex_options = "hold_position", position = "center")
 ```
-\normalsize
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
-\scriptsize
-```{r,out.width = "30%",fig.show="hold"}
-#par(mar = c(1,1,1,1))
-#plot(returns$TELEFONICA, main = "TEF.MC",col="red")
-#plot(returns$UNILEVER, main = "UNA.AS",col="red")
-#plot(returns$SOCGEN, main = "GLE.PA",col="red")
-#plot(returns$BAYER, main = "ENEL.MI",col="red")
-#plot(returns$ENEL, main = "BAYN.DE",col="red")
-#plot(returns$`DEUTSCHE TELEKOM`, main = "DTE.DE",col="red")
-#plot(returns$`AB INBEV`, main = "ABI.BR",col="red")
-#plot(returns$DAIMLER, main = "DAI.DE",col="red")
-#plot(returns$ORANGE, main = "ORA.PA",col="red")
-#plot(returns$SANOFI, main = "SAN.PA",col="red")
-#plot(returns$AIRBUS, main = "AIR.PA",col="red")
-#plot(returns$INTESA, main = "ISP.MI",col="red")
-#plot(returns$AHOLD, main = "AD.AS",col="red")
-#plot(returns$ASML, main = "ASML.AS",col="red")
- 
+\justifying
+\bigskip
+```{r,echo=FALSE}
+returns <- as.xts(data.frame(round(dailyReturn(newdata$TEF.MC.Adjusted,type="log"),4),round(dailyReturn(newdata$UNA.AS.Adjusted,type="log"),4),round(dailyReturn(newdata$GLE.PA.Adjusted,type="log"),4),round(dailyReturn(newdata$AIR.PA.Adjusted,type="log"),4)))
+returns <- returns[-1,]
+colnames(returns)<-c("TEF.RET","UNA.RET","GLE.RET","AIR.RET")
+ret <- tail(returns)
+retv <- knitr::kable(
+ret, caption = "Retornos logarítmicos diários-25-05-2020/01-06-2020",
+booktabs = TRUE)
+kable_styling(retv, latex_options = "hold_position", position = "center")
 ```
-\normalsize
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
-\scriptsize
-```{r,out.width = "30%",fig.show="hold"}
-
- #par(mar = c(2,2,2,2))
- #hist(returns$TELEFONICA,probability=T, main="TELEFONICA - daily.
-      #returns",xlab="Approximately normally distributed data",breaks=100)
- #lines(density(na.omit(returns$TELEFONICA)),col=2)
- #curve(dnorm(x,0,0.01640906), from = -0.15,to=0.15, col='blue',add = TRUE)
- #qqnorm(returns$TELEFONICA,main="QQ plot of normal data",pch=19)
- #qqline(returns$TELEFONICA)
-
-return<-return[-1]
-hist(return,breaks=100)
-chart.Histogram(return,methods = c("add.density","add.normal"),colorset = c("blue","green","red"))
-chartSeries(return,theme="white")
+\justifying
+\bigskip
+```{r, echo=FALSE}
+retcor <- cor(returns)
+retcork <- knitr::kable(
+retcor, caption = "Matrix correlação dos retornos",
+booktabs = TRUE)
+kable_styling(retcork , latex_options = "hold_position", position = "center")
 ```
-\normalsize
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
-\scriptsize
-```{r,class.output="bg-warning"}
- #TELTestNOR <- shapiro.test(as.numeric(returns$TELEFONICA))
- #TELSha <- matrix(c(TELTestNOR$statistic,TELTestNOR$p.value),ncol = 2)
- #colnames(TELSha) <- c("Estatistica","p-value")
- #rownames(TELSha) <- c("Shapiro-Wilk normality test")
- #TELSha <- as.table(TELSha)
- #d <- knitr::kable(
-  #TELSha, caption = 'Empresas extraidas do Euro Stoxx 50',
-  #booktabs = TRUE
-#)
-#kable_styling(d, latex_options = "hold_position", position = "center")
+\justifying
+\bigskip
+```{r, echo=FALSE}
+retannual <- function(x) {  
+  Return.annualized(x,geometric = FALSE)}
+retvol <- function(x) {  
+  StdDev.annualized(x,geometric = FALSE)}
+
+ETFStats <- do.call(data.frame, 
+                    list("média anual"= round(apply(returns, 2,retannual),6),
+                         "volatilidade anual"= round(apply(returns, 2, retvol),6),
+                         mediana = round(apply(returns, 2, median),6),
+                         min = round(apply(returns, 2, min),6),
+                         max = round(apply(returns, 2, max),6)))
+ETFStats<-t(ETFStats)
+ETFStatsk<- knitr::kable(
+ETFStats, caption = "Estatísticas dos retornos",
+booktabs = TRUE)
+kable_styling(ETFStatsk , latex_options = "hold_position", position = "center")
 ```
-\normalsize
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
-Annualized volatility
-\scriptsize
-```{r,include=FALSE}
-sqrt(252)*sd(return)
-sqrt(252)*sd(return["2020"])
-
-chart.RollingPerformance(R=return,width = 22,FUN = "sd.annualized",scale=252,main = 
-                           "GLE monthly rolling volatility")
-chart.RollingPerformance(R=return,width = 252,FUN = "sd.annualized",scale=252,main = 
-                           "GLE monthly rolling volatility")
+\justifying
+\bigskip
+```{r,volatilidade,echo=FALSE, fig.cap='Volatilidade nos últimos 4 anos',fig.topcaption = TRUE,out.width = "45%"}
+par(mfrow  = c(2,2))
+  autoplot(returns$TEF.RET,ts.colour = 'darkgreen') + ggtitle("TELEFÓNICA") + 
+  ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
+  autoplot(returns$UNA.RET,ts.colour = 'darkgreen') + ggtitle("UNILEVER") + 
+  ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
+  autoplot(returns$GLE.RET,ts.colour = 'darkgreen') + ggtitle("SOCIÉTÉ GÉNÉRALE") + 
+  ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
+  autoplot(returns$AIR.RET,ts.colour = 'darkgreen') + ggtitle("AIRBUS") + 
+  ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
 ```
-\normalsize
-Como se pode verificar, o desvio padrão da empresa telecomunicação "Telefonica" é 
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
-sGARCH model with contant mean
-```{r}
-
-s<-ugarchspec(mean.model = list(armaOrder=c(0,0)),variance.model = list(model="sGARCH"),
-              distribution.model = "norm")
-m<-ugarchfit(data=return,spec=s)
-m
-plot(m,which = "all")
-f<-ugarchforecast(fitORspec = m,n.ahead = 60)
-plot(fitted(f))
-plot(sigma(f))
+\justifying
+\bigskip
+```{r,teste,echo=FALSE, fig.cap='Teste a normalidade das distribuições',fig.topcaption = TRUE,out.width = "100%"}
+par(mfrow  = c(2,2))
+  qqnorm(returns$TEF.RET,main="TELEFÓNICA",pch=14)
+  qqline(returns$TEF.RET)
+  qqnorm(returns$UNA.RET,main="UNILEVER",pch=14)
+  qqline(returns$UNA.RET)
+  qqnorm(returns$GLE.RET,main="SOCIÉTÉ GÉNÉRALE",pch=14)
+  qqline(returns$GLE.RET)
+  qqnorm(returns$AIR.RET,main="AIRBUS",pch=14)
+  qqline(returns$AIR.RET)
 ```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
-
-Application example - potfolio allocation
-```{r}
-v<-sqrt(252)*sigma(m)
-w<-0.05/v
-plot(merge(v,w),multi.panel=TRUE)
-
-
+\justifying
+\bigskip
+```{r,echo=FALSE}
+lshap<- lapply(as.data.frame(returns), shapiro.test)
+lres <- sapply(lshap, "[", c("statistic","p.value"))
+lresk<- knitr::kable(
+lres, caption = "Teste normalidade Shapiro-Wilk",
+booktabs = TRUE)
+kable_styling(lresk , latex_options = c("hold_position","scale_down"), position = "center")
 ```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
-GARCH with sstd
+\justifying
+\bigskip
 
-```{r}
-s<-ugarchspec(mean.model = list(armaOrder=c(0,0)),variance.model = list(model="sGARCH"),
-              distribution.model = "sstd")
-m<-ugarchfit(data=return,spec=s)
-m
-plot(m,which = "all")
-f<-ugarchforecast(fitORspec = m,n.ahead = 60)
-plot(fitted(f))
-plot(sigma(f))
-```
-GJR-GARCH
-```{r}
-s<-ugarchspec(mean.model = list(armaOrder=c(0,0)),variance.model = list(model="gjrGARCH"),
-              distribution.model = "sstd")
-m<-ugarchfit(data=return,spec=s)
-m
-plot(m,which = "all")
-f<-ugarchforecast(fitORspec = m,n.ahead = 60)
-plot(fitted(f))
-plot(sigma(f))
-```
-GJR-GARCH in mean
-```{r}
-s<-ugarchspec(mean.model = list(armaOrder=c(0,0),archm=T,archpow=2),variance.model = list(model="sGARCH")
-              ,distribution.model = "sstd")
-m<-ugarchfit(data=return,spec=s)
-m
-plot(m,which = "all")
-f<-ugarchforecast(fitORspec = m,n.ahead = 60)
-plot(fitted(f))
-plot(sigma(f))
-```
+## EWMA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

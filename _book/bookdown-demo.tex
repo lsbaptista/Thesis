@@ -640,13 +640,14 @@ Aos incluir-mos mais activos no nosso portfolio estamos a diversificar o risco e
 Na (figura \ref{fig:covusa}) podemos ver que a partir de um determinado número de activos, normalmente compreendido entre 15 e 20, a percentagem de risco que pode ser eliminada pela diversificação estabiliza.
 
 
+
 \begin{figure}
 
 {\centering \includegraphics[width=0.6\linewidth]{image/covusa} 
 
 }
 
-\caption{Evolução da covariância a medida que se aumenta os activos no portfolio.}\label{fig:covusa}
+\caption{Evolução da covariância ao aumentar a diversificação no portfolio.}\label{fig:covusa}
 \end{figure}
 \FloatBarrier
 \centering
@@ -819,11 +820,11 @@ We describe our methods in this chapter.
 \hypertarget{aplicauxe7uxe3o-a-dados-do-modelo-1}{%
 \section{Aplicação a dados do modelo}\label{aplicauxe7uxe3o-a-dados-do-modelo-1}}
 
-A primeira fase consiste em extrair de forma aleatória 14 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na figura \ref{fig:empresas}.
+A primeira fase consiste em extrair de forma aleatória 4 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na figura \ref{fig:empresas}.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.8\linewidth]{image/cotacao} 
+{\centering \includegraphics[width=1\linewidth]{image/cotacao} 
 
 }
 
@@ -842,7 +843,7 @@ Fonte: Elaboração própria.
 \begin{Highlighting}[]
 \CommentTok{\#leitura de simbolos dos activos financeiros}
 \NormalTok{symbolsEU \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"TEF.MC"}\NormalTok{,}\StringTok{"UNA.AS"}\NormalTok{,}\StringTok{\textquotesingle{}GLE.PA\textquotesingle{}}\NormalTok{,}\StringTok{"AIR.PA"}\NormalTok{)}
-\KeywordTok{getSymbols}\NormalTok{(symbolsEU,}\DataTypeTok{src =} \StringTok{"yahoo"}\NormalTok{, }\DataTypeTok{from=}\StringTok{"2018{-}06{-}01"}\NormalTok{, }\DataTypeTok{to=}\StringTok{"2020{-}06{-}02"}\NormalTok{)}
+\KeywordTok{getSymbols}\NormalTok{(symbolsEU,}\DataTypeTok{src =} \StringTok{"yahoo"}\NormalTok{, }\DataTypeTok{from=}\StringTok{"2016{-}06{-}01"}\NormalTok{, }\DataTypeTok{to=}\StringTok{"2020{-}06{-}02"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -851,27 +852,42 @@ Fonte: Elaboração própria.
 \end{verbatim}
 
 \normalsize
-\scriptsize
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow  =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-  \KeywordTok{chartSeries}\NormalTok{(TEF.MC)}
-  \KeywordTok{chartSeries}\NormalTok{(UNA.AS)}
-  \KeywordTok{chartSeries}\NormalTok{(GLE.PA)}
-  \KeywordTok{chartSeries}\NormalTok{(AIR.PA)}
-\end{Highlighting}
-\end{Shaded}
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-4}Société Générale.Euronext Paris-25-05-2020/01-06-2020}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{rrrrrr}
+\toprule
+GLE.PA.Open & GLE.PA.High & GLE.PA.Low & GLE.PA.Close & GLE.PA.Volume & GLE.PA.Adjusted\\
+\midrule
+12.676 & 12.688 & 12.306 & 12.544 & 4479353 & 10.344\\
+12.750 & 13.490 & 12.700 & 13.424 & 9611549 & 13.424\\
+13.486 & 14.806 & 13.424 & 14.304 & 15167413 & 14.304\\
+14.546 & 14.722 & 13.692 & 13.916 & 8783657 & 13.916\\
+13.640 & 13.954 & 13.190 & 13.232 & 9592033 & 13.232\\
+\addlinespace
+13.712 & 13.964 & 13.542 & 13.820 & 4229388 & 13.820\\
+\bottomrule
+\end{tabular}}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:\url{https://finance.yahoo.com/}
+
+\justifying
+\bigskip
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.4\linewidth]{bookdown-demo_files/figure-latex/cotacao-1} \includegraphics[width=0.4\linewidth]{bookdown-demo_files/figure-latex/cotacao-2} \includegraphics[width=0.4\linewidth]{bookdown-demo_files/figure-latex/cotacao-3} \includegraphics[width=0.4\linewidth]{bookdown-demo_files/figure-latex/cotacao-4} 
+{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-4} 
 
 }
 
-\caption{Evolução da cotação nos últimos 2 anos}\label{fig:cotacao}
+\caption{Evolução das cotações nos últimos 5 anos}\label{fig:cotacao}
 \end{figure}
-\normalsize
 \FloatBarrier
 \centering
 
@@ -880,639 +896,178 @@ Fonte: Elaboração própria.
 \justifying
 \bigskip
 
-Calculo do retorno diario logaritmico
-\scriptsize
+\begin{table}[!h]
 
-\normalsize
+\caption{\label{tab:unnamed-chunk-5}Cotações a preços ajustados-25-05-2020/01-06-2020}
+\centering
+\begin{tabular}[t]{rrrr}
+\toprule
+TEF.MC.Adjusted & UNA.AS.Adjusted & GLE.PA.Adjusted & AIR.PA.Adjusted\\
+\midrule
+3.849220 & 43.79641 & 10.344 & 58.64\\
+3.699806 & 43.32800 & 13.424 & 62.81\\
+3.787268 & 44.07941 & 14.304 & 61.13\\
+3.952170 & 45.11382 & 13.916 & 60.12\\
+3.863797 & 45.36754 & 13.232 & 56.70\\
+\addlinespace
+4.008655 & 45.53343 & 13.820 & 59.44\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
 
-Correlação entre activos
-\scriptsize
+Fonte:\url{https://finance.yahoo.com/}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#do not print hash}
-\CommentTok{\#options(width = 70)}
-\CommentTok{\#cor(returns)}
-\end{Highlighting}
-\end{Shaded}
+\justifying
+\bigskip
 
-\normalsize
+\begin{table}[!h]
 
-\scriptsize
+\caption{\label{tab:unnamed-chunk-6}Estatísticas das cotações}
+\centering
+\begin{tabular}[t]{lllll}
+\toprule
+  & TEF.MC.Adjusted & UNA.AS.Adjusted & GLE.PA.Adjusted & AIR.PA.Adjusted\\
+\midrule
+ & Min.   :3.355 & Min.   :31.80 & Min.   : 9.702 & Min.   : 44.66\\
+ & 1st Qu.:6.094 & 1st Qu.:41.02 & 1st Qu.:20.750 & 1st Qu.: 64.72\\
+ & Median :6.455 & Median :43.98 & Median :25.883 & Median : 85.59\\
+ & Mean   :6.373 & Mean   :43.52 & Mean   :25.595 & Mean   : 85.73\\
+ & 3rd Qu.:6.790 & 3rd Qu.:46.21 & 3rd Qu.:31.359 & 3rd Qu.:108.10\\
+\addlinespace
+ & Max.   :8.089 & Max.   :54.82 & Max.   :35.649 & Max.   :134.60\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#par(mar = c(1,1,1,1))}
-\CommentTok{\#plot(returns$TELEFONICA, main = "TEF.MC",col="red")}
-\CommentTok{\#plot(returns$UNILEVER, main = "UNA.AS",col="red")}
-\CommentTok{\#plot(returns$SOCGEN, main = "GLE.PA",col="red")}
-\CommentTok{\#plot(returns$BAYER, main = "ENEL.MI",col="red")}
-\CommentTok{\#plot(returns$ENEL, main = "BAYN.DE",col="red")}
-\CommentTok{\#plot(returns$\textasciigrave{}DEUTSCHE TELEKOM\textasciigrave{}, main = "DTE.DE",col="red")}
-\CommentTok{\#plot(returns$\textasciigrave{}AB INBEV\textasciigrave{}, main = "ABI.BR",col="red")}
-\CommentTok{\#plot(returns$DAIMLER, main = "DAI.DE",col="red")}
-\CommentTok{\#plot(returns$ORANGE, main = "ORA.PA",col="red")}
-\CommentTok{\#plot(returns$SANOFI, main = "SAN.PA",col="red")}
-\CommentTok{\#plot(returns$AIRBUS, main = "AIR.PA",col="red")}
-\CommentTok{\#plot(returns$INTESA, main = "ISP.MI",col="red")}
-\CommentTok{\#plot(returns$AHOLD, main = "AD.AS",col="red")}
-\CommentTok{\#plot(returns$ASML, main = "ASML.AS",col="red")}
-\end{Highlighting}
-\end{Shaded}
+Fonte:Elaboração própria.
 
-\normalsize
+\justifying
+\bigskip
+\begin{table}[!h]
 
-\scriptsize
+\caption{\label{tab:unnamed-chunk-7}Retornos logarítmicos diários-25-05-2020/01-06-2020}
+\centering
+\begin{tabular}[t]{rrrr}
+\toprule
+TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+\midrule
+0.0300 & 0.0187 & 0.0083 & 0.0817\\
+-0.0396 & -0.0108 & 0.2606 & 0.0687\\
+0.0234 & 0.0172 & 0.0635 & -0.0271\\
+0.0426 & 0.0232 & -0.0275 & -0.0167\\
+-0.0226 & 0.0056 & -0.0504 & -0.0586\\
+\addlinespace
+0.0368 & 0.0036 & 0.0435 & 0.0472\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
 
-\begin{Shaded}
-\begin{Highlighting}[]
- \CommentTok{\#par(mar = c(2,2,2,2))}
- \CommentTok{\#hist(returns$TELEFONICA,probability=T, main="TELEFONICA {-} daily.}
-      \CommentTok{\#returns",xlab="Approximately normally distributed data",breaks=100)}
- \CommentTok{\#lines(density(na.omit(returns$TELEFONICA)),col=2)}
- \CommentTok{\#curve(dnorm(x,0,0.01640906), from = {-}0.15,to=0.15, col=\textquotesingle{}blue\textquotesingle{},add = TRUE)}
- \CommentTok{\#qqnorm(returns$TELEFONICA,main="QQ plot of normal data",pch=19)}
- \CommentTok{\#qqline(returns$TELEFONICA)}
+Fonte:Elaboração própria.
 
-\NormalTok{return\textless{}{-}return[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}
-\KeywordTok{hist}\NormalTok{(return,}\DataTypeTok{breaks=}\DecValTok{100}\NormalTok{)}
-\KeywordTok{chart.Histogram}\NormalTok{(return,}\DataTypeTok{methods =} \KeywordTok{c}\NormalTok{(}\StringTok{"add.density"}\NormalTok{,}\StringTok{"add.normal"}\NormalTok{),}\DataTypeTok{colorset =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{))}
-\KeywordTok{chartSeries}\NormalTok{(return,}\DataTypeTok{theme=}\StringTok{"white"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\justifying
+\bigskip
+\begin{table}[!h]
 
-\begin{center}\includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-7-1} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-7-2} \includegraphics[width=0.3\linewidth]{bookdown-demo_files/figure-latex/unnamed-chunk-7-3} \end{center}
-\normalsize
+\caption{\label{tab:unnamed-chunk-8}Matrix correlação dos retornos}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+\midrule
+TEF.RET & 1.0000000 & 0.4095170 & 0.5416327 & 0.3148413\\
+UNA.RET & 0.4095170 & 1.0000000 & 0.2044202 & 0.2571136\\
+GLE.RET & 0.5416327 & 0.2044202 & 1.0000000 & 0.5409838\\
+AIR.RET & 0.3148413 & 0.2571136 & 0.5409838 & 1.0000000\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
 
-\scriptsize
+Fonte:Elaboração própria.
 
-\begin{Shaded}
-\begin{Highlighting}[]
- \CommentTok{\#TELTestNOR \textless{}{-} shapiro.test(as.numeric(returns$TELEFONICA))}
- \CommentTok{\#TELSha \textless{}{-} matrix(c(TELTestNOR$statistic,TELTestNOR$p.value),ncol = 2)}
- \CommentTok{\#colnames(TELSha) \textless{}{-} c("Estatistica","p{-}value")}
- \CommentTok{\#rownames(TELSha) \textless{}{-} c("Shapiro{-}Wilk normality test")}
- \CommentTok{\#TELSha \textless{}{-} as.table(TELSha)}
- \CommentTok{\#d \textless{}{-} knitr::kable(}
-  \CommentTok{\#TELSha, caption = \textquotesingle{}Empresas extraidas do Euro Stoxx 50\textquotesingle{},}
-  \CommentTok{\#booktabs = TRUE}
-\CommentTok{\#)}
-\CommentTok{\#kable\_styling(d, latex\_options = "hold\_position", position = "center")}
-\end{Highlighting}
-\end{Shaded}
+\justifying
+\bigskip
+\begin{table}[!h]
 
-\normalsize
+\caption{\label{tab:unnamed-chunk-9}Estatísticas dos retornos}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+\midrule
+média.anual & -0.127432 & 0.065727 & -0.140809 & 0.035468\\
+volatilidade.anual & 0.269116 & 0.206205 & 0.406037 & 0.380514\\
+mediana & -0.000500 & 0.000000 & -0.000400 & 0.000400\\
+min & -0.175800 & -0.074400 & -0.230300 & -0.250600\\
+max & 0.163800 & 0.116200 & 0.260600 & 0.186200\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
 
-Annualized volatility
-\scriptsize
+Fonte:Elaboração própria.
 
-\normalsize
+\justifying
+\bigskip
+\begin{figure}
 
-Como se pode verificar, o desvio padrão da empresa telecomunicação ``Telefonica'' é
+{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-4} 
 
-sGARCH model with contant mean
+}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"sGARCH"}\NormalTok{),}
-              \DataTypeTok{distribution.model =} \StringTok{"norm"}\NormalTok{)}
-\NormalTok{m\textless{}{-}}\KeywordTok{ugarchfit}\NormalTok{(}\DataTypeTok{data=}\NormalTok{return,}\DataTypeTok{spec=}\NormalTok{s)}
-\NormalTok{m}
-\end{Highlighting}
-\end{Shaded}
+\caption{Volatilidade nos últimos 4 anos}\label{fig:volatilidade}
+\end{figure}
+\FloatBarrier
+\centering
 
-\begin{verbatim}
-## 
-## *---------------------------------*
-## *          GARCH Model Fit        *
-## *---------------------------------*
-## 
-## Conditional Variance Dynamics    
-## -----------------------------------
-## GARCH Model  : sGARCH(1,1)
-## Mean Model   : ARFIMA(0,0,0)
-## Distribution : norm 
-## 
-## Optimal Parameters
-## ------------------------------------
-##         Estimate  Std. Error   t value Pr(>|t|)
-## mu     -0.000009    0.000683 -0.012546  0.98999
-## omega   0.000006    0.000005  1.127051  0.25972
-## alpha1  0.131187    0.021268  6.168232  0.00000
-## beta1   0.867813    0.024966 34.760017  0.00000
-## 
-## Robust Standard Errors:
-##         Estimate  Std. Error  t value Pr(>|t|)
-## mu     -0.000009    0.000795 -0.01079 0.991391
-## omega   0.000006    0.000020  0.29634 0.766968
-## alpha1  0.131187    0.047271  2.77524 0.005516
-## beta1   0.867813    0.094008  9.23122 0.000000
-## 
-## LogLikelihood : 1277.896 
-## 
-## Information Criteria
-## ------------------------------------
-##                     
-## Akaike       -4.9957
-## Bayes        -4.9625
-## Shibata      -4.9958
-## Hannan-Quinn -4.9826
-## 
-## Weighted Ljung-Box Test on Standardized Residuals
-## ------------------------------------
-##                         statistic p-value
-## Lag[1]                      6.528 0.01062
-## Lag[2*(p+q)+(p+q)-1][2]     6.575 0.01547
-## Lag[4*(p+q)+(p+q)-1][5]     8.503 0.02207
-## d.o.f=0
-## H0 : No serial correlation
-## 
-## Weighted Ljung-Box Test on Standardized Squared Residuals
-## ------------------------------------
-##                         statistic p-value
-## Lag[1]                    0.02608  0.8717
-## Lag[2*(p+q)+(p+q)-1][5]   0.39239  0.9730
-## Lag[4*(p+q)+(p+q)-1][9]   2.42605  0.8485
-## d.o.f=2
-## 
-## Weighted ARCH LM Tests
-## ------------------------------------
-##             Statistic Shape Scale P-Value
-## ARCH Lag[3]   0.05388 0.500 2.000  0.8164
-## ARCH Lag[5]   0.72455 1.440 1.667  0.8160
-## ARCH Lag[7]   3.01402 2.315 1.543  0.5109
-## 
-## Nyblom stability test
-## ------------------------------------
-## Joint Statistic:  1.2194
-## Individual Statistics:              
-## mu     0.54062
-## omega  0.34514
-## alpha1 0.06844
-## beta1  0.11594
-## 
-## Asymptotic Critical Values (10% 5% 1%)
-## Joint Statistic:          1.07 1.24 1.6
-## Individual Statistic:     0.35 0.47 0.75
-## 
-## Sign Bias Test
-## ------------------------------------
-##                    t-value   prob sig
-## Sign Bias           0.9045 0.3662    
-## Negative Sign Bias  0.2516 0.8015    
-## Positive Sign Bias  0.3778 0.7057    
-## Joint Effect        0.8416 0.8395    
-## 
-## 
-## Adjusted Pearson Goodness-of-Fit Test:
-## ------------------------------------
-##   group statistic p-value(g-1)
-## 1    20     31.33      0.03710
-## 2    30     36.47      0.16026
-## 3    40     57.53      0.02817
-## 4    50     66.67      0.04727
-## 
-## 
-## Elapsed time : 0.107712
-\end{verbatim}
+Fonte:Elaboração própria.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(m,}\DataTypeTok{which =} \StringTok{"all"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\justifying
+\bigskip
+\begin{figure}
 
-\begin{verbatim}
-## 
-## please wait...calculating quantiles...
-\end{verbatim}
+{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/teste-1} 
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{f\textless{}{-}}\KeywordTok{ugarchforecast}\NormalTok{(}\DataTypeTok{fitORspec =}\NormalTok{ m,}\DataTypeTok{n.ahead =} \DecValTok{60}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{fitted}\NormalTok{(f))}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{sigma}\NormalTok{(f))}
-\end{Highlighting}
-\end{Shaded}
+}
 
-\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-10-1} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-10-2} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-10-3} \end{center}
+\caption{Teste a normalidade das distribuições}\label{fig:teste}
+\end{figure}
+\FloatBarrier
+\centering
 
-Application example - potfolio allocation
+Fonte:Elaboração própria.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{v\textless{}{-}}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{252}\NormalTok{)}\OperatorTok{*}\KeywordTok{sigma}\NormalTok{(m)}
-\NormalTok{w\textless{}{-}}\FloatTok{0.05}\OperatorTok{/}\NormalTok{v}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{merge}\NormalTok{(v,w),}\DataTypeTok{multi.panel=}\OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\justifying
+\bigskip
+\begin{table}[!h]
 
-\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-11-1} \end{center}
+\caption{\label{tab:unnamed-chunk-10}Shapiro-Wilk normality test}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lllll}
+\toprule
+  & TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+\midrule
+statistic & c(W = 0.80635804881946) & c(W = 0.91104077495707) & c(W = 0.779854033139441) & c(W = 0.781489153650026)\\
+p.value & 3.00697610665204e-33 & 5.71248039626033e-24 & 6.22273069135129e-35 & 7.81720129292387e-35\\
+\bottomrule
+\end{tabular}}
+\end{table}
+\FloatBarrier
+\centering
 
-GARCH with sstd
+Fonte:Elaboração própria.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"sGARCH"}\NormalTok{),}
-              \DataTypeTok{distribution.model =} \StringTok{"sstd"}\NormalTok{)}
-\NormalTok{m\textless{}{-}}\KeywordTok{ugarchfit}\NormalTok{(}\DataTypeTok{data=}\NormalTok{return,}\DataTypeTok{spec=}\NormalTok{s)}
-\NormalTok{m}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## *---------------------------------*
-## *          GARCH Model Fit        *
-## *---------------------------------*
-## 
-## Conditional Variance Dynamics    
-## -----------------------------------
-## GARCH Model  : sGARCH(1,1)
-## Mean Model   : ARFIMA(0,0,0)
-## Distribution : sstd 
-## 
-## Optimal Parameters
-## ------------------------------------
-##         Estimate  Std. Error  t value Pr(>|t|)
-## mu      -0.00028    0.000718 -0.38937 0.697004
-## omega    0.00001    0.000007  1.43216 0.152098
-## alpha1   0.14945    0.037597  3.97498 0.000070
-## beta1    0.84955    0.034397 24.69842 0.000000
-## skew     1.00637    0.059294 16.97256 0.000000
-## shape    4.58152    0.976792  4.69037 0.000003
-## 
-## Robust Standard Errors:
-##         Estimate  Std. Error  t value Pr(>|t|)
-## mu      -0.00028    0.000828 -0.33741 0.735811
-## omega    0.00001    0.000010  1.03543 0.300467
-## alpha1   0.14945    0.050660  2.94995 0.003178
-## beta1    0.84955    0.040648 20.90043 0.000000
-## skew     1.00637    0.048778 20.63142 0.000000
-## shape    4.58152    1.315381  3.48304 0.000496
-## 
-## LogLikelihood : 1308.308 
-## 
-## Information Criteria
-## ------------------------------------
-##                     
-## Akaike       -5.1071
-## Bayes        -5.0573
-## Shibata      -5.1074
-## Hannan-Quinn -5.0876
-## 
-## Weighted Ljung-Box Test on Standardized Residuals
-## ------------------------------------
-##                         statistic p-value
-## Lag[1]                      6.108 0.01346
-## Lag[2*(p+q)+(p+q)-1][2]     6.150 0.02006
-## Lag[4*(p+q)+(p+q)-1][5]     7.936 0.03057
-## d.o.f=0
-## H0 : No serial correlation
-## 
-## Weighted Ljung-Box Test on Standardized Squared Residuals
-## ------------------------------------
-##                         statistic p-value
-## Lag[1]                    0.03767  0.8461
-## Lag[2*(p+q)+(p+q)-1][5]   0.35938  0.9771
-## Lag[4*(p+q)+(p+q)-1][9]   2.61582  0.8203
-## d.o.f=2
-## 
-## Weighted ARCH LM Tests
-## ------------------------------------
-##             Statistic Shape Scale P-Value
-## ARCH Lag[3]   0.06827 0.500 2.000  0.7939
-## ARCH Lag[5]   0.61425 1.440 1.667  0.8494
-## ARCH Lag[7]   3.23445 2.315 1.543  0.4704
-## 
-## Nyblom stability test
-## ------------------------------------
-## Joint Statistic:  2.6829
-## Individual Statistics:              
-## mu     0.13510
-## omega  0.36284
-## alpha1 0.10539
-## beta1  0.21358
-## skew   0.03349
-## shape  0.13456
-## 
-## Asymptotic Critical Values (10% 5% 1%)
-## Joint Statistic:          1.49 1.68 2.12
-## Individual Statistic:     0.35 0.47 0.75
-## 
-## Sign Bias Test
-## ------------------------------------
-##                    t-value   prob sig
-## Sign Bias           0.8638 0.3881    
-## Negative Sign Bias  0.2443 0.8071    
-## Positive Sign Bias  0.3225 0.7472    
-## Joint Effect        0.7666 0.8574    
-## 
-## 
-## Adjusted Pearson Goodness-of-Fit Test:
-## ------------------------------------
-##   group statistic p-value(g-1)
-## 1    20     12.35       0.8700
-## 2    30     20.24       0.8855
-## 3    40     23.80       0.9736
-## 4    50     36.08       0.9151
-## 
-## 
-## Elapsed time : 0.1366351
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(m,}\DataTypeTok{which =} \StringTok{"all"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## please wait...calculating quantiles...
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{f\textless{}{-}}\KeywordTok{ugarchforecast}\NormalTok{(}\DataTypeTok{fitORspec =}\NormalTok{ m,}\DataTypeTok{n.ahead =} \DecValTok{60}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{fitted}\NormalTok{(f))}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{sigma}\NormalTok{(f))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-12-1} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-12-2} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-12-3} \end{center}
-
-GJR-GARCH
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"gjrGARCH"}\NormalTok{),}
-              \DataTypeTok{distribution.model =} \StringTok{"sstd"}\NormalTok{)}
-\NormalTok{m\textless{}{-}}\KeywordTok{ugarchfit}\NormalTok{(}\DataTypeTok{data=}\NormalTok{return,}\DataTypeTok{spec=}\NormalTok{s)}
-\NormalTok{m}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## *---------------------------------*
-## *          GARCH Model Fit        *
-## *---------------------------------*
-## 
-## Conditional Variance Dynamics    
-## -----------------------------------
-## GARCH Model  : gjrGARCH(1,1)
-## Mean Model   : ARFIMA(0,0,0)
-## Distribution : sstd 
-## 
-## Optimal Parameters
-## ------------------------------------
-##         Estimate  Std. Error  t value Pr(>|t|)
-## mu     -0.000455    0.000632 -0.71985 0.471618
-## omega   0.000010    0.000010  1.00731 0.313786
-## alpha1  0.052271    0.047765  1.09434 0.273804
-## beta1   0.866206    0.020314 42.64006 0.000000
-## gamma1  0.160828    0.050032  3.21449 0.001307
-## skew    1.002864    0.058111 17.25763 0.000000
-## shape   4.341634    0.525640  8.25971 0.000000
-## 
-## Robust Standard Errors:
-##         Estimate  Std. Error  t value Pr(>|t|)
-## mu     -0.000455    0.001203 -0.37810 0.705357
-## omega   0.000010    0.000027  0.39059 0.696103
-## alpha1  0.052271    0.144235  0.36240 0.717052
-## beta1   0.866206    0.054682 15.84071 0.000000
-## gamma1  0.160828    0.102882  1.56323 0.117998
-## skew    1.002864    0.061938 16.19138 0.000000
-## shape   4.341634    1.668031  2.60285 0.009245
-## 
-## LogLikelihood : 1311.898 
-## 
-## Information Criteria
-## ------------------------------------
-##                     
-## Akaike       -5.1172
-## Bayes        -5.0591
-## Shibata      -5.1176
-## Hannan-Quinn -5.0945
-## 
-## Weighted Ljung-Box Test on Standardized Residuals
-## ------------------------------------
-##                         statistic p-value
-## Lag[1]                      6.131 0.01328
-## Lag[2*(p+q)+(p+q)-1][2]     6.134 0.02026
-## Lag[4*(p+q)+(p+q)-1][5]     7.593 0.03715
-## d.o.f=0
-## H0 : No serial correlation
-## 
-## Weighted Ljung-Box Test on Standardized Squared Residuals
-## ------------------------------------
-##                         statistic p-value
-## Lag[1]                  0.0001617  0.9899
-## Lag[2*(p+q)+(p+q)-1][5] 0.3918931  0.9730
-## Lag[4*(p+q)+(p+q)-1][9] 1.5681695  0.9498
-## d.o.f=2
-## 
-## Weighted ARCH LM Tests
-## ------------------------------------
-##             Statistic Shape Scale P-Value
-## ARCH Lag[3]    0.1559 0.500 2.000  0.6929
-## ARCH Lag[5]    0.6961 1.440 1.667  0.8247
-## ARCH Lag[7]    1.9495 2.315 1.543  0.7280
-## 
-## Nyblom stability test
-## ------------------------------------
-## Joint Statistic:  4.2582
-## Individual Statistics:              
-## mu     0.20158
-## omega  0.43385
-## alpha1 0.08691
-## beta1  0.32000
-## gamma1 0.39704
-## skew   0.04049
-## shape  0.23487
-## 
-## Asymptotic Critical Values (10% 5% 1%)
-## Joint Statistic:          1.69 1.9 2.35
-## Individual Statistic:     0.35 0.47 0.75
-## 
-## Sign Bias Test
-## ------------------------------------
-##                    t-value   prob sig
-## Sign Bias          0.84322 0.3995    
-## Negative Sign Bias 0.20425 0.8382    
-## Positive Sign Bias 0.06488 0.9483    
-## Joint Effect       1.26462 0.7376    
-## 
-## 
-## Adjusted Pearson Goodness-of-Fit Test:
-## ------------------------------------
-##   group statistic p-value(g-1)
-## 1    20     12.67       0.8552
-## 2    30     24.82       0.6874
-## 3    40     23.49       0.9765
-## 4    50     48.04       0.5120
-## 
-## 
-## Elapsed time : 0.6063788
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(m,}\DataTypeTok{which =} \StringTok{"all"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## please wait...calculating quantiles...
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{f\textless{}{-}}\KeywordTok{ugarchforecast}\NormalTok{(}\DataTypeTok{fitORspec =}\NormalTok{ m,}\DataTypeTok{n.ahead =} \DecValTok{60}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{fitted}\NormalTok{(f))}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{sigma}\NormalTok{(f))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-13-1} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-13-2} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-13-3} \end{center}
-
-GJR-GARCH in mean
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{s\textless{}{-}}\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{mean.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{archm=}\NormalTok{T,}\DataTypeTok{archpow=}\DecValTok{2}\NormalTok{),}\DataTypeTok{variance.model =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"sGARCH"}\NormalTok{)}
-\NormalTok{              ,}\DataTypeTok{distribution.model =} \StringTok{"sstd"}\NormalTok{)}
-\NormalTok{m\textless{}{-}}\KeywordTok{ugarchfit}\NormalTok{(}\DataTypeTok{data=}\NormalTok{return,}\DataTypeTok{spec=}\NormalTok{s)}
-\NormalTok{m}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## *---------------------------------*
-## *          GARCH Model Fit        *
-## *---------------------------------*
-## 
-## Conditional Variance Dynamics    
-## -----------------------------------
-## GARCH Model  : sGARCH(1,1)
-## Mean Model   : ARFIMA(0,0,0)
-## Distribution : sstd 
-## 
-## Optimal Parameters
-## ------------------------------------
-##         Estimate  Std. Error  t value Pr(>|t|)
-## mu     -0.000209    0.000850 -0.24583 0.805811
-## archm  -0.260052    1.687089 -0.15414 0.877498
-## omega   0.000010    0.000007  1.43333 0.151763
-## alpha1  0.149581    0.037547  3.98389 0.000068
-## beta1   0.849419    0.034397 24.69457 0.000000
-## skew    1.005659    0.059422 16.92389 0.000000
-## shape   4.588790    0.980615  4.67950 0.000003
-## 
-## Robust Standard Errors:
-##         Estimate  Std. Error  t value Pr(>|t|)
-## mu     -0.000209    0.000908 -0.23029 0.817870
-## archm  -0.260052    1.227161 -0.21191 0.832175
-## omega   0.000010    0.000010  1.03683 0.299815
-## alpha1  0.149581    0.050737  2.94820 0.003196
-## beta1   0.849419    0.040798 20.82014 0.000000
-## skew    1.005659    0.049280 20.40702 0.000000
-## shape   4.588790    1.331994  3.44505 0.000571
-## 
-## LogLikelihood : 1308.32 
-## 
-## Information Criteria
-## ------------------------------------
-##                     
-## Akaike       -5.1032
-## Bayes        -5.0451
-## Shibata      -5.1036
-## Hannan-Quinn -5.0804
-## 
-## Weighted Ljung-Box Test on Standardized Residuals
-## ------------------------------------
-##                         statistic p-value
-## Lag[1]                      6.104 0.01349
-## Lag[2*(p+q)+(p+q)-1][2]     6.148 0.02009
-## Lag[4*(p+q)+(p+q)-1][5]     7.929 0.03069
-## d.o.f=0
-## H0 : No serial correlation
-## 
-## Weighted Ljung-Box Test on Standardized Squared Residuals
-## ------------------------------------
-##                         statistic p-value
-## Lag[1]                    0.03392  0.8539
-## Lag[2*(p+q)+(p+q)-1][5]   0.35242  0.9779
-## Lag[4*(p+q)+(p+q)-1][9]   2.65713  0.8139
-## d.o.f=2
-## 
-## Weighted ARCH LM Tests
-## ------------------------------------
-##             Statistic Shape Scale P-Value
-## ARCH Lag[3]    0.0789 0.500 2.000  0.7788
-## ARCH Lag[5]    0.6025 1.440 1.667  0.8530
-## ARCH Lag[7]    3.2903 2.315 1.543  0.4605
-## 
-## Nyblom stability test
-## ------------------------------------
-## Joint Statistic:  2.6894
-## Individual Statistics:              
-## mu     0.13939
-## archm  0.06144
-## omega  0.36140
-## alpha1 0.10565
-## beta1  0.21326
-## skew   0.03290
-## shape  0.13463
-## 
-## Asymptotic Critical Values (10% 5% 1%)
-## Joint Statistic:          1.69 1.9 2.35
-## Individual Statistic:     0.35 0.47 0.75
-## 
-## Sign Bias Test
-## ------------------------------------
-##                    t-value   prob sig
-## Sign Bias           0.8306 0.4066    
-## Negative Sign Bias  0.2560 0.7981    
-## Positive Sign Bias  0.2967 0.7668    
-## Joint Effect        0.7041 0.8722    
-## 
-## 
-## Adjusted Pearson Goodness-of-Fit Test:
-## ------------------------------------
-##   group statistic p-value(g-1)
-## 1    20     11.73       0.8970
-## 2    30     22.00       0.8202
-## 3    40     23.02       0.9804
-## 4    50     30.39       0.9830
-## 
-## 
-## Elapsed time : 0.2952309
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(m,}\DataTypeTok{which =} \StringTok{"all"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## please wait...calculating quantiles...
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{f\textless{}{-}}\KeywordTok{ugarchforecast}\NormalTok{(}\DataTypeTok{fitORspec =}\NormalTok{ m,}\DataTypeTok{n.ahead =} \DecValTok{60}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{fitted}\NormalTok{(f))}
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{sigma}\NormalTok{(f))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-14-1} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-14-2} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-14-3} \end{center}
+\justifying
+\bigskip
 
 \hypertarget{conclusuxe3o}{%
 \chapter*{Conclusão}\label{conclusuxe3o}}
