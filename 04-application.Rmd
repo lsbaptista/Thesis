@@ -15,6 +15,12 @@ knitr::opts_chunk$set(tidy=FALSE, message = FALSE,warning =  FALSE,fig.align = "
 #install.packages("tidyquant")
 #install.packages("rugarch")
 #install.packages("ggfortify")
+#install.packages("MFTSR", repos="http://R-Forge.R-project.org")
+#install.packages("fGarch")
+#install.packages("RQuantLib")
+library(RQuantLib)
+library(fGarch)
+library(MFTSR)
 library(ggfortify)
 library(tidyquant)
 library(rugarch)
@@ -105,6 +111,7 @@ Fonte:Elaboração própria.
 ```{r,echo=FALSE}
 returns <- as.xts(data.frame(round(dailyReturn(newdata$TEF.MC.Adjusted,type="log"),4),round(dailyReturn(newdata$UNA.AS.Adjusted,type="log"),4),round(dailyReturn(newdata$GLE.PA.Adjusted,type="log"),4),round(dailyReturn(newdata$AIR.PA.Adjusted,type="log"),4)))
 returns <- returns[-1,]
+#dim(returns)
 colnames(returns)<-c("TEF.RET","UNA.RET","GLE.RET","AIR.RET")
 ret <- tail(returns)
 retv <- knitr::kable(
@@ -141,6 +148,8 @@ ETFStats <- do.call(data.frame,
                     list("média anual"= round(apply(returns, 2,retannual),6),
                          "volatilidade anual"= round(apply(returns, 2, retvol),6),
                          mediana = round(apply(returns, 2, median),6),
+                         skewness = round(apply(returns, 2, skewness),6),
+                         kurtosis = round(apply(returns, 2, kurtosis),6),
                          min = round(apply(returns, 2, min),6),
                          max = round(apply(returns, 2, max),6)))
 ETFStats<-t(ETFStats)
@@ -165,6 +174,27 @@ par(mfrow  = c(2,2))
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
   autoplot(returns$AIR.RET,ts.colour = 'darkgreen') + ggtitle("AIRBUS") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+```{r,distr,echo=FALSE, fig.cap='Distribuição dos retornos',fig.topcaption = TRUE,out.width = "100%"}
+par(mfrow  = c(2,2))
+  hist(returns$TEF.RET,probability=T, main="TELEFÓNICA",xlab="",breaks=100)
+  lines(density(returns$TEF.RET),col=2)
+  curve(dnorm(x,0,0.01695272), from = -0.06,to=0.06, col='blue',add = TRUE)
+  hist(returns$UNA.RET,probability=T, main="UNILEVER",xlab="",breaks=100)
+  lines(density(returns$UNA.RET),col=2)
+  curve(dnorm(x,0,0.01298968), from = -0.05,to=0.05, col='blue',add = TRUE)
+  hist(returns$GLE.RET,probability=T, main="SOCIÉTÉ GÉNÉRALE",xlab="",breaks=100)
+  lines(density(returns$GLE.RET),col=2)
+  curve(dnorm(x,0,0.02557792), from = -0.1,to=0.1, col='blue',add = TRUE)
+  hist(returns$AIR.RET,probability=T, main="AIRBUS",xlab="",breaks=100)
+  lines(density(returns$AIR.RET),col=2)
+  curve(dnorm(x,0,0.02397011), from = -0.1,to=0.1, col='blue',add = TRUE)
 ```
 \FloatBarrier
 \centering 
@@ -206,17 +236,62 @@ Fonte:Elaboração própria.
 
 ## EWMA
 
+```{r,echo=FALSE}
+ewma <- function(x) {  
+  x<-ewmaVol(x,lambda = 0.94)
+  return(tail(x$sigma,1))
+  }
 
+pewma <- do.call(data.frame, 
+                    list("ewma"= round(apply(returns, 2,ewma),6)))
+        
+pewma<-t(pewma)
+pewmak<- knitr::kable(
+pewma, caption = "EWMA",
+booktabs = TRUE)
+kable_styling(pewmak , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
+\justifying
+\bigskip
 
+## GARCH
 
+```{r}
 
+```
 
+## Volatilidade implicita
 
+```{r,echo=FALSE}
+TEFImp <- EuropeanOptionImpliedVolatility(type="call", value = 0.27, underlying = 4.40, strike = 4.40,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
+UNAImp <- EuropeanOptionImpliedVolatility(type="call", value = 2.38, underlying = 46.66, strike = 46,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
+SOGImp <- EuropeanOptionImpliedVolatility(type="call", value = 1.62, underlying = 13.82, strike = 14,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
+AIRImp <- EuropeanOptionImpliedVolatility(type="call", value = 6.91, underlying = 59.44, strike = 60,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
 
+TEFImp <- round(TEFImp[]/sqrt(252),6)
+UNAImp<-round(UNAImp[]/sqrt(252),6)
+SOGImp<-round(SOGImp[]/sqrt(252),6)
+AIRImp<-round(AIRImp[]/sqrt(252),6)
 
+pimpvol<-cbind(TEFImp,UNAImp,SOGImp,AIRImp)
+colnames(pimpvol)<-c("TEF.RET","UNA.RET","GLE.RET","AIR.RET")
+rownames(pimpvol)<-"Volatilidade implícita"
 
+pimpvolk<- knitr::kable(
+pimpvol, caption = "Volatilidade Implícita",
+booktabs = TRUE)
+kable_styling(pimpvolk , latex_options = c("hold_position","scale_down"), position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
+\justifying
+\bigskip
 
 
 

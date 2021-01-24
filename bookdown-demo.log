@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.17)  23 JAN 2021 19:18
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.17)  24 JAN 2021 19:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1460,17 +1460,18 @@ Underfull \hbox (badness 5985) in paragraph at lines 13--13
 asticity 
  []
 
+[6
+
+]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 24.
+(Font)              scaled to size 14.4pt on input line 28.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 24.
+(Font)              scaled to size 14.4pt on input line 28.
 )
 \tf@toc=\write6
 \openout6 = `bookdown-demo.toc'.
 
-[6
-
-] [7] (./bookdown-demo.lot)
+[7] (./bookdown-demo.lot)
 \tf@lot=\write7
 \openout7 = `bookdown-demo.lot'.
 
@@ -1575,9 +1576,9 @@ Cap\'{\i }tulo 3.
 File: image/cotacao.png Graphic file (type bmp)
 <image/cotacao.png>
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 840.
+(Font)              scaled to size 8.0pt on input line 843.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 845.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 848.
 File: bookdown-demo_files/figure-latex/cotacao-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/cotacao-1.pdf>
 File: bookdown-demo_files/figure-latex/cotacao-2.pdf Graphic file (type pdf)
@@ -1607,9 +1608,12 @@ f)
 File: bookdown-demo_files/figure-latex/volatilidade-4.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/volatilidade-4.pdf>
+File: bookdown-demo_files/figure-latex/distr-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/distr-1.pdf>
+[31]
 File: bookdown-demo_files/figure-latex/teste-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/teste-1.pdf>
-[31] [32] (./bookdown-demo.bbl [33
+[32] [33] [34] (./bookdown-demo.bbl [35
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 21--26
@@ -1625,28 +1629,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--26
 ] [][][][] []
  []
 
-[34
+[36
 
-]) [35] [36
+]) [37] [38
 
-] [37
+] [39
 
-] [38
+] [40
 
 ] (./bookdown-demo.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
-(rerunfilecheck)             Checksum: DB57174D5C62A721141C060E63B09726;4456.
+(rerunfilecheck)             Checksum: 9695311192675638D60F529E0E18986F;4889.
  ) 
 Here is how much of TeX's memory you used:
- 23293 strings out of 479234
- 404823 string characters out of 5874137
- 904860 words of memory out of 5000000
- 42379 multiletter control sequences out of 15000+600000
+ 23307 strings out of 479234
+ 405228 string characters out of 5874137
+ 905194 words of memory out of 5000000
+ 42392 multiletter control sequences out of 15000+600000
  431714 words of font info for 116 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  98i,10n,125p,1844b,598s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (49 pages).
+Output written on bookdown-demo.pdf (51 pages).

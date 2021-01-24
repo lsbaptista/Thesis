@@ -18,7 +18,11 @@
 \contentsline {subsection}{\numberline {1.4.2}VaR Paramétrico (Aproximação Cornish-Fisher)}{23}{subsection.1.4.2}%
 \contentsline {chapter}{\numberline {2}Pacotes do R para análise}{25}{chapter.2}%
 \contentsline {chapter}{\numberline {3}Aplicação a dados do modelo}{27}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Aplicação a dados do modelo}{28}{section.3.1}%
-\contentsline {chapter}{Conclusão}{33}{chapter*.26}%
-\contentsline {chapter}{Bibliografia}{34}{chapter*.27}%
-\contentsline {part}{Apêndices}{37}{part*.28}%
+\contentsline {section}{\numberline {3.1}Introdução}{28}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Análise descritiva dos dados}{28}{section.3.2}%
+\contentsline {section}{\numberline {3.3}EWMA}{33}{section.3.3}%
+\contentsline {section}{\numberline {3.4}GARCH}{34}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Volatilidade implicita}{34}{section.3.5}%
+\contentsline {chapter}{Conclusão}{35}{chapter*.29}%
+\contentsline {chapter}{Bibliografia}{36}{chapter*.30}%
+\contentsline {part}{Apêndices}{39}{part*.31}%

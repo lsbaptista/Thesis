@@ -817,8 +817,11 @@ We describe our methods in this chapter.
 \endgroup
 \newpage
 
-\hypertarget{aplicauxe7uxe3o-a-dados-do-modelo-1}{%
-\section{Aplicação a dados do modelo}\label{aplicauxe7uxe3o-a-dados-do-modelo-1}}
+\hypertarget{introduuxe7uxe3o}{%
+\section{Introdução}\label{introduuxe7uxe3o}}
+
+\hypertarget{anuxe1lise-descritiva-dos-dados}{%
+\section{Análise descritiva dos dados}\label{anuxe1lise-descritiva-dos-dados}}
 
 A primeira fase consiste em extrair de forma aleatória 4 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na figura \ref{fig:empresas}.
 
@@ -1005,6 +1008,9 @@ Fonte:Elaboração própria.
 média.anual & -0.127432 & 0.065727 & -0.140809 & 0.035468\\
 volatilidade.anual & 0.269116 & 0.206205 & 0.406037 & 0.380514\\
 mediana & -0.000500 & 0.000000 & -0.000400 & 0.000400\\
+skewness & -1.198711 & 0.231393 & -0.654816 & -1.087794\\
+kurtosis & 28.014864 & 10.084442 & 25.701728 & 24.567621\\
+\addlinespace
 min & -0.175800 & -0.074400 & -0.230300 & -0.250600\\
 max & 0.163800 & 0.116200 & 0.260600 & 0.186200\\
 \bottomrule
@@ -1034,6 +1040,21 @@ Fonte:Elaboração própria.
 \bigskip
 \begin{figure}
 
+{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/distr-1} 
+
+}
+
+\caption{Distribuição dos retornos}\label{fig:distr}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+\begin{figure}
+
 {\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/teste-1} 
 
 }
@@ -1049,7 +1070,7 @@ Fonte:Elaboração própria.
 \bigskip
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-10}Shapiro-Wilk normality test}
+\caption{\label{tab:unnamed-chunk-10}Teste normalidade Shapiro-Wilk}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllll}
@@ -1058,6 +1079,56 @@ Fonte:Elaboração própria.
 \midrule
 statistic & c(W = 0.80635804881946) & c(W = 0.91104077495707) & c(W = 0.779854033139441) & c(W = 0.781489153650026)\\
 p.value & 3.00697610665204e-33 & 5.71248039626033e-24 & 6.22273069135129e-35 & 7.81720129292387e-35\\
+\bottomrule
+\end{tabular}}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\hypertarget{ewma}{%
+\section{EWMA}\label{ewma}}
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-11}EWMA volatility - Último dia}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+\midrule
+ewma & 0.034085 & 0.016665 & 0.075245 & 0.054578\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\hypertarget{garch}{%
+\section{GARCH}\label{garch}}
+
+\hypertarget{volatilidade-implicita}{%
+\section{Volatilidade implicita}\label{volatilidade-implicita}}
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-12}Volatilidade Implícita}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & TELEFÓNICA & UNILEVER & SOCIÉTÉ GÉNÉRALE & AIRBUS\\
+\midrule
+Volatilidade implícita & 0.035703 & 0.031302 & 0.053162 & 0.052567\\
 \bottomrule
 \end{tabular}}
 \end{table}
