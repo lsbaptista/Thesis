@@ -162,7 +162,6 @@ Considerando $\omega=\gamma\mathcal{V}_{L}$, o modelo GARCH(1,1) pode ser defini
 \end{equation}
 
 A equação \@ref(eq:garch2) é a que costuma ser utilizada de forma a estimar os parâmetros. De notar de que para obter um processo estável GARCH(1,1) é necessário que $\sigma+\beta<1$, ou então o peso aplicado a variância de longo prazo é negativa.
-
 A estimação dos parâmetros, tanto para o modelo EWMA como para o modelo GARCH(1,1), é realizado utilizando um processo conhecido como *maximum likelihood method*, onde se utilizam os dados históricos de modo a escolher os parâmetros que maximizem a probabilidade de ocorrência dos dados, de acordo com a equação
 
 \begin{equation} 

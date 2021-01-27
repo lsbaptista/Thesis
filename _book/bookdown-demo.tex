@@ -477,7 +477,6 @@ Considerando \(\omega=\gamma\mathcal{V}_{L}\), o modelo GARCH(1,1) pode ser defi
 \end{equation}
 
 A equação \eqref{eq:garch2} é a que costuma ser utilizada de forma a estimar os parâmetros. De notar de que para obter um processo estável GARCH(1,1) é necessário que \(\sigma+\beta<1\), ou então o peso aplicado a variância de longo prazo é negativa.
-
 A estimação dos parâmetros, tanto para o modelo EWMA como para o modelo GARCH(1,1), é realizado utilizando um processo conhecido como \emph{maximum likelihood method}, onde se utilizam os dados históricos de modo a escolher os parâmetros que maximizem a probabilidade de ocorrência dos dados, de acordo com a equação
 
 \begin{equation} 
@@ -1095,7 +1094,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-11}EWMA volatility - Último dia}
+\caption{\label{tab:unnamed-chunk-11}EWMA}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1113,20 +1112,425 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{bookdown-demo_files/figure-latex/TELp-1} 
+
+}
+
+\caption{EWMA}\label{fig:TELp}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
 \hypertarget{garch}{%
 \section{GARCH}\label{garch}}
+
+\hypertarget{telefuxf3nica}{%
+\subsection{TELEFÓNICA}\label{telefuxf3nica}}
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-12}TEF coeficientes}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
+\midrule
+mu & -0.000272 & 0.000347 & -0.781924 & 0.434259\\
+omega & 0.000009 & 0.000003 & 2.657112 & 0.007881\\
+alpha1 & 0.092658 & 0.027344 & 3.388574 & 0.000703\\
+beta1 & 0.863955 & 0.035008 & 24.678681 & 0.000000\\
+shape & 4.903280 & 0.707910 & 6.926414 & 0.000000\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-13}Information Criterion Statistics}
+\centering
+\begin{tabular}[t]{lr}
+\toprule
+  & x\\
+\midrule
+AIC & -5.885548\\
+BIC & -5.861412\\
+SIC & -5.885596\\
+HQIC & -5.876384\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-14}Standardized Residuals Tests}
+\centering
+\begin{tabular}[t]{lrrr}
+\toprule
+  & lags & statistic & p-value\\
+\midrule
+Ljung-Box Test 10 & 10 & 4.244723 & 0.9356325\\
+Ljung-Box Test 15 & 15 & 5.019352 & 0.9919613\\
+Ljung-Box Test 20 & 20 & 6.501503 & 0.9980281\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 4.123868 & 0.9415861\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 4.793213 & 0.9937371\\
+\addlinespace
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 5.753781 & 0.9991915\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/TELplot-1} 
+
+}
+
+\caption{Telefónica}\label{fig:TELplot}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\hypertarget{unilever}{%
+\subsection{UNILEVER}\label{unilever}}
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-16}UNA coeficientes}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
+\midrule
+mu & 0.000559 & 0.000299 & 1.869493 & 0.061554\\
+omega & 0.000018 & 0.000007 & 2.677594 & 0.007415\\
+alpha1 & 0.147282 & 0.043072 & 3.419449 & 0.000627\\
+beta1 & 0.752509 & 0.064936 & 11.588552 & 0.000000\\
+shape & 4.231528 & 0.572980 & 7.385118 & 0.000000\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-17}UNA Information Criterion Statistics}
+\centering
+\begin{tabular}[t]{lr}
+\toprule
+  & x\\
+\midrule
+AIC & -6.143925\\
+BIC & -6.119789\\
+SIC & -6.143973\\
+HQIC & -6.134761\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-18}UNA Standardized Residuals Tests}
+\centering
+\begin{tabular}[t]{lrrr}
+\toprule
+  & lags & statistic & p-value\\
+\midrule
+Ljung-Box Test 10 & 10 & 9.382676 & 0.4962117\\
+Ljung-Box Test 15 & 15 & 10.392739 & 0.7943356\\
+Ljung-Box Test 20 & 20 & 22.163517 & 0.3317041\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 1.348758 & 0.9993343\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 2.262615 & 0.9999333\\
+\addlinespace
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 20.973789 & 0.3986768\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/UNAplot-1} 
+
+}
+
+\caption{Unilever}\label{fig:UNAplot}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\hypertarget{sociuxe9te-guxe9nuxe9rale}{%
+\subsection{SOCIÉTE GÉNÉRALE}\label{sociuxe9te-guxe9nuxe9rale}}
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-20}GLE coeficientes}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
+\midrule
+mu & -0.000210 & 0.000434 & -0.483278 & 0.628898\\
+ar1 & 0.111514 & 0.030742 & 3.627464 & 0.000286\\
+omega & 0.000006 & 0.000003 & 2.037672 & 0.041583\\
+alpha1 & 0.081852 & 0.023736 & 3.448406 & 0.000564\\
+beta1 & 0.906758 & 0.025643 & 35.360406 & 0.000000\\
+\addlinespace
+shape & 4.520924 & 0.621813 & 7.270555 & 0.000000\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-21}GLE Information Criterion Statistics}
+\centering
+\begin{tabular}[t]{lr}
+\toprule
+  & x\\
+\midrule
+AIC & -5.286750\\
+BIC & -5.257787\\
+SIC & -5.286818\\
+HQIC & -5.275753\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-22}GLE Standardized Residuals Tests}
+\centering
+\begin{tabular}[t]{lrrr}
+\toprule
+  & lags & statistic & p-value\\
+\midrule
+Ljung-Box Test 10 & 10 & 4.752785 & 0.9070686\\
+Ljung-Box Test 15 & 15 & 8.971824 & 0.8789861\\
+Ljung-Box Test 20 & 20 & 15.532485 & 0.7451717\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 6.657031 & 0.7573778\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 8.010029 & 0.9233800\\
+\addlinespace
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 8.420870 & 0.9886966\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/GLEplot-1} 
+
+}
+
+\caption{Unilever}\label{fig:GLEplot}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\hypertarget{airbus}{%
+\subsection{Airbus}\label{airbus}}
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-24}AIR coeficientes}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
+\midrule
+mu & 0.000166 & 0.000129 & 1.293794 & 0.195737\\
+ar1 & 0.841677 & 0.115128 & 7.310780 & 0.000000\\
+ma1 & -0.866499 & 0.106322 & -8.149722 & 0.000000\\
+omega & 0.000013 & 0.000005 & 2.641668 & 0.008250\\
+alpha1 & 0.103316 & 0.025595 & 4.036505 & 0.000054\\
+\addlinespace
+beta1 & 0.859414 & 0.032928 & 26.099605 & 0.000000\\
+shape & 5.353777 & 0.933927 & 5.732542 & 0.000000\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-25}AIR Information Criterion Statistics}
+\centering
+\begin{tabular}[t]{lr}
+\toprule
+  & x\\
+\midrule
+AIC & -5.383331\\
+BIC & -5.349541\\
+SIC & -5.383425\\
+HQIC & -5.370502\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-26}AIR Standardized Residuals Tests}
+\centering
+\begin{tabular}[t]{lrrr}
+\toprule
+  & lags & statistic & p-value\\
+\midrule
+Ljung-Box Test 10 & 10 & 7.196079 & 0.7068133\\
+Ljung-Box Test 15 & 15 & 14.397346 & 0.4956318\\
+Ljung-Box Test 20 & 20 & 16.571276 & 0.6806111\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 27.794413 & 0.0019472\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 28.605581 & 0.0180715\\
+\addlinespace
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 30.986731 & 0.0553659\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/AIRplot-1} 
+
+}
+
+\caption{Unilever}\label{fig:AIRplot}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\begin{verbatim}
+## [1] 0.04255105
+\end{verbatim}
 
 \hypertarget{volatilidade-implicita}{%
 \section{Volatilidade implicita}\label{volatilidade-implicita}}
 
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{image/opcao} 
+
+}
+
+\caption{Opções call sobre as empresas }\label{fig:opcao}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-12}Volatilidade Implícita}
+\caption{\label{tab:unnamed-chunk-28}Volatilidade Implícita}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lrrrr}
 \toprule
-  & TELEFÓNICA & UNILEVER & SOCIÉTÉ GÉNÉRALE & AIRBUS\\
+  & TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
 \midrule
 Volatilidade implícita & 0.035703 & 0.031302 & 0.053162 & 0.052567\\
 \bottomrule
@@ -1139,6 +1543,9 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+\hypertarget{simulauxe7uxe3o}{%
+\section{Simulação}\label{simulauxe7uxe3o}}
 
 \hypertarget{conclusuxe3o}{%
 \chapter*{Conclusão}\label{conclusuxe3o}}
@@ -1157,5 +1564,8 @@ We have finished a nice book.
 
 \part*{\normalfont\huge\bfseries\centering Apêndice II}
 \newpage
+
+
+
 
 \end{document}

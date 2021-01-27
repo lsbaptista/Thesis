@@ -6,29 +6,33 @@
 ```{r,include=FALSE}
 rm(list = ls())
 knitr::opts_chunk$set(tidy=FALSE, message = FALSE,warning =  FALSE,fig.align = "center",fig.show = "hold")
-#install.packages("xlsx")
+#install.packages("https://cran.r-project.org/src/contrib/Archive/fGarch/fGarch_3042.83.1.tar.gz", #repo=NULL, type="source")
 #install.packages("kableExtra")
-#install.packages("quantmod")
+#install.packages("tidyquant")
 #install.packages("MASS")
 #install.packages("arsenal")
 #install.packages("formatR")
-#install.packages("tidyquant")
-#install.packages("rugarch")
 #install.packages("ggfortify")
 #install.packages("MFTSR", repos="http://R-Forge.R-project.org")
-#install.packages("fGarch")
-#install.packages("RQuantLib")
-library(RQuantLib)
+#install.packages("Metrics")
+#install.packages("stats")
+#install.packages("portes")
+#install.packages("reshape2")
+library(reshape2)
+library(portes)
+library(stats)
+library(forecast)
+library(Metrics)
 library(fGarch)
 library(MFTSR)
 library(ggfortify)
 library(tidyquant)
-library(rugarch)
 library(arsenal)
 library(MASS)
 library(kableExtra)
 library(xlsx)
 library(tidyverse)
+library(RQuantLib)
 ```
 
 ## Análise descritiva dos dados
@@ -258,13 +262,339 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
+```{r,TELp,echo=FALSE, fig.cap='EWMA',fig.topcaption = TRUE,out.width = "90%"}
+TEFew <- ewmaVol(returns$TEF.RET,lambda = 0.94)
+UNAew <- ewmaVol(returns$UNA.RET,lambda = 0.94)
+GLEew <- ewmaVol(returns$GLE.RET,lambda = 0.94)
+AIRew <- ewmaVol(returns$AIR.RET,lambda = 0.94)
+
+par(mfrow  = c(2,2))
+  TEL1<-plot(returns$TEF.RET,type="l",main="Telefónica", col="green")
+  TEL2<-lines(TEFew$sigma,col="red")
+  TEL2
+  TEL3<-plot(returns$UNA.RET,type="l",main="Unilever",col="green")
+  TEL4<-lines(UNAew$sigma,col="red")
+  TEL4
+  TEL5<-plot(returns$GLE.RET,type="l",main="SoGen",col="green")
+  TEL6<-lines(GLEew$sigma,col="red")
+  TEL6
+  TEL7<-plot(returns$AIR.RET,type="l",main="Airbus",col="green")
+  TEL8<-lines(AIRew$sigma,col="red")
+  TEL8
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+
 ## GARCH
 
-```{r}
+### TELEFÓNICA
 
+```{r,echo=FALSE,warning = FALSE}
+TEF<-garchFit(formula = ~ garch(1,1),data=returns$TEF.RET,cond.dist = "std", trace=FALSE)
+
+TEFcoef <- round(TEF@fit$matcoef,6)
+
+TEFcoefk<- knitr::kable(
+TEFcoef, caption = "TEF coeficientes",
+booktabs = TRUE)
+kable_styling(TEFcoefk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+TEFics <- TEF@fit$ics
+TEFicsk<- knitr::kable(
+TEFics, caption = "Information Criterion Statistics",
+booktabs = TRUE)
+kable_styling(TEFicsk , latex_options = "hold_position", position = "center")
+
+pers <- TEF@fit$params$persistence
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+TEFr <-residuals(TEF, standardize = T)
+TEFres <- as.data.frame(LjungBox(TEFr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+TEFsre <- as.data.frame(LjungBox(TEFr^2, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+TEFLjun <- rbind(TEFres,TEFsre)
+rownames(TEFLjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 20","Ljung-Box Test 10 R^2 ","Ljung-Box Test 15 R^2","Ljung-Box Test 20 R^2")
+TEFLjun$df<-NULL
+
+TEFLjunk<- knitr::kable(
+TEFLjun, caption = "Standardized Residuals Tests",
+booktabs = TRUE)
+kable_styling(TEFLjunk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+```{r,TELplot,echo=FALSE, fig.cap='Telefónica',fig.topcaption = TRUE,out.width = "100%"}
+par(mfrow  = c(2,2))
+  plot(TEF,which= 2)
+  plot(TEF,which= 3)
+  plot(TEF,which=4)
+  plot(TEF,which=5)
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+TEFsd <- TEF@sigma.t
+TEFvol <- tail(TEFsd,1)
+```
+
+### UNILEVER
+
+```{r,echo=FALSE,warning = FALSE}
+UNA<-garchFit(formula = ~ garch(1,1),data=returns$UNA.RET,cond.dist = "std", trace=FALSE)
+
+UNAcoef <- round(UNA@fit$matcoef,6)
+
+UNAcoefk<- knitr::kable(
+UNAcoef, caption = "UNA coeficientes",
+booktabs = TRUE)
+kable_styling(UNAcoefk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+UNAics <- UNA@fit$ics
+UNAicsk<- knitr::kable(
+UNAics, caption = "UNA Information Criterion Statistics",
+booktabs = TRUE)
+kable_styling(UNAicsk , latex_options = "hold_position", position = "center")
+
+UNApers <- UNA@fit$params$persistence
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+UNAr <-residuals(UNA, standardize = T)
+UNAres <- as.data.frame(LjungBox(UNAr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+UNAsre <- as.data.frame(LjungBox(UNAr^2, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+UNALjun <- rbind(UNAres,UNAsre)
+rownames(UNALjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 20","Ljung-Box Test 10 R^2 ","Ljung-Box Test 15 R^2","Ljung-Box Test 20 R^2")
+UNALjun$df<-NULL
+
+UNALjunk<- knitr::kable(
+UNALjun, caption = "UNA Standardized Residuals Tests",
+booktabs = TRUE)
+kable_styling(UNALjunk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+```{r,UNAplot,echo=FALSE, fig.cap='Unilever',fig.topcaption = TRUE,out.width = "100%"}
+par(mfrow  = c(2,2))
+  plot(UNA,which= 2)
+  plot(UNA,which= 3)
+  plot(UNA,which=4)
+  plot(UNA,which=5)
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+UNAsd <- UNA@sigma.t
+UNAvol <- tail(UNAsd,1)
+```
+
+### SOCIÉTE GÉNÉRALE
+
+```{r,echo=FALSE,warning = FALSE}
+GLE<-garchFit(formula = ~ arma(1,0) + garch(1,1),data=returns$GLE.RET,cond.dist = "std", trace=FALSE)
+
+GLEcoef <- round(GLE@fit$matcoef,6)
+
+GLEcoefk<- knitr::kable(
+GLEcoef, caption = "GLE coeficientes",
+booktabs = TRUE)
+kable_styling(GLEcoefk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+GLEics <- GLE@fit$ics
+GLEicsk<- knitr::kable(
+GLEics, caption = "GLE Information Criterion Statistics",
+booktabs = TRUE)
+kable_styling(GLEicsk , latex_options = "hold_position", position = "center")
+
+GLEpers <- GLE@fit$params$persistence
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+GLEr <-residuals(GLE, standardize = T)
+GLEres <- as.data.frame(LjungBox(GLEr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+GLEsre <- as.data.frame(LjungBox(GLEr^2, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+GLELjun <- rbind(GLEres,GLEsre)
+rownames(GLELjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 20","Ljung-Box Test 10 R^2 ","Ljung-Box Test 15 R^2","Ljung-Box Test 20 R^2")
+GLELjun$df<-NULL
+
+GLELjunk<- knitr::kable(
+GLELjun, caption = "GLE Standardized Residuals Tests",
+booktabs = TRUE)
+kable_styling(GLELjunk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+```{r,GLEplot,echo=FALSE, fig.cap='Unilever',fig.topcaption = TRUE,out.width = "100%"}
+par(mfrow  = c(2,2))
+  plot(GLE,which= 2)
+  plot(GLE,which= 3)
+  plot(GLE,which=4)
+  plot(GLE,which=5)
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+GLEsd <- GLE@sigma.t
+GLEvol <- tail(GLEsd,1)
+```
+
+### Airbus
+
+```{r,echo=FALSE,warning = FALSE}
+AIR<-garchFit(formula = ~ arma(1,1) + garch(1,1),data=returns$AIR.RET,cond.dist = "std", trace=FALSE)
+
+AIRcoef <- round(AIR@fit$matcoef,6)
+
+AIRcoefk<- knitr::kable(
+AIRcoef, caption = "AIR coeficientes",
+booktabs = TRUE)
+kable_styling(AIRcoefk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+AIRics <- AIR@fit$ics
+AIRicsk<- knitr::kable(
+AIRics, caption = "AIR Information Criterion Statistics",
+booktabs = TRUE)
+kable_styling(AIRicsk , latex_options = "hold_position", position = "center")
+
+AIRpers <- AIR@fit$params$persistence
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+AIRr <-residuals(AIR, standardize = TRUE)
+AIRres <- as.data.frame(LjungBox(AIRr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+AIRsre <- as.data.frame(LjungBox(AIRr^2, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+AIRLjun <- rbind(AIRres,AIRsre)
+rownames(AIRLjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 20","Ljung-Box Test 10 R^2 ","Ljung-Box Test 15 R^2","Ljung-Box Test 20 R^2")
+AIRLjun$df<-NULL
+
+AIRLjunk<- knitr::kable(
+AIRLjun, caption = "AIR Standardized Residuals Tests",
+booktabs = TRUE)
+kable_styling(AIRLjunk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+```{r,AIRplot,echo=FALSE, fig.cap='Unilever',fig.topcaption = TRUE,out.width = "100%"}
+par(mfrow  = c(2,2))
+  plot(AIR,which= 2)
+  plot(AIR,which= 3)
+  plot(AIR,which=4)
+  plot(AIR,which=5)
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+```{r,echo=FALSE}
+AIRsd <- AIR@sigma.t
+AIRvol <- tail(AIRsd,1)
 ```
 
 ## Volatilidade implicita
+
+```{r, opcao,echo=FALSE,fig.cap="Opções call sobre as empresas ",out.width="70%"}
+knitr::include_graphics("image/opcao.png")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
 
 ```{r,echo=FALSE}
 TEFImp <- EuropeanOptionImpliedVolatility(type="call", value = 0.27, underlying = 4.40, strike = 4.40,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
@@ -292,6 +622,8 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+## Simulação
 
 
 
