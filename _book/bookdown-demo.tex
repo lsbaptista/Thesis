@@ -839,22 +839,6 @@ Fonte: Elaboração própria.
 
 \justifying
 \bigskip
-\scriptsize
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{TEF.MC\textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/TEF.MC.xlsx"}\NormalTok{)}
-\NormalTok{TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(TEF.MC[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(TEF.MC}\OperatorTok{$}\NormalTok{Date))}
-\NormalTok{GLE.PA\textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/GLE.PA.xlsx"}\NormalTok{)}
-\NormalTok{GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(GLE.PA[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(GLE.PA}\OperatorTok{$}\NormalTok{Date))}
-\NormalTok{ENEL.MI\textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/ENEL.MI.xlsx"}\NormalTok{)}
-\NormalTok{ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(ENEL.MI[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(ENEL.MI}\OperatorTok{$}\NormalTok{Date))}
-\NormalTok{AIR.PA\textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/AIR.PA.xlsx"}\NormalTok{)}
-\NormalTok{AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(AIR.PA[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(AIR.PA}\OperatorTok{$}\NormalTok{Date))}
-\end{Highlighting}
-\end{Shaded}
-
-\normalsize
 
 \begin{table}[!h]
 
@@ -882,6 +866,16 @@ Fonte:\url{https://finance.yahoo.com/}
 \justifying
 \bigskip
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow  =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+  \KeywordTok{chartSeries}\NormalTok{(TEF.MC,}\DataTypeTok{theme =} \KeywordTok{chartTheme}\NormalTok{(}\StringTok{"white"}\NormalTok{))}
+  \KeywordTok{chartSeries}\NormalTok{(ENEL.MI,}\DataTypeTok{theme =} \KeywordTok{chartTheme}\NormalTok{(}\StringTok{"white"}\NormalTok{))}
+  \KeywordTok{chartSeries}\NormalTok{(GLE.PA,}\DataTypeTok{theme =} \KeywordTok{chartTheme}\NormalTok{(}\StringTok{"white"}\NormalTok{))}
+  \KeywordTok{chartSeries}\NormalTok{(AIR.PA,}\DataTypeTok{theme =} \KeywordTok{chartTheme}\NormalTok{(}\StringTok{"white"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{figure}
 
 {\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-4} 
@@ -890,6 +884,7 @@ Fonte:\url{https://finance.yahoo.com/}
 
 \caption{Evolução das cotações nos últimos 5 anos}\label{fig:cotacao}
 \end{figure}
+
 \FloatBarrier
 \centering
 
@@ -923,6 +918,17 @@ Fonte:\url{https://finance.yahoo.com/}
 
 \justifying
 \bigskip
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pt \textless{}{-}}\KeywordTok{summary}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(newdata))}
+\NormalTok{p \textless{}{-}}\StringTok{ }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}
+\NormalTok{pt, }\DataTypeTok{caption =} \StringTok{"Estatísticas das cotações"}\NormalTok{,}
+\DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{kable\_styling}\NormalTok{(p, }\DataTypeTok{latex\_options =} \StringTok{"hold\_position"}\NormalTok{, }\DataTypeTok{position =} \StringTok{"center"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{table}[!h]
 
@@ -942,6 +948,7 @@ Fonte:\url{https://finance.yahoo.com/}
 \bottomrule
 \end{tabular}
 \end{table}
+\normalsize
 \FloatBarrier
 \centering
 
@@ -949,9 +956,20 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{returns \textless{}{-}}\StringTok{ }\KeywordTok{as.xts}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{TEF.MC,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{),}\KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{ENEL.MI,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{),}\KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{GLE.PA,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{),}\KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{AIR.PA,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{)))}
+\NormalTok{returns \textless{}{-}}\StringTok{ }\NormalTok{returns[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-7}Retornos logarítmicos diários-25-05-2020/01-06-2020}
+\caption{\label{tab:unnamed-chunk-8}Retornos logarítmicos diários-25-05-2020/01-06-2020}
 \centering
 \begin{tabular}[t]{rrrr}
 \toprule
@@ -974,9 +992,19 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{retcor \textless{}{-}}\StringTok{ }\KeywordTok{cor}\NormalTok{(returns)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-8}Matrix correlação dos retornos}
+\caption{\label{tab:unnamed-chunk-10}Matrix correlação dos retornos}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -996,9 +1024,31 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{retannual \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{  }
+  \KeywordTok{Return.annualized}\NormalTok{(x,}\DataTypeTok{geometric =} \OtherTok{FALSE}\NormalTok{)\}}
+\NormalTok{retvol \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{  }
+  \KeywordTok{StdDev.annualized}\NormalTok{(x,}\DataTypeTok{geometric =} \OtherTok{FALSE}\NormalTok{)\}}
+
+\NormalTok{ETFStats \textless{}{-}}\StringTok{ }\KeywordTok{do.call}\NormalTok{(data.frame, }
+                    \KeywordTok{list}\NormalTok{(}\StringTok{"média anual"}\NormalTok{=}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{apply}\NormalTok{(returns, }\DecValTok{2}\NormalTok{,retannual),}\DecValTok{6}\NormalTok{),}
+                         \StringTok{"volatilidade anual"}\NormalTok{=}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{apply}\NormalTok{(returns, }\DecValTok{2}\NormalTok{, retvol),}\DecValTok{6}\NormalTok{),}
+                         \DataTypeTok{mediana =} \KeywordTok{round}\NormalTok{(}\KeywordTok{apply}\NormalTok{(returns, }\DecValTok{2}\NormalTok{, median),}\DecValTok{6}\NormalTok{),}
+                         \DataTypeTok{skewness =} \KeywordTok{round}\NormalTok{(}\KeywordTok{apply}\NormalTok{(returns, }\DecValTok{2}\NormalTok{, skewness),}\DecValTok{6}\NormalTok{),}
+                         \DataTypeTok{kurtosis =} \KeywordTok{round}\NormalTok{(}\KeywordTok{apply}\NormalTok{(returns, }\DecValTok{2}\NormalTok{, kurtosis),}\DecValTok{6}\NormalTok{),}
+                         \DataTypeTok{min =} \KeywordTok{round}\NormalTok{(}\KeywordTok{apply}\NormalTok{(returns, }\DecValTok{2}\NormalTok{, min),}\DecValTok{6}\NormalTok{),}
+                         \DataTypeTok{max =} \KeywordTok{round}\NormalTok{(}\KeywordTok{apply}\NormalTok{(returns, }\DecValTok{2}\NormalTok{, max),}\DecValTok{6}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+nolmalsize
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-9}Estatísticas dos retornos}
+\caption{\label{tab:unnamed-chunk-12}Estatísticas dos retornos}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1067,9 +1117,20 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lshap\textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(returns), shapiro.test)}
+\NormalTok{lres \textless{}{-}}\StringTok{ }\KeywordTok{sapply}\NormalTok{(lshap, }\StringTok{"["}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"statistic"}\NormalTok{,}\StringTok{"p.value"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-10}Teste normalidade Shapiro-Wilk}
+\caption{\label{tab:unnamed-chunk-14}Teste normalidade Shapiro-Wilk}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllll}
@@ -1092,9 +1153,25 @@ Fonte:Elaboração própria.
 \hypertarget{ewma}{%
 \section{EWMA}\label{ewma}}
 
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ewma \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{  }
+\NormalTok{  x\textless{}{-}}\KeywordTok{ewmaVol}\NormalTok{(x,}\DataTypeTok{lambda =} \FloatTok{0.94}\NormalTok{)}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{tail}\NormalTok{(x}\OperatorTok{$}\NormalTok{sigma,}\DecValTok{1}\NormalTok{))}
+\NormalTok{  \}}
+
+\NormalTok{pewma \textless{}{-}}\StringTok{ }\KeywordTok{do.call}\NormalTok{(data.frame, }
+                    \KeywordTok{list}\NormalTok{(}\StringTok{"ewma"}\NormalTok{=}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{apply}\NormalTok{(returns, }\DecValTok{2}\NormalTok{,ewma),}\DecValTok{6}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-11}EWMA}
+\caption{\label{tab:unnamed-chunk-16}EWMA}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1131,6 +1208,8 @@ Fonte:Elaboração própria.
 \hypertarget{simulauxe7uxe3o-ewma}{%
 \subsection{Simulação EWMA}\label{simulauxe7uxe3o-ewma}}
 
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dfewma \textless{}{-}}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(pewma)}
@@ -1141,6 +1220,10 @@ Fonte:Elaboração própria.
 \NormalTok{mu \textless{}{-}}\StringTok{ }\FloatTok{{-}0.00575}
 \end{Highlighting}
 \end{Shaded}
+
+\normalsize
+
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1165,6 +1248,8 @@ Fonte:Elaboração própria.
 \end{Highlighting}
 \end{Shaded}
 
+\normalsize
+
 \begin{figure}
 
 {\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/sim-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/sim-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/sim-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/sim-4} 
@@ -1174,11 +1259,23 @@ Fonte:Elaboração própria.
 \caption{Simulação Monte Carlo para 80 dias}\label{fig:sim}
 \end{figure}
 
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, median)}
+\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-17}Valores simulados}
+\caption{\label{tab:unnamed-chunk-23}Valores simulados}
 \centering
-\resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lrrrr}
 \toprule
   & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
@@ -1191,7 +1288,7 @@ Fonte:Elaboração própria.
 \addlinespace
 80 & 4.195701 & 6.833317 & 11.03732 & 52.76993\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
 \FloatBarrier
 \centering
@@ -1212,7 +1309,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-18}TEF coeficientes}
+\caption{\label{tab:unnamed-chunk-24}TEF coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1236,7 +1333,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-19}Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-25}Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1259,7 +1356,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-20}Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-26}Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1303,7 +1400,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-22}ENEL coeficientes}
+\caption{\label{tab:unnamed-chunk-28}ENEL coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1327,7 +1424,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-23}ENEL Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-29}ENEL Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1350,7 +1447,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-24}ENEL Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-30}ENEL Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1394,7 +1491,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-26}GLE coeficientes}
+\caption{\label{tab:unnamed-chunk-32}GLE coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1420,7 +1517,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-27}GLE Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-33}GLE Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1443,7 +1540,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-28}GLE Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-34}GLE Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1487,7 +1584,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-30}AIR coeficientes}
+\caption{\label{tab:unnamed-chunk-36}AIR coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1514,7 +1611,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-31}AIR Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-37}AIR Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1537,7 +1634,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-32}AIR Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-38}AIR Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1597,7 +1694,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-34}Volatilidade Implícita}
+\caption{\label{tab:unnamed-chunk-40}Volatilidade Implícita}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lrrrr}

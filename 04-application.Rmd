@@ -51,8 +51,8 @@ Fonte: Elaboração própria.
 
 \justifying
 \bigskip
-\scriptsize
-```{r}
+
+```{r,echo=FALSE}
 TEF.MC<-read_xlsx ("data/TEF.MC.xlsx")
 TEF.MC <- xts(TEF.MC[, -1], order.by=as.Date(TEF.MC$Date))
 GLE.PA<-read_xlsx ("data/GLE.PA.xlsx")
@@ -62,7 +62,7 @@ ENEL.MI <- xts(ENEL.MI[, -1], order.by=as.Date(ENEL.MI$Date))
 AIR.PA<-read_xlsx ("data/AIR.PA.xlsx")
 AIR.PA <- xts(AIR.PA[, -1], order.by=as.Date(AIR.PA$Date))
 ```
-\normalsize
+
 
 ```{r,echo=FALSE}
 gle<-tail(GLE.PA)
@@ -78,13 +78,14 @@ Fonte:https://finance.yahoo.com/
 \justifying
 \bigskip
 
-```{r,cotacao,echo=FALSE, fig.cap='Evolução das cotações nos últimos 5 anos',fig.topcaption = TRUE,out.width = "45%"}
+```{r,echo=FALSE, cotacao, fig.cap='Evolução das cotações nos últimos 5 anos',fig.topcaption = TRUE,out.width = "45%"}
 par(mfrow  = c(2,2))
   chartSeries(TEF.MC,theme = chartTheme("white"))
   chartSeries(ENEL.MI,theme = chartTheme("white"))
   chartSeries(GLE.PA,theme = chartTheme("white"))
   chartSeries(AIR.PA,theme = chartTheme("white"))
 ```
+
 \FloatBarrier
 \centering 
 Fonte: Elaboração própria.
@@ -108,23 +109,32 @@ Fonte:https://finance.yahoo.com/
 
 \justifying
 \bigskip
-
-```{r, echo=FALSE}
+\scriptsize
+```{r}
 pt <-summary(as.data.frame(newdata))
 p <- knitr::kable(
 pt, caption = "Estatísticas das cotações",
 booktabs = TRUE)
 kable_styling(p, latex_options = "hold_position", position = "center")
 ```
+\normalsize
 \FloatBarrier
 \centering 
 Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-```{r,echo=FALSE}
-returns <- as.xts(data.frame(round(dailyReturn(newdata$TEF.MC,type="log"),4),round(dailyReturn(newdata$ENEL.MI,type="log"),4),round(dailyReturn(newdata$GLE.PA,type="log"),4),round(dailyReturn(newdata$AIR.PA,type="log"),4)))
+\scriptsize
+```{r}
+returns <- as.xts(data.frame(round(dailyReturn(newdata$TEF.MC,type="log"),4),
+                             round(dailyReturn(newdata$ENEL.MI,type="log"),4),
+                             round(dailyReturn(newdata$GLE.PA,type="log"),4),
+                             round(dailyReturn(newdata$AIR.PA,type="log"),4)))
 returns <- returns[-1,]
+```
+\normalsize
+
+```{r,echo=FALSE}
 colnames(returns)<-c("TEF.RET","ENEL.RET","GLE.RET","AIR.RET")
 ret <- tail(returns)
 retv <- knitr::kable(
@@ -138,8 +148,13 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-```{r, echo=FALSE}
+\scriptsize
+```{r}
 retcor <- cor(returns)
+```
+\normalsize
+
+```{r, echo=FALSE}
 retcork <- knitr::kable(
 retcor, caption = "Matrix correlação dos retornos",
 booktabs = TRUE)
@@ -151,7 +166,8 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-```{r, echo=FALSE}
+\scriptsize
+```{r}
 retannual <- function(x) {  
   Return.annualized(x,geometric = FALSE)}
 retvol <- function(x) {  
@@ -165,6 +181,10 @@ ETFStats <- do.call(data.frame,
                          kurtosis = round(apply(returns, 2, kurtosis),6),
                          min = round(apply(returns, 2, min),6),
                          max = round(apply(returns, 2, max),6)))
+```
+nolmalsize
+
+```{r, echo=FALSE}
 ETFStats<-t(ETFStats)
 ETFStatsk<- knitr::kable(
 ETFStats, caption = "Estatísticas dos retornos",
@@ -232,9 +252,14 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-```{r,echo=FALSE}
+\scriptsize
+```{r}
 lshap<- lapply(as.data.frame(returns), shapiro.test)
 lres <- sapply(lshap, "[", c("statistic","p.value"))
+```
+\normalsize
+
+```{r,echo=FALSE}
 lresk<- knitr::kable(
 lres, caption = "Teste normalidade Shapiro-Wilk",
 booktabs = TRUE)
@@ -248,8 +273,8 @@ Fonte:Elaboração própria.
 \bigskip
 
 ## EWMA
-
-```{r,echo=FALSE}
+\scriptsize
+```{r}
 ewma <- function(x) {  
   x<-ewmaVol(x,lambda = 0.94)
   return(tail(x$sigma,1))
@@ -257,7 +282,10 @@ ewma <- function(x) {
 
 pewma <- do.call(data.frame, 
                     list("ewma"= round(apply(returns, 2,ewma),6)))
+```
+\normalsize
 
+```{r,echo=FALSE}
 pewma<-t(pewma)
 pewmak<- knitr::kable(
 pewma, caption = "EWMA",
@@ -297,6 +325,7 @@ Fonte:Elaboração própria.
 
 ### Simulação EWMA
 
+\scriptsize
 ```{r}
 dfewma <- as.data.frame(pewma)
 
@@ -305,8 +334,9 @@ dia <- 1:N
 M <- 1000
 mu <- -0.00575
 ```
+\normalsize
 
-
+\scriptsize
 ```{r,warning=FALSE}
 TEF.preco_inicial <- TEF.MC$Close[[nrow(TEF.MC$Close)]]
 TEF.MC.sigma <- dfewma$TEF.RET*sqrt(252)
@@ -317,7 +347,9 @@ monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   monte_carlo_sim[[1,j]] <- TEF.preco_inicial
     for(i in 2:N){
-      monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*exp(TEF.MC.mean+TEF.MC.sigma* rnorm(1,0,1)*sqrt(1/252))
+      monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*
+        exp(TEF.MC.mean+TEF.MC.sigma *
+              rnorm(1,0,1)*sqrt(1/252))
     }
 }
 
@@ -327,6 +359,7 @@ w <- c('Dia',w)
 names(TEF.MC_MC_sim) <- w
 TEF.MC_MC_sim <- gather(TEF.MC_MC_sim, key='Simulation', value = 'Preço',-(Dia))
 ```
+\normalsize
 
 ```{r,echo=FALSE, warning=FALSE}
 ENEL.preco_inicial <- ENEL.MI$Close[[nrow(ENEL.MI$Close)]]
@@ -398,12 +431,16 @@ par(mfrow  = c(2,2))
        ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
 
-```{r,echo=FALSE}
+\scriptsize
+```{r}
 M.TEF.MC <- apply(monte_carlo_sim, 1, median)
 M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,median )
 M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,median )
 M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
+```
+\normalsize
 
+```{r,echo=FALSE}
 SimEWMA <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
 SimEWMAk<- knitr::kable(
 tail(SimEWMA), caption = "Valores simulados",
@@ -418,6 +455,9 @@ Fonte:Elaboração própria.
 \bigskip
 
 ### Portfolio EWMA
+
+
+
 
 
 ## GARCH
@@ -716,7 +756,7 @@ AIRvol <- tail(AIRsd,1)
 
 ## Volatilidade implicita
 
-```{r, opcao,echo=FALSE,fig.cap="Opções call sobre as empresas ",out.width="70%"}
+```{r, opcao,echo=FALSE,fig.cap="Opções call sobre as empresas ",out.width="100%"}
 knitr::include_graphics("image/opcao.png")
 ```
 \FloatBarrier
@@ -745,7 +785,7 @@ rownames(pimpvol)<-"Volatilidade implícita"
 pimpvolk<- knitr::kable(
 pimpvol, caption = "Volatilidade Implícita",
 booktabs = TRUE)
-kable_styling(pimpvolk , latex_options = c("hold_position","scale_down"), position = "center")
+kable_styling(pimpvolk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
 \centering 

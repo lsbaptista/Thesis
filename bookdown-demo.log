@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.30)  30 JAN 2021 12:26
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.30)  30 JAN 2021 12:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1579,10 +1579,8 @@ Cap\'{\i }tulo 3.
 ]
 File: image/cotacao.png Graphic file (type bmp)
 <image/cotacao.png>
-LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 842.
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 846.
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 871.
 File: bookdown-demo_files/figure-latex/cotacao-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/cotacao-1.pdf>
 File: bookdown-demo_files/figure-latex/cotacao-2.pdf Graphic file (type pdf)
@@ -1592,14 +1590,14 @@ File: bookdown-demo_files/figure-latex/cotacao-3.pdf Graphic file (type pdf)
 File: bookdown-demo_files/figure-latex/cotacao-4.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/cotacao-4.pdf>
 [28]
+LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 921.
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 925.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[29]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[30]
+[29] [30]
 File: bookdown-demo_files/figure-latex/volatilidade-1.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/volatilidade-1.pdf>
@@ -1612,18 +1610,16 @@ f)
 File: bookdown-demo_files/figure-latex/volatilidade-4.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/volatilidade-4.pdf>
+[31]
 File: bookdown-demo_files/figure-latex/distr-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/distr-1.pdf>
-[31]
+[32]
 File: bookdown-demo_files/figure-latex/teste-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/teste-1.pdf>
-[32]
+[33] [34]
 File: bookdown-demo_files/figure-latex/TELp-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/TELp-1.pdf>
-[33]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1136.
-[34]
+[35]
 File: bookdown-demo_files/figure-latex/sim-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/sim-1.pdf>
 File: bookdown-demo_files/figure-latex/sim-2.pdf Graphic file (type pdf)
@@ -1632,41 +1628,38 @@ File: bookdown-demo_files/figure-latex/sim-3.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/sim-3.pdf>
 File: bookdown-demo_files/figure-latex/sim-4.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/sim-4.pdf>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[35]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 [36]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[37]
 File: bookdown-demo_files/figure-latex/TELplot-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/TELplot-1.pdf>
-[37]
+[38]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[38]
+[39]
 File: bookdown-demo_files/figure-latex/ENELplot-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ENELplot-1.pdf>
-[39]
+[40]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[40]
+[41]
 File: bookdown-demo_files/figure-latex/GLEplot-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/GLEplot-1.pdf>
-[41]
+[42]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[42]
+[43]
 File: bookdown-demo_files/figure-latex/AIRplot-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/AIRplot-1.pdf>
-[43]
+[44]
 File: image/opcao.png Graphic file (type bmp)
 <image/opcao.png>
-[44] [45] (./bookdown-demo.bbl [46
+[45] [46] (./bookdown-demo.bbl [47
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 21--26
@@ -1682,13 +1675,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--26
 ] [][][][] []
  []
 
-[47
+[48
 
-]) [48] [49
-
-] [50
+]) [49] [50
 
 ] [51
+
+] [52
 
 ] (./bookdown-demo.aux)
 
@@ -1699,11 +1692,11 @@ Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  23442 strings out of 479234
- 409563 string characters out of 5874137
- 907168 words of memory out of 5000000
+ 409565 string characters out of 5874137
+ 910168 words of memory out of 5000000
  42513 multiletter control sequences out of 15000+600000
  431722 words of font info for 117 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  98i,10n,125p,1844b,598s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (62 pages).
+Output written on bookdown-demo.pdf (63 pages).
