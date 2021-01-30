@@ -866,16 +866,6 @@ Fonte:\url{https://finance.yahoo.com/}
 \justifying
 \bigskip
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow  =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-  \KeywordTok{chartSeries}\NormalTok{(TEF.MC,}\DataTypeTok{theme =} \KeywordTok{chartTheme}\NormalTok{(}\StringTok{"white"}\NormalTok{))}
-  \KeywordTok{chartSeries}\NormalTok{(ENEL.MI,}\DataTypeTok{theme =} \KeywordTok{chartTheme}\NormalTok{(}\StringTok{"white"}\NormalTok{))}
-  \KeywordTok{chartSeries}\NormalTok{(GLE.PA,}\DataTypeTok{theme =} \KeywordTok{chartTheme}\NormalTok{(}\StringTok{"white"}\NormalTok{))}
-  \KeywordTok{chartSeries}\NormalTok{(AIR.PA,}\DataTypeTok{theme =} \KeywordTok{chartTheme}\NormalTok{(}\StringTok{"white"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{figure}
 
 {\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-4} 
@@ -960,7 +950,10 @@ Fonte:Elaboração própria.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{returns \textless{}{-}}\StringTok{ }\KeywordTok{as.xts}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{TEF.MC,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{),}\KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{ENEL.MI,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{),}\KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{GLE.PA,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{),}\KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{AIR.PA,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{)))}
+\NormalTok{returns \textless{}{-}}\StringTok{ }\KeywordTok{as.xts}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{TEF.MC,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{),}
+                             \KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{ENEL.MI,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{),}
+                             \KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{GLE.PA,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{),}
+                             \KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{AIR.PA,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{)))}
 \NormalTok{returns \textless{}{-}}\StringTok{ }\NormalTok{returns[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,]}
 \end{Highlighting}
 \end{Shaded}
@@ -1159,7 +1152,7 @@ Fonte:Elaboração própria.
 \begin{Highlighting}[]
 \NormalTok{ewma \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{  }
 \NormalTok{  x\textless{}{-}}\KeywordTok{ewmaVol}\NormalTok{(x,}\DataTypeTok{lambda =} \FloatTok{0.94}\NormalTok{)}
-  \KeywordTok{return}\NormalTok{(}\KeywordTok{tail}\NormalTok{(x}\OperatorTok{$}\NormalTok{sigma,}\DecValTok{1}\NormalTok{))}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{head}\NormalTok{(x}\OperatorTok{$}\NormalTok{sigma,}\DecValTok{1}\NormalTok{))}
 \NormalTok{  \}}
 
 \NormalTok{pewma \textless{}{-}}\StringTok{ }\KeywordTok{do.call}\NormalTok{(data.frame, }
@@ -1177,7 +1170,7 @@ Fonte:Elaboração própria.
 \toprule
   & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-ewma & 0.034085 & 0.023709 & 0.075245 & 0.054579\\
+ewma & 0.017013 & 0.015718 & 0.0257 & 0.024053\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1236,7 +1229,9 @@ Fonte:Elaboração própria.
 \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{M)\{}
 \NormalTok{  monte\_carlo\_sim[[}\DecValTok{1}\NormalTok{,j]] \textless{}{-}}\StringTok{ }\NormalTok{TEF.preco\_inicial}
     \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\NormalTok{N)\{}
-\NormalTok{      monte\_carlo\_sim[[i,j]] \textless{}{-}}\StringTok{ }\NormalTok{monte\_carlo\_sim[[i}\DecValTok{{-}1}\NormalTok{,j]]}\OperatorTok{*}\KeywordTok{exp}\NormalTok{(TEF.MC.mean}\OperatorTok{+}\NormalTok{TEF.MC.sigma}\OperatorTok{*}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{252}\NormalTok{))}
+\NormalTok{      monte\_carlo\_sim[[i,j]] \textless{}{-}}\StringTok{ }\NormalTok{monte\_carlo\_sim[[i}\DecValTok{{-}1}\NormalTok{,j]]}\OperatorTok{*}
+\StringTok{        }\KeywordTok{exp}\NormalTok{(TEF.MC.mean}\OperatorTok{+}\NormalTok{TEF.MC.sigma }\OperatorTok{*}
+\StringTok{              }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{252}\NormalTok{))}
 \NormalTok{    \}}
 \NormalTok{\}}
 
@@ -1271,7 +1266,6 @@ Fonte:Elaboração própria.
 \end{Shaded}
 
 \normalsize
-
 \begin{table}[!h]
 
 \caption{\label{tab:unnamed-chunk-23}Valores simulados}
@@ -1280,13 +1274,13 @@ Fonte:Elaboração própria.
 \toprule
   & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
 \midrule
-75 & 4.188878 & 6.925697 & 11.62720 & 54.64831\\
-76 & 4.192417 & 6.915972 & 11.55361 & 54.42756\\
-77 & 4.216259 & 6.911018 & 11.50560 & 54.29371\\
-78 & 4.201474 & 6.873053 & 11.28486 & 53.56600\\
-79 & 4.202018 & 6.851637 & 11.15256 & 53.13935\\
+75 & 4.336042 & 6.978384 & 13.38802 & 58.25085\\
+76 & 4.338451 & 6.972270 & 13.47509 & 57.94058\\
+77 & 4.351331 & 6.969343 & 13.40925 & 58.01952\\
+78 & 4.344289 & 6.944320 & 13.44580 & 58.17967\\
+79 & 4.345151 & 6.930350 & 13.45456 & 58.10161\\
 \addlinespace
-80 & 4.195701 & 6.833317 & 11.03732 & 52.76993\\
+80 & 4.342470 & 6.918440 & 13.43255 & 58.03591\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1301,6 +1295,59 @@ Fonte:Elaboração própria.
 \hypertarget{portfolio-ewma}{%
 \subsection{Portfolio EWMA}\label{portfolio-ewma}}
 
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{SimReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
+\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
+\NormalTok{minvarewma \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturns) }
+\NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarewma)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-26}Pesos no portfolio}
+\centering
+\begin{tabular}[t]{lr}
+\toprule
+  & Pesos\\
+\midrule
+SimTEF & 0.3717284\\
+SimENEL & 0.3584272\\
+SimGLE & 0.1799806\\
+SimAIR & 0.0898637\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{optweights \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2939002}\NormalTok{, }\FloatTok{0.6052965}\NormalTok{, }\FloatTok{0.0698046}\NormalTok{, }\FloatTok{0.0309987}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_ewma \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturns, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweights, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_ewma}\OperatorTok{$}\NormalTok{contribution }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       SimTEF      SimENEL       SimGLE       SimAIR 
+## 5.277048e-04 1.479953e-03 6.238249e-05 5.393451e-05
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MVaRewma\_VaR \textless{}{-}}\StringTok{ }\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_ewma}\OperatorTok{$}\NormalTok{MVaR}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
 \hypertarget{garch}{%
 \section{GARCH}\label{garch}}
 
@@ -1309,7 +1356,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-24}TEF coeficientes}
+\caption{\label{tab:unnamed-chunk-28}TEF coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1333,7 +1380,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-25}Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-29}Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1356,7 +1403,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-26}Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-30}Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1400,7 +1447,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-28}ENEL coeficientes}
+\caption{\label{tab:unnamed-chunk-32}ENEL coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1424,7 +1471,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-29}ENEL Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-33}ENEL Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1447,7 +1494,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-30}ENEL Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-34}ENEL Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1491,7 +1538,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-32}GLE coeficientes}
+\caption{\label{tab:unnamed-chunk-36}GLE coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1517,7 +1564,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-33}GLE Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-37}GLE Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1540,7 +1587,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-34}GLE Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-38}GLE Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1584,7 +1631,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-36}AIR coeficientes}
+\caption{\label{tab:unnamed-chunk-40}AIR coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1611,7 +1658,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-37}AIR Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-41}AIR Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1634,7 +1681,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-38}AIR Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-42}AIR Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1673,12 +1720,126 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
+\hypertarget{simulauxe7uxe3o-garch}{%
+\subsection{Simulação GARCH}\label{simulauxe7uxe3o-garch}}
+
+\scriptsize
+
+\normalsize
+
+\scriptsize
+
+\normalsize
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/simgarch-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/simgarch-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/simgarch-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/simgarch-4} 
+
+}
+
+\caption{Simulação Monte Carlo para 80 dias}\label{fig:simgarch}
+\end{figure}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, median)}
+\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-50}GARCH - Valores simulados}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
+\midrule
+75 & 4.302669 & 6.898191 & 10.87305 & 55.74675\\
+76 & 4.295976 & 6.913417 & 10.79496 & 55.93433\\
+77 & 4.294854 & 6.925364 & 10.66950 & 56.29190\\
+78 & 4.269621 & 6.911978 & 10.62941 & 56.03433\\
+79 & 4.287504 & 6.916477 & 10.55421 & 55.39971\\
+\addlinespace
+80 & 4.287599 & 6.922461 & 10.52076 & 55.36995\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\hypertarget{portfolio-garch}{%
+\subsection{Portfolio GARCH}\label{portfolio-garch}}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{SimReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
+\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
+\NormalTok{minvarGARCH \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturns) }
+\NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarGARCH)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-53}GARCH - Pesos no portfolio}
+\centering
+\begin{tabular}[t]{lr}
+\toprule
+  & Pesos\\
+\midrule
+SimTEF & 0.2417921\\
+SimENEL & 0.6383109\\
+SimGLE & 0.0000000\\
+SimAIR & 0.1198970\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{optweights \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2417921}\NormalTok{, }\FloatTok{0.6383109}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.1198970}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_GARCH \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturns, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweights, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_GARCH}\OperatorTok{$}\NormalTok{contribution }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       SimTEF      SimENEL       SimGLE       SimAIR 
+## 0.0006355425 0.0013987753 0.0000000000 0.0002691519
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MVaRGARCH\_VaR \textless{}{-}}\StringTok{ }\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_GARCH}\OperatorTok{$}\NormalTok{MVaR}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
 \hypertarget{volatilidade-implicita}{%
 \section{Volatilidade implicita}\label{volatilidade-implicita}}
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{image/opcao} 
+{\centering \includegraphics[width=1\linewidth]{image/opcao} 
 
 }
 
@@ -1694,16 +1855,15 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-40}Volatilidade Implícita}
+\caption{\label{tab:unnamed-chunk-55}Volatilidade Implícita}
 \centering
-\resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lrrrr}
 \toprule
   & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
 Volatilidade implícita & 0.037038 & 0.030534 & 0.053162 & 0.052567\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
 \FloatBarrier
 \centering
@@ -1712,6 +1872,120 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+\hypertarget{simulauxe7uxe3o-volatilidade-implicita}{%
+\subsection{Simulação Volatilidade implicita}\label{simulauxe7uxe3o-volatilidade-implicita}}
+
+\scriptsize
+
+\normalsize
+
+\scriptsize
+
+\normalsize
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/simvi-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/simvi-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/simvi-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/simvi-4} 
+
+}
+
+\caption{Simulação Monte Carlo para 80 dias}\label{fig:simvi}
+\end{figure}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, median)}
+\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-62}Vol. Implicita - Valores simulados}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
+\midrule
+75 & 4.253632 & 6.865796 & 12.55420 & 52.50080\\
+76 & 4.270586 & 6.850759 & 12.51728 & 52.27566\\
+77 & 4.299808 & 6.866648 & 12.54283 & 52.50673\\
+78 & 4.286894 & 6.820148 & 12.64984 & 53.23140\\
+79 & 4.272550 & 6.844515 & 12.57552 & 52.28541\\
+\addlinespace
+80 & 4.238196 & 6.833332 & 12.37838 & 52.66406\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\hypertarget{portfolio-volatilidade-uxedmplicita}{%
+\subsection{Portfolio volatilidade ímplicita}\label{portfolio-volatilidade-uxedmplicita}}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{SimReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
+\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
+\NormalTok{minvarVI \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturns) }
+\NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarVI)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-65}Vol Implicita- Pesos no portfolio}
+\centering
+\begin{tabular}[t]{lr}
+\toprule
+  & Pesos\\
+\midrule
+SimTEF & 0.3086148\\
+SimENEL & 0.4442713\\
+SimGLE & 0.1409448\\
+SimAIR & 0.1061691\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{optweights \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.3086148}\NormalTok{, }\FloatTok{0.4442713}\NormalTok{, }\FloatTok{0.1409448}\NormalTok{, }\FloatTok{0.1061691}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_VI \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturns, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweights, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_VI}\OperatorTok{$}\NormalTok{contribution }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       SimTEF      SimENEL       SimGLE       SimAIR 
+## 0.0011525341 0.0016437382 0.0009126103 0.0004161308
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MVaRVI\_VaR \textless{}{-}}\StringTok{ }\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_VI}\OperatorTok{$}\NormalTok{MVaR}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
 
 \hypertarget{conclusuxe3o}{%
 \chapter*{Conclusão}\label{conclusuxe3o}}

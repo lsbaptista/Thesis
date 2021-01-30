@@ -37,6 +37,12 @@ library(kableExtra)
 library(xlsx)
 library(tidyverse)
 library(RQuantLib)
+library(tseries)
+library(timeSeries)
+library(fPortfolio)
+library(caTools)
+library(dygraphs)
+library(portfolio.optimization)
 ```
 
 ## Análise descritiva dos dados
@@ -277,7 +283,7 @@ Fonte:Elaboração própria.
 ```{r}
 ewma <- function(x) {  
   x<-ewmaVol(x,lambda = 0.94)
-  return(tail(x$sigma,1))
+  return(head(x$sigma,1))
   }
 
 pewma <- do.call(data.frame, 
@@ -386,7 +392,7 @@ GLE.preco_inicial <- GLE.PA$Close[[nrow(GLE.PA$Close)]]
 GLE.PA.sigma <- dfewma$GLE.RET*sqrt(252)
 GLE.PA.mean <- (mu-(GLE.PA.sigma^2)/2)*(1/252)
 
-set.seed(2)
+set.seed(3)
 GLE_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   GLE_monte_carlo_sim[[1,j]] <- GLE.preco_inicial
@@ -406,7 +412,7 @@ AIR.preco_inicial <- AIR.PA$Close[[nrow(AIR.PA$Close)]]
 AIR.PA.sigma <- dfewma$AIR.RET*sqrt(252)
 AIR.PA.mean <- (mu-(AIR.PA.sigma^2)/2)*(1/252)
 
-set.seed(2)
+set.seed(4)
 AIR_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   AIR_monte_carlo_sim[[1,j]] <- AIR.preco_inicial
@@ -438,8 +444,8 @@ M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,median )
 M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,median )
 M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
 ```
-\normalsize
 
+\normalsize
 ```{r,echo=FALSE}
 SimEWMA <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
 SimEWMAk<- knitr::kable(
@@ -453,12 +459,54 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-
 ### Portfolio EWMA
 
+```{r,echo=FALSE}
+SimDate<-read_xlsx ("data/date.xlsx")
+SDate<- as.Date(SimDate$Date)
+SimTEF <- as.numeric(SimEWMA$M.TEF.MC)
+SimTEF.MC <-xts(SimTEF,SDate)
+SimENEL <- as.numeric(SimEWMA$M.ENEL.MI)
+SimENEL.MI <-xts(SimENEL,SDate)
+SimGLE <- as.numeric(SimEWMA$M.GLE.PA)
+SimGLE.PA <-xts(SimGLE,SDate)
+SimAIR <- as.numeric(SimEWMA$M.AIR.PA)
+SimAIR.PA <-xts(SimAIR,SDate)
+
+myPortfolio <-na.omit(merge(SimTEF.MC,SimENEL.MI,SimGLE.PA,SimAIR.PA))
+
+myPortfolioReturns <- ROC(myPortfolio,type="discrete")[-1,]
+colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
+```
 
 
+\scriptsize
+```{r}
+set.seed(10)
+SimReturns <- as.timeSeries(myPortfolioReturns)
+#returns the portfolio with the minimal risk on the efficient frontier
+minvarewma <- minvariancePortfolio(SimReturns) 
+minew<-getPortfolio(minvarewma)
+```
+\normalsize
 
+```{r,echo=FALSE}
+minewma<- as.data.frame(minew$weights)
+colnames(minewma)<- c("Pesos")
+minewmak<- knitr::kable(
+minewma, caption = "Pesos no portfolio",
+booktabs = TRUE)
+kable_styling(minewmak , latex_options = "hold_position", position = "center")
+```
+
+\scriptsize
+```{r}
+optweights <- c(0.2939002, 0.6052965, 0.0698046, 0.0309987)
+ModVaR_95_ewma <- VaR(myPortfolioReturns, p=0.95,weights=optweights, portfolio_method = "component", method = "modified")
+ModVaR_95_ewma$contribution 
+MVaRewma_VaR <- ModVaR_95_ewma$MVaR
+```
+\normalsize
 
 ## GARCH
 
@@ -662,7 +710,7 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-```{r,GLEplot,echo=FALSE, fig.cap='ENEL',fig.topcaption = TRUE,out.width = "100%"}
+```{r,GLEplot,echo=FALSE, fig.cap='SOCIÉTÉ GÉNÉRALE',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
   plot(GLE,which= 2)
   plot(GLE,which= 3)
@@ -681,7 +729,7 @@ GLEsd <- GLE@sigma.t
 GLEvol <- tail(GLEsd,1)
 ```
 
-### Airbus
+### AIRBUS
 
 ```{r,echo=FALSE,warning = FALSE}
 AIR<-garchFit(formula = ~ arma(1,1) + garch(1,1),data=returns$AIR.RET,cond.dist = "std", trace=FALSE)
@@ -735,7 +783,7 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-```{r,AIRplot,echo=FALSE, fig.cap='ENEL',fig.topcaption = TRUE,out.width = "100%"}
+```{r,AIRplot,echo=FALSE, fig.cap='AIRBUS',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
   plot(AIR,which= 2)
   plot(AIR,which= 3)
@@ -753,6 +801,186 @@ Fonte:Elaboração própria.
 AIRsd <- AIR@sigma.t
 AIRvol <- tail(AIRsd,1)
 ```
+
+### Simulação GARCH
+
+\scriptsize
+```{r,echo=FALSE}
+dfewma <- as.data.frame(pewma)
+
+N <- 80
+dia <- 1:N
+M <- 1000
+mu <- -0.00575
+```
+\normalsize
+
+\scriptsize
+```{r,echo=FALSE, warning=FALSE}
+TEF.preco_inicial <- TEF.MC$Close[[nrow(TEF.MC$Close)]]
+TEF.MC.sigma <- TEFvol*sqrt(252)
+TEF.MC.mean <- (mu-(TEF.MC.sigma^2)/2)*(1/252)
+
+set.seed(12)
+monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  monte_carlo_sim[[1,j]] <- TEF.preco_inicial
+    for(i in 2:N){
+      monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*
+        exp(TEF.MC.mean+TEF.MC.sigma *
+              rnorm(1,0,1)*sqrt(1/252))
+    }
+}
+
+TEF.MC_MC_sim <- as_tibble(cbind(dia,monte_carlo_sim))
+w <- str_c('Sim',seq(1,M))
+w <- c('Dia',w)
+names(TEF.MC_MC_sim) <- w
+TEF.MC_MC_sim <- gather(TEF.MC_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+\normalsize
+
+```{r,echo=FALSE, warning=FALSE}
+ENEL.preco_inicial <- ENEL.MI$Close[[nrow(ENEL.MI$Close)]]
+ENEL.MI.sigma <- ENELvol*sqrt(252)
+ENEL.MI.mean <- (mu-(ENEL.MI.sigma^2)/2)*(1/252)
+
+set.seed(15)
+ENEL_monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  ENEL_monte_carlo_sim[[1,j]] <- ENEL.preco_inicial
+    for(i in 2:N){
+      ENEL_monte_carlo_sim[[i,j]] <- ENEL_monte_carlo_sim[[i-1,j]]*exp(ENEL.MI.mean+ENEL.MI.sigma * rnorm(1,0,1)*sqrt(1/252))
+    }
+  }
+ENEL.MI_MC_sim <- as_tibble(cbind(dia,ENEL_monte_carlo_sim))
+w1 <- str_c('Sim',seq(1,M))
+w1 <- c('Dia',w1)
+names(ENEL.MI_MC_sim) <- w1
+ENEL.MI_MC_sim <- gather(ENEL.MI_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+
+```{r,echo=FALSE, warning=FALSE}
+GLE.preco_inicial <- GLE.PA$Close[[nrow(GLE.PA$Close)]]
+GLE.PA.sigma <- GLEvol*sqrt(252)
+GLE.PA.mean <- (mu-(GLE.PA.sigma^2)/2)*(1/252)
+
+set.seed(16)
+GLE_monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  GLE_monte_carlo_sim[[1,j]] <- GLE.preco_inicial
+    for(i in 2:N){
+      GLE_monte_carlo_sim[[i,j]] <- GLE_monte_carlo_sim[[i-1,j]]*exp(GLE.PA.mean+GLE.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
+    }
+  }
+GLE.PA_MC_sim <- as_tibble(cbind(dia,GLE_monte_carlo_sim))
+w2 <- str_c('Sim',seq(1,M))
+w2 <- c('Dia',w2)
+names(GLE.PA_MC_sim) <- w2
+GLE.PA_MC_sim <- gather(GLE.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+
+```{r,echo=FALSE, warning=FALSE}
+AIR.preco_inicial <- AIR.PA$Close[[nrow(AIR.PA$Close)]]
+AIR.PA.sigma <- AIRvol*sqrt(252)
+AIR.PA.mean <- (mu-(AIR.PA.sigma^2)/2)*(1/252)
+
+set.seed(17)
+AIR_monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  AIR_monte_carlo_sim[[1,j]] <- AIR.preco_inicial
+    for(i in 2:N){
+      AIR_monte_carlo_sim[[i,j]] <- AIR_monte_carlo_sim[[i-1,j]]*exp(AIR.PA.mean+AIR.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
+    }
+  }
+AIR.PA_MC_sim <- as_tibble(cbind(dia,AIR_monte_carlo_sim))
+w3 <- str_c('Sim',seq(1,M))
+w3 <- c('Dia',w3)
+names(AIR.PA_MC_sim) <- w3
+AIR.PA_MC_sim <- gather(AIR.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+
+
+```{r,simgarch,echo=FALSE, fig.cap='Simulação Monte Carlo para 80 dias',fig.topcaption = TRUE,out.width = "45%"}
+
+par(mfrow  = c(2,2))
+    ggplot(TEF.MC_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("TEF: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+    ggplot(ENEL.MI_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("ENEL: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+     ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+       ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+```
+
+\scriptsize
+```{r}
+M.TEF.MC <- apply(monte_carlo_sim, 1, median)
+M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,median )
+M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,median )
+M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
+```
+
+\normalsize
+```{r,echo=FALSE}
+SimGARCH <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
+SimGARCHk<- knitr::kable(
+tail(SimGARCH), caption = "GARCH - Valores simulados",
+booktabs = TRUE)
+kable_styling(SimGARCHk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+### Portfolio GARCH
+
+```{r,echo=FALSE}
+SimDate<-read_xlsx ("data/date.xlsx")
+SDate<- as.Date(SimDate$Date)
+SimTEF <- as.numeric(SimGARCH$M.TEF.MC)
+SimTEF.MC <-xts(SimTEF,SDate)
+SimENEL <- as.numeric(SimGARCH$M.ENEL.MI)
+SimENEL.MI <-xts(SimENEL,SDate)
+SimGLE <- as.numeric(SimGARCH$M.GLE.PA)
+SimGLE.PA <-xts(SimGLE,SDate)
+SimAIR <- as.numeric(SimGARCH$M.AIR.PA)
+SimAIR.PA <-xts(SimAIR,SDate)
+
+myPortfolio <-na.omit(merge(SimTEF.MC,SimENEL.MI,SimGLE.PA,SimAIR.PA))
+
+myPortfolioReturns <- ROC(myPortfolio,type="discrete")[-1,]
+colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
+```
+
+
+\scriptsize
+```{r}
+set.seed(10)
+SimReturns <- as.timeSeries(myPortfolioReturns)
+#returns the portfolio with the minimal risk on the efficient frontier
+minvarGARCH <- minvariancePortfolio(SimReturns) 
+minew<-getPortfolio(minvarGARCH)
+```
+\normalsize
+
+```{r,echo=FALSE}
+minGARCH<- as.data.frame(minew$weights)
+colnames(minGARCH)<- c("Pesos")
+minGARCHk<- knitr::kable(
+minGARCH, caption = "GARCH - Pesos no portfolio",
+booktabs = TRUE)
+kable_styling(minGARCHk , latex_options = "hold_position", position = "center")
+```
+
+\scriptsize
+```{r}
+optweights <- c(0.2417921, 0.6383109, 0, 0.1198970)
+ModVaR_95_GARCH <- VaR(myPortfolioReturns, p=0.95,weights=optweights, portfolio_method = "component", method = "modified")
+ModVaR_95_GARCH$contribution 
+MVaRGARCH_VaR <- ModVaR_95_GARCH$MVaR
+```
+\normalsize
 
 ## Volatilidade implicita
 
@@ -782,6 +1010,7 @@ pimpvol<-cbind(TEFImp,ENELImp,SOGImp,AIRImp)
 colnames(pimpvol)<-c("TEF.RET","ENEL.RET","GLE.RET","AIR.RET")
 rownames(pimpvol)<-"Volatilidade implícita"
 
+pimpvol <- as.data.frame(pimpvol)
 pimpvolk<- knitr::kable(
 pimpvol, caption = "Volatilidade Implícita",
 booktabs = TRUE)
@@ -793,3 +1022,183 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+### Simulação Volatilidade implicita
+
+\scriptsize
+```{r,echo=FALSE}
+dfewma <- as.data.frame(pewma)
+
+N <- 80
+dia <- 1:N
+M <- 1000
+mu <- -0.00575
+```
+\normalsize
+
+\scriptsize
+```{r,echo=FALSE, warning=FALSE}
+TEF.preco_inicial <- TEF.MC$Close[[nrow(TEF.MC$Close)]]
+TEF.MC.sigma <- pimpvol$TEF.RET*sqrt(252)
+TEF.MC.mean <- (mu-(TEF.MC.sigma^2)/2)*(1/252)
+
+set.seed(21)
+monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  monte_carlo_sim[[1,j]] <- TEF.preco_inicial
+    for(i in 2:N){
+      monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*
+        exp(TEF.MC.mean+TEF.MC.sigma *
+              rnorm(1,0,1)*sqrt(1/252))
+    }
+}
+
+TEF.MC_MC_sim <- as_tibble(cbind(dia,monte_carlo_sim))
+w <- str_c('Sim',seq(1,M))
+w <- c('Dia',w)
+names(TEF.MC_MC_sim) <- w
+TEF.MC_MC_sim <- gather(TEF.MC_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+\normalsize
+
+```{r,echo=FALSE, warning=FALSE}
+ENEL.preco_inicial <- ENEL.MI$Close[[nrow(ENEL.MI$Close)]]
+ENEL.MI.sigma <- pimpvol$ENEL.RET*sqrt(252)
+ENEL.MI.mean <- (mu-(ENEL.MI.sigma^2)/2)*(1/252)
+
+set.seed(22)
+ENEL_monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  ENEL_monte_carlo_sim[[1,j]] <- ENEL.preco_inicial
+    for(i in 2:N){
+      ENEL_monte_carlo_sim[[i,j]] <- ENEL_monte_carlo_sim[[i-1,j]]*exp(ENEL.MI.mean+ENEL.MI.sigma * rnorm(1,0,1)*sqrt(1/252))
+    }
+  }
+ENEL.MI_MC_sim <- as_tibble(cbind(dia,ENEL_monte_carlo_sim))
+w1 <- str_c('Sim',seq(1,M))
+w1 <- c('Dia',w1)
+names(ENEL.MI_MC_sim) <- w1
+ENEL.MI_MC_sim <- gather(ENEL.MI_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+
+```{r,echo=FALSE, warning=FALSE}
+GLE.preco_inicial <- GLE.PA$Close[[nrow(GLE.PA$Close)]]
+GLE.PA.sigma <- pimpvol$GLE.RET*sqrt(252)
+GLE.PA.mean <- (mu-(GLE.PA.sigma^2)/2)*(1/252)
+
+set.seed(23)
+GLE_monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  GLE_monte_carlo_sim[[1,j]] <- GLE.preco_inicial
+    for(i in 2:N){
+      GLE_monte_carlo_sim[[i,j]] <- GLE_monte_carlo_sim[[i-1,j]]*exp(GLE.PA.mean+GLE.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
+    }
+  }
+GLE.PA_MC_sim <- as_tibble(cbind(dia,GLE_monte_carlo_sim))
+w2 <- str_c('Sim',seq(1,M))
+w2 <- c('Dia',w2)
+names(GLE.PA_MC_sim) <- w2
+GLE.PA_MC_sim <- gather(GLE.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+
+```{r,echo=FALSE, warning=FALSE}
+AIR.preco_inicial <- AIR.PA$Close[[nrow(AIR.PA$Close)]]
+AIR.PA.sigma <- pimpvol$AIR.RET*sqrt(252)
+AIR.PA.mean <- (mu-(AIR.PA.sigma^2)/2)*(1/252)
+
+set.seed(24)
+AIR_monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  AIR_monte_carlo_sim[[1,j]] <- AIR.preco_inicial
+    for(i in 2:N){
+      AIR_monte_carlo_sim[[i,j]] <- AIR_monte_carlo_sim[[i-1,j]]*exp(AIR.PA.mean+AIR.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
+    }
+  }
+AIR.PA_MC_sim <- as_tibble(cbind(dia,AIR_monte_carlo_sim))
+w3 <- str_c('Sim',seq(1,M))
+w3 <- c('Dia',w3)
+names(AIR.PA_MC_sim) <- w3
+AIR.PA_MC_sim <- gather(AIR.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+
+
+```{r,simvi,echo=FALSE, fig.cap='Simulação Monte Carlo para 80 dias',fig.topcaption = TRUE,out.width = "45%"}
+
+par(mfrow  = c(2,2))
+    ggplot(TEF.MC_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("TEF: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+    ggplot(ENEL.MI_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("ENEL: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+     ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+       ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+```
+
+\scriptsize
+```{r}
+M.TEF.MC <- apply(monte_carlo_sim, 1, median)
+M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,median )
+M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,median )
+M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
+```
+
+\normalsize
+```{r,echo=FALSE}
+SimVI <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
+SimVIk<- knitr::kable(
+tail(SimVI), caption = "Vol. Implicita - Valores simulados",
+booktabs = TRUE)
+kable_styling(SimVIk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+### Portfolio volatilidade ímplicita
+
+```{r,echo=FALSE}
+SimDate<-read_xlsx ("data/date.xlsx")
+SDate<- as.Date(SimDate$Date)
+SimTEF <- as.numeric(SimVI$M.TEF.MC)
+SimTEF.MC <-xts(SimTEF,SDate)
+SimENEL <- as.numeric(SimVI$M.ENEL.MI)
+SimENEL.MI <-xts(SimENEL,SDate)
+SimGLE <- as.numeric(SimVI$M.GLE.PA)
+SimGLE.PA <-xts(SimGLE,SDate)
+SimAIR <- as.numeric(SimVI$M.AIR.PA)
+SimAIR.PA <-xts(SimAIR,SDate)
+
+myPortfolio <-na.omit(merge(SimTEF.MC,SimENEL.MI,SimGLE.PA,SimAIR.PA))
+
+myPortfolioReturns <- ROC(myPortfolio,type="discrete")[-1,]
+colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
+```
+
+
+\scriptsize
+```{r}
+set.seed(10)
+SimReturns <- as.timeSeries(myPortfolioReturns)
+#returns the portfolio with the minimal risk on the efficient frontier
+minvarVI <- minvariancePortfolio(SimReturns) 
+minew<-getPortfolio(minvarVI)
+```
+\normalsize
+
+```{r,echo=FALSE}
+minVI<- as.data.frame(minew$weights)
+colnames(minVI)<- c("Pesos")
+minVIk<- knitr::kable(
+minVI, caption = "Vol Implicita- Pesos no portfolio",
+booktabs = TRUE)
+kable_styling(minVIk , latex_options = "hold_position", position = "center")
+```
+
+\scriptsize
+```{r}
+optweights <- c(0.3086148, 0.4442713, 0.1409448, 0.1061691)
+ModVaR_95_VI <- VaR(myPortfolioReturns, p=0.95,weights=optweights, portfolio_method = "component", method = "modified")
+ModVaR_95_VI$contribution 
+MVaRVI_VaR <- ModVaR_95_VI$MVaR
+```
+\normalsize

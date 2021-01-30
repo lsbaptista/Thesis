@@ -23,12 +23,16 @@
 \contentsline {section}{\numberline {3.3}EWMA}{34}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Simulação EWMA}{35}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Portfolio EWMA}{37}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}GARCH}{37}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}TELEFÓNICA}{37}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.4}GARCH}{38}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}TELEFÓNICA}{38}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}ENEL}{39}{subsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.4.3}SOCIÉTE GÉNÉRALE}{41}{subsection.3.4.3}%
 \contentsline {subsection}{\numberline {3.4.4}Airbus}{43}{subsection.3.4.4}%
-\contentsline {section}{\numberline {3.5}Volatilidade implicita}{45}{section.3.5}%
-\contentsline {chapter}{Conclusão}{47}{chapter*.49}%
-\contentsline {chapter}{Bibliografia}{48}{chapter*.50}%
-\contentsline {part}{Apêndices}{51}{part*.51}%
+\contentsline {subsection}{\numberline {3.4.5}Simulação GARCH}{45}{subsection.3.4.5}%
+\contentsline {subsection}{\numberline {3.4.6}Portfolio GARCH}{46}{subsection.3.4.6}%
+\contentsline {section}{\numberline {3.5}Volatilidade implicita}{47}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Simulação Volatilidade implicita}{47}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Portfolio volatilidade ímplicita}{49}{subsection.3.5.2}%
+\contentsline {chapter}{Conclusão}{50}{chapter*.56}%
+\contentsline {chapter}{Bibliografia}{51}{chapter*.57}%
+\contentsline {part}{Apêndices}{54}{part*.58}%
