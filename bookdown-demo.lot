@@ -10,16 +10,17 @@
 \contentsline {table}{\numberline {3.6}{\ignorespaces Estatísticas dos retornos\relax }}{31}{table.caption.22}%
 \contentsline {table}{\numberline {3.7}{\ignorespaces Teste normalidade Shapiro-Wilk\relax }}{33}{table.caption.26}%
 \contentsline {table}{\numberline {3.8}{\ignorespaces EWMA\relax }}{33}{table.caption.27}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces TEF coeficientes\relax }}{34}{table.caption.29}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces Information Criterion Statistics\relax }}{35}{table.caption.30}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces Standardized Residuals Tests\relax }}{35}{table.caption.31}%
-\contentsline {table}{\numberline {3.12}{\ignorespaces UNA coeficientes\relax }}{36}{table.caption.33}%
-\contentsline {table}{\numberline {3.13}{\ignorespaces UNA Information Criterion Statistics\relax }}{37}{table.caption.34}%
-\contentsline {table}{\numberline {3.14}{\ignorespaces UNA Standardized Residuals Tests\relax }}{37}{table.caption.35}%
-\contentsline {table}{\numberline {3.15}{\ignorespaces GLE coeficientes\relax }}{38}{table.caption.37}%
-\contentsline {table}{\numberline {3.16}{\ignorespaces GLE Information Criterion Statistics\relax }}{39}{table.caption.38}%
-\contentsline {table}{\numberline {3.17}{\ignorespaces GLE Standardized Residuals Tests\relax }}{39}{table.caption.39}%
-\contentsline {table}{\numberline {3.18}{\ignorespaces AIR coeficientes\relax }}{40}{table.caption.41}%
-\contentsline {table}{\numberline {3.19}{\ignorespaces AIR Information Criterion Statistics\relax }}{41}{table.caption.42}%
-\contentsline {table}{\numberline {3.20}{\ignorespaces AIR Standardized Residuals Tests\relax }}{41}{table.caption.43}%
-\contentsline {table}{\numberline {3.21}{\ignorespaces Volatilidade Implícita\relax }}{43}{table.caption.46}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Valores simulados\relax }}{36}{table.caption.30}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces TEF coeficientes\relax }}{36}{table.caption.31}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Information Criterion Statistics\relax }}{37}{table.caption.32}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Standardized Residuals Tests\relax }}{37}{table.caption.33}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces ENEL coeficientes\relax }}{38}{table.caption.35}%
+\contentsline {table}{\numberline {3.14}{\ignorespaces ENEL Information Criterion Statistics\relax }}{39}{table.caption.36}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces ENEL Standardized Residuals Tests\relax }}{39}{table.caption.37}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces GLE coeficientes\relax }}{40}{table.caption.39}%
+\contentsline {table}{\numberline {3.17}{\ignorespaces GLE Information Criterion Statistics\relax }}{41}{table.caption.40}%
+\contentsline {table}{\numberline {3.18}{\ignorespaces GLE Standardized Residuals Tests\relax }}{41}{table.caption.41}%
+\contentsline {table}{\numberline {3.19}{\ignorespaces AIR coeficientes\relax }}{42}{table.caption.43}%
+\contentsline {table}{\numberline {3.20}{\ignorespaces AIR Information Criterion Statistics\relax }}{43}{table.caption.44}%
+\contentsline {table}{\numberline {3.21}{\ignorespaces AIR Standardized Residuals Tests\relax }}{43}{table.caption.45}%
+\contentsline {table}{\numberline {3.22}{\ignorespaces Volatilidade Implícita\relax }}{44}{table.caption.48}%

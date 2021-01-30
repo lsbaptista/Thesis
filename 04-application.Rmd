@@ -4,6 +4,7 @@
 
 ## Introdução
 ```{r,include=FALSE}
+Sys.setlocale("LC_ALL","English")
 rm(list = ls())
 knitr::opts_chunk$set(tidy=FALSE, message = FALSE,warning =  FALSE,fig.align = "center",fig.show = "hold")
 #install.packages("https://cran.r-project.org/src/contrib/Archive/fGarch/fGarch_3042.83.1.tar.gz", #repo=NULL, type="source")
@@ -18,6 +19,9 @@ knitr::opts_chunk$set(tidy=FALSE, message = FALSE,warning =  FALSE,fig.align = "
 #install.packages("stats")
 #install.packages("portes")
 #install.packages("reshape2")
+#install.packages("Quandl")
+library(readxl)
+library(Quandl)
 library(reshape2)
 library(portes)
 library(stats)
@@ -49,9 +53,14 @@ Fonte: Elaboração própria.
 \bigskip
 \scriptsize
 ```{r}
-#leitura de simbolos dos activos financeiros
-symbolsEU <- c("TEF.MC","UNA.AS",'GLE.PA',"AIR.PA")
-getSymbols(symbolsEU,src = "yahoo", from="2016-06-01", to="2020-06-02")
+TEF.MC<-read_xlsx ("data/TEF.MC.xlsx")
+TEF.MC <- xts(TEF.MC[, -1], order.by=as.Date(TEF.MC$Date))
+GLE.PA<-read_xlsx ("data/GLE.PA.xlsx")
+GLE.PA <- xts(GLE.PA[, -1], order.by=as.Date(GLE.PA$Date))
+ENEL.MI<-read_xlsx ("data/ENEL.MI.xlsx")
+ENEL.MI <- xts(ENEL.MI[, -1], order.by=as.Date(ENEL.MI$Date))
+AIR.PA<-read_xlsx ("data/AIR.PA.xlsx")
+AIR.PA <- xts(AIR.PA[, -1], order.by=as.Date(AIR.PA$Date))
 ```
 \normalsize
 
@@ -60,7 +69,7 @@ gle<-tail(GLE.PA)
 gle <- knitr::kable(
 gle, caption = "Société Générale.Euronext Paris-25-05-2020/01-06-2020",
 booktabs = TRUE)
-kable_styling(gle, latex_options = c("hold_position","scale_down"), position = "center")
+kable_styling(gle, latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
 \centering 
@@ -72,7 +81,7 @@ Fonte:https://finance.yahoo.com/
 ```{r,cotacao,echo=FALSE, fig.cap='Evolução das cotações nos últimos 5 anos',fig.topcaption = TRUE,out.width = "45%"}
 par(mfrow  = c(2,2))
   chartSeries(TEF.MC,theme = chartTheme("white"))
-  chartSeries(UNA.AS,theme = chartTheme("white"))
+  chartSeries(ENEL.MI,theme = chartTheme("white"))
   chartSeries(GLE.PA,theme = chartTheme("white"))
   chartSeries(AIR.PA,theme = chartTheme("white"))
 ```
@@ -84,8 +93,9 @@ Fonte: Elaboração própria.
 \bigskip
 
 ```{r,echo=FALSE}
-newdata <- merge(TEF.MC$TEF.MC.Adjusted,UNA.AS$UNA.AS.Adjusted,GLE.PA$GLE.PA.Adjusted,AIR.PA$AIR.PA.Adjusted)
+newdata <- merge(TEF.MC$`Adj Close`,ENEL.MI$`Adj Close`,GLE.PA$`Adj Close`,AIR.PA$`Adj Close`)
 newdata <- na.omit(newdata)
+colnames(newdata) <- c("TEF.MC","ENEL.MI","GLE.PA","AIR.PA")
 adj <- tail(newdata)
 adj <- knitr::kable(
 adj, caption = "Cotações a preços ajustados-25-05-2020/01-06-2020",
@@ -113,10 +123,9 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 ```{r,echo=FALSE}
-returns <- as.xts(data.frame(round(dailyReturn(newdata$TEF.MC.Adjusted,type="log"),4),round(dailyReturn(newdata$UNA.AS.Adjusted,type="log"),4),round(dailyReturn(newdata$GLE.PA.Adjusted,type="log"),4),round(dailyReturn(newdata$AIR.PA.Adjusted,type="log"),4)))
+returns <- as.xts(data.frame(round(dailyReturn(newdata$TEF.MC,type="log"),4),round(dailyReturn(newdata$ENEL.MI,type="log"),4),round(dailyReturn(newdata$GLE.PA,type="log"),4),round(dailyReturn(newdata$AIR.PA,type="log"),4)))
 returns <- returns[-1,]
-#dim(returns)
-colnames(returns)<-c("TEF.RET","UNA.RET","GLE.RET","AIR.RET")
+colnames(returns)<-c("TEF.RET","ENEL.RET","GLE.RET","AIR.RET")
 ret <- tail(returns)
 retv <- knitr::kable(
 ret, caption = "Retornos logarítmicos diários-25-05-2020/01-06-2020",
@@ -172,7 +181,7 @@ Fonte:Elaboração própria.
 par(mfrow  = c(2,2))
   autoplot(returns$TEF.RET,ts.colour = 'darkgreen') + ggtitle("TELEFÓNICA") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
-  autoplot(returns$UNA.RET,ts.colour = 'darkgreen') + ggtitle("UNILEVER") + 
+  autoplot(returns$ENEL.RET,ts.colour = 'darkgreen') + ggtitle("ENEL") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
   autoplot(returns$GLE.RET,ts.colour = 'darkgreen') + ggtitle("SOCIÉTÉ GÉNÉRALE") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
@@ -189,10 +198,10 @@ Fonte:Elaboração própria.
 par(mfrow  = c(2,2))
   hist(returns$TEF.RET,probability=T, main="TELEFÓNICA",xlab="",breaks=100)
   lines(density(returns$TEF.RET),col=2)
-  curve(dnorm(x,0,0.01695272), from = -0.06,to=0.06, col='blue',add = TRUE)
-  hist(returns$UNA.RET,probability=T, main="UNILEVER",xlab="",breaks=100)
-  lines(density(returns$UNA.RET),col=2)
-  curve(dnorm(x,0,0.01298968), from = -0.05,to=0.05, col='blue',add = TRUE)
+  curve(dnorm(x,0,0.01695272), from = -0.15,to=0.15, col='blue',add = TRUE)
+  hist(returns$ENEL.RET,probability=T, main="ENEL",xlab="",breaks=100)
+  lines(density(returns$ENEL.RET),col=2)
+  curve(dnorm(x,0,0.01571777), from = -0.05,to=0.05, col='blue',add = TRUE)
   hist(returns$GLE.RET,probability=T, main="SOCIÉTÉ GÉNÉRALE",xlab="",breaks=100)
   lines(density(returns$GLE.RET),col=2)
   curve(dnorm(x,0,0.02557792), from = -0.1,to=0.1, col='blue',add = TRUE)
@@ -210,8 +219,8 @@ Fonte:Elaboração própria.
 par(mfrow  = c(2,2))
   qqnorm(returns$TEF.RET,main="TELEFÓNICA",pch=14)
   qqline(returns$TEF.RET)
-  qqnorm(returns$UNA.RET,main="UNILEVER",pch=14)
-  qqline(returns$UNA.RET)
+  qqnorm(returns$ENEL.RET,main="ENEL",pch=14)
+  qqline(returns$ENEL.RET)
   qqnorm(returns$GLE.RET,main="SOCIÉTÉ GÉNÉRALE",pch=14)
   qqline(returns$GLE.RET)
   qqnorm(returns$AIR.RET,main="AIRBUS",pch=14)
@@ -248,7 +257,7 @@ ewma <- function(x) {
 
 pewma <- do.call(data.frame, 
                     list("ewma"= round(apply(returns, 2,ewma),6)))
-        
+
 pewma<-t(pewma)
 pewmak<- knitr::kable(
 pewma, caption = "EWMA",
@@ -264,23 +273,20 @@ Fonte:Elaboração própria.
 
 ```{r,TELp,echo=FALSE, fig.cap='EWMA',fig.topcaption = TRUE,out.width = "90%"}
 TEFew <- ewmaVol(returns$TEF.RET,lambda = 0.94)
-UNAew <- ewmaVol(returns$UNA.RET,lambda = 0.94)
+ENELew <- ewmaVol(returns$ENEL.RET,lambda = 0.94)
 GLEew <- ewmaVol(returns$GLE.RET,lambda = 0.94)
 AIRew <- ewmaVol(returns$AIR.RET,lambda = 0.94)
 
 par(mfrow  = c(2,2))
   TEL1<-plot(returns$TEF.RET,type="l",main="Telefónica", col="green")
-  TEL2<-lines(TEFew$sigma,col="red")
-  TEL2
-  TEL3<-plot(returns$UNA.RET,type="l",main="Unilever",col="green")
-  TEL4<-lines(UNAew$sigma,col="red")
-  TEL4
+  lines(TEFew$sigma,col="red")
+  TEL3<-plot(returns$ENEL.RET,type="l",main="ENEL",col="green")
+  lines(ENELew$sigma,col="red")
   TEL5<-plot(returns$GLE.RET,type="l",main="SoGen",col="green")
-  TEL6<-lines(GLEew$sigma,col="red")
-  TEL6
+  lines(GLEew$sigma,col="red")
   TEL7<-plot(returns$AIR.RET,type="l",main="Airbus",col="green")
-  TEL8<-lines(AIRew$sigma,col="red")
-  TEL8
+  lines(AIRew$sigma,col="red")
+
 ```
 \FloatBarrier
 \centering 
@@ -288,6 +294,130 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+### Simulação EWMA
+
+```{r}
+dfewma <- as.data.frame(pewma)
+
+N <- 80
+dia <- 1:N
+M <- 1000
+mu <- -0.00575
+```
+
+
+```{r,warning=FALSE}
+TEF.preco_inicial <- TEF.MC$Close[[nrow(TEF.MC$Close)]]
+TEF.MC.sigma <- dfewma$TEF.RET*sqrt(252)
+TEF.MC.mean <- (mu-(TEF.MC.sigma^2)/2)*(1/252)
+
+set.seed(1)
+monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  monte_carlo_sim[[1,j]] <- TEF.preco_inicial
+    for(i in 2:N){
+      monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*exp(TEF.MC.mean+TEF.MC.sigma* rnorm(1,0,1)*sqrt(1/252))
+    }
+}
+
+TEF.MC_MC_sim <- as_tibble(cbind(dia,monte_carlo_sim))
+w <- str_c('Sim',seq(1,M))
+w <- c('Dia',w)
+names(TEF.MC_MC_sim) <- w
+TEF.MC_MC_sim <- gather(TEF.MC_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+
+```{r,echo=FALSE, warning=FALSE}
+ENEL.preco_inicial <- ENEL.MI$Close[[nrow(ENEL.MI$Close)]]
+ENEL.MI.sigma <- dfewma$ENEL.RET*sqrt(252)
+ENEL.MI.mean <- (mu-(ENEL.MI.sigma^2)/2)*(1/252)
+
+set.seed(2)
+ENEL_monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  ENEL_monte_carlo_sim[[1,j]] <- ENEL.preco_inicial
+    for(i in 2:N){
+      ENEL_monte_carlo_sim[[i,j]] <- ENEL_monte_carlo_sim[[i-1,j]]*exp(ENEL.MI.mean+ENEL.MI.sigma * rnorm(1,0,1)*sqrt(1/252))
+    }
+  }
+ENEL.MI_MC_sim <- as_tibble(cbind(dia,ENEL_monte_carlo_sim))
+w1 <- str_c('Sim',seq(1,M))
+w1 <- c('Dia',w1)
+names(ENEL.MI_MC_sim) <- w1
+ENEL.MI_MC_sim <- gather(ENEL.MI_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+
+```{r,echo=FALSE, warning=FALSE}
+GLE.preco_inicial <- GLE.PA$Close[[nrow(GLE.PA$Close)]]
+GLE.PA.sigma <- dfewma$GLE.RET*sqrt(252)
+GLE.PA.mean <- (mu-(GLE.PA.sigma^2)/2)*(1/252)
+
+set.seed(2)
+GLE_monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  GLE_monte_carlo_sim[[1,j]] <- GLE.preco_inicial
+    for(i in 2:N){
+      GLE_monte_carlo_sim[[i,j]] <- GLE_monte_carlo_sim[[i-1,j]]*exp(GLE.PA.mean+GLE.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
+    }
+  }
+GLE.PA_MC_sim <- as_tibble(cbind(dia,GLE_monte_carlo_sim))
+w2 <- str_c('Sim',seq(1,M))
+w2 <- c('Dia',w2)
+names(GLE.PA_MC_sim) <- w2
+GLE.PA_MC_sim <- gather(GLE.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+
+```{r,echo=FALSE, warning=FALSE}
+AIR.preco_inicial <- AIR.PA$Close[[nrow(AIR.PA$Close)]]
+AIR.PA.sigma <- dfewma$AIR.RET*sqrt(252)
+AIR.PA.mean <- (mu-(AIR.PA.sigma^2)/2)*(1/252)
+
+set.seed(2)
+AIR_monte_carlo_sim <- matrix(nrow=N, ncol = M)
+for(j in 1:M){
+  AIR_monte_carlo_sim[[1,j]] <- AIR.preco_inicial
+    for(i in 2:N){
+      AIR_monte_carlo_sim[[i,j]] <- AIR_monte_carlo_sim[[i-1,j]]*exp(AIR.PA.mean+AIR.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
+    }
+  }
+AIR.PA_MC_sim <- as_tibble(cbind(dia,AIR_monte_carlo_sim))
+w3 <- str_c('Sim',seq(1,M))
+w3 <- c('Dia',w3)
+names(AIR.PA_MC_sim) <- w3
+AIR.PA_MC_sim <- gather(AIR.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia))
+```
+
+
+```{r,sim,echo=FALSE, fig.cap='Simulação Monte Carlo para 80 dias',fig.topcaption = TRUE,out.width = "45%"}
+
+par(mfrow  = c(2,2))
+    ggplot(TEF.MC_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("TEF: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+    ggplot(ENEL.MI_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("ENEL: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+     ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+       ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+```
+
+```{r,echo=FALSE}
+M.TEF.MC <- apply(monte_carlo_sim, 1, median)
+M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,median )
+M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,median )
+M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
+
+SimEWMA <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
+SimEWMAk<- knitr::kable(
+tail(SimEWMA), caption = "Valores simulados",
+booktabs = TRUE)
+kable_styling(SimEWMAk , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+### Portfolio EWMA
 
 
 ## GARCH
@@ -365,17 +495,17 @@ TEFsd <- TEF@sigma.t
 TEFvol <- tail(TEFsd,1)
 ```
 
-### UNILEVER
+### ENEL
 
 ```{r,echo=FALSE,warning = FALSE}
-UNA<-garchFit(formula = ~ garch(1,1),data=returns$UNA.RET,cond.dist = "std", trace=FALSE)
+ENEL<-garchFit(formula = ~ garch(1,1),data=returns$ENEL.RET,cond.dist = "std", trace=FALSE)
 
-UNAcoef <- round(UNA@fit$matcoef,6)
+ENELcoef <- round(ENEL@fit$matcoef,6)
 
-UNAcoefk<- knitr::kable(
-UNAcoef, caption = "UNA coeficientes",
+ENELcoefk<- knitr::kable(
+ENELcoef, caption = "ENEL coeficientes",
 booktabs = TRUE)
-kable_styling(UNAcoefk , latex_options = "hold_position", position = "center")
+kable_styling(ENELcoefk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
 \centering 
@@ -385,13 +515,13 @@ Fonte:Elaboração própria.
 \bigskip
 
 ```{r,echo=FALSE}
-UNAics <- UNA@fit$ics
-UNAicsk<- knitr::kable(
-UNAics, caption = "UNA Information Criterion Statistics",
+ENELics <- ENEL@fit$ics
+ENELicsk<- knitr::kable(
+ENELics, caption = "ENEL Information Criterion Statistics",
 booktabs = TRUE)
-kable_styling(UNAicsk , latex_options = "hold_position", position = "center")
+kable_styling(ENELicsk , latex_options = "hold_position", position = "center")
 
-UNApers <- UNA@fit$params$persistence
+ENELpers <- ENEL@fit$params$persistence
 ```
 \FloatBarrier
 \centering 
@@ -401,17 +531,17 @@ Fonte:Elaboração própria.
 \bigskip
 
 ```{r,echo=FALSE}
-UNAr <-residuals(UNA, standardize = T)
-UNAres <- as.data.frame(LjungBox(UNAr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
-UNAsre <- as.data.frame(LjungBox(UNAr^2, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
-UNALjun <- rbind(UNAres,UNAsre)
-rownames(UNALjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 20","Ljung-Box Test 10 R^2 ","Ljung-Box Test 15 R^2","Ljung-Box Test 20 R^2")
-UNALjun$df<-NULL
+ENELr <-residuals(ENEL, standardize = T)
+ENELres <- as.data.frame(LjungBox(ENELr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+ENELsre <- as.data.frame(LjungBox(ENELr^2, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+ENELLjun <- rbind(ENELres,ENELsre)
+rownames(ENELLjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 20","Ljung-Box Test 10 R^2 ","Ljung-Box Test 15 R^2","Ljung-Box Test 20 R^2")
+ENELLjun$df<-NULL
 
-UNALjunk<- knitr::kable(
-UNALjun, caption = "UNA Standardized Residuals Tests",
+ENELLjunk<- knitr::kable(
+ENELLjun, caption = "ENEL Standardized Residuals Tests",
 booktabs = TRUE)
-kable_styling(UNALjunk , latex_options = "hold_position", position = "center")
+kable_styling(ENELLjunk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
 \centering 
@@ -419,12 +549,12 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-```{r,UNAplot,echo=FALSE, fig.cap='Unilever',fig.topcaption = TRUE,out.width = "100%"}
+```{r,ENELplot,echo=FALSE, fig.cap='ENEL',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
-  plot(UNA,which= 2)
-  plot(UNA,which= 3)
-  plot(UNA,which=4)
-  plot(UNA,which=5)
+  plot(ENEL,which= 2)
+  plot(ENEL,which= 3)
+  plot(ENEL,which=4)
+  plot(ENEL,which=5)
 ```
 \FloatBarrier
 \centering 
@@ -434,8 +564,8 @@ Fonte:Elaboração própria.
 \bigskip
 
 ```{r,echo=FALSE}
-UNAsd <- UNA@sigma.t
-UNAvol <- tail(UNAsd,1)
+ENELsd <- ENEL@sigma.t
+ENELvol <- tail(ENELsd,1)
 ```
 
 ### SOCIÉTE GÉNÉRALE
@@ -492,7 +622,7 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-```{r,GLEplot,echo=FALSE, fig.cap='Unilever',fig.topcaption = TRUE,out.width = "100%"}
+```{r,GLEplot,echo=FALSE, fig.cap='ENEL',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
   plot(GLE,which= 2)
   plot(GLE,which= 3)
@@ -565,7 +695,7 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-```{r,AIRplot,echo=FALSE, fig.cap='Unilever',fig.topcaption = TRUE,out.width = "100%"}
+```{r,AIRplot,echo=FALSE, fig.cap='ENEL',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
   plot(AIR,which= 2)
   plot(AIR,which= 3)
@@ -597,18 +727,19 @@ Fonte:Elaboração própria.
 \bigskip
 
 ```{r,echo=FALSE}
-TEFImp <- EuropeanOptionImpliedVolatility(type="call", value = 0.27, underlying = 4.40, strike = 4.40,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
-UNAImp <- EuropeanOptionImpliedVolatility(type="call", value = 2.38, underlying = 46.66, strike = 46,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
+TEFImp <- EuropeanOptionImpliedVolatility(type="call", value = 0.27, underlying = 4.40, strike = 4.40,dividendYield = 0.0407, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
+#time is in trading days
+ENELImp <- EuropeanOptionImpliedVolatility(type="call", value = 0.26, underlying = 7, strike = 7.2,dividendYield = 0.012, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
 SOGImp <- EuropeanOptionImpliedVolatility(type="call", value = 1.62, underlying = 13.82, strike = 14,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
 AIRImp <- EuropeanOptionImpliedVolatility(type="call", value = 6.91, underlying = 59.44, strike = 60,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
 
 TEFImp <- round(TEFImp[]/sqrt(252),6)
-UNAImp<-round(UNAImp[]/sqrt(252),6)
+ENELImp<-round(ENELImp[]/sqrt(252),6)
 SOGImp<-round(SOGImp[]/sqrt(252),6)
 AIRImp<-round(AIRImp[]/sqrt(252),6)
 
-pimpvol<-cbind(TEFImp,UNAImp,SOGImp,AIRImp)
-colnames(pimpvol)<-c("TEF.RET","UNA.RET","GLE.RET","AIR.RET")
+pimpvol<-cbind(TEFImp,ENELImp,SOGImp,AIRImp)
+colnames(pimpvol)<-c("TEF.RET","ENEL.RET","GLE.RET","AIR.RET")
 rownames(pimpvol)<-"Volatilidade implícita"
 
 pimpvolk<- knitr::kable(
@@ -622,9 +753,3 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-
-## Simulação
-
-
-
-

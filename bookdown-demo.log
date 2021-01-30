@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.27)  27 JAN 2021 21:06
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.30)  30 JAN 2021 12:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -153,11 +153,11 @@ Package: expl3 2021-01-09 L3 programming layer (loader)
 
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backen
 d-xetex.def
-File: l3backend-xetex.def 2021-01-09 L3 backend support: XeTeX
+File: l3backend-xetex.def 2020-01-29 L3 backend support: XeTeX
 (|extractbb --version)
 \c__kernel_sys_dvipdfmx_version_int=\count194
-\g__color_stack_int=\count195
-\l__kernel_color_stack_int=\count196
+\l__color_backend_stack_int=\count195
+\g__color_backend_stack_int=\count196
 \g__graphics_track_int=\count197
 \l__pdf_internal_box=\box49
 \g__pdf_backend_object_int=\count198
@@ -887,7 +887,7 @@ Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
 )
 (c:/Users/lsbap/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.
 sty
-Package: multirow 2021/01/02 v2.6 Span multiple rows of a table
+Package: multirow 2021/01/29 v2.7 Span multiple rows of a table
 \multirow@colwidth=\skip102
 \multirow@cntb=\count333
 \multirow@dima=\skip103
@@ -1468,9 +1468,9 @@ asticity
 
 ]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 33.
+(Font)              scaled to size 14.4pt on input line 34.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 33.
+(Font)              scaled to size 14.4pt on input line 34.
 )
 \tf@toc=\write6
 \openout6 = `bookdown-demo.toc'.
@@ -1582,7 +1582,7 @@ File: image/cotacao.png Graphic file (type bmp)
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
 (Font)              scaled to size 8.0pt on input line 842.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 847.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 846.
 File: bookdown-demo_files/figure-latex/cotacao-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/cotacao-1.pdf>
 File: bookdown-demo_files/figure-latex/cotacao-2.pdf Graphic file (type pdf)
@@ -1621,40 +1621,52 @@ File: bookdown-demo_files/figure-latex/teste-1.pdf Graphic file (type pdf)
 File: bookdown-demo_files/figure-latex/TELp-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/TELp-1.pdf>
 [33]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1136.
+[34]
+File: bookdown-demo_files/figure-latex/sim-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/sim-1.pdf>
+File: bookdown-demo_files/figure-latex/sim-2.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/sim-2.pdf>
+File: bookdown-demo_files/figure-latex/sim-3.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/sim-3.pdf>
+File: bookdown-demo_files/figure-latex/sim-4.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/sim-4.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[34]
-File: bookdown-demo_files/figure-latex/TELplot-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/TELplot-1.pdf>
 [35]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [36]
-File: bookdown-demo_files/figure-latex/UNAplot-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/UNAplot-1.pdf>
+File: bookdown-demo_files/figure-latex/TELplot-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/TELplot-1.pdf>
 [37]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [38]
-File: bookdown-demo_files/figure-latex/GLEplot-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/GLEplot-1.pdf>
+File: bookdown-demo_files/figure-latex/ENELplot-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/ENELplot-1.pdf>
 [39]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [40]
-File: bookdown-demo_files/figure-latex/AIRplot-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/AIRplot-1.pdf>
+File: bookdown-demo_files/figure-latex/GLEplot-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/GLEplot-1.pdf>
 [41]
-File: image/opcao.png Graphic file (type bmp)
-<image/opcao.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[42] [43] (./bookdown-demo.bbl [44
+[42]
+File: bookdown-demo_files/figure-latex/AIRplot-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/AIRplot-1.pdf>
+[43]
+File: image/opcao.png Graphic file (type bmp)
+<image/opcao.png>
+[44] [45] (./bookdown-demo.bbl [46
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 21--26
@@ -1670,28 +1682,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--26
 ] [][][][] []
  []
 
-[45
+[47
 
-]) [46] [47
+]) [48] [49
 
-] [48
+] [50
 
-] [49
+] [51
 
 ] (./bookdown-demo.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
-(rerunfilecheck)             Checksum: 23E797CECCC238DCB21D5B0072ED5535;5458.
+(rerunfilecheck)             Checksum: 521BF13E8010C73F00C994F34D05AB40;5608.
  ) 
 Here is how much of TeX's memory you used:
- 23389 strings out of 479234
- 407748 string characters out of 5874137
- 906441 words of memory out of 5000000
- 42463 multiletter control sequences out of 15000+600000
+ 23442 strings out of 479234
+ 409563 string characters out of 5874137
+ 907168 words of memory out of 5000000
+ 42513 multiletter control sequences out of 15000+600000
  431722 words of font info for 117 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  98i,10n,125p,1844b,598s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (60 pages).
+Output written on bookdown-demo.pdf (62 pages).

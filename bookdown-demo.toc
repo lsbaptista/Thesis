@@ -21,13 +21,14 @@
 \contentsline {section}{\numberline {3.1}Introdução}{28}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Análise descritiva dos dados}{28}{section.3.2}%
 \contentsline {section}{\numberline {3.3}EWMA}{33}{section.3.3}%
-\contentsline {section}{\numberline {3.4}GARCH}{34}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}TELEFÓNICA}{34}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}UNILEVER}{36}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}SOCIÉTE GÉNÉRALE}{38}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Airbus}{40}{subsection.3.4.4}%
-\contentsline {section}{\numberline {3.5}Volatilidade implicita}{42}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Simulação}{43}{section.3.6}%
-\contentsline {chapter}{Conclusão}{44}{chapter*.47}%
-\contentsline {chapter}{Bibliografia}{45}{chapter*.48}%
-\contentsline {part}{Apêndices}{48}{part*.49}%
+\contentsline {subsection}{\numberline {3.3.1}Simulação EWMA}{34}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Portfolio EWMA}{36}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}GARCH}{36}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}TELEFÓNICA}{36}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}ENEL}{38}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}SOCIÉTE GÉNÉRALE}{40}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Airbus}{42}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Volatilidade implicita}{44}{section.3.5}%
+\contentsline {chapter}{Conclusão}{46}{chapter*.49}%
+\contentsline {chapter}{Bibliografia}{47}{chapter*.50}%
+\contentsline {part}{Apêndices}{50}{part*.51}%

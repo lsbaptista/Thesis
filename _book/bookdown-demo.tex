@@ -843,15 +843,16 @@ Fonte: Elaboração própria.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#leitura de simbolos dos activos financeiros}
-\NormalTok{symbolsEU \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"TEF.MC"}\NormalTok{,}\StringTok{"UNA.AS"}\NormalTok{,}\StringTok{\textquotesingle{}GLE.PA\textquotesingle{}}\NormalTok{,}\StringTok{"AIR.PA"}\NormalTok{)}
-\KeywordTok{getSymbols}\NormalTok{(symbolsEU,}\DataTypeTok{src =} \StringTok{"yahoo"}\NormalTok{, }\DataTypeTok{from=}\StringTok{"2016{-}06{-}01"}\NormalTok{, }\DataTypeTok{to=}\StringTok{"2020{-}06{-}02"}\NormalTok{)}
+\NormalTok{TEF.MC\textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/TEF.MC.xlsx"}\NormalTok{)}
+\NormalTok{TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(TEF.MC[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(TEF.MC}\OperatorTok{$}\NormalTok{Date))}
+\NormalTok{GLE.PA\textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/GLE.PA.xlsx"}\NormalTok{)}
+\NormalTok{GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(GLE.PA[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(GLE.PA}\OperatorTok{$}\NormalTok{Date))}
+\NormalTok{ENEL.MI\textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/ENEL.MI.xlsx"}\NormalTok{)}
+\NormalTok{ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(ENEL.MI[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(ENEL.MI}\OperatorTok{$}\NormalTok{Date))}
+\NormalTok{AIR.PA\textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/AIR.PA.xlsx"}\NormalTok{)}
+\NormalTok{AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(AIR.PA[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(AIR.PA}\OperatorTok{$}\NormalTok{Date))}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## [1] "TEF.MC" "UNA.AS" "GLE.PA" "AIR.PA"
-\end{verbatim}
 
 \normalsize
 
@@ -859,20 +860,19 @@ Fonte: Elaboração própria.
 
 \caption{\label{tab:unnamed-chunk-4}Société Générale.Euronext Paris-25-05-2020/01-06-2020}
 \centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{rrrrrr}
+\begin{tabular}[t]{rr}
 \toprule
-GLE.PA.Open & GLE.PA.High & GLE.PA.Low & GLE.PA.Close & GLE.PA.Volume & GLE.PA.Adjusted\\
+Close & Adj Close\\
 \midrule
-12.676 & 12.688 & 12.306 & 12.544 & 4479353 & 10.344\\
-12.750 & 13.490 & 12.700 & 13.424 & 9611549 & 13.424\\
-13.486 & 14.806 & 13.424 & 14.304 & 15167413 & 14.304\\
-14.546 & 14.722 & 13.692 & 13.916 & 8783657 & 13.916\\
-13.640 & 13.954 & 13.190 & 13.232 & 9592033 & 13.232\\
+12.544 & 10.344\\
+13.424 & 13.424\\
+14.304 & 14.304\\
+13.916 & 13.916\\
+13.232 & 13.232\\
 \addlinespace
-13.712 & 13.964 & 13.542 & 13.820 & 4229388 & 13.820\\
+13.820 & 13.820\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
 \FloatBarrier
 \centering
@@ -904,15 +904,15 @@ Fonte: Elaboração própria.
 \centering
 \begin{tabular}[t]{rrrr}
 \toprule
-TEF.MC.Adjusted & UNA.AS.Adjusted & GLE.PA.Adjusted & AIR.PA.Adjusted\\
+TEF.MC & ENEL.MI & GLE.PA & AIR.PA\\
 \midrule
-3.849220 & 43.79641 & 10.344 & 58.64\\
-3.699806 & 43.32800 & 13.424 & 62.81\\
-3.787268 & 44.07941 & 14.304 & 61.13\\
-3.952170 & 45.11382 & 13.916 & 60.12\\
-3.863797 & 45.36754 & 13.232 & 56.70\\
+3.849220 & 6.254183 & 10.344 & 58.64\\
+3.699806 & 6.259947 & 13.424 & 62.81\\
+3.787268 & 6.327197 & 14.304 & 61.13\\
+3.952170 & 6.525101 & 13.916 & 60.12\\
+3.863797 & 6.629818 & 13.232 & 56.70\\
 \addlinespace
-4.008655 & 45.53343 & 13.820 & 59.44\\
+4.008655 & 6.723007 & 13.820 & 59.44\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -930,15 +930,15 @@ Fonte:\url{https://finance.yahoo.com/}
 \centering
 \begin{tabular}[t]{lllll}
 \toprule
-  & TEF.MC.Adjusted & UNA.AS.Adjusted & GLE.PA.Adjusted & AIR.PA.Adjusted\\
+  &     TEF.MC &    ENEL.MI &     GLE.PA &     AIR.PA\\
 \midrule
- & Min.   :3.355 & Min.   :31.80 & Min.   : 9.702 & Min.   : 44.66\\
- & 1st Qu.:6.094 & 1st Qu.:41.02 & 1st Qu.:20.750 & 1st Qu.: 64.72\\
- & Median :6.455 & Median :43.98 & Median :25.883 & Median : 85.59\\
- & Mean   :6.373 & Mean   :43.52 & Mean   :25.595 & Mean   : 85.73\\
- & 3rd Qu.:6.790 & 3rd Qu.:46.21 & 3rd Qu.:31.359 & 3rd Qu.:108.10\\
+ & Min.   :3.355 & Min.   :2.943 & Min.   : 9.702 & Min.   : 44.66\\
+ & 1st Qu.:6.097 & 1st Qu.:3.891 & 1st Qu.:20.735 & 1st Qu.: 64.67\\
+ & Median :6.456 & Median :4.331 & Median :25.922 & Median : 85.56\\
+ & Mean   :6.375 & Mean   :4.624 & Mean   :25.603 & Mean   : 85.65\\
+ & 3rd Qu.:6.792 & 3rd Qu.:5.267 & 3rd Qu.:31.364 & 3rd Qu.:108.01\\
 \addlinespace
- & Max.   :8.089 & Max.   :54.82 & Max.   :35.649 & Max.   :134.60\\
+ & Max.   :8.089 & Max.   :8.229 & Max.   :35.649 & Max.   :134.60\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -955,15 +955,15 @@ Fonte:Elaboração própria.
 \centering
 \begin{tabular}[t]{rrrr}
 \toprule
-TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-0.0300 & 0.0187 & 0.0083 & 0.0817\\
--0.0396 & -0.0108 & 0.2606 & 0.0687\\
-0.0234 & 0.0172 & 0.0635 & -0.0271\\
-0.0426 & 0.0232 & -0.0275 & -0.0167\\
--0.0226 & 0.0056 & -0.0504 & -0.0586\\
+0.0300 & 0.0155 & 0.0083 & 0.0817\\
+-0.0396 & 0.0009 & 0.2606 & 0.0687\\
+0.0234 & 0.0107 & 0.0635 & -0.0271\\
+0.0426 & 0.0308 & -0.0275 & -0.0167\\
+-0.0226 & 0.0159 & -0.0504 & -0.0586\\
 \addlinespace
-0.0368 & 0.0036 & 0.0435 & 0.0472\\
+0.0368 & 0.0140 & 0.0435 & 0.0472\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -980,12 +980,12 @@ Fonte:Elaboração própria.
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
-  & TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+  & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-TEF.RET & 1.0000000 & 0.4095170 & 0.5416327 & 0.3148413\\
-UNA.RET & 0.4095170 & 1.0000000 & 0.2044202 & 0.2571136\\
-GLE.RET & 0.5416327 & 0.2044202 & 1.0000000 & 0.5409838\\
-AIR.RET & 0.3148413 & 0.2571136 & 0.5409838 & 1.0000000\\
+TEF.RET & 1.0000000 & 0.5792880 & 0.5416984 & 0.3144011\\
+ENEL.RET & 0.5792880 & 1.0000000 & 0.4564904 & 0.3423647\\
+GLE.RET & 0.5416984 & 0.4564904 & 1.0000000 & 0.5417957\\
+AIR.RET & 0.3144011 & 0.3423647 & 0.5417957 & 1.0000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1002,16 +1002,16 @@ Fonte:Elaboração própria.
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
-  & TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+  & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-média.anual & -0.127432 & 0.065727 & -0.140809 & 0.035468\\
-volatilidade.anual & 0.269116 & 0.206205 & 0.406037 & 0.380514\\
-mediana & -0.000500 & 0.000000 & -0.000400 & 0.000400\\
-skewness & -1.198711 & 0.231393 & -0.654816 & -1.087794\\
-kurtosis & 28.014864 & 10.084442 & 25.701728 & 24.567621\\
+média.anual & -0.128565 & 0.186336 & -0.142061 & 0.035758\\
+volatilidade.anual & 0.270075 & 0.249512 & 0.407981 & 0.381835\\
+mediana & -0.000500 & 0.000900 & -0.000300 & 0.000200\\
+skewness & -1.199014 & -3.212281 & -0.652772 & -1.084556\\
+kurtosis & 27.848870 & 43.434065 & 25.410242 & 24.429017\\
 \addlinespace
-min & -0.175800 & -0.074400 & -0.230300 & -0.250600\\
-max & 0.163800 & 0.116200 & 0.260600 & 0.186200\\
+min & -0.175800 & -0.221200 & -0.230300 & -0.250600\\
+max & 0.163800 & 0.072500 & 0.260600 & 0.186200\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1074,10 +1074,10 @@ Fonte:Elaboração própria.
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllll}
 \toprule
-  & TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+  & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-statistic & c(W = 0.80635804881946) & c(W = 0.91104077495707) & c(W = 0.779854033139441) & c(W = 0.781489153650026)\\
-p.value & 3.00697610665204e-33 & 5.71248039626033e-24 & 6.22273069135129e-35 & 7.81720129292387e-35\\
+statistic & c(W = 0.806556139172951) & c(W = 0.81527958050879) & c(W = 0.781822265470115) & c(W = 0.781772438450224)\\
+p.value & 4.1518298262632e-33 & 1.62872401140161e-32 & 1.10625328031641e-34 & 1.09857623834578e-34\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1098,9 +1098,9 @@ Fonte:Elaboração própria.
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
-  & TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+  & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-ewma & 0.034085 & 0.016665 & 0.075245 & 0.054578\\
+ewma & 0.034085 & 0.023709 & 0.075245 & 0.054579\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1128,6 +1128,82 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
+\hypertarget{simulauxe7uxe3o-ewma}{%
+\subsection{Simulação EWMA}\label{simulauxe7uxe3o-ewma}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfewma \textless{}{-}}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(pewma)}
+
+\NormalTok{N \textless{}{-}}\StringTok{ }\DecValTok{80}
+\NormalTok{dia \textless{}{-}}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{N}
+\NormalTok{M \textless{}{-}}\StringTok{ }\DecValTok{1000}
+\NormalTok{mu \textless{}{-}}\StringTok{ }\FloatTok{{-}0.00575}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TEF.preco\_inicial \textless{}{-}}\StringTok{ }\NormalTok{TEF.MC}\OperatorTok{$}\NormalTok{Close[[}\KeywordTok{nrow}\NormalTok{(TEF.MC}\OperatorTok{$}\NormalTok{Close)]]}
+\NormalTok{TEF.MC.sigma \textless{}{-}}\StringTok{ }\NormalTok{dfewma}\OperatorTok{$}\NormalTok{TEF.RET}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{252}\NormalTok{)}
+\NormalTok{TEF.MC.mean \textless{}{-}}\StringTok{ }\NormalTok{(mu}\OperatorTok{{-}}\NormalTok{(TEF.MC.sigma}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{252}\NormalTok{)}
+
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{monte\_carlo\_sim \textless{}{-}}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DataTypeTok{nrow=}\NormalTok{N, }\DataTypeTok{ncol =}\NormalTok{ M)}
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{M)\{}
+\NormalTok{  monte\_carlo\_sim[[}\DecValTok{1}\NormalTok{,j]] \textless{}{-}}\StringTok{ }\NormalTok{TEF.preco\_inicial}
+    \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\NormalTok{N)\{}
+\NormalTok{      monte\_carlo\_sim[[i,j]] \textless{}{-}}\StringTok{ }\NormalTok{monte\_carlo\_sim[[i}\DecValTok{{-}1}\NormalTok{,j]]}\OperatorTok{*}\KeywordTok{exp}\NormalTok{(TEF.MC.mean}\OperatorTok{+}\NormalTok{TEF.MC.sigma}\OperatorTok{*}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{252}\NormalTok{))}
+\NormalTok{    \}}
+\NormalTok{\}}
+
+\NormalTok{TEF.MC\_MC\_sim \textless{}{-}}\StringTok{ }\KeywordTok{as\_tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(dia,monte\_carlo\_sim))}
+\NormalTok{w \textless{}{-}}\StringTok{ }\KeywordTok{str\_c}\NormalTok{(}\StringTok{\textquotesingle{}Sim\textquotesingle{}}\NormalTok{,}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,M))}
+\NormalTok{w \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Dia\textquotesingle{}}\NormalTok{,w)}
+\KeywordTok{names}\NormalTok{(TEF.MC\_MC\_sim) \textless{}{-}}\StringTok{ }\NormalTok{w}
+\NormalTok{TEF.MC\_MC\_sim \textless{}{-}}\StringTok{ }\KeywordTok{gather}\NormalTok{(TEF.MC\_MC\_sim, }\DataTypeTok{key=}\StringTok{\textquotesingle{}Simulation\textquotesingle{}}\NormalTok{, }\DataTypeTok{value =} \StringTok{\textquotesingle{}Preço\textquotesingle{}}\NormalTok{,}\OperatorTok{{-}}\NormalTok{(Dia))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/sim-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/sim-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/sim-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/sim-4} 
+
+}
+
+\caption{Simulação Monte Carlo para 80 dias}\label{fig:sim}
+\end{figure}
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-17}Valores simulados}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
+\midrule
+75 & 4.188878 & 6.925697 & 11.62720 & 54.64831\\
+76 & 4.192417 & 6.915972 & 11.55361 & 54.42756\\
+77 & 4.216259 & 6.911018 & 11.50560 & 54.29371\\
+78 & 4.201474 & 6.873053 & 11.28486 & 53.56600\\
+79 & 4.202018 & 6.851637 & 11.15256 & 53.13935\\
+\addlinespace
+80 & 4.195701 & 6.833317 & 11.03732 & 52.76993\\
+\bottomrule
+\end{tabular}}
+\end{table}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+\hypertarget{portfolio-ewma}{%
+\subsection{Portfolio EWMA}\label{portfolio-ewma}}
+
 \hypertarget{garch}{%
 \section{GARCH}\label{garch}}
 
@@ -1136,17 +1212,17 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-12}TEF coeficientes}
+\caption{\label{tab:unnamed-chunk-18}TEF coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & -0.000272 & 0.000347 & -0.781924 & 0.434259\\
-omega & 0.000009 & 0.000003 & 2.657112 & 0.007881\\
-alpha1 & 0.092658 & 0.027344 & 3.388574 & 0.000703\\
-beta1 & 0.863955 & 0.035008 & 24.678681 & 0.000000\\
-shape & 4.903280 & 0.707910 & 6.926414 & 0.000000\\
+mu & -0.000275 & 0.000349 & -0.786996 & 0.431284\\
+omega & 0.000009 & 0.000003 & 2.626875 & 0.008617\\
+alpha1 & 0.094462 & 0.028183 & 3.351714 & 0.000803\\
+beta1 & 0.862275 & 0.035908 & 24.013557 & 0.000000\\
+shape & 4.849731 & 0.699459 & 6.933546 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1160,16 +1236,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-13}Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-19}Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & x\\
 \midrule
-AIC & -5.885548\\
-BIC & -5.861412\\
-SIC & -5.885596\\
-HQIC & -5.876384\\
+AIC & -5.880106\\
+BIC & -5.855799\\
+SIC & -5.880154\\
+HQIC & -5.870873\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1183,19 +1259,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-14}Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-20}Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 4.244723 & 0.9356325\\
-Ljung-Box Test 15 & 15 & 5.019352 & 0.9919613\\
-Ljung-Box Test 20 & 20 & 6.501503 & 0.9980281\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 4.123868 & 0.9415861\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 4.793213 & 0.9937371\\
+Ljung-Box Test 10 & 10 & 5.365586 & 0.8654579\\
+Ljung-Box Test 15 & 15 & 6.370089 & 0.9728383\\
+Ljung-Box Test 20 & 20 & 9.016115 & 0.9827199\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 3.984322 & 0.9480515\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 4.641853 & 0.9947489\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 5.753781 & 0.9991915\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 5.629360 & 0.9993135\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1222,22 +1298,22 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-\hypertarget{unilever}{%
-\subsection{UNILEVER}\label{unilever}}
+\hypertarget{enel}{%
+\subsection{ENEL}\label{enel}}
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-16}UNA coeficientes}
+\caption{\label{tab:unnamed-chunk-22}ENEL coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & 0.000559 & 0.000299 & 1.869493 & 0.061554\\
-omega & 0.000018 & 0.000007 & 2.677594 & 0.007415\\
-alpha1 & 0.147282 & 0.043072 & 3.419449 & 0.000627\\
-beta1 & 0.752509 & 0.064936 & 11.588552 & 0.000000\\
-shape & 4.231528 & 0.572980 & 7.385118 & 0.000000\\
+mu & 0.001136 & 0.000341 & 3.327331 & 0.000877\\
+omega & 0.000015 & 0.000006 & 2.452925 & 0.014170\\
+alpha1 & 0.101807 & 0.034761 & 2.928744 & 0.003403\\
+beta1 & 0.820593 & 0.054752 & 14.987439 & 0.000000\\
+shape & 4.505741 & 0.641796 & 7.020522 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1251,16 +1327,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-17}UNA Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-23}ENEL Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & x\\
 \midrule
-AIC & -6.143925\\
-BIC & -6.119789\\
-SIC & -6.143973\\
-HQIC & -6.134761\\
+AIC & -5.924634\\
+BIC & -5.900327\\
+SIC & -5.924682\\
+HQIC & -5.915401\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1274,19 +1350,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-18}UNA Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-24}ENEL Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 9.382676 & 0.4962117\\
-Ljung-Box Test 15 & 15 & 10.392739 & 0.7943356\\
-Ljung-Box Test 20 & 20 & 22.163517 & 0.3317041\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 1.348758 & 0.9993343\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 2.262615 & 0.9999333\\
+Ljung-Box Test 10 & 10 & 7.094059 & 0.7165364\\
+Ljung-Box Test 15 & 15 & 10.856248 & 0.7627166\\
+Ljung-Box Test 20 & 20 & 14.205137 & 0.8199445\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 14.667299 & 0.1446705\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 21.005772 & 0.1366450\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 20.973789 & 0.3986768\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 21.869880 & 0.3476129\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1299,11 +1375,11 @@ Fonte:Elaboração própria.
 \bigskip
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/UNAplot-1} 
+{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/ENELplot-1} 
 
 }
 
-\caption{Unilever}\label{fig:UNAplot}
+\caption{ENEL}\label{fig:ENELplot}
 \end{figure}
 \FloatBarrier
 \centering
@@ -1318,19 +1394,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-20}GLE coeficientes}
+\caption{\label{tab:unnamed-chunk-26}GLE coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & -0.000210 & 0.000434 & -0.483278 & 0.628898\\
-ar1 & 0.111514 & 0.030742 & 3.627464 & 0.000286\\
-omega & 0.000006 & 0.000003 & 2.037672 & 0.041583\\
-alpha1 & 0.081852 & 0.023736 & 3.448406 & 0.000564\\
-beta1 & 0.906758 & 0.025643 & 35.360406 & 0.000000\\
+mu & -0.000206 & 0.000440 & -0.468768 & 0.639235\\
+ar1 & 0.105854 & 0.031107 & 3.402874 & 0.000667\\
+omega & 0.000006 & 0.000003 & 2.027070 & 0.042655\\
+alpha1 & 0.082622 & 0.023947 & 3.450161 & 0.000560\\
+beta1 & 0.906152 & 0.025807 & 35.112916 & 0.000000\\
 \addlinespace
-shape & 4.520924 & 0.621813 & 7.270555 & 0.000000\\
+shape & 4.586812 & 0.639949 & 7.167466 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1344,16 +1420,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-21}GLE Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-27}GLE Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & x\\
 \midrule
-AIC & -5.286750\\
-BIC & -5.257787\\
-SIC & -5.286818\\
-HQIC & -5.275753\\
+AIC & -5.270385\\
+BIC & -5.241217\\
+SIC & -5.270454\\
+HQIC & -5.259305\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1367,19 +1443,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-22}GLE Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-28}GLE Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 4.752785 & 0.9070686\\
-Ljung-Box Test 15 & 15 & 8.971824 & 0.8789861\\
-Ljung-Box Test 20 & 20 & 15.532485 & 0.7451717\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 6.657031 & 0.7573778\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 8.010029 & 0.9233800\\
+Ljung-Box Test 10 & 10 & 5.878758 & 0.8253445\\
+Ljung-Box Test 15 & 15 & 7.740314 & 0.9337712\\
+Ljung-Box Test 20 & 20 & 14.427032 & 0.8082015\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 6.727049 & 0.7509375\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 8.145806 & 0.9178041\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 8.420870 & 0.9886966\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 8.431973 & 0.9886019\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1396,7 +1472,7 @@ Fonte:Elaboração própria.
 
 }
 
-\caption{Unilever}\label{fig:GLEplot}
+\caption{ENEL}\label{fig:GLEplot}
 \end{figure}
 \FloatBarrier
 \centering
@@ -1411,20 +1487,20 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-24}AIR coeficientes}
+\caption{\label{tab:unnamed-chunk-30}AIR coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & 0.000166 & 0.000129 & 1.293794 & 0.195737\\
-ar1 & 0.841677 & 0.115128 & 7.310780 & 0.000000\\
-ma1 & -0.866499 & 0.106322 & -8.149722 & 0.000000\\
-omega & 0.000013 & 0.000005 & 2.641668 & 0.008250\\
-alpha1 & 0.103316 & 0.025595 & 4.036505 & 0.000054\\
+mu & 0.000161 & 0.000128 & 1.254022 & 0.209834\\
+ar1 & 0.849062 & 0.115516 & 7.350151 & 0.000000\\
+ma1 & -0.873890 & 0.106280 & -8.222483 & 0.000000\\
+omega & 0.000014 & 0.000005 & 2.730241 & 0.006329\\
+alpha1 & 0.112889 & 0.027696 & 4.076007 & 0.000046\\
 \addlinespace
-beta1 & 0.859414 & 0.032928 & 26.099605 & 0.000000\\
-shape & 5.353777 & 0.933927 & 5.732542 & 0.000000\\
+beta1 & 0.849060 & 0.034133 & 24.875270 & 0.000000\\
+shape & 5.460341 & 0.965924 & 5.652974 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1438,16 +1514,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-25}AIR Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-31}AIR Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & x\\
 \midrule
-AIC & -5.383331\\
-BIC & -5.349541\\
-SIC & -5.383425\\
-HQIC & -5.370502\\
+AIC & -5.381134\\
+BIC & -5.347105\\
+SIC & -5.381229\\
+HQIC & -5.368208\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1461,19 +1537,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-26}AIR Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-32}AIR Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 7.196079 & 0.7068133\\
-Ljung-Box Test 15 & 15 & 14.397346 & 0.4956318\\
-Ljung-Box Test 20 & 20 & 16.571276 & 0.6806111\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 27.794413 & 0.0019472\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 28.605581 & 0.0180715\\
+Ljung-Box Test 10 & 10 & 6.933033 & 0.7317516\\
+Ljung-Box Test 15 & 15 & 13.058807 & 0.5977556\\
+Ljung-Box Test 20 & 20 & 16.121427 & 0.7090631\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 24.459099 & 0.0064707\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 25.491652 & 0.0437178\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 30.986731 & 0.0553659\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 29.344316 & 0.0811977\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1490,7 +1566,7 @@ Fonte:Elaboração própria.
 
 }
 
-\caption{Unilever}\label{fig:AIRplot}
+\caption{ENEL}\label{fig:AIRplot}
 \end{figure}
 \FloatBarrier
 \centering
@@ -1499,10 +1575,6 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-
-\begin{verbatim}
-## [1] 0.04255105
-\end{verbatim}
 
 \hypertarget{volatilidade-implicita}{%
 \section{Volatilidade implicita}\label{volatilidade-implicita}}
@@ -1525,14 +1597,14 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-28}Volatilidade Implícita}
+\caption{\label{tab:unnamed-chunk-34}Volatilidade Implícita}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lrrrr}
 \toprule
-  & TEF.RET & UNA.RET & GLE.RET & AIR.RET\\
+  & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-Volatilidade implícita & 0.035703 & 0.031302 & 0.053162 & 0.052567\\
+Volatilidade implícita & 0.037038 & 0.030534 & 0.053162 & 0.052567\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1543,9 +1615,6 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-
-\hypertarget{simulauxe7uxe3o}{%
-\section{Simulação}\label{simulauxe7uxe3o}}
 
 \hypertarget{conclusuxe3o}{%
 \chapter*{Conclusão}\label{conclusuxe3o}}
