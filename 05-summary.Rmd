@@ -1,9 +1,20 @@
 # Conclusão {-}
 
-We have finished a nice book.
-
-
-
+```{r}
+par(mfrow  = c(2,2))
+plot(SimVI$M.TEF.MC,type="l", col="blue")
+  lines(SimEWMA$M.TEF.MC,col="red")
+  lines(SimGARCH$M.TEF.MC,col="green")
+plot(SimVI$M.ENEL.MI,type="l", col="blue")
+  lines(SimEWMA$M.ENEL.MI,col="red")
+  lines(SimGARCH$M.ENEL.MI,col="green")
+plot(SimGARCH$M.GLE.PA,type="l", col="blue")
+  lines(SimEWMA$M.GLE.PA,col="red")
+  lines(SimVI$M.GLE.PA,col="green")
+plot(SimVI$M.AIR.PA,type="l", col="blue")
+  lines(SimEWMA$M.AIR.PA,col="red")
+  lines(SimGARCH$M.AIR.PA,col="green")
+```
 
 
 

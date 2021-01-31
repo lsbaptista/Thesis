@@ -43,7 +43,17 @@ library(fPortfolio)
 library(caTools)
 library(dygraphs)
 library(portfolio.optimization)
+library(rugarch)
 ```
+
+
+```{r, processo,echo=FALSE,fig.cap='Modelação do processo',out.width="80%"}
+knitr::include_graphics("image/modelação.png")
+```
+\FloatBarrier
+\centering 
+Fonte: Elaboração própria.
+
 
 ## Análise descritiva dos dados
 A primeira fase consiste em extrair de forma aleatória 4 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na figura \@ref(fig:empresas).
@@ -73,8 +83,8 @@ AIR.PA <- xts(AIR.PA[, -1], order.by=as.Date(AIR.PA$Date))
 ```{r,echo=FALSE}
 gle<-tail(GLE.PA)
 gle <- knitr::kable(
-gle, caption = "Société Générale.Euronext Paris-25-05-2020/01-06-2020",
-booktabs = TRUE)
+  gle, caption = "Société Générale.Euronext Paris-25-05-2020/01-06-2020",
+  booktabs = TRUE)
 kable_styling(gle, latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -86,10 +96,10 @@ Fonte:https://finance.yahoo.com/
 
 ```{r,echo=FALSE, cotacao, fig.cap='Evolução das cotações nos últimos 5 anos',fig.topcaption = TRUE,out.width = "45%"}
 par(mfrow  = c(2,2))
-  chartSeries(TEF.MC,theme = chartTheme("white"))
-  chartSeries(ENEL.MI,theme = chartTheme("white"))
-  chartSeries(GLE.PA,theme = chartTheme("white"))
-  chartSeries(AIR.PA,theme = chartTheme("white"))
+chartSeries(TEF.MC,theme = chartTheme("white",up.col="darkgreen"))
+chartSeries(ENEL.MI,theme = chartTheme("white",up.col="dodgerblue3"))
+chartSeries(GLE.PA,theme = chartTheme("white",up.col="darkorange"))
+chartSeries(AIR.PA,theme = chartTheme("white",up.col="deeppink"))
 ```
 
 \FloatBarrier
@@ -105,8 +115,8 @@ newdata <- na.omit(newdata)
 colnames(newdata) <- c("TEF.MC","ENEL.MI","GLE.PA","AIR.PA")
 adj <- tail(newdata)
 adj <- knitr::kable(
-adj, caption = "Cotações a preços ajustados-25-05-2020/01-06-2020",
-booktabs = TRUE)
+  adj, caption = "Cotações a preços ajustados-25-05-2020/01-06-2020",
+  booktabs = TRUE)
 kable_styling(adj, latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -119,8 +129,8 @@ Fonte:https://finance.yahoo.com/
 ```{r}
 pt <-summary(as.data.frame(newdata))
 p <- knitr::kable(
-pt, caption = "Estatísticas das cotações",
-booktabs = TRUE)
+  pt, caption = "Estatísticas das cotações",
+  booktabs = TRUE)
 kable_styling(p, latex_options = "hold_position", position = "center")
 ```
 \normalsize
@@ -144,8 +154,8 @@ returns <- returns[-1,]
 colnames(returns)<-c("TEF.RET","ENEL.RET","GLE.RET","AIR.RET")
 ret <- tail(returns)
 retv <- knitr::kable(
-ret, caption = "Retornos logarítmicos diários-25-05-2020/01-06-2020",
-booktabs = TRUE)
+  ret, caption = "Retornos logarítmicos diários-25-05-2020/01-06-2020",
+  booktabs = TRUE)
 kable_styling(retv, latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -162,8 +172,8 @@ retcor <- cor(returns)
 
 ```{r, echo=FALSE}
 retcork <- knitr::kable(
-retcor, caption = "Matrix correlação dos retornos",
-booktabs = TRUE)
+  retcor, caption = "Matrix correlação dos retornos",
+  booktabs = TRUE)
 kable_styling(retcork , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -193,8 +203,8 @@ nolmalsize
 ```{r, echo=FALSE}
 ETFStats<-t(ETFStats)
 ETFStatsk<- knitr::kable(
-ETFStats, caption = "Estatísticas dos retornos",
-booktabs = TRUE)
+  ETFStats, caption = "Estatísticas dos retornos",
+  booktabs = TRUE)
 kable_styling(ETFStatsk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -205,13 +215,13 @@ Fonte:Elaboração própria.
 \bigskip
 ```{r,volatilidade,echo=FALSE, fig.cap='Volatilidade nos últimos 4 anos',fig.topcaption = TRUE,out.width = "45%"}
 par(mfrow  = c(2,2))
-  autoplot(returns$TEF.RET,ts.colour = 'darkgreen') + ggtitle("TELEFÓNICA") + 
+autoplot(returns$TEF.RET,ts.colour = 'darkgreen') + ggtitle("TELEFÓNICA") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
-  autoplot(returns$ENEL.RET,ts.colour = 'darkgreen') + ggtitle("ENEL") + 
+autoplot(returns$ENEL.RET,ts.colour = 'dodgerblue3') + ggtitle("ENEL") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
-  autoplot(returns$GLE.RET,ts.colour = 'darkgreen') + ggtitle("SOCIÉTÉ GÉNÉRALE") + 
+autoplot(returns$GLE.RET,ts.colour = 'darkorange') + ggtitle("SOCIÉTÉ GÉNÉRALE") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
-  autoplot(returns$AIR.RET,ts.colour = 'darkgreen') + ggtitle("AIRBUS") + 
+autoplot(returns$AIR.RET,ts.colour = 'deeppink') + ggtitle("AIRBUS") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
 ```
 \FloatBarrier
@@ -222,18 +232,18 @@ Fonte:Elaboração própria.
 \bigskip
 ```{r,distr,echo=FALSE, fig.cap='Distribuição dos retornos',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
-  hist(returns$TEF.RET,probability=T, main="TELEFÓNICA",xlab="",breaks=100)
-  lines(density(returns$TEF.RET),col=2)
-  curve(dnorm(x,0,0.01695272), from = -0.15,to=0.15, col='blue',add = TRUE)
-  hist(returns$ENEL.RET,probability=T, main="ENEL",xlab="",breaks=100)
-  lines(density(returns$ENEL.RET),col=2)
-  curve(dnorm(x,0,0.01571777), from = -0.05,to=0.05, col='blue',add = TRUE)
-  hist(returns$GLE.RET,probability=T, main="SOCIÉTÉ GÉNÉRALE",xlab="",breaks=100)
-  lines(density(returns$GLE.RET),col=2)
-  curve(dnorm(x,0,0.02557792), from = -0.1,to=0.1, col='blue',add = TRUE)
-  hist(returns$AIR.RET,probability=T, main="AIRBUS",xlab="",breaks=100)
-  lines(density(returns$AIR.RET),col=2)
-  curve(dnorm(x,0,0.02397011), from = -0.1,to=0.1, col='blue',add = TRUE)
+hist(returns$TEF.RET,probability=T, main="TELEFÓNICA",xlab="",breaks=100)
+lines(density(returns$TEF.RET),col=2)
+curve(dnorm(x,0,0.01695272), from = -0.15,to=0.15, col='blue',add = TRUE)
+hist(returns$ENEL.RET,probability=T, main="ENEL",xlab="",breaks=100)
+lines(density(returns$ENEL.RET),col=2)
+curve(dnorm(x,0,0.01571777), from = -0.05,to=0.05, col='blue',add = TRUE)
+hist(returns$GLE.RET,probability=T, main="SOCIÉTÉ GÉNÉRALE",xlab="",breaks=100)
+lines(density(returns$GLE.RET),col=2)
+curve(dnorm(x,0,0.02557792), from = -0.1,to=0.1, col='blue',add = TRUE)
+hist(returns$AIR.RET,probability=T, main="AIRBUS",xlab="",breaks=100)
+lines(density(returns$AIR.RET),col=2)
+curve(dnorm(x,0,0.02397011), from = -0.1,to=0.1, col='blue',add = TRUE)
 ```
 \FloatBarrier
 \centering 
@@ -243,14 +253,14 @@ Fonte:Elaboração própria.
 \bigskip
 ```{r,teste,echo=FALSE, fig.cap='Teste a normalidade das distribuições',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
-  qqnorm(returns$TEF.RET,main="TELEFÓNICA",pch=14)
-  qqline(returns$TEF.RET)
-  qqnorm(returns$ENEL.RET,main="ENEL",pch=14)
-  qqline(returns$ENEL.RET)
-  qqnorm(returns$GLE.RET,main="SOCIÉTÉ GÉNÉRALE",pch=14)
-  qqline(returns$GLE.RET)
-  qqnorm(returns$AIR.RET,main="AIRBUS",pch=14)
-  qqline(returns$AIR.RET)
+qqnorm(returns$TEF.RET,main="TELEFÓNICA",pch=14,col='darkgreen')
+qqline(returns$TEF.RET)
+qqnorm(returns$ENEL.RET,main="ENEL",pch=14,col = 'dodgerblue3')
+qqline(returns$ENEL.RET)
+qqnorm(returns$GLE.RET,main="SOCIÉTÉ GÉNÉRALE",pch=14,col = "darkorange")
+qqline(returns$GLE.RET)
+qqnorm(returns$AIR.RET,main="AIRBUS",pch=14,col ="deeppink")
+qqline(returns$AIR.RET)
 ```
 \FloatBarrier
 \centering 
@@ -267,8 +277,8 @@ lres <- sapply(lshap, "[", c("statistic","p.value"))
 
 ```{r,echo=FALSE}
 lresk<- knitr::kable(
-lres, caption = "Teste normalidade Shapiro-Wilk",
-booktabs = TRUE)
+  lres, caption = "Teste normalidade Shapiro-Wilk",
+  booktabs = TRUE)
 kable_styling(lresk , latex_options = c("hold_position","scale_down"), position = "center")
 ```
 \FloatBarrier
@@ -284,18 +294,18 @@ Fonte:Elaboração própria.
 ewma <- function(x) {  
   x<-ewmaVol(x,lambda = 0.94)
   return(head(x$sigma,1))
-  }
+}
 
 pewma <- do.call(data.frame, 
-                    list("ewma"= round(apply(returns, 2,ewma),6)))
+                 list("ewma"= round(apply(returns, 2,ewma),6)))
 ```
 \normalsize
 
 ```{r,echo=FALSE}
 pewma<-t(pewma)
 pewmak<- knitr::kable(
-pewma, caption = "EWMA",
-booktabs = TRUE)
+  pewma, caption = "EWMA",
+  booktabs = TRUE)
 kable_styling(pewmak , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -312,14 +322,14 @@ GLEew <- ewmaVol(returns$GLE.RET,lambda = 0.94)
 AIRew <- ewmaVol(returns$AIR.RET,lambda = 0.94)
 
 par(mfrow  = c(2,2))
-  TEL1<-plot(returns$TEF.RET,type="l",main="Telefónica", col="green")
-  lines(TEFew$sigma,col="red")
-  TEL3<-plot(returns$ENEL.RET,type="l",main="ENEL",col="green")
-  lines(ENELew$sigma,col="red")
-  TEL5<-plot(returns$GLE.RET,type="l",main="SoGen",col="green")
-  lines(GLEew$sigma,col="red")
-  TEL7<-plot(returns$AIR.RET,type="l",main="Airbus",col="green")
-  lines(AIRew$sigma,col="red")
+TEL1<-plot(returns$TEF.RET,type="l",main="Telefónica", col="green")
+lines(TEFew$sigma,col="darkgreen")
+TEL3<-plot(returns$ENEL.RET,type="l",main="ENEL",col="green")
+lines(ENELew$sigma,col="dodgerblue3")
+TEL5<-plot(returns$GLE.RET,type="l",main="SoGen",col="green")
+lines(GLEew$sigma,col="darkorange")
+TEL7<-plot(returns$AIR.RET,type="l",main="Airbus",col="green")
+lines(AIRew$sigma,col="deeppink")
 
 ```
 \FloatBarrier
@@ -352,11 +362,11 @@ set.seed(1)
 monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   monte_carlo_sim[[1,j]] <- TEF.preco_inicial
-    for(i in 2:N){
-      monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*
-        exp(TEF.MC.mean+TEF.MC.sigma *
-              rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*
+      exp(TEF.MC.mean+TEF.MC.sigma *
+            rnorm(1,0,1)*sqrt(1/252))
+  }
 }
 
 TEF.MC_MC_sim <- as_tibble(cbind(dia,monte_carlo_sim))
@@ -376,10 +386,10 @@ set.seed(2)
 ENEL_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   ENEL_monte_carlo_sim[[1,j]] <- ENEL.preco_inicial
-    for(i in 2:N){
-      ENEL_monte_carlo_sim[[i,j]] <- ENEL_monte_carlo_sim[[i-1,j]]*exp(ENEL.MI.mean+ENEL.MI.sigma * rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    ENEL_monte_carlo_sim[[i,j]] <- ENEL_monte_carlo_sim[[i-1,j]]*exp(ENEL.MI.mean+ENEL.MI.sigma * rnorm(1,0,1)*sqrt(1/252))
   }
+}
 ENEL.MI_MC_sim <- as_tibble(cbind(dia,ENEL_monte_carlo_sim))
 w1 <- str_c('Sim',seq(1,M))
 w1 <- c('Dia',w1)
@@ -396,10 +406,10 @@ set.seed(3)
 GLE_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   GLE_monte_carlo_sim[[1,j]] <- GLE.preco_inicial
-    for(i in 2:N){
-      GLE_monte_carlo_sim[[i,j]] <- GLE_monte_carlo_sim[[i-1,j]]*exp(GLE.PA.mean+GLE.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    GLE_monte_carlo_sim[[i,j]] <- GLE_monte_carlo_sim[[i-1,j]]*exp(GLE.PA.mean+GLE.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
   }
+}
 GLE.PA_MC_sim <- as_tibble(cbind(dia,GLE_monte_carlo_sim))
 w2 <- str_c('Sim',seq(1,M))
 w2 <- c('Dia',w2)
@@ -416,10 +426,10 @@ set.seed(4)
 AIR_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   AIR_monte_carlo_sim[[1,j]] <- AIR.preco_inicial
-    for(i in 2:N){
-      AIR_monte_carlo_sim[[i,j]] <- AIR_monte_carlo_sim[[i-1,j]]*exp(AIR.PA.mean+AIR.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    AIR_monte_carlo_sim[[i,j]] <- AIR_monte_carlo_sim[[i-1,j]]*exp(AIR.PA.mean+AIR.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
   }
+}
 AIR.PA_MC_sim <- as_tibble(cbind(dia,AIR_monte_carlo_sim))
 w3 <- str_c('Sim',seq(1,M))
 w3 <- c('Dia',w3)
@@ -431,10 +441,12 @@ AIR.PA_MC_sim <- gather(AIR.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia)
 ```{r,sim,echo=FALSE, fig.cap='Simulação Monte Carlo para 80 dias',fig.topcaption = TRUE,out.width = "45%"}
 
 par(mfrow  = c(2,2))
-    ggplot(TEF.MC_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("TEF: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
-    ggplot(ENEL.MI_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("ENEL: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
-     ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
-       ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(TEF.MC_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = 'darkgreen'
+) + ggtitle(str_c("TEF: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(ENEL.MI_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = 'dodgerblue3') + ggtitle(str_c("ENEL: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = "darkorange"
+) + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour="deeppink") + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
 
 \scriptsize
@@ -449,8 +461,8 @@ M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
 ```{r,echo=FALSE}
 SimEWMA <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
 SimEWMAk<- knitr::kable(
-tail(SimEWMA), caption = "Valores simulados",
-booktabs = TRUE)
+  tail(SimEWMA), caption = "Valores simulados",
+  booktabs = TRUE)
 kable_styling(SimEWMAk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -494,8 +506,8 @@ minew<-getPortfolio(minvarewma)
 minewma<- as.data.frame(minew$weights)
 colnames(minewma)<- c("Pesos")
 minewmak<- knitr::kable(
-minewma, caption = "Pesos no portfolio",
-booktabs = TRUE)
+  minewma, caption = "Pesos no portfolio",
+  booktabs = TRUE)
 kable_styling(minewmak , latex_options = "hold_position", position = "center")
 ```
 
@@ -518,8 +530,8 @@ TEF<-garchFit(formula = ~ garch(1,1),data=returns$TEF.RET,cond.dist = "std", tra
 TEFcoef <- round(TEF@fit$matcoef,6)
 
 TEFcoefk<- knitr::kable(
-TEFcoef, caption = "TEF coeficientes",
-booktabs = TRUE)
+  TEFcoef, caption = "TEF coeficientes",
+  booktabs = TRUE)
 kable_styling(TEFcoefk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -532,8 +544,8 @@ Fonte:Elaboração própria.
 ```{r,echo=FALSE}
 TEFics <- TEF@fit$ics
 TEFicsk<- knitr::kable(
-TEFics, caption = "Information Criterion Statistics",
-booktabs = TRUE)
+  TEFics, caption = "Information Criterion Statistics",
+  booktabs = TRUE)
 kable_styling(TEFicsk , latex_options = "hold_position", position = "center")
 
 pers <- TEF@fit$params$persistence
@@ -554,8 +566,8 @@ rownames(TEFLjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 20
 TEFLjun$df<-NULL
 
 TEFLjunk<- knitr::kable(
-TEFLjun, caption = "Standardized Residuals Tests",
-booktabs = TRUE)
+  TEFLjun, caption = "Standardized Residuals Tests",
+  booktabs = TRUE)
 kable_styling(TEFLjunk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -566,10 +578,10 @@ Fonte:Elaboração própria.
 \bigskip
 ```{r,TELplot,echo=FALSE, fig.cap='Telefónica',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
-  plot(TEF,which= 2)
-  plot(TEF,which= 3)
-  plot(TEF,which=4)
-  plot(TEF,which=5)
+plot(TEF,which= 2)
+plot(TEF,which= 3)
+plot(TEF,which=4)
+plot(TEF,which=5)
 ```
 \FloatBarrier
 \centering 
@@ -591,8 +603,8 @@ ENEL<-garchFit(formula = ~ garch(1,1),data=returns$ENEL.RET,cond.dist = "std", t
 ENELcoef <- round(ENEL@fit$matcoef,6)
 
 ENELcoefk<- knitr::kable(
-ENELcoef, caption = "ENEL coeficientes",
-booktabs = TRUE)
+  ENELcoef, caption = "ENEL coeficientes",
+  booktabs = TRUE)
 kable_styling(ENELcoefk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -605,8 +617,8 @@ Fonte:Elaboração própria.
 ```{r,echo=FALSE}
 ENELics <- ENEL@fit$ics
 ENELicsk<- knitr::kable(
-ENELics, caption = "ENEL Information Criterion Statistics",
-booktabs = TRUE)
+  ENELics, caption = "ENEL Information Criterion Statistics",
+  booktabs = TRUE)
 kable_styling(ENELicsk , latex_options = "hold_position", position = "center")
 
 ENELpers <- ENEL@fit$params$persistence
@@ -627,8 +639,8 @@ rownames(ENELLjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 2
 ENELLjun$df<-NULL
 
 ENELLjunk<- knitr::kable(
-ENELLjun, caption = "ENEL Standardized Residuals Tests",
-booktabs = TRUE)
+  ENELLjun, caption = "ENEL Standardized Residuals Tests",
+  booktabs = TRUE)
 kable_styling(ENELLjunk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -639,10 +651,10 @@ Fonte:Elaboração própria.
 \bigskip
 ```{r,ENELplot,echo=FALSE, fig.cap='ENEL',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
-  plot(ENEL,which= 2)
-  plot(ENEL,which= 3)
-  plot(ENEL,which=4)
-  plot(ENEL,which=5)
+plot(ENEL,which= 2)
+plot(ENEL,which= 3)
+plot(ENEL,which=4)
+plot(ENEL,which=5)
 ```
 \FloatBarrier
 \centering 
@@ -664,8 +676,8 @@ GLE<-garchFit(formula = ~ arma(1,0) + garch(1,1),data=returns$GLE.RET,cond.dist 
 GLEcoef <- round(GLE@fit$matcoef,6)
 
 GLEcoefk<- knitr::kable(
-GLEcoef, caption = "GLE coeficientes",
-booktabs = TRUE)
+  GLEcoef, caption = "GLE coeficientes",
+  booktabs = TRUE)
 kable_styling(GLEcoefk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -678,8 +690,8 @@ Fonte:Elaboração própria.
 ```{r,echo=FALSE}
 GLEics <- GLE@fit$ics
 GLEicsk<- knitr::kable(
-GLEics, caption = "GLE Information Criterion Statistics",
-booktabs = TRUE)
+  GLEics, caption = "GLE Information Criterion Statistics",
+  booktabs = TRUE)
 kable_styling(GLEicsk , latex_options = "hold_position", position = "center")
 
 GLEpers <- GLE@fit$params$persistence
@@ -700,8 +712,8 @@ rownames(GLELjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 20
 GLELjun$df<-NULL
 
 GLELjunk<- knitr::kable(
-GLELjun, caption = "GLE Standardized Residuals Tests",
-booktabs = TRUE)
+  GLELjun, caption = "GLE Standardized Residuals Tests",
+  booktabs = TRUE)
 kable_styling(GLELjunk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -712,10 +724,10 @@ Fonte:Elaboração própria.
 \bigskip
 ```{r,GLEplot,echo=FALSE, fig.cap='SOCIÉTÉ GÉNÉRALE',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
-  plot(GLE,which= 2)
-  plot(GLE,which= 3)
-  plot(GLE,which=4)
-  plot(GLE,which=5)
+plot(GLE,which= 2)
+plot(GLE,which= 3)
+plot(GLE,which=4)
+plot(GLE,which=5)
 ```
 \FloatBarrier
 \centering 
@@ -732,13 +744,15 @@ GLEvol <- tail(GLEsd,1)
 ### AIRBUS
 
 ```{r,echo=FALSE,warning = FALSE}
-AIR<-garchFit(formula = ~ arma(1,1) + garch(1,1),data=returns$AIR.RET,cond.dist = "std", trace=FALSE)
+AIR.spec <- ugarchspec(variance.model=list(model="eGARCH",garchOrder=c(2,2)),
+                            mean.model=list(armaOrder=c(1,1)),distribution.model="std") 
+AIR <- ugarchfit(AIR.spec, returns$AIR.RET) 
 
 AIRcoef <- round(AIR@fit$matcoef,6)
 
 AIRcoefk<- knitr::kable(
-AIRcoef, caption = "AIR coeficientes",
-booktabs = TRUE)
+  AIRcoef, caption = "AIR coeficientes",
+  booktabs = TRUE)
 kable_styling(AIRcoefk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -749,13 +763,13 @@ Fonte:Elaboração própria.
 \bigskip
 
 ```{r,echo=FALSE}
-AIRics <- AIR@fit$ics
+AIRics <- infocriteria(AIR)
 AIRicsk<- knitr::kable(
-AIRics, caption = "AIR Information Criterion Statistics",
-booktabs = TRUE)
+  AIRics, caption = "AIR Information Criterion Statistics",
+  booktabs = TRUE)
 kable_styling(AIRicsk , latex_options = "hold_position", position = "center")
 
-AIRpers <- AIR@fit$params$persistence
+AIRpers <- AIR@fit$persistence
 ```
 \FloatBarrier
 \centering 
@@ -765,16 +779,16 @@ Fonte:Elaboração própria.
 \bigskip
 
 ```{r,echo=FALSE}
-AIRr <-residuals(AIR, standardize = TRUE)
-AIRres <- as.data.frame(LjungBox(AIRr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
-AIRsre <- as.data.frame(LjungBox(AIRr^2, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+AIRr <-as.numeric(residuals(AIR, standardize = T))
+AIRres <-as.matrix(LjungBox(AIRr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+AIRsre <- as.data.frame(LjungBox(AIRr, lags=c(10,15,20), order=0, season=1, squared.residuals=TRUE))
 AIRLjun <- rbind(AIRres,AIRsre)
 rownames(AIRLjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 20","Ljung-Box Test 10 R^2 ","Ljung-Box Test 15 R^2","Ljung-Box Test 20 R^2")
 AIRLjun$df<-NULL
 
 AIRLjunk<- knitr::kable(
-AIRLjun, caption = "AIR Standardized Residuals Tests",
-booktabs = TRUE)
+  AIRLjun, caption = "AIR Standardized Residuals Tests",
+  booktabs = TRUE)
 kable_styling(AIRLjunk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -785,10 +799,11 @@ Fonte:Elaboração própria.
 \bigskip
 ```{r,AIRplot,echo=FALSE, fig.cap='AIRBUS',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
-  plot(AIR,which= 2)
-  plot(AIR,which= 3)
-  plot(AIR,which=4)
-  plot(AIR,which=5)
+plot(AIR,which= 1)
+plot(AIR,which= 3)
+plot(AIR,which=4)
+plot(AIR,which=5)
+
 ```
 \FloatBarrier
 \centering 
@@ -798,7 +813,7 @@ Fonte:Elaboração própria.
 \bigskip
 
 ```{r,echo=FALSE}
-AIRsd <- AIR@sigma.t
+AIRsd <- AIR@fit$sigma
 AIRvol <- tail(AIRsd,1)
 ```
 
@@ -825,11 +840,11 @@ set.seed(12)
 monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   monte_carlo_sim[[1,j]] <- TEF.preco_inicial
-    for(i in 2:N){
-      monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*
-        exp(TEF.MC.mean+TEF.MC.sigma *
-              rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*
+      exp(TEF.MC.mean+TEF.MC.sigma *
+            rnorm(1,0,1)*sqrt(1/252))
+  }
 }
 
 TEF.MC_MC_sim <- as_tibble(cbind(dia,monte_carlo_sim))
@@ -849,10 +864,10 @@ set.seed(15)
 ENEL_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   ENEL_monte_carlo_sim[[1,j]] <- ENEL.preco_inicial
-    for(i in 2:N){
-      ENEL_monte_carlo_sim[[i,j]] <- ENEL_monte_carlo_sim[[i-1,j]]*exp(ENEL.MI.mean+ENEL.MI.sigma * rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    ENEL_monte_carlo_sim[[i,j]] <- ENEL_monte_carlo_sim[[i-1,j]]*exp(ENEL.MI.mean+ENEL.MI.sigma * rnorm(1,0,1)*sqrt(1/252))
   }
+}
 ENEL.MI_MC_sim <- as_tibble(cbind(dia,ENEL_monte_carlo_sim))
 w1 <- str_c('Sim',seq(1,M))
 w1 <- c('Dia',w1)
@@ -869,10 +884,10 @@ set.seed(16)
 GLE_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   GLE_monte_carlo_sim[[1,j]] <- GLE.preco_inicial
-    for(i in 2:N){
-      GLE_monte_carlo_sim[[i,j]] <- GLE_monte_carlo_sim[[i-1,j]]*exp(GLE.PA.mean+GLE.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    GLE_monte_carlo_sim[[i,j]] <- GLE_monte_carlo_sim[[i-1,j]]*exp(GLE.PA.mean+GLE.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
   }
+}
 GLE.PA_MC_sim <- as_tibble(cbind(dia,GLE_monte_carlo_sim))
 w2 <- str_c('Sim',seq(1,M))
 w2 <- c('Dia',w2)
@@ -889,10 +904,10 @@ set.seed(17)
 AIR_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   AIR_monte_carlo_sim[[1,j]] <- AIR.preco_inicial
-    for(i in 2:N){
-      AIR_monte_carlo_sim[[i,j]] <- AIR_monte_carlo_sim[[i-1,j]]*exp(AIR.PA.mean+AIR.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    AIR_monte_carlo_sim[[i,j]] <- AIR_monte_carlo_sim[[i-1,j]]*exp(AIR.PA.mean+AIR.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
   }
+}
 AIR.PA_MC_sim <- as_tibble(cbind(dia,AIR_monte_carlo_sim))
 w3 <- str_c('Sim',seq(1,M))
 w3 <- c('Dia',w3)
@@ -904,10 +919,13 @@ AIR.PA_MC_sim <- gather(AIR.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia)
 ```{r,simgarch,echo=FALSE, fig.cap='Simulação Monte Carlo para 80 dias',fig.topcaption = TRUE,out.width = "45%"}
 
 par(mfrow  = c(2,2))
-    ggplot(TEF.MC_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("TEF: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
-    ggplot(ENEL.MI_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("ENEL: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
-     ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
-       ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(TEF.MC_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = 'darkgreen'
+) + ggtitle(str_c("TEF: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(ENEL.MI_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = 'dodgerblue3'
+) + ggtitle(str_c("ENEL: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = "darkorange"
+) + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour="deeppink") + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
 
 \scriptsize
@@ -922,8 +940,8 @@ M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
 ```{r,echo=FALSE}
 SimGARCH <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
 SimGARCHk<- knitr::kable(
-tail(SimGARCH), caption = "GARCH - Valores simulados",
-booktabs = TRUE)
+  tail(SimGARCH), caption = "GARCH - Valores simulados",
+  booktabs = TRUE)
 kable_styling(SimGARCHk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -968,8 +986,8 @@ minew<-getPortfolio(minvarGARCH)
 minGARCH<- as.data.frame(minew$weights)
 colnames(minGARCH)<- c("Pesos")
 minGARCHk<- knitr::kable(
-minGARCH, caption = "GARCH - Pesos no portfolio",
-booktabs = TRUE)
+  minGARCH, caption = "GARCH - Pesos no portfolio",
+  booktabs = TRUE)
 kable_styling(minGARCHk , latex_options = "hold_position", position = "center")
 ```
 
@@ -1012,8 +1030,8 @@ rownames(pimpvol)<-"Volatilidade implícita"
 
 pimpvol <- as.data.frame(pimpvol)
 pimpvolk<- knitr::kable(
-pimpvol, caption = "Volatilidade Implícita",
-booktabs = TRUE)
+  pimpvol, caption = "Volatilidade Implícita",
+  booktabs = TRUE)
 kable_styling(pimpvolk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -1046,11 +1064,11 @@ set.seed(21)
 monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   monte_carlo_sim[[1,j]] <- TEF.preco_inicial
-    for(i in 2:N){
-      monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*
-        exp(TEF.MC.mean+TEF.MC.sigma *
-              rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    monte_carlo_sim[[i,j]] <- monte_carlo_sim[[i-1,j]]*
+      exp(TEF.MC.mean+TEF.MC.sigma *
+            rnorm(1,0,1)*sqrt(1/252))
+  }
 }
 
 TEF.MC_MC_sim <- as_tibble(cbind(dia,monte_carlo_sim))
@@ -1070,10 +1088,10 @@ set.seed(22)
 ENEL_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   ENEL_monte_carlo_sim[[1,j]] <- ENEL.preco_inicial
-    for(i in 2:N){
-      ENEL_monte_carlo_sim[[i,j]] <- ENEL_monte_carlo_sim[[i-1,j]]*exp(ENEL.MI.mean+ENEL.MI.sigma * rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    ENEL_monte_carlo_sim[[i,j]] <- ENEL_monte_carlo_sim[[i-1,j]]*exp(ENEL.MI.mean+ENEL.MI.sigma * rnorm(1,0,1)*sqrt(1/252))
   }
+}
 ENEL.MI_MC_sim <- as_tibble(cbind(dia,ENEL_monte_carlo_sim))
 w1 <- str_c('Sim',seq(1,M))
 w1 <- c('Dia',w1)
@@ -1090,10 +1108,10 @@ set.seed(23)
 GLE_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   GLE_monte_carlo_sim[[1,j]] <- GLE.preco_inicial
-    for(i in 2:N){
-      GLE_monte_carlo_sim[[i,j]] <- GLE_monte_carlo_sim[[i-1,j]]*exp(GLE.PA.mean+GLE.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    GLE_monte_carlo_sim[[i,j]] <- GLE_monte_carlo_sim[[i-1,j]]*exp(GLE.PA.mean+GLE.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
   }
+}
 GLE.PA_MC_sim <- as_tibble(cbind(dia,GLE_monte_carlo_sim))
 w2 <- str_c('Sim',seq(1,M))
 w2 <- c('Dia',w2)
@@ -1110,10 +1128,10 @@ set.seed(24)
 AIR_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   AIR_monte_carlo_sim[[1,j]] <- AIR.preco_inicial
-    for(i in 2:N){
-      AIR_monte_carlo_sim[[i,j]] <- AIR_monte_carlo_sim[[i-1,j]]*exp(AIR.PA.mean+AIR.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
-    }
+  for(i in 2:N){
+    AIR_monte_carlo_sim[[i,j]] <- AIR_monte_carlo_sim[[i-1,j]]*exp(AIR.PA.mean+AIR.PA.sigma * rnorm(1,0,1)*sqrt(1/252))
   }
+}
 AIR.PA_MC_sim <- as_tibble(cbind(dia,AIR_monte_carlo_sim))
 w3 <- str_c('Sim',seq(1,M))
 w3 <- c('Dia',w3)
@@ -1125,10 +1143,10 @@ AIR.PA_MC_sim <- gather(AIR.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia)
 ```{r,simvi,echo=FALSE, fig.cap='Simulação Monte Carlo para 80 dias',fig.topcaption = TRUE,out.width = "45%"}
 
 par(mfrow  = c(2,2))
-    ggplot(TEF.MC_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("TEF: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
-    ggplot(ENEL.MI_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("ENEL: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
-     ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
-       ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1) + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(TEF.MC_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = 'darkgreen') + ggtitle(str_c("TEF: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(ENEL.MI_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = 'dodgerblue3') + ggtitle(str_c("ENEL: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = "darkorange") + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
+ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour="deeppink") + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
 
 \scriptsize
@@ -1143,8 +1161,8 @@ M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
 ```{r,echo=FALSE}
 SimVI <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
 SimVIk<- knitr::kable(
-tail(SimVI), caption = "Vol. Implicita - Valores simulados",
-booktabs = TRUE)
+  tail(SimVI), caption = "Vol. Implicita - Valores simulados",
+  booktabs = TRUE)
 kable_styling(SimVIk , latex_options = "hold_position", position = "center")
 ```
 \FloatBarrier
@@ -1189,8 +1207,8 @@ minew<-getPortfolio(minvarVI)
 minVI<- as.data.frame(minew$weights)
 colnames(minVI)<- c("Pesos")
 minVIk<- knitr::kable(
-minVI, caption = "Vol Implicita- Pesos no portfolio",
-booktabs = TRUE)
+  minVI, caption = "Vol Implicita- Pesos no portfolio",
+  booktabs = TRUE)
 kable_styling(minVIk , latex_options = "hold_position", position = "center")
 ```
 
@@ -1202,3 +1220,4 @@ ModVaR_95_VI$contribution
 MVaRVI_VaR <- ModVaR_95_VI$MVaR
 ```
 \normalsize
+

@@ -819,6 +819,19 @@ We describe our methods in this chapter.
 \hypertarget{introduuxe7uxe3o}{%
 \section{Introdução}\label{introduuxe7uxe3o}}
 
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{image/modelação} 
+
+}
+
+\caption{Modelação do processo}\label{fig:processo}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte: Elaboração própria.
+
 \hypertarget{anuxe1lise-descritiva-dos-dados}{%
 \section{Análise descritiva dos dados}\label{anuxe1lise-descritiva-dos-dados}}
 
@@ -914,8 +927,8 @@ Fonte:\url{https://finance.yahoo.com/}
 \begin{Highlighting}[]
 \NormalTok{pt \textless{}{-}}\KeywordTok{summary}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(newdata))}
 \NormalTok{p \textless{}{-}}\StringTok{ }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}
-\NormalTok{pt, }\DataTypeTok{caption =} \StringTok{"Estatísticas das cotações"}\NormalTok{,}
-\DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{  pt, }\DataTypeTok{caption =} \StringTok{"Estatísticas das cotações"}\NormalTok{,}
+  \DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{)}
 \KeywordTok{kable\_styling}\NormalTok{(p, }\DataTypeTok{latex\_options =} \StringTok{"hold\_position"}\NormalTok{, }\DataTypeTok{position =} \StringTok{"center"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1153,10 +1166,10 @@ Fonte:Elaboração própria.
 \NormalTok{ewma \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{  }
 \NormalTok{  x\textless{}{-}}\KeywordTok{ewmaVol}\NormalTok{(x,}\DataTypeTok{lambda =} \FloatTok{0.94}\NormalTok{)}
   \KeywordTok{return}\NormalTok{(}\KeywordTok{head}\NormalTok{(x}\OperatorTok{$}\NormalTok{sigma,}\DecValTok{1}\NormalTok{))}
-\NormalTok{  \}}
+\NormalTok{\}}
 
 \NormalTok{pewma \textless{}{-}}\StringTok{ }\KeywordTok{do.call}\NormalTok{(data.frame, }
-                    \KeywordTok{list}\NormalTok{(}\StringTok{"ewma"}\NormalTok{=}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{apply}\NormalTok{(returns, }\DecValTok{2}\NormalTok{,ewma),}\DecValTok{6}\NormalTok{)))}
+                 \KeywordTok{list}\NormalTok{(}\StringTok{"ewma"}\NormalTok{=}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{apply}\NormalTok{(returns, }\DecValTok{2}\NormalTok{,ewma),}\DecValTok{6}\NormalTok{)))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1228,11 +1241,11 @@ Fonte:Elaboração própria.
 \NormalTok{monte\_carlo\_sim \textless{}{-}}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DataTypeTok{nrow=}\NormalTok{N, }\DataTypeTok{ncol =}\NormalTok{ M)}
 \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{M)\{}
 \NormalTok{  monte\_carlo\_sim[[}\DecValTok{1}\NormalTok{,j]] \textless{}{-}}\StringTok{ }\NormalTok{TEF.preco\_inicial}
-    \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\NormalTok{N)\{}
-\NormalTok{      monte\_carlo\_sim[[i,j]] \textless{}{-}}\StringTok{ }\NormalTok{monte\_carlo\_sim[[i}\DecValTok{{-}1}\NormalTok{,j]]}\OperatorTok{*}
-\StringTok{        }\KeywordTok{exp}\NormalTok{(TEF.MC.mean}\OperatorTok{+}\NormalTok{TEF.MC.sigma }\OperatorTok{*}
-\StringTok{              }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{252}\NormalTok{))}
-\NormalTok{    \}}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\NormalTok{N)\{}
+\NormalTok{    monte\_carlo\_sim[[i,j]] \textless{}{-}}\StringTok{ }\NormalTok{monte\_carlo\_sim[[i}\DecValTok{{-}1}\NormalTok{,j]]}\OperatorTok{*}
+\StringTok{      }\KeywordTok{exp}\NormalTok{(TEF.MC.mean}\OperatorTok{+}\NormalTok{TEF.MC.sigma }\OperatorTok{*}
+\StringTok{            }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{252}\NormalTok{))}
+\NormalTok{  \}}
 \NormalTok{\}}
 
 \NormalTok{TEF.MC\_MC\_sim \textless{}{-}}\StringTok{ }\KeywordTok{as\_tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(dia,monte\_carlo\_sim))}
@@ -1616,7 +1629,7 @@ Fonte:Elaboração própria.
 
 }
 
-\caption{ENEL}\label{fig:GLEplot}
+\caption{SOCIÉTÉ GÉNÉRALE}\label{fig:GLEplot}
 \end{figure}
 \FloatBarrier
 \centering
@@ -1627,7 +1640,7 @@ Fonte:Elaboração própria.
 \bigskip
 
 \hypertarget{airbus}{%
-\subsection{Airbus}\label{airbus}}
+\subsection{AIRBUS}\label{airbus}}
 
 \begin{table}[!h]
 
@@ -1637,14 +1650,19 @@ Fonte:Elaboração própria.
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & 0.000161 & 0.000128 & 1.254022 & 0.209834\\
-ar1 & 0.849062 & 0.115516 & 7.350151 & 0.000000\\
-ma1 & -0.873890 & 0.106280 & -8.222483 & 0.000000\\
-omega & 0.000014 & 0.000005 & 2.730241 & 0.006329\\
-alpha1 & 0.112889 & 0.027696 & 4.076007 & 0.000046\\
+mu & 0.000378 & 0.000256 & 1.478670 & 0.139229\\
+ar1 & -0.690353 & 0.049772 & -13.870237 & 0.000000\\
+ma1 & 0.713683 & 0.048171 & 14.815473 & 0.000000\\
+omega & -0.420511 & 0.129163 & -3.255673 & 0.001131\\
+alpha1 & -0.146353 & 0.028249 & -5.180744 & 0.000000\\
 \addlinespace
-beta1 & 0.849060 & 0.034133 & 24.875270 & 0.000000\\
-shape & 5.460341 & 0.965924 & 5.652974 & 0.000000\\
+alpha2 & -0.135647 & 0.029636 & -4.577144 & 0.000005\\
+beta1 & 0.022517 & 0.015512 & 1.451604 & 0.146612\\
+beta2 & 0.925715 & 0.009439 & 98.074257 & 0.000000\\
+gamma1 & 0.054007 & 0.049166 & 1.098462 & 0.272003\\
+gamma2 & 0.176758 & 0.052157 & 3.388992 & 0.000701\\
+\addlinespace
+shape & 5.904549 & 1.113789 & 5.301318 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1662,12 +1680,12 @@ Fonte:Elaboração própria.
 \centering
 \begin{tabular}[t]{lr}
 \toprule
-  & x\\
+  & \\
 \midrule
-AIC & -5.381134\\
-BIC & -5.347105\\
-SIC & -5.381229\\
-HQIC & -5.368208\\
+Akaike & -5.404779\\
+Bayes & -5.351304\\
+Shibata & -5.405012\\
+Hannan-Quinn & -5.384466\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1687,13 +1705,13 @@ Fonte:Elaboração própria.
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 6.933033 & 0.7317516\\
-Ljung-Box Test 15 & 15 & 13.058807 & 0.5977556\\
-Ljung-Box Test 20 & 20 & 16.121427 & 0.7090631\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 24.459099 & 0.0064707\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 25.491652 & 0.0437178\\
+Ljung-Box Test 10 & 10 & 3.180686 & 0.9768463\\
+Ljung-Box Test 15 & 15 & 7.325160 & 0.9479907\\
+Ljung-Box Test 20 & 20 & 10.701992 & 0.9535876\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 9.914234 & 0.4480498\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 12.112217 & 0.6705160\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 29.344316 & 0.0811977\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 14.427566 & 0.8081728\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1710,7 +1728,7 @@ Fonte:Elaboração própria.
 
 }
 
-\caption{ENEL}\label{fig:AIRplot}
+\caption{AIRBUS}\label{fig:AIRplot}
 \end{figure}
 \FloatBarrier
 \centering
@@ -1760,13 +1778,13 @@ Fonte:Elaboração própria.
 \toprule
   & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
 \midrule
-75 & 4.302669 & 6.898191 & 10.87305 & 55.74675\\
-76 & 4.295976 & 6.913417 & 10.79496 & 55.93433\\
-77 & 4.294854 & 6.925364 & 10.66950 & 56.29190\\
-78 & 4.269621 & 6.911978 & 10.62941 & 56.03433\\
-79 & 4.287504 & 6.916477 & 10.55421 & 55.39971\\
+75 & 4.302669 & 6.898191 & 10.87305 & 56.47486\\
+76 & 4.295976 & 6.913417 & 10.79496 & 56.64959\\
+77 & 4.294854 & 6.925364 & 10.66950 & 56.97824\\
+78 & 4.269621 & 6.911978 & 10.62941 & 56.74971\\
+79 & 4.287504 & 6.916477 & 10.55421 & 56.17910\\
 \addlinespace
-80 & 4.287599 & 6.922461 & 10.52076 & 55.36995\\
+80 & 4.287599 & 6.922461 & 10.52076 & 56.15682\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1803,10 +1821,10 @@ Fonte:Elaboração própria.
 \toprule
   & Pesos\\
 \midrule
-SimTEF & 0.2417921\\
-SimENEL & 0.6383109\\
+SimTEF & 0.2374378\\
+SimENEL & 0.6217249\\
 SimGLE & 0.0000000\\
-SimAIR & 0.1198970\\
+SimAIR & 0.1408373\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1823,7 +1841,7 @@ SimAIR & 0.1198970\\
 
 \begin{verbatim}
 ##       SimTEF      SimENEL       SimGLE       SimAIR 
-## 0.0006355425 0.0013987753 0.0000000000 0.0002691519
+## 0.0006583067 0.0014194780 0.0000000000 0.0001898469
 \end{verbatim}
 
 \begin{Shaded}
@@ -1991,7 +2009,25 @@ SimAIR & 0.1061691\\
 \chapter*{Conclusão}\label{conclusuxe3o}}
 \addcontentsline{toc}{chapter}{Conclusão}
 
-We have finished a nice book.
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow  =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-67-1} \end{center}
 
   \bibliography{book.bib,packages.bib}
 

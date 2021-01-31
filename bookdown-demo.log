@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.30)  30 JAN 2021 22:32
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.30)  31 JAN 2021 12:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1577,8 +1577,19 @@ Cap\'{\i }tulo 3.
 [27
 
 ]
+File: image/modelação.png Graphic file (type bmp)
+<image/modelação.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 836--836
+|[]\TU/Arial(0)/b/n/17.28 Análise descritiva dos dados|
+ []
+
 File: image/cotacao.png Graphic file (type bmp)
 <image/cotacao.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[28]
 File: bookdown-demo_files/figure-latex/cotacao-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/cotacao-1.pdf>
 File: bookdown-demo_files/figure-latex/cotacao-2.pdf Graphic file (type pdf)
@@ -1587,15 +1598,22 @@ File: bookdown-demo_files/figure-latex/cotacao-3.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/cotacao-3.pdf>
 File: bookdown-demo_files/figure-latex/cotacao-4.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/cotacao-4.pdf>
-[28]
-LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 911.
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 915.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[29] [30]
+[29]
+LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 924.
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 928.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[30]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[31]
 File: bookdown-demo_files/figure-latex/volatilidade-1.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/volatilidade-1.pdf>
@@ -1608,7 +1626,6 @@ f)
 File: bookdown-demo_files/figure-latex/volatilidade-4.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/volatilidade-4.pdf>
-[31]
 File: bookdown-demo_files/figure-latex/distr-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/distr-1.pdf>
 [32]
@@ -1683,9 +1700,18 @@ File: bookdown-demo_files/figure-latex/simvi-4.pdf Graphic file (type pdf)
 [47]
 Underfull \vbox (badness 5939) has occurred while \output is active []
 
-[48] [49] (./bookdown-demo.bbl [50
+[48] [49]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2014.
+File: bookdown-demo_files/figure-latex/unnamed-chunk-67-1.pdf Graphic file (typ
+e pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-67-1.pdf>
 
-]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[50
+
+] (./bookdown-demo.bbl [51]
 Underfull \hbox (badness 10000) in paragraph at lines 21--26
 \TU/Arial(0)/m/n/12 from []$[][][][][] [] [] [] [][][] [] [][][][][][][][][][][
 ][][][][][][][] [] [][][][][][] [] [][] [] [][][][][][][][][][][][][][] [] [][]
@@ -1699,28 +1725,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--26
 ] [][][][] []
  []
 
-[51
+[52
 
-]) [52] [53
-
-] [54
+]) [53] [54
 
 ] [55
+
+] [56
 
 ] (./bookdown-demo.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
-(rerunfilecheck)             Checksum: 278637C6DDC1745E5B210505EFF545E8;6359.
+(rerunfilecheck)             Checksum: ABA220B17939603037E1E6E7927CA686;6359.
  ) 
 Here is how much of TeX's memory you used:
- 23507 strings out of 479234
- 412257 string characters out of 5874137
- 909445 words of memory out of 5000000
- 42571 multiletter control sequences out of 15000+600000
- 431714 words of font info for 116 fonts, out of 8000000 for 9000
+ 23532 strings out of 479234
+ 412955 string characters out of 5874137
+ 910516 words of memory out of 5000000
+ 42591 multiletter control sequences out of 15000+600000
+ 431730 words of font info for 118 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  98i,10n,125p,1844b,598s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (66 pages).
+Output written on bookdown-demo.pdf (67 pages).
