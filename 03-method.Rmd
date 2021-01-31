@@ -1,4 +1,14 @@
 # Pacotes do R para análise
 \newpage
 
-We describe our methods in this chapter.
+O presente trabalho foi elaborado tendo como apoio na análise dos dados a linguagem de programação R.
+Vários “Packages” do R foram utilizados, apresentando-se uma descrição dos utilizados.
+
+Quantmod: “The quantmod package for R is designed to assist the quantitative trader in the development,testing, and deployment of statistically based trading models.” (https://www.quantmod.com/)
+
+PerformanceAnalytics: “Collection of econometric functions for performance and risk analysis.”
+(https://cran.r-project.org/web/packages/PerformanceAnalytics/index.html)
+
+fPortfolio: “Provides a collection of functions to optimize portfolios and to analyze them from different points of view.”( https://cran.r-project.org/web/packages/fPortfolio/fPortfolio.pdf)
+
+Portfolio.optimization: “Simplify your portfolio optimization process by applying a contemporary modeling way to model and solve your portfolio problems. “ (https://cran.rproject.org/web/packages/portfolio.optimization/index.html)

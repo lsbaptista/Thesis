@@ -22,7 +22,7 @@ Como inicialmente referido, o objetivo é analisar as diferentes formas de calcu
 
 A investigação decorrerá aplicando-se os diferentes métodos de calculo da variância a dados do mercado, assim como os pressupostos teóricos de cada um dos métodos, sendo constituída uma carteira de ações integrantes do Euro Stoxx 50, calculando o seu retorno final para cada uma das volatilidades, assim como o risco a que está exposto um investidor. O retorno obtido será também comparado com um *benchmark*, neste caso o Euro Stoxx 50. 
 
-Ao longo deste percurso será também análisada a forma como é constituídos um portfolio, a teoria subjacente a média-variância, as retrições aplicáveis ao modelo desenvolvido, assim como a teoria subjacente aos vários métodos para análise da exposição ao risco aquando da constituição de um portfolio. 
+Ao longo deste percurso será também analisada a forma como é constituídos um portfolio, a teoria subjacente a média-variância, as retrições aplicáveis ao modelo desenvolvido, assim como a teoria subjacente aos vários métodos para análise da exposição ao risco aquando da constituição de um portfolio. 
 
 A aplicação pratica dos métodos aos dados do mercado será realizado com o apoio da linguagem de programação R, utilizando para esse efeito os vários “packages” disponíveis para aplicação ao sector financeiro. Um dos capítulos será dedicado a apresentação e descrição dos principais “packages” utilizados para análise dos dados, sendo que o R é parte integrante desta dissertação como ferramenta de análise estatísticas e aplicabilidade ao sector financeiro.
 

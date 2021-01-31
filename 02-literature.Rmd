@@ -309,7 +309,7 @@ Fonte: [@Goetzmann2014, pp.58]
 \justifying
 \bigskip
 
-Com base no apresentado até agora, o que se propõe é optimizar um portfolio em que os activos que o constituem apresentem pesos de modo a minimizar o risco, ou seja, minimizar a variância total, sem a possibilidade de vendas a descoberto e de activo sem risco, determinando a carteira eficiente. O problema a que se propõe é minimizar  $\sigma_{p}^{2}$ de acordo com a equação \#ref(eq:estdesviopadraop), sujeito ás seguintes restrições:
+Com base no apresentado até agora, o que se propõe é optimizar um portfolio em que os activos que o constituem apresentem pesos de modo a minimizar o risco, ou seja, minimizar a variância total, sem a possibilidade de vendas a descoberto e de activo sem risco, determinando a carteira eficiente. O problema a que se propõe é minimizar  $\sigma_{p}^{2}$ de acordo com a equação \@ref(eq:estdesviopadraop), sujeito ás seguintes restrições:
 
 \begin{equation} 
   \sum_{i=1}^{N}X_{i}\overline{R}_{i}=\overline{R}_{p}
@@ -336,7 +336,6 @@ Fonte: [@invest, p.33]
 
 \justifying
 \medskip
-
 A definição e optimização de portfolios está sujeita a outras restrições que não serão aqui apresentadas, tais como custos de *trading*, custos de oportunidade ou custos associados a regulamentação e fiscalidade^[O artigo @Fabozzi2014 "60 Years of portfolio optimization:Practical challenges and current trends" aborda várias outras restrições na abordagem da optimização na média-variância proposta por Markowitz].
 
 ## Value at Risk

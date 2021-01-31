@@ -302,7 +302,7 @@ Como inicialmente referido, o objetivo é analisar as diferentes formas de calcu
 
 A investigação decorrerá aplicando-se os diferentes métodos de calculo da variância a dados do mercado, assim como os pressupostos teóricos de cada um dos métodos, sendo constituída uma carteira de ações integrantes do Euro Stoxx 50, calculando o seu retorno final para cada uma das volatilidades, assim como o risco a que está exposto um investidor. O retorno obtido será também comparado com um \emph{benchmark}, neste caso o Euro Stoxx 50.
 
-Ao longo deste percurso será também análisada a forma como é constituídos um portfolio, a teoria subjacente a média-variância, as retrições aplicáveis ao modelo desenvolvido, assim como a teoria subjacente aos vários métodos para análise da exposição ao risco aquando da constituição de um portfolio.
+Ao longo deste percurso será também analisada a forma como é constituídos um portfolio, a teoria subjacente a média-variância, as retrições aplicáveis ao modelo desenvolvido, assim como a teoria subjacente aos vários métodos para análise da exposição ao risco aquando da constituição de um portfolio.
 
 A aplicação pratica dos métodos aos dados do mercado será realizado com o apoio da linguagem de programação R, utilizando para esse efeito os vários ``packages'' disponíveis para aplicação ao sector financeiro. Um dos capítulos será dedicado a apresentação e descrição dos principais ``packages'' utilizados para análise dos dados, sendo que o R é parte integrante desta dissertação como ferramenta de análise estatísticas e aplicabilidade ao sector financeiro.
 
@@ -656,7 +656,7 @@ Fonte: \citep[pp.58]{Goetzmann2014}
 \justifying
 \bigskip
 
-Com base no apresentado até agora, o que se propõe é optimizar um portfolio em que os activos que o constituem apresentem pesos de modo a minimizar o risco, ou seja, minimizar a variância total, sem a possibilidade de vendas a descoberto e de activo sem risco, determinando a carteira eficiente. O problema a que se propõe é minimizar \(\sigma_{p}^{2}\) de acordo com a equação \#ref(eq:estdesviopadraop), sujeito ás seguintes restrições:
+Com base no apresentado até agora, o que se propõe é optimizar um portfolio em que os activos que o constituem apresentem pesos de modo a minimizar o risco, ou seja, minimizar a variância total, sem a possibilidade de vendas a descoberto e de activo sem risco, determinando a carteira eficiente. O problema a que se propõe é minimizar \(\sigma_{p}^{2}\) de acordo com a equação \eqref{eq:estdesviopadraop}, sujeito ás seguintes restrições:
 
 \begin{equation} 
   \sum_{i=1}^{N}X_{i}\overline{R}_{i}=\overline{R}_{p}
@@ -808,7 +808,17 @@ Os parâmetros referentes a \(\zeta_1\) e \(\zeta_2\) são respectivamente os va
 
 \newpage
 
-We describe our methods in this chapter.
+O presente trabalho foi elaborado tendo como apoio na análise dos dados a linguagem de programação R.
+Vários ``Packages'' do R foram utilizados, apresentando-se uma descrição dos utilizados.
+
+Quantmod: ``The quantmod package for R is designed to assist the quantitative trader in the development,testing, and deployment of statistically based trading models.'' (\url{https://www.quantmod.com/})
+
+PerformanceAnalytics: ``Collection of econometric functions for performance and risk analysis.''
+(\url{https://cran.r-project.org/web/packages/PerformanceAnalytics/index.html})
+
+fPortfolio: ``Provides a collection of functions to optimize portfolios and to analyze them from different points of view.''( \url{https://cran.r-project.org/web/packages/fPortfolio/fPortfolio.pdf})
+
+Portfolio.optimization: ``Simplify your portfolio optimization process by applying a contemporary modeling way to model and solve your portfolio problems. `` (\url{https://cran.rproject.org/web/packages/portfolio.optimization/index.html})
 
 \hypertarget{aplicauxe7uxe3o-a-dados-do-modelo}{%
 \chapter{Aplicação a dados do modelo}\label{aplicauxe7uxe3o-a-dados-do-modelo}}
@@ -819,23 +829,7 @@ We describe our methods in this chapter.
 \hypertarget{introduuxe7uxe3o}{%
 \section{Introdução}\label{introduuxe7uxe3o}}
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.5\linewidth]{image/modelação} 
-
-}
-
-\caption{Modelação do processo}\label{fig:processo}
-\end{figure}
-\FloatBarrier
-\centering
-
-Fonte: Elaboração própria.
-
-\hypertarget{anuxe1lise-descritiva-dos-dados}{%
-\section{Análise descritiva dos dados}\label{anuxe1lise-descritiva-dos-dados}}
-
-A primeira fase consiste em extrair de forma aleatória 4 acções constituintes do Euro Stoxx 50, estando os valores obtidos representados na figura \ref{fig:empresas}.
+A análise contempla, numa primeira fase, extrair 4 empresas constituintes do Euro Stoxx 50\footnote{\url{https://etf.invesco.com/pt/institutional/en/product/invesco-euro-stoxx-50-ucits-etf-acc/index-components}}, sendo que essa escolha foi realizado tendo em consideração a diversificação do portfolio por sector de actividade e por presença geográfica, possibilitando deste modo minimizar a correlação que possa existir, apostando em sectores considerados cíclicos e também em sectores defensivos, estando as empresas seleccionadas representados na figura \ref{fig:empresas}, onde podemos verificar o sector de actividade e a sua cotação no último dia considerado.
 
 \begin{figure}
 
@@ -853,9 +847,36 @@ Fonte: Elaboração própria.
 \justifying
 \bigskip
 
+O intervalo temporal utilizado na obtenção dos dados foi de 01/06/2016 a 01/06/2020, contemplando 4
+anos de dados históricos, tendo sido obtidos a partir do Yahoo.finance, perfazendo 1014 dias de negociação. De acordo com \citet{NG2006} ``\ldots recomenda-se usar 1000 amostras para a estimação do modelo GARCH convencional''. Ainda considerando \citet{smallsample} ``\ldots foi demonstrado que um nível elevado de persistência obtido em modelos GARCH(1,1) usando um número elevado de observações têm autocorrelação menor do que as estimações sugeridas com amostras pequenas''
+
+Resumindo as várias etapas e de acordo com a figura \ref{fig:processo}, após a obtenção e tratamento dos dados é realizada uma análise descritiva dos mesmos, sendo depois estimada a volatilidade para o último dia de acordo com os modelos em estudo. O modelo de simulação integra esses valores obtidos de variância para cada um dos activos e de acordo com o modelo utilizado, sendo constítuido um portfolio que minimize a variância com base em 80 dias de simulação de preços, sendo as restrições aplicáveis ao modelo a não possibilidade de posições curtas, investir em activos sem risco e empréstimo de capital.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{image/modelação} 
+
+}
+
+\caption{Modelação do processo}\label{fig:processo}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte: Elaboração própria.
+
+\justifying
+
+Ao longo do trabalho e sempre que se verifique necessário será disponibilizado no próprio conteúdo do trabalho o código R utilizado para obtenção dos dados. As tabelas originadas que contemplam todo o \emph{output} de um determinado código serão colocadas em anexo.
+
+\hypertarget{anuxe1lise-descritiva-dos-dados}{%
+\section{Análise descritiva dos dados}\label{anuxe1lise-descritiva-dos-dados}}
+
+Na tabela \ref{tab:sogtail} estão representados os valores para as acções da empresa Société Générale nos últimos 5 dias em análise, sendo os valores representativos do preço de fecho e do preço ajustado. O preço ajustado contempla a remuneração do acionista com dividendos a serem pagos ou pagos e também o ajuste a ocorrência de \emph{split} das acções.
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-4}Société Générale.Euronext Paris-25-05-2020/01-06-2020}
+\caption{\label{tab:sogtail}Société Générale.Euronext Paris-25-05-2020/01-06-2020}
 \centering
 \begin{tabular}[t]{rr}
 \toprule
@@ -879,6 +900,8 @@ Fonte:\url{https://finance.yahoo.com/}
 \justifying
 \bigskip
 
+Na figura \ref{fig:cotacao} temos a evolução da cotação das acções das empresas nos últimos 4 anos, verificando-se no inicio do ano de 2020 uma queda abrupta nas cotações, devido as possíveis repercussões económicas negativas com o alastrar de infecções de COVID-19 a nível mundial, tendo originado nalgumas destas empresas quedas superiores a 50\% do seu valor.
+
 \begin{figure}
 
 {\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/cotacao-4} 
@@ -887,7 +910,6 @@ Fonte:\url{https://finance.yahoo.com/}
 
 \caption{Evolução das cotações nos últimos 5 anos}\label{fig:cotacao}
 \end{figure}
-
 \FloatBarrier
 \centering
 
@@ -896,31 +918,8 @@ Fonte: Elaboração própria.
 \justifying
 \bigskip
 
-\begin{table}[!h]
+Com a função \emph{summary} agrega-se na tabela \ref{tab:estcot} algumas estatísticas referentes a variação das cotações, apresentando os valores mínimos e máximos, assim como quartis e a média. Os valores referentes a média e mediana ilustram que existem empresas cuja distribuição dos valores apresentam uma cauda mais à direita(ENI), enquanto outras apresentam uma cauda mais a esquerda (GLE), de acordo com os dados dos últimos 4 anos.
 
-\caption{\label{tab:unnamed-chunk-5}Cotações a preços ajustados-25-05-2020/01-06-2020}
-\centering
-\begin{tabular}[t]{rrrr}
-\toprule
-TEF.MC & ENEL.MI & GLE.PA & AIR.PA\\
-\midrule
-3.849220 & 6.254183 & 10.344 & 58.64\\
-3.699806 & 6.259947 & 13.424 & 62.81\\
-3.787268 & 6.327197 & 14.304 & 61.13\\
-3.952170 & 6.525101 & 13.916 & 60.12\\
-3.863797 & 6.629818 & 13.232 & 56.70\\
-\addlinespace
-4.008655 & 6.723007 & 13.820 & 59.44\\
-\bottomrule
-\end{tabular}
-\end{table}
-\FloatBarrier
-\centering
-
-Fonte:\url{https://finance.yahoo.com/}
-
-\justifying
-\bigskip
 \scriptsize
 
 \begin{Shaded}
@@ -935,19 +934,19 @@ Fonte:\url{https://finance.yahoo.com/}
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-6}Estatísticas das cotações}
+\caption{\label{tab:estcot}Estatísticas das cotações}
 \centering
 \begin{tabular}[t]{lllll}
 \toprule
   &     TEF.MC &    ENEL.MI &     GLE.PA &     AIR.PA\\
 \midrule
- & Min.   :3.355 & Min.   :2.943 & Min.   : 9.702 & Min.   : 44.66\\
- & 1st Qu.:6.097 & 1st Qu.:3.891 & 1st Qu.:20.735 & 1st Qu.: 64.67\\
- & Median :6.456 & Median :4.331 & Median :25.922 & Median : 85.56\\
- & Mean   :6.375 & Mean   :4.624 & Mean   :25.603 & Mean   : 85.65\\
- & 3rd Qu.:6.792 & 3rd Qu.:5.267 & 3rd Qu.:31.364 & 3rd Qu.:108.01\\
+ & Min.   : 3.682 & Min.   :3.586 & Min.   :11.77 & Min.   : 48.47\\
+ & 1st Qu.: 7.107 & 1st Qu.:4.405 & 1st Qu.:27.54 & 1st Qu.: 69.95\\
+ & Median : 7.743 & Median :5.030 & Median :35.23 & Median : 90.02\\
+ & Mean   : 7.846 & Mean   :5.194 & Mean   :35.12 & Mean   : 90.00\\
+ & 3rd Qu.: 8.936 & 3rd Qu.:5.709 & 3rd Qu.:45.20 & 3rd Qu.:112.96\\
 \addlinespace
- & Max.   :8.089 & Max.   :8.229 & Max.   :35.649 & Max.   :134.60\\
+ & Max.   :10.600 & Max.   :8.566 & Max.   :51.88 & Max.   :139.00\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -959,6 +958,9 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+O cálculo dos retornos diários é efectuado com a função \emph{dailyreturn}, sendo aplicada a função dos retornos logarítmicos de acordo com a equação \eqref{eq:logRet}. No gráfico \ref{fig:volatilidade} estão representados os gráficos referentes aos retornos diários logarítmicos para cada uma das empresa.
+
 \scriptsize
 
 \begin{Shaded}
@@ -968,29 +970,20 @@ Fonte:Elaboração própria.
                              \KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{GLE.PA,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{),}
                              \KeywordTok{round}\NormalTok{(}\KeywordTok{dailyReturn}\NormalTok{(newdata}\OperatorTok{$}\NormalTok{AIR.PA,}\DataTypeTok{type=}\StringTok{"log"}\NormalTok{),}\DecValTok{4}\NormalTok{)))}
 \NormalTok{returns \textless{}{-}}\StringTok{ }\NormalTok{returns[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,]}
+\KeywordTok{colnames}\NormalTok{(returns)\textless{}{-}}\KeywordTok{c}\NormalTok{(}\StringTok{"TEF.RET"}\NormalTok{,}\StringTok{"ENEL.RET"}\NormalTok{,}\StringTok{"GLE.RET"}\NormalTok{,}\StringTok{"AIR.RET"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \normalsize
 
-\begin{table}[!h]
+\begin{figure}
 
-\caption{\label{tab:unnamed-chunk-8}Retornos logarítmicos diários-25-05-2020/01-06-2020}
-\centering
-\begin{tabular}[t]{rrrr}
-\toprule
-TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
-\midrule
-0.0300 & 0.0155 & 0.0083 & 0.0817\\
--0.0396 & 0.0009 & 0.2606 & 0.0687\\
-0.0234 & 0.0107 & 0.0635 & -0.0271\\
-0.0426 & 0.0308 & -0.0275 & -0.0167\\
--0.0226 & 0.0159 & -0.0504 & -0.0586\\
-\addlinespace
-0.0368 & 0.0140 & 0.0435 & 0.0472\\
-\bottomrule
-\end{tabular}
-\end{table}
+{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-4} 
+
+}
+
+\caption{Volatilidade nos últimos 4 anos}\label{fig:volatilidade}
+\end{figure}
 \FloatBarrier
 \centering
 
@@ -998,11 +991,14 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+Na matrix de correlações \ref{tab:correl} dos retornos podemos verificar que a correlação entre os vários activos financeiros pode ser considerada como apresentando uma correlação fraca ou moderada\footnote{De acordo com os valores apresentados em \url{https://pt.wikipedia.org/wiki/Coeficiente_de_correla\%C3\%A7\%C3\%A3o_de_Pearson} a 31/01/2021}.
+
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{retcor \textless{}{-}}\StringTok{ }\KeywordTok{cor}\NormalTok{(returns)}
+\NormalTok{retcor \textless{}{-}}\StringTok{ }\KeywordTok{cor}\NormalTok{(returns,}\DataTypeTok{method =} \StringTok{"pearson"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1010,16 +1006,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-10}Matrix correlação dos retornos}
+\caption{\label{tab:correl}Matrix correlação dos retornos}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-TEF.RET & 1.0000000 & 0.5792880 & 0.5416984 & 0.3144011\\
-ENEL.RET & 0.5792880 & 1.0000000 & 0.4564904 & 0.3423647\\
-GLE.RET & 0.5416984 & 0.4564904 & 1.0000000 & 0.5417957\\
-AIR.RET & 0.3144011 & 0.3423647 & 0.5417957 & 1.0000000\\
+TEF.RET & 1.0000000 & 0.5604966 & 0.5767450 & 0.3091662\\
+ENEL.RET & 0.5604966 & 1.0000000 & 0.4675049 & 0.3363855\\
+GLE.RET & 0.5767450 & 0.4675049 & 1.0000000 & 0.5438836\\
+AIR.RET & 0.3091662 & 0.3363855 & 0.5438836 & 1.0000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1030,6 +1026,11 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+A analise descritiva dos retornos é apresentada na tabela \ref{tab:statret}, sendo que todos apresentam uma assimetria negativa ou à esquerda, sendo que a cauda da distribuição nestes casos aponta para a esquerda. A curtose apresenta valores elevados e superiores a 3, sendo que as distribuições tem cauda mais pesadas do que a da distribuição normal. Neste caso as distribuições são ditas \emph{leptokurtic} sendo uma caracteridtica comum na distribuição dos retornos das acções.
+
+As volatilidades apresentadas, assim como o retorno, são valores anuais e com peso igual atríbuido a cada uma das observações.
+
 \scriptsize
 
 \begin{Shaded}
@@ -1050,24 +1051,24 @@ Fonte:Elaboração própria.
 \end{Highlighting}
 \end{Shaded}
 
-nolmalsize
+\normalsize
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-12}Estatísticas dos retornos}
+\caption{\label{tab:statret}Estatísticas dos retornos}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-média.anual & -0.128565 & 0.186336 & -0.142061 & 0.035758\\
-volatilidade.anual & 0.270075 & 0.249512 & 0.407981 & 0.381835\\
-mediana & -0.000500 & 0.000900 & -0.000300 & 0.000200\\
-skewness & -1.199014 & -3.212281 & -0.652772 & -1.084556\\
-kurtosis & 27.848870 & 43.434065 & 25.410242 & 24.429017\\
+média.anual & -0.183024 & 0.136957 & -0.239176 & 0.015389\\
+volatilidade.anual & 0.272573 & 0.250557 & 0.390555 & 0.382228\\
+mediana & -0.000500 & 0.000550 & -0.000400 & 0.000000\\
+skewness & -1.180939 & -3.163924 & -1.894116 & -1.073346\\
+kurtosis & 26.775129 & 42.544983 & 18.274829 & 24.303828\\
 \addlinespace
 min & -0.175800 & -0.221200 & -0.230300 & -0.250600\\
-max & 0.163800 & 0.072500 & 0.260600 & 0.186200\\
+max & 0.163800 & 0.072500 & 0.119200 & 0.186200\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1078,21 +1079,11 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-\begin{figure}
 
-{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-1} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-2} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-3} \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/volatilidade-4} 
+Na análise ao tipo de distribuição dos retornos estes não apresentam distribuição normal, sendo que os pressupostos subjacentes a normalidade dos dados não se verificam.
 
-}
+Nos histogramas (figura \ref{fig:distr}), a linha a azul representa uma distribuição normal (com média 0 e desvio padrão igual ao valor dos dados (rendibilidades log)) de modo a comparar com o histograma, sendo que se verifica distribuição leptocúrticas nas rendibilidades log dos vários índices, como verificado anteriormente.
 
-\caption{Volatilidade nos últimos 4 anos}\label{fig:volatilidade}
-\end{figure}
-\FloatBarrier
-\centering
-
-Fonte:Elaboração própria.
-
-\justifying
-\bigskip
 \begin{figure}
 
 {\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/distr-1} 
@@ -1107,10 +1098,12 @@ Fonte:Elaboração própria.
 Fonte:Elaboração própria.
 
 \justifying
-\bigskip
+
+Na figura \ref{fig:teste} ``qq plot'', verifica-se que nos extremos os dados não se agrupam ao redor da linha reta (negação da normalidade).
+
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/teste-1} 
+{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/teste-1} 
 
 }
 
@@ -1123,6 +1116,9 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+Por fim, o teste Shapiro-Wilk (teste á normalidade) na tabela \ref{tab:shapiro} apresentam um valor de p\textless0.05 (considerando um nível significância a 95\%), sendo que se pode rejeitar a distribuição normal dos índices.
+
 \scriptsize
 
 \begin{Shaded}
@@ -1136,15 +1132,15 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-14}Teste normalidade Shapiro-Wilk}
+\caption{\label{tab:shapiro}Teste normalidade Shapiro-Wilk}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllll}
 \toprule
   & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-statistic & c(W = 0.806556139172951) & c(W = 0.81527958050879) & c(W = 0.781822265470115) & c(W = 0.781772438450224)\\
-p.value & 4.1518298262632e-33 & 1.62872401140161e-32 & 1.10625328031641e-34 & 1.09857623834578e-34\\
+statistic & c(W = 0.811384342525116) & c(W = 0.818054783145533) & c(W = 0.82081809350098) & c(W = 0.783215020212509)\\
+p.value & 8.79214304718309e-33 & 2.5430577727588e-32 & 3.98450306533009e-32 & 1.34466952817559e-34\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1155,6 +1151,8 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+\newpage
 
 \hypertarget{ewma}{%
 \section{EWMA}\label{ewma}}
@@ -1177,13 +1175,13 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-16}EWMA}
+\caption{\label{tab:unnamed-chunk-9}EWMA}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   & TEF.RET & ENEL.RET & GLE.RET & AIR.RET\\
 \midrule
-ewma & 0.017013 & 0.015718 & 0.0257 & 0.024053\\
+ewma & 0.017171 & 0.015784 & 0.024603 & 0.024078\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1281,19 +1279,19 @@ Fonte:Elaboração própria.
 \normalsize
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-23}Valores simulados}
+\caption{\label{tab:unnamed-chunk-16}Valores simulados}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
 \midrule
-75 & 4.336042 & 6.978384 & 13.38802 & 58.25085\\
-76 & 4.338451 & 6.972270 & 13.47509 & 57.94058\\
-77 & 4.351331 & 6.969343 & 13.40925 & 58.01952\\
-78 & 4.344289 & 6.944320 & 13.44580 & 58.17967\\
-79 & 4.345151 & 6.930350 & 13.45456 & 58.10161\\
+75 & 4.335086 & 6.978082 & 13.41861 & 58.24843\\
+76 & 4.337511 & 6.971940 & 13.50231 & 57.93784\\
+77 & 4.350503 & 6.968998 & 13.43931 & 58.01684\\
+78 & 4.343392 & 6.943868 & 13.47455 & 58.17713\\
+79 & 4.344257 & 6.929837 & 13.48312 & 58.09898\\
 \addlinespace
-80 & 4.342470 & 6.918440 & 13.43255 & 58.03591\\
+80 & 4.341547 & 6.917876 & 13.46217 & 58.03320\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1324,16 +1322,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-26}Pesos no portfolio}
+\caption{\label{tab:unnamed-chunk-19}Pesos no portfolio}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & Pesos\\
 \midrule
-SimTEF & 0.3717284\\
-SimENEL & 0.3584272\\
-SimGLE & 0.1799806\\
-SimAIR & 0.0898637\\
+SimTEF & 0.3636435\\
+SimENEL & 0.3522291\\
+SimGLE & 0.1942263\\
+SimAIR & 0.0899011\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1350,7 +1348,7 @@ SimAIR & 0.0898637\\
 
 \begin{verbatim}
 ##       SimTEF      SimENEL       SimGLE       SimAIR 
-## 5.277048e-04 1.479953e-03 6.238249e-05 5.393451e-05
+## 5.339517e-04 1.487616e-03 5.683399e-05 5.386004e-05
 \end{verbatim}
 
 \begin{Shaded}
@@ -1369,17 +1367,17 @@ SimAIR & 0.0898637\\
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-28}TEF coeficientes}
+\caption{\label{tab:unnamed-chunk-21}TEF coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & -0.000275 & 0.000349 & -0.786996 & 0.431284\\
-omega & 0.000009 & 0.000003 & 2.626875 & 0.008617\\
-alpha1 & 0.094462 & 0.028183 & 3.351714 & 0.000803\\
-beta1 & 0.862275 & 0.035908 & 24.013557 & 0.000000\\
-shape & 4.849731 & 0.699459 & 6.933546 & 0.000000\\
+mu & -0.000379 & 0.000350 & -1.082629 & 0.278973\\
+omega & 0.000009 & 0.000004 & 2.541010 & 0.011053\\
+alpha1 & 0.100268 & 0.029830 & 3.361296 & 0.000776\\
+beta1 & 0.858803 & 0.036855 & 23.302267 & 0.000000\\
+shape & 4.536782 & 0.625307 & 7.255290 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1393,16 +1391,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-29}Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-22}Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & x\\
 \midrule
-AIC & -5.880106\\
-BIC & -5.855799\\
-SIC & -5.880154\\
-HQIC & -5.870873\\
+AIC & -5.852243\\
+BIC & -5.827936\\
+SIC & -5.852291\\
+HQIC & -5.843010\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1416,19 +1414,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-30}Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-23}Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 5.365586 & 0.8654579\\
-Ljung-Box Test 15 & 15 & 6.370089 & 0.9728383\\
-Ljung-Box Test 20 & 20 & 9.016115 & 0.9827199\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 3.984322 & 0.9480515\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 4.641853 & 0.9947489\\
+Ljung-Box Test 10 & 10 & 6.198507 & 0.7983188\\
+Ljung-Box Test 15 & 15 & 7.922587 & 0.9268487\\
+Ljung-Box Test 20 & 20 & 10.646615 & 0.9548772\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 3.872646 & 0.9529093\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 4.519563 & 0.9954718\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 5.629360 & 0.9993135\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 5.286529 & 0.9995736\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1460,17 +1458,17 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-32}ENEL coeficientes}
+\caption{\label{tab:unnamed-chunk-25}ENEL coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & 0.001136 & 0.000341 & 3.327331 & 0.000877\\
-omega & 0.000015 & 0.000006 & 2.452925 & 0.014170\\
-alpha1 & 0.101807 & 0.034761 & 2.928744 & 0.003403\\
-beta1 & 0.820593 & 0.054752 & 14.987439 & 0.000000\\
-shape & 4.505741 & 0.641796 & 7.020522 & 0.000000\\
+mu & 0.000986 & 0.000347 & 2.844387 & 0.004450\\
+omega & 0.000013 & 0.000006 & 2.136010 & 0.032679\\
+alpha1 & 0.082728 & 0.032089 & 2.578088 & 0.009935\\
+beta1 & 0.849329 & 0.054225 & 15.663135 & 0.000000\\
+shape & 4.370370 & 0.608089 & 7.187052 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1484,16 +1482,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-33}ENEL Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-26}ENEL Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & x\\
 \midrule
-AIC & -5.924634\\
-BIC & -5.900327\\
-SIC & -5.924682\\
-HQIC & -5.915401\\
+AIC & -5.904819\\
+BIC & -5.880512\\
+SIC & -5.904867\\
+HQIC & -5.895586\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1507,19 +1505,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-34}ENEL Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-27}ENEL Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 7.094059 & 0.7165364\\
-Ljung-Box Test 15 & 15 & 10.856248 & 0.7627166\\
-Ljung-Box Test 20 & 20 & 14.205137 & 0.8199445\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 14.667299 & 0.1446705\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 21.005772 & 0.1366450\\
+Ljung-Box Test 10 & 10 & 5.902122 & 0.8234184\\
+Ljung-Box Test 15 & 15 & 8.346615 & 0.9091359\\
+Ljung-Box Test 20 & 20 & 12.712356 & 0.8893817\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 15.877611 & 0.1031899\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 21.691460 & 0.1161531\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 21.869880 & 0.3476129\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 22.626570 & 0.3075005\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1551,19 +1549,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-36}GLE coeficientes}
+\caption{\label{tab:unnamed-chunk-29}GLE coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & -0.000206 & 0.000440 & -0.468768 & 0.639235\\
-ar1 & 0.105854 & 0.031107 & 3.402874 & 0.000667\\
-omega & 0.000006 & 0.000003 & 2.027070 & 0.042655\\
-alpha1 & 0.082622 & 0.023947 & 3.450161 & 0.000560\\
-beta1 & 0.906152 & 0.025807 & 35.112916 & 0.000000\\
+mu & -0.000289 & 0.000443 & -0.651252 & 0.514884\\
+ar1 & 0.121001 & 0.031051 & 3.896836 & 0.000097\\
+omega & 0.000006 & 0.000003 & 2.000855 & 0.045408\\
+alpha1 & 0.078825 & 0.023084 & 3.414788 & 0.000638\\
+beta1 & 0.909954 & 0.025072 & 36.294359 & 0.000000\\
 \addlinespace
-shape & 4.586812 & 0.639949 & 7.167466 & 0.000000\\
+shape & 4.552082 & 0.639795 & 7.114907 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1577,16 +1575,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-37}GLE Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-30}GLE Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & x\\
 \midrule
-AIC & -5.270385\\
-BIC & -5.241217\\
-SIC & -5.270454\\
-HQIC & -5.259305\\
+AIC & -5.257949\\
+BIC & -5.228781\\
+SIC & -5.258019\\
+HQIC & -5.246870\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1600,19 +1598,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-38}GLE Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-31}GLE Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 5.878758 & 0.8253445\\
-Ljung-Box Test 15 & 15 & 7.740314 & 0.9337712\\
-Ljung-Box Test 20 & 20 & 14.427032 & 0.8082015\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 6.727049 & 0.7509375\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 8.145806 & 0.9178041\\
+Ljung-Box Test 10 & 10 & 9.424505 & 0.4923450\\
+Ljung-Box Test 15 & 15 & 12.742444 & 0.6221838\\
+Ljung-Box Test 20 & 20 & 17.348143 & 0.6302653\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 9.730418 & 0.4644545\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 11.370615 & 0.7259071\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 8.431973 & 0.9886019\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 12.306028 & 0.9051400\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1644,25 +1642,25 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-40}AIR coeficientes}
+\caption{\label{tab:unnamed-chunk-33}AIR coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & 0.000378 & 0.000256 & 1.478670 & 0.139229\\
-ar1 & -0.690353 & 0.049772 & -13.870237 & 0.000000\\
-ma1 & 0.713683 & 0.048171 & 14.815473 & 0.000000\\
-omega & -0.420511 & 0.129163 & -3.255673 & 0.001131\\
-alpha1 & -0.146353 & 0.028249 & -5.180744 & 0.000000\\
+mu & 0.000319 & 0.000440 & 0.724062 & 0.469028\\
+ar1 & -0.693914 & 0.116113 & -5.976211 & 0.000000\\
+ma1 & 0.719512 & 0.111501 & 6.452954 & 0.000000\\
+omega & -0.435484 & 0.136013 & -3.201777 & 0.001366\\
+alpha1 & -0.146797 & 0.028679 & -5.118586 & 0.000000\\
 \addlinespace
-alpha2 & -0.135647 & 0.029636 & -4.577144 & 0.000005\\
-beta1 & 0.022517 & 0.015512 & 1.451604 & 0.146612\\
-beta2 & 0.925715 & 0.009439 & 98.074257 & 0.000000\\
-gamma1 & 0.054007 & 0.049166 & 1.098462 & 0.272003\\
-gamma2 & 0.176758 & 0.052157 & 3.388992 & 0.000701\\
+alpha2 & -0.138516 & 0.030069 & -4.606552 & 0.000004\\
+beta1 & 0.021816 & 0.016705 & 1.305994 & 0.191555\\
+beta2 & 0.924611 & 0.011025 & 83.864477 & 0.000000\\
+gamma1 & 0.054024 & 0.050191 & 1.076382 & 0.281756\\
+gamma2 & 0.184697 & 0.053209 & 3.471175 & 0.000518\\
 \addlinespace
-shape & 5.904549 & 1.113789 & 5.301318 & 0.000000\\
+shape & 5.952636 & 1.124647 & 5.292891 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1676,16 +1674,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-41}AIR Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-34}AIR Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & \\
 \midrule
-Akaike & -5.404779\\
-Bayes & -5.351304\\
-Shibata & -5.405012\\
-Hannan-Quinn & -5.384466\\
+Akaike & -5.400004\\
+Bayes & -5.346529\\
+Shibata & -5.400236\\
+Hannan-Quinn & -5.379691\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1699,19 +1697,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-42}AIR Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-35}AIR Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 3.180686 & 0.9768463\\
-Ljung-Box Test 15 & 15 & 7.325160 & 0.9479907\\
-Ljung-Box Test 20 & 20 & 10.701992 & 0.9535876\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 9.914234 & 0.4480498\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 12.112217 & 0.6705160\\
+Ljung-Box Test 10 & 10 & 3.462744 & 0.9683482\\
+Ljung-Box Test 15 & 15 & 7.061652 & 0.9559163\\
+Ljung-Box Test 20 & 20 & 11.078144 & 0.9441708\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 10.999861 & 0.3575288\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 13.441840 & 0.5682108\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 14.427566 & 0.8081728\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 15.579557 & 0.7423413\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1772,19 +1770,19 @@ Fonte:Elaboração própria.
 \normalsize
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-50}GARCH - Valores simulados}
+\caption{\label{tab:unnamed-chunk-43}GARCH - Valores simulados}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
 \midrule
-75 & 4.302669 & 6.898191 & 10.87305 & 56.47486\\
-76 & 4.295976 & 6.913417 & 10.79496 & 56.64959\\
-77 & 4.294854 & 6.925364 & 10.66950 & 56.97824\\
-78 & 4.269621 & 6.911978 & 10.62941 & 56.74971\\
-79 & 4.287504 & 6.916477 & 10.55421 & 56.17910\\
+75 & 4.298612 & 6.897289 & 12.60805 & 56.49988\\
+76 & 4.291775 & 6.912593 & 12.56276 & 56.67411\\
+77 & 4.290603 & 6.924601 & 12.48429 & 57.00167\\
+78 & 4.264916 & 6.911137 & 12.46493 & 56.77420\\
+79 & 4.283066 & 6.915656 & 12.42094 & 56.20594\\
 \addlinespace
-80 & 4.287599 & 6.922461 & 10.52076 & 56.15682\\
+80 & 4.283131 & 6.921668 & 12.40604 & 56.18391\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1815,16 +1813,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-53}GARCH - Pesos no portfolio}
+\caption{\label{tab:unnamed-chunk-46}GARCH - Pesos no portfolio}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & Pesos\\
 \midrule
-SimTEF & 0.2374378\\
-SimENEL & 0.6217249\\
-SimGLE & 0.0000000\\
-SimAIR & 0.1408373\\
+SimTEF & 0.2282703\\
+SimENEL & 0.6162560\\
+SimGLE & 0.0214131\\
+SimAIR & 0.1340605\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1841,7 +1839,7 @@ SimAIR & 0.1408373\\
 
 \begin{verbatim}
 ##       SimTEF      SimENEL       SimGLE       SimAIR 
-## 0.0006583067 0.0014194780 0.0000000000 0.0001898469
+## 0.0006825776 0.0014227605 0.0000000000 0.0001830280
 \end{verbatim}
 
 \begin{Shaded}
@@ -1873,7 +1871,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-55}Volatilidade Implícita}
+\caption{\label{tab:unnamed-chunk-48}Volatilidade Implícita}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1925,7 +1923,7 @@ Fonte:Elaboração própria.
 \normalsize
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-62}Vol. Implicita - Valores simulados}
+\caption{\label{tab:unnamed-chunk-55}Vol. Implicita - Valores simulados}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1968,7 +1966,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-65}Vol Implicita- Pesos no portfolio}
+\caption{\label{tab:unnamed-chunk-58}Vol Implicita- Pesos no portfolio}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -2027,7 +2025,7 @@ SimAIR & 0.1061691\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-67-1} \end{center}
+\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-60-1} \end{center}
 
   \bibliography{book.bib,packages.bib}
 
