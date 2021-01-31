@@ -73,7 +73,7 @@ Ao longo do trabalho e sempre que se verifique necessário será disponibilizado
 
 ## Análise descritiva dos dados
 
-Na tabela \@ref(tab:sogtail) estão representados os valores para as acções da empresa Société Générale nos últimos 5 dias em análise, sendo os valores representativos do preço de fecho e do preço ajustado. O preço ajustado contempla a remuneração do acionista com dividendos a serem pagos ou pagos e também o ajuste a ocorrência de *split* das acções.
+Na tabela \@ref(tab:sogtail) estão representados os valores para as acções da empresa Société Générale nos últimos 5 dias em análise, sendo os valores representativos do preço de fecho e do preço ajustado. O preço ajustado contempla a remuneração do acionista com dividendos a serem pagos ou pagos e também o ajuste a ocorrência de *split* das acções. No calculo do retorno utiliza-se o preço ajustado.
 
 ```{r,echo=FALSE}
 TEF.MC<-read_xlsx ("data/TEF.MC.xlsx")
@@ -116,7 +116,7 @@ Fonte: Elaboração própria.
 \bigskip
 
 ```{r,fecho, echo=FALSE}
-newdata <- merge(TEF.MC$Close,ENEL.MI$Close,GLE.PA$Close,AIR.PA$Close)
+newdata <- merge(TEF.MC$`Adj Close`,ENEL.MI$`Adj Close`,GLE.PA$`Adj Close`,AIR.PA$`Adj Close`)
 newdata <- na.omit(newdata)
 colnames(newdata) <- c("TEF.MC","ENEL.MI","GLE.PA","AIR.PA")
 ```
@@ -254,7 +254,7 @@ Fonte:Elaboração própria.
 
 Na figura \@ref(fig:teste) "qq plot", verifica-se que nos extremos os dados não se agrupam ao redor da linha reta (negação da normalidade).
 
-```{r,teste,echo=FALSE, fig.cap='Teste a normalidade das distribuições',fig.topcaption = TRUE,out.width = "80%"}
+```{r,teste,echo=FALSE, fig.cap='Teste a normalidade das distribuições',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
 qqnorm(returns$TEF.RET,main="TELEFÓNICA",pch=14,col='darkgreen')
 qqline(returns$TEF.RET)
@@ -296,33 +296,24 @@ Fonte:Elaboração própria.
 
 \newpage
 ## EWMA
+
+O *exponential weighted moving average* (EWMA) é calculado com um *decay factor* $\lambda$ de 0.94 e de acordo com a equação \@ref(eq:ewma2). Para esse fim utiliza-se a função do R *ewmaVol* sendo calculado todos os valores de desvio padrão deste o inicio da serie temporal. 
+
 \scriptsize
 ```{r}
+set.seed(89)
 ewma <- function(x) {  
   x<-ewmaVol(x,lambda = 0.94)
-  return(head(x$sigma,1))
+  return(tail(x$sigma,1))
 }
-
 pewma <- do.call(data.frame, 
-                 list("ewma"= round(apply(returns, 2,ewma),6)))
+                 list("ewma"= round(apply(returns,2,ewma),6)))
 ```
 \normalsize
 
-```{r,echo=FALSE}
-pewma<-t(pewma)
-pewmak<- knitr::kable(
-  pewma, caption = "EWMA",
-  booktabs = TRUE)
-kable_styling(pewmak , latex_options = "hold_position", position = "center")
-```
-\FloatBarrier
-\centering 
-Fonte:Elaboração própria.
+Na figura \@ref(fig:gewma) podemos ver como acompanha e responde o calculo do EWMA a alterações bruscas da volatilidade diária, verificando-se algum atraso nessa resposta, como esperado, tendo em consideração o próprio método em si e o facto da escolha de um $\lambda$ de 0.94.
 
-\justifying
-\bigskip
-
-```{r,TELp,echo=FALSE, fig.cap='EWMA',fig.topcaption = TRUE,out.width = "90%"}
+```{r,gewma,echo=FALSE, fig.cap='EWMA',fig.topcaption = TRUE,out.width = "90%"}
 TEFew <- ewmaVol(returns$TEF.RET,lambda = 0.94)
 ENELew <- ewmaVol(returns$ENEL.RET,lambda = 0.94)
 GLEew <- ewmaVol(returns$GLE.RET,lambda = 0.94)
@@ -346,21 +337,37 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
+Na tabela \@ref(tab:ewmaval) temos os valores referentes ao desvio padrão calculado para o último dia de cotação, sendo esse o valor a ser utilizado na simulação.
+
+```{r,ewmaval,echo=FALSE}
+pewma<-t(pewma)
+pewmak<- knitr::kable(
+  pewma, caption = "EWMA",
+  booktabs = TRUE)
+kable_styling(pewmak , latex_options = "hold_position", position = "center")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
 ### Simulação EWMA
 
-\scriptsize
-```{r}
-dfewma <- as.data.frame(pewma)
+O procedimento para a simulação de Monte Carlo será o mesmo para todos os diferentes métodos de calculo de volatilidade, sendo que aqui apenas se apresenta o código R utilizado para a primeira simulação, sendo depois igual para todos as outras situações, onde apenas se altera o valor relativo ao desvio padrão.
 
-N <- 80
-dia <- 1:N
-M <- 1000
-mu <- -0.00575
-```
-\normalsize
+A simulação será efectuada para um total de 80 dias de negociação, sendo efectuada um total de 1000 vezes. A equação utilizada para a simulação é a equação \@ref(eq:logprice), em que $\mu$ representa a taxa de juro sem risco referente a obrigações do tesouro alemão a 3 meses^[Germany 3 Month Bond Yield Historical Data - https://www.investing.com/rates-bonds/germany-3-month-bond-yield-historical-data], sendo este o prazo mais próximo do espaço temporal do investimento. 
 
 \scriptsize
 ```{r,warning=FALSE}
+dfewma <- as.data.frame(pewma)
+
+SN <- 80
+dia <- 1:N
+M <- 1000
+mu <- -0.00575
+
 TEF.preco_inicial <- TEF.MC$Close[[nrow(TEF.MC$Close)]]
 TEF.MC.sigma <- dfewma$TEF.RET*sqrt(252)
 TEF.MC.mean <- (mu-(TEF.MC.sigma^2)/2)*(1/252)
@@ -375,7 +382,6 @@ for(j in 1:M){
             rnorm(1,0,1)*sqrt(1/252))
   }
 }
-
 TEF.MC_MC_sim <- as_tibble(cbind(dia,monte_carlo_sim))
 w <- str_c('Sim',seq(1,M))
 w <- c('Dia',w)
@@ -444,6 +450,7 @@ names(AIR.PA_MC_sim) <- w3
 AIR.PA_MC_sim <- gather(AIR.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia))
 ```
 
+Na figura \@ref(fig:sim) encontram-se as simulações efectuadas para cada uma das empresas.
 
 ```{r,sim,echo=FALSE, fig.cap='Simulação Monte Carlo para 80 dias',fig.topcaption = TRUE,out.width = "45%"}
 
@@ -456,6 +463,8 @@ ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(a
 ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour="deeppink") + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
 
+A partir dos valores simulados calcula-se a mediana para cada um dos dias de acordo com o código R abaixo, obtendo-se desta forma os dados ilustrados na tabela \@ref(tab:simtabewma) referente aos últimos 5 dias.
+
 \scriptsize
 ```{r}
 M.TEF.MC <- apply(monte_carlo_sim, 1, median)
@@ -463,12 +472,13 @@ M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,median )
 M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,median )
 M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
 ```
-
 \normalsize
-```{r,echo=FALSE}
+
+```{r,simtabewma,echo=FALSE}
 SimEWMA <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
+SimEWMA
 SimEWMAk<- knitr::kable(
-  tail(SimEWMA), caption = "Valores simulados",
+  tail(SimEWMA), caption = "EWMA - Valores simulados",
   booktabs = TRUE)
 kable_styling(SimEWMAk , latex_options = "hold_position", position = "center")
 ```
@@ -478,6 +488,7 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
 ### Portfolio EWMA
 
 ```{r,echo=FALSE}
@@ -498,34 +509,42 @@ myPortfolioReturns <- ROC(myPortfolio,type="discrete")[-1,]
 colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 ```
 
+Na definição do portfolio vamos utilizar os dados referentes às simulações realizadas, considerando que o objectivo é minimizar o risco, ou seja minimizar a variância. A função utilizada pelo R é *minvariancePortfolio*, sendo desta forma definido os pesos de cada um dos activos que irão constituir o portfolio, especificados na tabela \@ref(tab:pewma). ENEL será a empresa com maior peso no portfolio com cerca de 60%, seguida pela TELEFONICA com cerca de 30%. As outras terão uma ponderação mais residual.
 
 \scriptsize
 ```{r}
-set.seed(10)
+set.seed(130)
 SimReturns <- as.timeSeries(myPortfolioReturns)
-#returns the portfolio with the minimal risk on the efficient frontier
 minvarewma <- minvariancePortfolio(SimReturns) 
 minew<-getPortfolio(minvarewma)
 ```
 \normalsize
 
-```{r,echo=FALSE}
+```{r,pewma,echo=FALSE}
 minewma<- as.data.frame(minew$weights)
 colnames(minewma)<- c("Pesos")
 minewmak<- knitr::kable(
-  minewma, caption = "Pesos no portfolio",
+  minewma, caption = "EWMA - Pesos no portfolio",
   booktabs = TRUE)
 kable_styling(minewmak , latex_options = "hold_position", position = "center")
 ```
 
+Definidos as ponderações de cada empresa no portfolio podemos calcula o VaR assim como as contribuições individuais de cada um dos activos, podendo-se verificar nos dados abaixo que a maior contribuição é dada pela ENEL, sendo natural, pois apresenta um grande peso no portfolio. 
+
 \scriptsize
 ```{r}
 optweights <- c(0.2939002, 0.6052965, 0.0698046, 0.0309987)
-ModVaR_95_ewma <- VaR(myPortfolioReturns, p=0.95,weights=optweights, portfolio_method = "component", method = "modified")
+ModVaR_95_ewma <- VaR(myPortfolioReturns, p=0.95,weights=optweights, 
+                      portfolio_method = "component", method = "modified")
 ModVaR_95_ewma$contribution 
-MVaRewma_VaR <- ModVaR_95_ewma$MVaR
 ```
 \normalsize
+
+```{r,echo=FALSE}
+MVaRewma_VaR <- ModVaR_95_ewma$MVaR
+```
+
+Analisando o valor calculado para a portfolio, pode-se verificar que para um nível de confiança 95%, o VaR a 1 dia para dados simulados a 80 dias é de `r MVaRewma_VaR`, ou seja, existe uma probabilidade de 5% de ocorrer uma perda igual ou superior a este valor no montante total do portfolio investido.
 
 ## GARCH
 
@@ -867,7 +886,7 @@ ENEL.preco_inicial <- ENEL.MI$Close[[nrow(ENEL.MI$Close)]]
 ENEL.MI.sigma <- ENELvol*sqrt(252)
 ENEL.MI.mean <- (mu-(ENEL.MI.sigma^2)/2)*(1/252)
 
-set.seed(15)
+set.seed(13)
 ENEL_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   ENEL_monte_carlo_sim[[1,j]] <- ENEL.preco_inicial
@@ -887,7 +906,7 @@ GLE.preco_inicial <- GLE.PA$Close[[nrow(GLE.PA$Close)]]
 GLE.PA.sigma <- GLEvol*sqrt(252)
 GLE.PA.mean <- (mu-(GLE.PA.sigma^2)/2)*(1/252)
 
-set.seed(16)
+set.seed(14)
 GLE_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   GLE_monte_carlo_sim[[1,j]] <- GLE.preco_inicial
@@ -907,7 +926,7 @@ AIR.preco_inicial <- AIR.PA$Close[[nrow(AIR.PA$Close)]]
 AIR.PA.sigma <- AIRvol*sqrt(252)
 AIR.PA.mean <- (mu-(AIR.PA.sigma^2)/2)*(1/252)
 
-set.seed(17)
+set.seed(15)
 AIR_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   AIR_monte_carlo_sim[[1,j]] <- AIR.preco_inicial
@@ -981,7 +1000,7 @@ colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 
 \scriptsize
 ```{r}
-set.seed(10)
+set.seed(110)
 SimReturns <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
 minvarGARCH <- minvariancePortfolio(SimReturns) 
@@ -1202,7 +1221,7 @@ colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 
 \scriptsize
 ```{r}
-set.seed(10)
+set.seed(100)
 SimReturns <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
 minvarVI <- minvariancePortfolio(SimReturns) 
