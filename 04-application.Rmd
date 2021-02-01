@@ -363,7 +363,7 @@ A simulação será efectuada para um total de 80 dias de negociação, sendo ef
 ```{r,warning=FALSE}
 dfewma <- as.data.frame(pewma)
 
-SN <- 80
+N <- 80
 dia <- 1:N
 M <- 1000
 mu <- -0.00575
@@ -476,7 +476,6 @@ M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
 
 ```{r,simtabewma,echo=FALSE}
 SimEWMA <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
-SimEWMA
 SimEWMAk<- knitr::kable(
   tail(SimEWMA), caption = "EWMA - Valores simulados",
   booktabs = TRUE)
@@ -529,7 +528,8 @@ minewmak<- knitr::kable(
 kable_styling(minewmak , latex_options = "hold_position", position = "center")
 ```
 
-Definidos as ponderações de cada empresa no portfolio podemos calcula o VaR assim como as contribuições individuais de cada um dos activos, podendo-se verificar nos dados abaixo que a maior contribuição é dada pela ENEL, sendo natural, pois apresenta um grande peso no portfolio. 
+Definidos as ponderações de cada empresa no portfolio podemos calcula o VaR assim como as contribuições individuais de cada um dos activos, podendo-se verificar nos dados abaixo que a maior contribuição é dada pela ENEL, sendo natural, pois apresenta um grande peso no portfolio. No cálculo do VaR foi utilizado o VaR paramétrico com aproximação Cornish-Fisher, pois é mais representativo da realidade da
+distribuição dos retornos dos activos financeiros.
 
 \scriptsize
 ```{r}
@@ -694,7 +694,7 @@ ENELsd <- ENEL@sigma.t
 ENELvol <- tail(ENELsd,1)
 ```
 
-### SOCIÉTE GÉNÉRALE
+### SOCIÉTÉ GÉNÉRALE
 
 ```{r,echo=FALSE,warning = FALSE}
 GLE<-garchFit(formula = ~ arma(1,0) + garch(1,1),data=returns$GLE.RET,cond.dist = "std", trace=FALSE)
@@ -1019,7 +1019,7 @@ kable_styling(minGARCHk , latex_options = "hold_position", position = "center")
 
 \scriptsize
 ```{r}
-optweights <- c(0.2417921, 0.6383109, 0, 0.1198970)
+optweights <- c(0.2440413, 0.5635348, 0.0229443, 0.1694796)
 ModVaR_95_GARCH <- VaR(myPortfolioReturns, p=0.95,weights=optweights, portfolio_method = "component", method = "modified")
 ModVaR_95_GARCH$contribution 
 MVaRGARCH_VaR <- ModVaR_95_GARCH$MVaR
@@ -1225,6 +1225,7 @@ set.seed(100)
 SimReturns <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
 minvarVI <- minvariancePortfolio(SimReturns) 
+minvarVI
 minew<-getPortfolio(minvarVI)
 ```
 \normalsize
