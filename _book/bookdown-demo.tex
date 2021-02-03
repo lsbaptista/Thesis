@@ -1275,10 +1275,10 @@ A partir dos valores simulados calcula-se a mediana para cada um dos dias de aco
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, median)}
-\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
-\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
-\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
+\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
+\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1292,13 +1292,13 @@ A partir dos valores simulados calcula-se a mediana para cada um dos dias de aco
 \toprule
   & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
 \midrule
-75 & 4.188878 & 6.925697 & 11.00619 & 53.49614\\
-76 & 4.192417 & 6.915972 & 11.19670 & 52.80927\\
-77 & 4.216259 & 6.911018 & 11.01720 & 52.93010\\
-78 & 4.201474 & 6.873053 & 11.08516 & 53.21941\\
-79 & 4.202018 & 6.851637 & 11.08611 & 53.01485\\
+75 & 4.353636 & 7.061643 & 13.44873 & 58.97885\\
+76 & 4.355204 & 7.067500 & 13.44746 & 58.85199\\
+77 & 4.353707 & 7.062899 & 13.51566 & 58.91117\\
+78 & 4.346170 & 7.061539 & 13.56391 & 58.75981\\
+79 & 4.342754 & 7.062226 & 13.63570 & 58.73444\\
 \addlinespace
-80 & 4.195701 & 6.833317 & 11.01303 & 52.83642\\
+80 & 4.354900 & 7.062980 & 13.64332 & 58.69858\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1319,7 +1319,6 @@ Na definição do portfolio vamos utilizar os dados referentes às simulações 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{130}\NormalTok{)}
 \NormalTok{SimReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
 \NormalTok{minvarewma \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturns) }
 \NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarewma)}
@@ -1336,10 +1335,10 @@ Na definição do portfolio vamos utilizar os dados referentes às simulações 
 \toprule
   & Pesos\\
 \midrule
-SimTEF & 0.2939002\\
-SimENEL & 0.6052965\\
-SimGLE & 0.0698046\\
-SimAIR & 0.0309987\\
+SimTEF & 0.2502928\\
+SimENEL & 0.5540359\\
+SimGLE & 0.1141192\\
+SimAIR & 0.0815521\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1359,13 +1358,13 @@ distribuição dos retornos dos activos financeiros.
 \end{Shaded}
 
 \begin{verbatim}
-##       SimTEF      SimENEL       SimGLE       SimAIR 
-## 0.0011932644 0.0021514212 0.0004105596 0.0001484052
+##        SimTEF       SimENEL        SimGLE        SimAIR 
+##  3.279291e-04  6.078317e-04 -5.610903e-06  1.514503e-05
 \end{verbatim}
 
 \normalsize
 
-Analisando o valor calculado para a portfolio, pode-se verificar que para um nível de confiança 95\%, o VaR a 1 dia para dados simulados a 80 dias é de 0.0039037, ou seja, existe uma probabilidade de 5\% de ocorrer uma perda igual ou superior a este valor no montante total do portfolio investido.
+Analisando o valor calculado para a portfolio, pode-se verificar que para um nível de confiança 95\%, o VaR a 1 dia para dados simulados a 80 dias é de \ensuremath{9.4529493\times 10^{-4}}, ou seja, existe uma probabilidade de 5\% de ocorrer uma perda igual ou superior a este valor no montante total do portfolio investido.
 
 \hypertarget{garch}{%
 \section{GARCH}\label{garch}}
@@ -1768,10 +1767,10 @@ Fonte:Elaboração própria.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, median)}
-\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
-\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
-\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
+\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
+\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1784,13 +1783,13 @@ Fonte:Elaboração própria.
 \toprule
   & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
 \midrule
-75 & 4.302669 & 6.918881 & 11.16700 & 55.94371\\
-76 & 4.295976 & 6.888461 & 11.16576 & 56.20188\\
-77 & 4.294854 & 6.907611 & 11.17053 & 56.40026\\
-78 & 4.269621 & 6.904789 & 11.10052 & 56.13273\\
-79 & 4.287504 & 6.896734 & 11.26009 & 56.19401\\
+75 & 4.317201 & 6.962290 & 13.66729 & 60.00318\\
+76 & 4.323147 & 6.964033 & 13.69626 & 59.93394\\
+77 & 4.328549 & 6.959366 & 13.74518 & 60.06126\\
+78 & 4.323386 & 6.959086 & 13.74053 & 60.09178\\
+79 & 4.324565 & 6.957337 & 13.81596 & 60.17193\\
 \addlinespace
-80 & 4.287599 & 6.925755 & 11.22461 & 56.28258\\
+80 & 4.319850 & 6.961215 & 13.80471 & 60.18599\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1809,7 +1808,6 @@ Fonte:Elaboração própria.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{110}\NormalTok{)}
 \NormalTok{SimReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
 \CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
 \NormalTok{minvarGARCH \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturns) }
@@ -1827,10 +1825,10 @@ Fonte:Elaboração própria.
 \toprule
   & Pesos\\
 \midrule
-SimTEF & 0.2440413\\
-SimENEL & 0.5635348\\
-SimGLE & 0.0229443\\
-SimAIR & 0.1694796\\
+SimTEF & 0.2079913\\
+SimENEL & 0.6288714\\
+SimGLE & 0.0000000\\
+SimAIR & 0.1631372\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1847,7 +1845,7 @@ SimAIR & 0.1694796\\
 
 \begin{verbatim}
 ##       SimTEF      SimENEL       SimGLE       SimAIR 
-## 0.0007945427 0.0013428541 0.0001376002 0.0004713490
+## 2.212796e-04 3.776863e-04 4.074302e-05 7.616810e-05
 \end{verbatim}
 
 \begin{Shaded}
@@ -1921,10 +1919,10 @@ Fonte:Elaboração própria.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, median)}
-\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
-\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
-\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,median )}
+\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, mean)}
+\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
+\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
+\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1937,13 +1935,13 @@ Fonte:Elaboração própria.
 \toprule
   & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
 \midrule
-75 & 4.253632 & 6.865796 & 12.55420 & 52.50080\\
-76 & 4.270586 & 6.850759 & 12.51728 & 52.27566\\
-77 & 4.299808 & 6.866648 & 12.54283 & 52.50673\\
-78 & 4.286894 & 6.820148 & 12.64984 & 53.23140\\
-79 & 4.272550 & 6.844515 & 12.57552 & 52.28541\\
+75 & 4.412571 & 6.836974 & 13.80279 & 59.90791\\
+76 & 4.407512 & 6.822441 & 13.83433 & 59.86369\\
+77 & 4.412001 & 6.843420 & 13.88527 & 59.97287\\
+78 & 4.423491 & 6.848677 & 13.90446 & 59.87972\\
+79 & 4.420402 & 6.857666 & 13.88917 & 59.93295\\
 \addlinespace
-80 & 4.238196 & 6.833332 & 12.37838 & 52.66406\\
+80 & 4.425597 & 6.842198 & 13.89540 & 60.00853\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1962,10 +1960,40 @@ Fonte:Elaboração própria.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
 \NormalTok{SimReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
 \CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
 \NormalTok{minvarVI \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturns) }
+\NormalTok{minvarVI}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Title:
+##  MV Minimum Variance Portfolio 
+##  Estimator:         covEstimator 
+##  Solver:            solveRquadprog 
+##  Optimize:          minRisk 
+##  Constraints:       LongOnly 
+## 
+## Portfolio Weights:
+##  SimTEF SimENEL  SimGLE  SimAIR 
+##  0.3278  0.4001  0.1278  0.1442 
+## 
+## Covariance Risk Budgets:
+##  SimTEF SimENEL  SimGLE  SimAIR 
+##  0.3278  0.4001  0.1278  0.1442 
+## 
+## Target Returns and Risks:
+##    mean     Cov    CVaR     VaR 
+## -0.0001  0.0007  0.0014  0.0013 
+## 
+## Description:
+##  Wed Feb 03 23:45:31 2021 by user: lsbap
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarVI)}
 \end{Highlighting}
 \end{Shaded}
@@ -1980,10 +2008,10 @@ Fonte:Elaboração própria.
 \toprule
   & Pesos\\
 \midrule
-SimTEF & 0.3086148\\
-SimENEL & 0.4442713\\
-SimGLE & 0.1409448\\
-SimAIR & 0.1061691\\
+SimTEF & 0.3278427\\
+SimENEL & 0.4001305\\
+SimGLE & 0.1278029\\
+SimAIR & 0.1442238\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -2000,7 +2028,7 @@ SimAIR & 0.1061691\\
 
 \begin{verbatim}
 ##       SimTEF      SimENEL       SimGLE       SimAIR 
-## 0.0011525341 0.0016437382 0.0009126103 0.0004161308
+## 3.595976e-04 6.189773e-04 1.526014e-04 9.428342e-05
 \end{verbatim}
 
 \begin{Shaded}
@@ -2010,6 +2038,167 @@ SimAIR & 0.1061691\\
 \end{Shaded}
 
 \normalsize
+
+\hypertarget{benchmark}{%
+\subsection{BENCHMARK}\label{benchmark}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TEF.MC.R \textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/TEF.MC.R.xlsx"}\NormalTok{)}
+\NormalTok{TEF.MC.R \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(TEF.MC.R[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(TEF.MC.R}\OperatorTok{$}\NormalTok{Date))}
+\NormalTok{GLE.PA.R \textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/GLE.PA.R.xlsx"}\NormalTok{)}
+\NormalTok{GLE.PA.R \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(GLE.PA.R[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(GLE.PA.R}\OperatorTok{$}\NormalTok{Date))}
+\NormalTok{ENEL.MI.R \textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/ENEL.MI.R.xlsx"}\NormalTok{)}
+\NormalTok{ENEL.MI.R \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(ENEL.MI.R[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(ENEL.MI.R}\OperatorTok{$}\NormalTok{Date))}
+\NormalTok{AIR.PA.R \textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/AIR.PA.R.xlsx"}\NormalTok{)}
+\NormalTok{AIR.PA.R \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(AIR.PA.R[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(AIR.PA.R}\OperatorTok{$}\NormalTok{Date))}
+
+\NormalTok{myPortfolioR \textless{}{-}}\KeywordTok{na.omit}\NormalTok{(}\KeywordTok{merge}\NormalTok{(TEF.MC.R}\OperatorTok{$}\StringTok{\textasciigrave{}}\DataTypeTok{Adj Close}\StringTok{\textasciigrave{}}\NormalTok{,ENEL.MI.R}\OperatorTok{$}\StringTok{\textasciigrave{}}\DataTypeTok{Adj Close}\StringTok{\textasciigrave{}}\NormalTok{,GLE.PA.R}\OperatorTok{$}\StringTok{\textasciigrave{}}\DataTypeTok{Adj Close}\StringTok{\textasciigrave{}}\NormalTok{,}
+\NormalTok{                             AIR.PA.R}\OperatorTok{$}\StringTok{\textasciigrave{}}\DataTypeTok{Adj Close}\StringTok{\textasciigrave{}}\NormalTok{))}
+
+\NormalTok{myPortfolioReturnsR \textless{}{-}}\StringTok{ }\KeywordTok{ROC}\NormalTok{(myPortfolioR,}\DataTypeTok{type=}\StringTok{"discrete"}\NormalTok{)[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,]}
+\KeywordTok{colnames}\NormalTok{(myPortfolioReturnsR) \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"RealTEF"}\NormalTok{,}\StringTok{"RealENEL"}\NormalTok{,}\StringTok{"RealGLE"}\NormalTok{,}\StringTok{"RealAIR"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SimReturnsR \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
+\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
+\NormalTok{equalweights \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsR,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{)) }
+\KeywordTok{stdev}\NormalTok{(equalweights}\OperatorTok{$}\NormalTok{portfolio.returns)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.02259565
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{optweightsR \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_R \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsR, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_R}\OperatorTok{$}\NormalTok{MVaR}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.03482475
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SimReturnsRvi \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
+\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
+\NormalTok{equalweightsvi \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRvi,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.3086148}\NormalTok{, }\FloatTok{0.4442713}\NormalTok{, }\FloatTok{0.1409448}\NormalTok{, }\FloatTok{0.1061691}\NormalTok{)) }
+\KeywordTok{stdev}\NormalTok{(equalweightsvi}\OperatorTok{$}\NormalTok{portfolio.returns)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01835064
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{optweightsvi \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.3086148}\NormalTok{, }\FloatTok{0.4442713}\NormalTok{, }\FloatTok{0.1409448}\NormalTok{, }\FloatTok{0.1061691}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_vi \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsvi, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_vi}\OperatorTok{$}\NormalTok{MVaR}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.02912507
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SimReturnsRgarch \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
+\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
+\NormalTok{equalweightsgarch \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRgarch,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.2440413}\NormalTok{, }\FloatTok{0.5635348}\NormalTok{, }\FloatTok{0.0229443}\NormalTok{, }\FloatTok{0.1694796}\NormalTok{)) }
+\KeywordTok{stdev}\NormalTok{(equalweightsgarch}\OperatorTok{$}\NormalTok{portfolio.returns)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01748715
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{optweightsgarch \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2440413}\NormalTok{, }\FloatTok{0.5635348}\NormalTok{, }\FloatTok{0.0229443}\NormalTok{, }\FloatTok{0.1694796}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_garch \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsgarch, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_garch}\OperatorTok{$}\NormalTok{MVaR}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.02680972
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SimReturnsRewma \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
+\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
+\NormalTok{equalweightsewma \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRewma,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.2939002}\NormalTok{, }\FloatTok{0.6052965}\NormalTok{, }\FloatTok{0.0698046}\NormalTok{, }\FloatTok{0.0309987}\NormalTok{)) }
+\KeywordTok{stdev}\NormalTok{(equalweightsewma}\OperatorTok{$}\NormalTok{portfolio.returns)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01623324
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{optweightsewma \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2939002}\NormalTok{, }\FloatTok{0.6052965}\NormalTok{, }\FloatTok{0.0698046}\NormalTok{, }\FloatTok{0.0309987}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_ewma \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsewma, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
+\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_ewma}\OperatorTok{$}\NormalTok{MVaR}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0259623
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RealReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
+\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
+\NormalTok{minvarRR \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(RealReturns) }
+\NormalTok{minvarRR}\OperatorTok{@}\NormalTok{portfolio}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## An object of class "fPFOLIOVAL"
+## Slot "portfolio":
+## $weights
+##    RealTEF   RealENEL    RealGLE    RealAIR 
+## 0.08775736 0.91224264 0.00000000 0.00000000 
+## 
+## $covRiskBudgets
+##    RealTEF   RealENEL    RealGLE    RealAIR 
+## 0.08775736 0.91224264 0.00000000 0.00000000 
+## 
+## $targetReturn
+##         mean           mu 
+## 0.0006914969 0.0006914969 
+## 
+## $targetRisk
+##        Cov      Sigma       CVaR        VaR 
+## 0.01510150 0.01510150 0.02651413 0.02380063 
+## 
+## $targetAlpha
+## [1] 0.05
+## 
+## $status
+## [1] 0
+## 
+## 
+## Slot "messages":
+## list()
+\end{verbatim}
 
 \hypertarget{conclusuxe3o}{%
 \chapter*{Conclusão}\label{conclusuxe3o}}
@@ -2033,7 +2222,7 @@ SimAIR & 0.1061691\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-57-1} \end{center}
+\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-67-1} \end{center}
 
   \bibliography{book.bib,packages.bib}
 
@@ -2120,6 +2309,8 @@ SimAIR & 0.1061691\\
 \end{minipage}
 \end{center}
 
+\newpage
+
 \begin{center}
  {\normalfont\Large\bfseries GARCH - estatísticas do portfolio}
 \end{center}
@@ -2130,6 +2321,8 @@ SimAIR & 0.1061691\\
     \includegraphics[width=2\textwidth]{image/garchport.png}
 \end{minipage}
 \end{center}
+
+\newpage
 
 \begin{center}
  {\normalfont\Large\bfseries Volatilidade Implícita -  estatísticas do portfolio}

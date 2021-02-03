@@ -44,6 +44,7 @@ library(caTools)
 library(dygraphs)
 library(portfolio.optimization)
 library(rugarch)
+library(PerformanceAnalytics)
 ```
 A análise contempla, numa primeira fase, extrair 4 empresas constituintes do Euro Stoxx 50^[https://etf.invesco.com/pt/institutional/en/product/invesco-euro-stoxx-50-ucits-etf-acc/index-components], sendo que essa escolha foi realizado tendo em consideração a diversificação do portfolio por sector de actividade e por presença geográfica, possibilitando deste modo minimizar a correlação que possa existir, apostando em sectores considerados cíclicos e também em sectores defensivos, estando as empresas seleccionadas representados na figura \@ref(fig:empresas), onde podemos verificar o sector de actividade e a sua cotação no último dia considerado.
 
@@ -467,10 +468,10 @@ A partir dos valores simulados calcula-se a mediana para cada um dos dias de aco
 
 \scriptsize
 ```{r}
-M.TEF.MC <- apply(monte_carlo_sim, 1, median)
-M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,median )
-M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,median )
-M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
+M.TEF.MC <- apply(monte_carlo_sim, 1, mean)
+M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,mean )
+M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,mean )
+M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,mean )
 ```
 \normalsize
 
@@ -512,7 +513,6 @@ Na definição do portfolio vamos utilizar os dados referentes às simulações 
 
 \scriptsize
 ```{r}
-set.seed(130)
 SimReturns <- as.timeSeries(myPortfolioReturns)
 minvarewma <- minvariancePortfolio(SimReturns) 
 minew<-getPortfolio(minvarewma)
@@ -847,8 +847,6 @@ AIRvol <- tail(AIRsd,1)
 
 \scriptsize
 ```{r,echo=FALSE}
-dfewma <- as.data.frame(pewma)
-
 N <- 80
 dia <- 1:N
 M <- 1000
@@ -862,7 +860,7 @@ TEF.preco_inicial <- TEF.MC$Close[[nrow(TEF.MC$Close)]]
 TEF.MC.sigma <- TEFvol*sqrt(252)
 TEF.MC.mean <- (mu-(TEF.MC.sigma^2)/2)*(1/252)
 
-set.seed(12)
+set.seed(5)
 monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   monte_carlo_sim[[1,j]] <- TEF.preco_inicial
@@ -886,7 +884,7 @@ ENEL.preco_inicial <- ENEL.MI$Close[[nrow(ENEL.MI$Close)]]
 ENEL.MI.sigma <- ENELvol*sqrt(252)
 ENEL.MI.mean <- (mu-(ENEL.MI.sigma^2)/2)*(1/252)
 
-set.seed(13)
+set.seed(6)
 ENEL_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   ENEL_monte_carlo_sim[[1,j]] <- ENEL.preco_inicial
@@ -906,7 +904,7 @@ GLE.preco_inicial <- GLE.PA$Close[[nrow(GLE.PA$Close)]]
 GLE.PA.sigma <- GLEvol*sqrt(252)
 GLE.PA.mean <- (mu-(GLE.PA.sigma^2)/2)*(1/252)
 
-set.seed(14)
+set.seed(7)
 GLE_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   GLE_monte_carlo_sim[[1,j]] <- GLE.preco_inicial
@@ -926,7 +924,7 @@ AIR.preco_inicial <- AIR.PA$Close[[nrow(AIR.PA$Close)]]
 AIR.PA.sigma <- AIRvol*sqrt(252)
 AIR.PA.mean <- (mu-(AIR.PA.sigma^2)/2)*(1/252)
 
-set.seed(15)
+set.seed(8)
 AIR_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   AIR_monte_carlo_sim[[1,j]] <- AIR.preco_inicial
@@ -956,10 +954,10 @@ ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(a
 
 \scriptsize
 ```{r}
-M.TEF.MC <- apply(monte_carlo_sim, 1, median)
-M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,median )
-M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,median )
-M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
+M.TEF.MC <- apply(monte_carlo_sim, 1, mean)
+M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,mean )
+M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,mean )
+M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,mean )
 ```
 
 \normalsize
@@ -1000,7 +998,6 @@ colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 
 \scriptsize
 ```{r}
-set.seed(110)
 SimReturns <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
 minvarGARCH <- minvariancePortfolio(SimReturns) 
@@ -1071,8 +1068,6 @@ Fonte:Elaboração própria.
 
 \scriptsize
 ```{r,echo=FALSE}
-dfewma <- as.data.frame(pewma)
-
 N <- 80
 dia <- 1:N
 M <- 1000
@@ -1086,7 +1081,7 @@ TEF.preco_inicial <- TEF.MC$Close[[nrow(TEF.MC$Close)]]
 TEF.MC.sigma <- pimpvol$TEF.RET*sqrt(252)
 TEF.MC.mean <- (mu-(TEF.MC.sigma^2)/2)*(1/252)
 
-set.seed(21)
+set.seed(9)
 monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   monte_carlo_sim[[1,j]] <- TEF.preco_inicial
@@ -1110,7 +1105,7 @@ ENEL.preco_inicial <- ENEL.MI$Close[[nrow(ENEL.MI$Close)]]
 ENEL.MI.sigma <- pimpvol$ENEL.RET*sqrt(252)
 ENEL.MI.mean <- (mu-(ENEL.MI.sigma^2)/2)*(1/252)
 
-set.seed(22)
+set.seed(10)
 ENEL_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   ENEL_monte_carlo_sim[[1,j]] <- ENEL.preco_inicial
@@ -1130,7 +1125,7 @@ GLE.preco_inicial <- GLE.PA$Close[[nrow(GLE.PA$Close)]]
 GLE.PA.sigma <- pimpvol$GLE.RET*sqrt(252)
 GLE.PA.mean <- (mu-(GLE.PA.sigma^2)/2)*(1/252)
 
-set.seed(23)
+set.seed(11)
 GLE_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   GLE_monte_carlo_sim[[1,j]] <- GLE.preco_inicial
@@ -1150,7 +1145,7 @@ AIR.preco_inicial <- AIR.PA$Close[[nrow(AIR.PA$Close)]]
 AIR.PA.sigma <- pimpvol$AIR.RET*sqrt(252)
 AIR.PA.mean <- (mu-(AIR.PA.sigma^2)/2)*(1/252)
 
-set.seed(24)
+set.seed(12)
 AIR_monte_carlo_sim <- matrix(nrow=N, ncol = M)
 for(j in 1:M){
   AIR_monte_carlo_sim[[1,j]] <- AIR.preco_inicial
@@ -1177,10 +1172,10 @@ ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(a
 
 \scriptsize
 ```{r}
-M.TEF.MC <- apply(monte_carlo_sim, 1, median)
-M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,median )
-M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,median )
-M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,median )
+M.TEF.MC <- apply(monte_carlo_sim, 1, mean)
+M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,mean )
+M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,mean )
+M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,mean )
 ```
 
 \normalsize
@@ -1221,7 +1216,7 @@ colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 
 \scriptsize
 ```{r}
-set.seed(100)
+
 SimReturns <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
 minvarVI <- minvariancePortfolio(SimReturns) 
@@ -1247,4 +1242,108 @@ ModVaR_95_VI$contribution
 MVaRVI_VaR <- ModVaR_95_VI$MVaR
 ```
 \normalsize
+
+### BENCHMARK
+
+```{r}
+
+TEF.MC.R <-read_xlsx ("data/TEF.MC.R.xlsx")
+TEF.MC.R <- xts(TEF.MC.R[, -1], order.by=as.Date(TEF.MC.R$Date))
+GLE.PA.R <-read_xlsx ("data/GLE.PA.R.xlsx")
+GLE.PA.R <- xts(GLE.PA.R[, -1], order.by=as.Date(GLE.PA.R$Date))
+ENEL.MI.R <-read_xlsx ("data/ENEL.MI.R.xlsx")
+ENEL.MI.R <- xts(ENEL.MI.R[, -1], order.by=as.Date(ENEL.MI.R$Date))
+AIR.PA.R <-read_xlsx ("data/AIR.PA.R.xlsx")
+AIR.PA.R <- xts(AIR.PA.R[, -1], order.by=as.Date(AIR.PA.R$Date))
+
+myPortfolioR <-na.omit(merge(TEF.MC.R$`Adj Close`,ENEL.MI.R$`Adj Close`,GLE.PA.R$`Adj Close`,
+                             AIR.PA.R$`Adj Close`))
+
+myPortfolioReturnsR <- ROC(myPortfolioR,type="discrete")[-1,]
+colnames(myPortfolioReturnsR) <- c("RealTEF","RealENEL","RealGLE","RealAIR")
+```
+
+```{r}
+
+SimReturnsR <- as.timeSeries(myPortfolioReturnsR)
+#returns the portfolio with the minimal risk on the efficient frontier
+equalweights <- Return.portfolio(SimReturnsR,weights = c(0.25,0.25,0.25,0.25)) 
+stdev(equalweights$portfolio.returns)
+```
+
+```{r}
+optweightsR <- c(0.25,0.25,0.25,0.25)
+ModVaR_95_R <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsR, portfolio_method = "component", method = "modified")
+ModVaR_95_R$MVaR
+```
+
+
+```{r}
+
+SimReturnsRvi <- as.timeSeries(myPortfolioReturnsR)
+#returns the portfolio with the minimal risk on the efficient frontier
+equalweightsvi <- Return.portfolio(SimReturnsRvi,weights = c(0.3086148, 0.4442713, 0.1409448, 0.1061691)) 
+stdev(equalweightsvi$portfolio.returns)
+```
+```{r}
+optweightsvi <- c(0.3086148, 0.4442713, 0.1409448, 0.1061691)
+ModVaR_95_vi <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsvi, portfolio_method = "component", method = "modified")
+ModVaR_95_vi$MVaR
+```
+
+
+```{r}
+
+SimReturnsRgarch <- as.timeSeries(myPortfolioReturnsR)
+#returns the portfolio with the minimal risk on the efficient frontier
+equalweightsgarch <- Return.portfolio(SimReturnsRgarch,weights = c(0.2440413, 0.5635348, 0.0229443, 0.1694796)) 
+stdev(equalweightsgarch$portfolio.returns)
+```
+```{r}
+optweightsgarch <- c(0.2440413, 0.5635348, 0.0229443, 0.1694796)
+ModVaR_95_garch <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsgarch, portfolio_method = "component", method = "modified")
+ModVaR_95_garch$MVaR
+```
+
+```{r}
+
+SimReturnsRewma <- as.timeSeries(myPortfolioReturnsR)
+#returns the portfolio with the minimal risk on the efficient frontier
+equalweightsewma <- Return.portfolio(SimReturnsRewma,weights = c(0.2939002, 0.6052965, 0.0698046, 0.0309987)) 
+stdev(equalweightsewma$portfolio.returns)
+```
+```{r}
+optweightsewma <- c(0.2939002, 0.6052965, 0.0698046, 0.0309987)
+ModVaR_95_ewma <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsewma, portfolio_method = "component", method = "modified")
+ModVaR_95_ewma$MVaR
+```
+
+```{r}
+
+RealReturns <- as.timeSeries(myPortfolioReturnsR)
+#returns the portfolio with the minimal risk on the efficient frontier
+minvarRR <- minvariancePortfolio(RealReturns) 
+minvarRR@portfolio
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

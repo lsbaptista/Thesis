@@ -33,6 +33,7 @@
 \contentsline {section}{\numberline {3.5}Volatilidade implicita}{50}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}Simulação Volatilidade implicita}{50}{subsection.3.5.1}%
 \contentsline {subsection}{\numberline {3.5.2}Portfolio volatilidade ímplicita}{52}{subsection.3.5.2}%
-\contentsline {chapter}{Conclusão}{53}{chapter*.55}%
-\contentsline {chapter}{Bibliografia}{55}{chapter*.56}%
-\contentsline {part}{Apêndices}{59}{part*.57}%
+\contentsline {subsection}{\numberline {3.5.3}BENCHMARK}{53}{subsection.3.5.3}%
+\contentsline {chapter}{Conclusão}{57}{chapter*.55}%
+\contentsline {chapter}{Bibliografia}{59}{chapter*.56}%
+\contentsline {part}{Apêndices}{63}{part*.57}%

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.30)  1 FEB 2021 20:53
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.30)  3 FEB 2021 23:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1468,9 +1468,9 @@ asticity
 
 ]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 38.
+(Font)              scaled to size 14.4pt on input line 39.
 LaTeX Font Info:    Font shape `TU/Arial(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 38.
+(Font)              scaled to size 14.4pt on input line 39.
 )
 \tf@toc=\write6
 \openout6 = `bookdown-demo.toc'.
@@ -1709,16 +1709,17 @@ Underfull \vbox (badness 5939) has occurred while \output is active []
 
 [51] [52]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2020.
-File: bookdown-demo_files/figure-latex/unnamed-chunk-57-1.pdf Graphic file (typ
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2047.
+[53] [54] [55] [56]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-67-1.pdf Graphic file (typ
 e pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-57-1.pdf>
+<use bookdown-demo_files/figure-latex/unnamed-chunk-67-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[53
+[57
 
-] (./bookdown-demo.bbl [54]
+] (./bookdown-demo.bbl [58]
 Underfull \hbox (badness 10000) in paragraph at lines 21--26
 \TU/Arial(0)/m/n/12 from []$[][][][][] [] [] [] [][][] [] [][][][][][][][][][][
 ][][][][][][][] [] [][][][][][] [] [][] [] [][][][][][][][][][][][][][] [] [][]
@@ -1732,52 +1733,50 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--26
 ] [][][][] []
  []
 
-[55
+[59
 
-] [56]) [57] [58
+] [60]) [61] [62
 
-] [59
+] [63
 
 ]
 File: image/ewmaport.png Graphic file (type bmp)
 <image/ewmaport.png>
-[60]
+[64]
 File: image/garchtef.png Graphic file (type bmp)
 <image/garchtef.png>
-[61]
+[65]
 File: image/garchenel.png Graphic file (type bmp)
 <image/garchenel.png>
-[62]
+[66]
 File: image/garchgle.png Graphic file (type bmp)
 <image/garchgle.png>
-[63]
+[67]
 File: image/air1.png Graphic file (type bmp)
 <image/air1.png>
-[64]
+[68]
 File: image/air2.png Graphic file (type bmp)
 <image/air2.png>
+[69]
 File: image/garchport.png Graphic file (type bmp)
 <image/garchport.png>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[65]
+[70]
 File: image/vi.png Graphic file (type bmp)
 <image/vi.png>
-[66] (./bookdown-demo.aux)
+[71] (./bookdown-demo.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
-(rerunfilecheck)             Checksum: 1BE6EFD6A255FB9CFBC485E03CE2DC60;6362.
+(rerunfilecheck)             Checksum: DAE9AA0C6A1939ECA5E591802934C72D;6469.
  ) 
 Here is how much of TeX's memory you used:
- 23584 strings out of 479234
- 413792 string characters out of 5874137
- 908430 words of memory out of 5000000
- 42635 multiletter control sequences out of 15000+600000
- 431730 words of font info for 118 fonts, out of 8000000 for 9000
+ 23587 strings out of 479234
+ 413836 string characters out of 5874137
+ 908590 words of memory out of 5000000
+ 42637 multiletter control sequences out of 15000+600000
+ 431738 words of font info for 119 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  98i,10n,125p,1844b,598s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (77 pages).
+Output written on bookdown-demo.pdf (82 pages).
