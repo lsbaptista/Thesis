@@ -804,31 +804,98 @@ Os parâmetros referentes a \(\zeta_1\) e \(\zeta_2\) são respectivamente os va
   \label{eq:curtose}
 \end{equation}
 
-\hypertarget{pacotes-do-r-para-anuxe1lise}{%
-\chapter{Pacotes do R para análise}\label{pacotes-do-r-para-anuxe1lise}}
+\hypertarget{software-r}{%
+\chapter{Software R}\label{software-r}}
 
-\newpage
-
-O presente trabalho foi elaborado tendo como apoio na análise dos dados a linguagem de programação R.
-Vários ``Packages'' do R foram utilizados, apresentando-se uma descrição dos utilizados.
-
-Quantmod: ``The quantmod package for R is designed to assist the quantitative trader in the development,testing, and deployment of statistically based trading models.'' (\url{https://www.quantmod.com/})
-
-PerformanceAnalytics: ``Collection of econometric functions for performance and risk analysis.''
-(\url{https://cran.r-project.org/web/packages/PerformanceAnalytics/index.html})
-
-fPortfolio: ``Provides a collection of functions to optimize portfolios and to analyze them from different points of view.''( \url{https://cran.r-project.org/web/packages/fPortfolio/fPortfolio.pdf})
-
-Portfolio.optimization: ``Simplify your portfolio optimization process by applying a contemporary modeling way to model and solve your portfolio problems. `` (\url{https://cran.rproject.org/web/packages/portfolio.optimization/index.html})
-
-\hypertarget{aplicauxe7uxe3o-a-dados-do-modelo}{%
-\chapter{Aplicação a dados do modelo}\label{aplicauxe7uxe3o-a-dados-do-modelo}}
-
-\endgroup
 \newpage
 
 \hypertarget{introduuxe7uxe3o}{%
 \section{Introdução}\label{introduuxe7uxe3o}}
+
+O presente trabalho foi elaborado tendo como apoio na análise dos dados a linguagem de programação R\footnote{O seu criador é tido como John Chambers, no ano de 1976, nos laboratórios Bell sediados nos Estados Unidos}, sendo por isso fundamental uma breve descrição da mesma, assim como a apresentação e descrição dos principais pacotes utilizados, sendo também o objectivo a aplicabilidade de ferramentas de computação na análise de dados.
+
+O R é uma linguagem de programação \emph{open source} bastante utilizada para computação estatística, havendo uma grande comunidade de suporte à linguagem, assim como uma grande diversidade de pacotes de software para várias áreas de matemática e estatística aplicada, sendo bastante utilizada em \emph{data mining} e \emph{machine learning}. A capacidade do R deve-se em grande parte a extensão dada à linguagem através dos pacotes desenvolvidos pela comunidade R, sendo \emph{open source}, que desta forma vão dando resposta aos desafios presentes na resolução de problemas estatísticos e na análise de dados, tornando esta linguagem de fácil utilização , não sendo necessário grandes conhecimentos de programação para aplicar esses modelos a casos práticos.
+
+Desta forma, e havendo uma grande disponibilidade de pacotes desenvolvidos para o sector financeiro, optou-se pela sua utilização no desenvolvimento deste trabalho, sendo parte essencial para extração, tratamento e analise dos dados. Também foi parte basilar da construção do documento, sendo utilizado o BOOKDOWN, pacote para desenvolvimento e escrita de HTML, PDF, EPub e livros (\citet{R-bookdown}).
+
+A versão utilizada no desenvolvimento do trabalho foi o R-4.0.3\footnote{Disponível em ``\url{https://cran.r-project.org/bin/windows/base/}''}, sendo utilizado como IDE o RStudio versão 1.3.1093\footnote{Disponível em ``\url{https://rstudio.com/products/rstudio/download/\#download}''}
+
+\hypertarget{finanuxe7as-e-r}{%
+\section{Finanças e R}\label{finanuxe7as-e-r}}
+
+O R disponibiliza uma grande variedade de pacotes desenvolvidos pela sua comunidade. No entanto, devido a essa diversidade torna-se às vezes complicado saber qual o mais adequado para utilizar em cada uma das situações. A opção ao longo do trabalho prendeu-se essencialmente por optar por aqueles que deram uma melhor resposta ao problema em análise, havendo utilização de pacotes diferentes dentro de um mesmo tipo de análise, por de alguma forma um se adequar melhor que o outro, nem que fosse apenas na extração dos dados para posterior apresentação em tabelas. Salienta-se o facto de muitos destes pacotes dependerem de outros, sendo que ao serem instalados essas dependências também são instaladas.Dito isto passo seguidamente a apresentar e descrever de forma sumaria os principais pacotes aplicados na analise e modelação dos dados.
+
+\hypertarget{fgarch}{%
+\subsection{fGarch}\label{fgarch}}
+
+O pacote fGarch faz parte da organização Rmetrics, sendo este um projecto de software de desenvolvimento livre para o ensino de finanças computacionais\footnote{Disponível em ``\url{https://www.rmetrics.org/}''}. O fGarch disponibiliza uma colecção de funções para analisar e modelar comportamento que apresentam heteroscedasticidade em modelos de séries temporais.@fGarch
+
+Uma das funções utilizadas foi o garchFit
+
+\hypertarget{fportfolio}{%
+\subsection{fPortfolio}\label{fportfolio}}
+
+\hypertarget{fbasis}{%
+\subsubsection{fBasis}\label{fbasis}}
+
+\hypertarget{mftsr}{%
+\subsubsection{MFTSR}\label{mftsr}}
+
+\hypertarget{fassets}{%
+\subsubsection{fAssets}\label{fassets}}
+
+\hypertarget{ggfortify}{%
+\subsection{ggfortify}\label{ggfortify}}
+
+\hypertarget{portes}{%
+\subsection{portes}\label{portes}}
+
+\hypertarget{parallel}{%
+\subsubsection{parallel}\label{parallel}}
+
+\hypertarget{forecast}{%
+\subsubsection{forecast}\label{forecast}}
+
+\hypertarget{rquantlib}{%
+\subsection{RQuantLib}\label{rquantlib}}
+
+\hypertarget{rugarch}{%
+\subsection{rugarch}\label{rugarch}}
+
+\hypertarget{tidyquant}{%
+\subsection{Tidyquant}\label{tidyquant}}
+
+\hypertarget{lubridate}{%
+\subsubsection{lubridate}\label{lubridate}}
+
+\hypertarget{performanceanalytics}{%
+\subsubsection{PerformanceAnalytics}\label{performanceanalytics}}
+
+\hypertarget{xts}{%
+\subsubsection{xts}\label{xts}}
+
+\hypertarget{zoo}{%
+\subsubsection{zoo}\label{zoo}}
+
+\hypertarget{performanceanalytics-1}{%
+\subsubsection{PerformanceAnalytics}\label{performanceanalytics-1}}
+
+\hypertarget{quantmod}{%
+\subsubsection{quantmod}\label{quantmod}}
+
+\hypertarget{ttr}{%
+\subsubsection{TTR}\label{ttr}}
+
+\hypertarget{timeseries}{%
+\subsection{timeSeries}\label{timeseries}}
+
+\hypertarget{aplicauxe7uxe3o-a-dados-do-modelo}{%
+\chapter{Aplicação a dados do modelo}\label{aplicauxe7uxe3o-a-dados-do-modelo}}
+
+\newpage
+
+\hypertarget{introduuxe7uxe3o-1}{%
+\section{Introdução}\label{introduuxe7uxe3o-1}}
 
 A análise contempla, numa primeira fase, extrair 4 empresas constituintes do Euro Stoxx 50\footnote{\url{https://etf.invesco.com/pt/institutional/en/product/invesco-euro-stoxx-50-ucits-etf-acc/index-components}}, sendo que essa escolha foi realizado tendo em consideração a diversificação do portfolio por sector de actividade e por presença geográfica, possibilitando deste modo minimizar a correlação que possa existir, apostando em sectores considerados cíclicos e também em sectores defensivos, estando as empresas seleccionadas representados na figura \ref{fig:empresas}, onde podemos verificar o sector de actividade e a sua cotação no último dia considerado.
 
@@ -1180,7 +1247,7 @@ Na figura \ref{fig:gewma} podemos ver como acompanha e responde o calculo do EWM
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{bookdown-demo_files/figure-latex/gewma-1} 
+{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/gewma-1} 
 
 }
 
@@ -1963,37 +2030,6 @@ Fonte:Elaboração própria.
 \NormalTok{SimReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
 \CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
 \NormalTok{minvarVI \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturns) }
-\NormalTok{minvarVI}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Title:
-##  MV Minimum Variance Portfolio 
-##  Estimator:         covEstimator 
-##  Solver:            solveRquadprog 
-##  Optimize:          minRisk 
-##  Constraints:       LongOnly 
-## 
-## Portfolio Weights:
-##  SimTEF SimENEL  SimGLE  SimAIR 
-##  0.3278  0.4001  0.1278  0.1442 
-## 
-## Covariance Risk Budgets:
-##  SimTEF SimENEL  SimGLE  SimAIR 
-##  0.3278  0.4001  0.1278  0.1442 
-## 
-## Target Returns and Risks:
-##    mean     Cov    CVaR     VaR 
-## -0.0001  0.0007  0.0014  0.0013 
-## 
-## Description:
-##  Wed Feb 03 23:45:31 2021 by user: lsbap
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarVI)}
 \end{Highlighting}
 \end{Shaded}
@@ -2038,6 +2074,35 @@ SimAIR & 0.1442238\\
 \end{Shaded}
 
 \normalsize
+
+\hypertarget{apresentauxe7uxe3o-dos-resultados}{%
+\chapter{Apresentação dos resultados}\label{apresentauxe7uxe3o-dos-resultados}}
+
+\endgroup
+\newpage
+
+\hypertarget{apresentauxe7uxe3o-dos-resultados-1}{%
+\section{Apresentação dos resultados}\label{apresentauxe7uxe3o-dos-resultados-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow  =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-57-1} \end{center}
 
 \hypertarget{benchmark}{%
 \subsection{BENCHMARK}\label{benchmark}}
@@ -2203,26 +2268,6 @@ SimAIR & 0.1442238\\
 \hypertarget{conclusuxe3o}{%
 \chapter*{Conclusão}\label{conclusuxe3o}}
 \addcontentsline{toc}{chapter}{Conclusão}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow  =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-67-1} \end{center}
 
   \bibliography{book.bib,packages.bib}
 

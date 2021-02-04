@@ -1,4 +1,8 @@
-# Conclusão {-}
+# Apresentação dos resultados
+\endgroup
+\newpage
+
+## Apresentação dos resultados
 
 ```{r}
 par(mfrow  = c(2,2))
@@ -14,6 +18,90 @@ plot(SimGARCH$M.GLE.PA,type="l", col="blue")
 plot(SimVI$M.AIR.PA,type="l", col="blue")
   lines(SimEWMA$M.AIR.PA,col="red")
   lines(SimGARCH$M.AIR.PA,col="green")
+```
+
+### BENCHMARK
+
+```{r}
+
+TEF.MC.R <-read_xlsx ("data/TEF.MC.R.xlsx")
+TEF.MC.R <- xts(TEF.MC.R[, -1], order.by=as.Date(TEF.MC.R$Date))
+GLE.PA.R <-read_xlsx ("data/GLE.PA.R.xlsx")
+GLE.PA.R <- xts(GLE.PA.R[, -1], order.by=as.Date(GLE.PA.R$Date))
+ENEL.MI.R <-read_xlsx ("data/ENEL.MI.R.xlsx")
+ENEL.MI.R <- xts(ENEL.MI.R[, -1], order.by=as.Date(ENEL.MI.R$Date))
+AIR.PA.R <-read_xlsx ("data/AIR.PA.R.xlsx")
+AIR.PA.R <- xts(AIR.PA.R[, -1], order.by=as.Date(AIR.PA.R$Date))
+
+myPortfolioR <-na.omit(merge(TEF.MC.R$`Adj Close`,ENEL.MI.R$`Adj Close`,GLE.PA.R$`Adj Close`,
+                             AIR.PA.R$`Adj Close`))
+
+myPortfolioReturnsR <- ROC(myPortfolioR,type="discrete")[-1,]
+colnames(myPortfolioReturnsR) <- c("RealTEF","RealENEL","RealGLE","RealAIR")
+```
+
+```{r}
+
+SimReturnsR <- as.timeSeries(myPortfolioReturnsR)
+#returns the portfolio with the minimal risk on the efficient frontier
+equalweights <- Return.portfolio(SimReturnsR,weights = c(0.25,0.25,0.25,0.25)) 
+stdev(equalweights$portfolio.returns)
+```
+
+```{r}
+optweightsR <- c(0.25,0.25,0.25,0.25)
+ModVaR_95_R <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsR, portfolio_method = "component", method = "modified")
+ModVaR_95_R$MVaR
+```
+
+
+```{r}
+
+SimReturnsRvi <- as.timeSeries(myPortfolioReturnsR)
+#returns the portfolio with the minimal risk on the efficient frontier
+equalweightsvi <- Return.portfolio(SimReturnsRvi,weights = c(0.3086148, 0.4442713, 0.1409448, 0.1061691)) 
+stdev(equalweightsvi$portfolio.returns)
+```
+```{r}
+optweightsvi <- c(0.3086148, 0.4442713, 0.1409448, 0.1061691)
+ModVaR_95_vi <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsvi, portfolio_method = "component", method = "modified")
+ModVaR_95_vi$MVaR
+```
+
+
+```{r}
+
+SimReturnsRgarch <- as.timeSeries(myPortfolioReturnsR)
+#returns the portfolio with the minimal risk on the efficient frontier
+equalweightsgarch <- Return.portfolio(SimReturnsRgarch,weights = c(0.2440413, 0.5635348, 0.0229443, 0.1694796)) 
+stdev(equalweightsgarch$portfolio.returns)
+```
+```{r}
+optweightsgarch <- c(0.2440413, 0.5635348, 0.0229443, 0.1694796)
+ModVaR_95_garch <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsgarch, portfolio_method = "component", method = "modified")
+ModVaR_95_garch$MVaR
+```
+
+```{r}
+
+SimReturnsRewma <- as.timeSeries(myPortfolioReturnsR)
+#returns the portfolio with the minimal risk on the efficient frontier
+equalweightsewma <- Return.portfolio(SimReturnsRewma,weights = c(0.2939002, 0.6052965, 0.0698046, 0.0309987)) 
+stdev(equalweightsewma$portfolio.returns)
+```
+```{r}
+optweightsewma <- c(0.2939002, 0.6052965, 0.0698046, 0.0309987)
+ModVaR_95_ewma <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsewma, portfolio_method = "component", method = "modified")
+ModVaR_95_ewma$MVaR
+```
+
+```{r}
+
+RealReturns <- as.timeSeries(myPortfolioReturnsR)
+#returns the portfolio with the minimal risk on the efficient frontier
+minvarRR <- minvariancePortfolio(RealReturns) 
+minvarRR@portfolio
+
 ```
 
 

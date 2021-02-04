@@ -2,28 +2,29 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Société Générale.Euronext Paris-25-05-2020/01-06-2020\relax }}{30}{table.caption.17}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Estatísticas das cotações\relax }}{31}{table.caption.19}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Matrix correlação dos retornos\relax }}{32}{table.caption.21}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Estatísticas dos retornos\relax }}{33}{table.caption.22}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Teste normalidade Shapiro-Wilk\relax }}{35}{table.caption.25}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces EWMA\relax }}{37}{table.caption.27}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces EWMA - Valores simulados\relax }}{39}{table.caption.29}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces EWMA - Pesos no portfolio\relax }}{39}{table.caption.30}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces TEF coeficientes\relax }}{40}{table.caption.31}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces Information Criterion Statistics\relax }}{41}{table.caption.32}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces Standardized Residuals Tests\relax }}{41}{table.caption.33}%
-\contentsline {table}{\numberline {3.12}{\ignorespaces ENEL coeficientes\relax }}{42}{table.caption.35}%
-\contentsline {table}{\numberline {3.13}{\ignorespaces ENEL Information Criterion Statistics\relax }}{43}{table.caption.36}%
-\contentsline {table}{\numberline {3.14}{\ignorespaces ENEL Standardized Residuals Tests\relax }}{43}{table.caption.37}%
-\contentsline {table}{\numberline {3.15}{\ignorespaces GLE coeficientes\relax }}{44}{table.caption.39}%
-\contentsline {table}{\numberline {3.16}{\ignorespaces GLE Information Criterion Statistics\relax }}{45}{table.caption.40}%
-\contentsline {table}{\numberline {3.17}{\ignorespaces GLE Standardized Residuals Tests\relax }}{45}{table.caption.41}%
-\contentsline {table}{\numberline {3.18}{\ignorespaces AIR coeficientes\relax }}{47}{table.caption.43}%
-\contentsline {table}{\numberline {3.19}{\ignorespaces AIR Information Criterion Statistics\relax }}{47}{table.caption.44}%
-\contentsline {table}{\numberline {3.20}{\ignorespaces AIR Standardized Residuals Tests\relax }}{47}{table.caption.45}%
-\contentsline {table}{\numberline {3.21}{\ignorespaces GARCH - Valores simulados\relax }}{49}{table.caption.48}%
-\contentsline {table}{\numberline {3.22}{\ignorespaces GARCH - Pesos no portfolio\relax }}{50}{table.caption.49}%
-\contentsline {table}{\numberline {3.23}{\ignorespaces Volatilidade Implícita\relax }}{50}{table.caption.51}%
-\contentsline {table}{\numberline {3.24}{\ignorespaces Vol. Implicita - Valores simulados\relax }}{51}{table.caption.53}%
-\contentsline {table}{\numberline {3.25}{\ignorespaces Vol Implicita- Pesos no portfolio\relax }}{52}{table.caption.54}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Société Générale.Euronext Paris-25-05-2020/01-06-2020\relax }}{32}{table.caption.17}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Estatísticas das cotações\relax }}{33}{table.caption.19}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Matrix correlação dos retornos\relax }}{34}{table.caption.21}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Estatísticas dos retornos\relax }}{35}{table.caption.22}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Teste normalidade Shapiro-Wilk\relax }}{37}{table.caption.25}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces EWMA\relax }}{39}{table.caption.27}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces EWMA - Valores simulados\relax }}{41}{table.caption.29}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces EWMA - Pesos no portfolio\relax }}{41}{table.caption.30}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces TEF coeficientes\relax }}{42}{table.caption.31}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Information Criterion Statistics\relax }}{43}{table.caption.32}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Standardized Residuals Tests\relax }}{43}{table.caption.33}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces ENEL coeficientes\relax }}{44}{table.caption.35}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces ENEL Information Criterion Statistics\relax }}{45}{table.caption.36}%
+\contentsline {table}{\numberline {3.14}{\ignorespaces ENEL Standardized Residuals Tests\relax }}{45}{table.caption.37}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces GLE coeficientes\relax }}{46}{table.caption.39}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces GLE Information Criterion Statistics\relax }}{47}{table.caption.40}%
+\contentsline {table}{\numberline {3.17}{\ignorespaces GLE Standardized Residuals Tests\relax }}{47}{table.caption.41}%
+\contentsline {table}{\numberline {3.18}{\ignorespaces AIR coeficientes\relax }}{49}{table.caption.43}%
+\contentsline {table}{\numberline {3.19}{\ignorespaces AIR Information Criterion Statistics\relax }}{49}{table.caption.44}%
+\contentsline {table}{\numberline {3.20}{\ignorespaces AIR Standardized Residuals Tests\relax }}{49}{table.caption.45}%
+\contentsline {table}{\numberline {3.21}{\ignorespaces GARCH - Valores simulados\relax }}{51}{table.caption.48}%
+\contentsline {table}{\numberline {3.22}{\ignorespaces GARCH - Pesos no portfolio\relax }}{52}{table.caption.49}%
+\contentsline {table}{\numberline {3.23}{\ignorespaces Volatilidade Implícita\relax }}{52}{table.caption.51}%
+\contentsline {table}{\numberline {3.24}{\ignorespaces Vol. Implicita - Valores simulados\relax }}{53}{table.caption.53}%
+\contentsline {table}{\numberline {3.25}{\ignorespaces Vol Implicita- Pesos no portfolio\relax }}{54}{table.caption.54}%
+\addvspace {10\p@ }

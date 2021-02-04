@@ -1,5 +1,4 @@
 # Aplicação a dados do modelo
-\endgroup
 \newpage
 
 ## Introdução
@@ -7,44 +6,18 @@
 Sys.setlocale("LC_ALL","English")
 rm(list = ls())
 knitr::opts_chunk$set(tidy=FALSE, message = FALSE,warning =  FALSE,fig.align = "center",fig.show = "hold")
-#install.packages("https://cran.r-project.org/src/contrib/Archive/fGarch/fGarch_3042.83.1.tar.gz", #repo=NULL, type="source")
-#install.packages("kableExtra")
-#install.packages("tidyquant")
-#install.packages("MASS")
-#install.packages("arsenal")
-#install.packages("formatR")
-#install.packages("ggfortify")
-#install.packages("MFTSR", repos="http://R-Forge.R-project.org")
-#install.packages("Metrics")
-#install.packages("stats")
-#install.packages("portes")
-#install.packages("reshape2")
-#install.packages("Quandl")
 library(readxl)
-library(Quandl)
-library(reshape2)
 library(portes)
-library(stats)
-library(forecast)
-library(Metrics)
 library(fGarch)
 library(MFTSR)
 library(ggfortify)
 library(tidyquant)
-library(arsenal)
-library(MASS)
 library(kableExtra)
-library(xlsx)
 library(tidyverse)
 library(RQuantLib)
-library(tseries)
 library(timeSeries)
 library(fPortfolio)
-library(caTools)
-library(dygraphs)
-library(portfolio.optimization)
 library(rugarch)
-library(PerformanceAnalytics)
 ```
 A análise contempla, numa primeira fase, extrair 4 empresas constituintes do Euro Stoxx 50^[https://etf.invesco.com/pt/institutional/en/product/invesco-euro-stoxx-50-ucits-etf-acc/index-components], sendo que essa escolha foi realizado tendo em consideração a diversificação do portfolio por sector de actividade e por presença geográfica, possibilitando deste modo minimizar a correlação que possa existir, apostando em sectores considerados cíclicos e também em sectores defensivos, estando as empresas seleccionadas representados na figura \@ref(fig:empresas), onde podemos verificar o sector de actividade e a sua cotação no último dia considerado.
 
@@ -155,13 +128,13 @@ colnames(returns)<-c("TEF.RET","ENEL.RET","GLE.RET","AIR.RET")
 
 ```{r,volatilidade,echo=FALSE, fig.cap='Volatilidade nos últimos 4 anos',fig.topcaption = TRUE,out.width = "45%"}
 par(mfrow  = c(2,2))
-autoplot(returns$TEF.RET,ts.colour = 'darkgreen') + ggtitle("TELEFÓNICA") + 
+autoplot(returns$TEF.RET,ts.colour = 'darkgreen') + ggtitle("TEF") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
 autoplot(returns$ENEL.RET,ts.colour = 'dodgerblue3') + ggtitle("ENEL") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
-autoplot(returns$GLE.RET,ts.colour = 'darkorange') + ggtitle("SOCIÉTÉ GÉNÉRALE") + 
+autoplot(returns$GLE.RET,ts.colour = 'darkorange') + ggtitle("GLE") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
-autoplot(returns$AIR.RET,ts.colour = 'deeppink') + ggtitle("AIRBUS") + 
+autoplot(returns$AIR.RET,ts.colour = 'deeppink') + ggtitle("AIR") + 
   ylab("Log return") + xlab("anos") + theme(plot.title = element_text(hjust = 0.5))
 ```
 \FloatBarrier
@@ -234,16 +207,16 @@ Nos histogramas (figura \@ref(fig:distr)), a linha a azul representa uma distrib
 
 ```{r,distr,echo=FALSE, fig.cap='Distribuição dos retornos',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
-hist(returns$TEF.RET,probability=T, main="TELEFÓNICA",xlab="",breaks=100)
+hist(returns$TEF.RET,probability=T, main="TEF",xlab="",breaks=100)
 lines(density(returns$TEF.RET),col=2)
 curve(dnorm(x,0,0.01695272), from = -0.15,to=0.15, col='blue',add = TRUE)
 hist(returns$ENEL.RET,probability=T, main="ENEL",xlab="",breaks=100)
 lines(density(returns$ENEL.RET),col=2)
 curve(dnorm(x,0,0.01571777), from = -0.05,to=0.05, col='blue',add = TRUE)
-hist(returns$GLE.RET,probability=T, main="SOCIÉTÉ GÉNÉRALE",xlab="",breaks=100)
+hist(returns$GLE.RET,probability=T, main="GLE",xlab="",breaks=100)
 lines(density(returns$GLE.RET),col=2)
 curve(dnorm(x,0,0.02557792), from = -0.1,to=0.1, col='blue',add = TRUE)
-hist(returns$AIR.RET,probability=T, main="AIRBUS",xlab="",breaks=100)
+hist(returns$AIR.RET,probability=T, main="AIR",xlab="",breaks=100)
 lines(density(returns$AIR.RET),col=2)
 curve(dnorm(x,0,0.02397011), from = -0.1,to=0.1, col='blue',add = TRUE)
 ```
@@ -314,20 +287,20 @@ pewma <- do.call(data.frame,
 
 Na figura \@ref(fig:gewma) podemos ver como acompanha e responde o calculo do EWMA a alterações bruscas da volatilidade diária, verificando-se algum atraso nessa resposta, como esperado, tendo em consideração o próprio método em si e o facto da escolha de um $\lambda$ de 0.94.
 
-```{r,gewma,echo=FALSE, fig.cap='EWMA',fig.topcaption = TRUE,out.width = "90%"}
+```{r,gewma,echo=FALSE, fig.cap='EWMA',fig.topcaption = TRUE,out.width = "80%"}
 TEFew <- ewmaVol(returns$TEF.RET,lambda = 0.94)
 ENELew <- ewmaVol(returns$ENEL.RET,lambda = 0.94)
 GLEew <- ewmaVol(returns$GLE.RET,lambda = 0.94)
 AIRew <- ewmaVol(returns$AIR.RET,lambda = 0.94)
 
 par(mfrow  = c(2,2))
-TEL1<-plot(returns$TEF.RET,type="l",main="Telefónica", col="green")
+TEL1<-plot(returns$TEF.RET,type="l",main="TEF", col="green")
 lines(TEFew$sigma,col="darkgreen")
 TEL3<-plot(returns$ENEL.RET,type="l",main="ENEL",col="green")
 lines(ENELew$sigma,col="dodgerblue3")
-TEL5<-plot(returns$GLE.RET,type="l",main="SoGen",col="green")
+TEL5<-plot(returns$GLE.RET,type="l",main="GLE",col="green")
 lines(GLEew$sigma,col="darkorange")
-TEL7<-plot(returns$AIR.RET,type="l",main="Airbus",col="green")
+TEL7<-plot(returns$AIR.RET,type="l",main="AIR",col="green")
 lines(AIRew$sigma,col="deeppink")
 
 ```
@@ -1220,7 +1193,6 @@ colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 SimReturns <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
 minvarVI <- minvariancePortfolio(SimReturns) 
-minvarVI
 minew<-getPortfolio(minvarVI)
 ```
 \normalsize
@@ -1242,90 +1214,6 @@ ModVaR_95_VI$contribution
 MVaRVI_VaR <- ModVaR_95_VI$MVaR
 ```
 \normalsize
-
-### BENCHMARK
-
-```{r}
-
-TEF.MC.R <-read_xlsx ("data/TEF.MC.R.xlsx")
-TEF.MC.R <- xts(TEF.MC.R[, -1], order.by=as.Date(TEF.MC.R$Date))
-GLE.PA.R <-read_xlsx ("data/GLE.PA.R.xlsx")
-GLE.PA.R <- xts(GLE.PA.R[, -1], order.by=as.Date(GLE.PA.R$Date))
-ENEL.MI.R <-read_xlsx ("data/ENEL.MI.R.xlsx")
-ENEL.MI.R <- xts(ENEL.MI.R[, -1], order.by=as.Date(ENEL.MI.R$Date))
-AIR.PA.R <-read_xlsx ("data/AIR.PA.R.xlsx")
-AIR.PA.R <- xts(AIR.PA.R[, -1], order.by=as.Date(AIR.PA.R$Date))
-
-myPortfolioR <-na.omit(merge(TEF.MC.R$`Adj Close`,ENEL.MI.R$`Adj Close`,GLE.PA.R$`Adj Close`,
-                             AIR.PA.R$`Adj Close`))
-
-myPortfolioReturnsR <- ROC(myPortfolioR,type="discrete")[-1,]
-colnames(myPortfolioReturnsR) <- c("RealTEF","RealENEL","RealGLE","RealAIR")
-```
-
-```{r}
-
-SimReturnsR <- as.timeSeries(myPortfolioReturnsR)
-#returns the portfolio with the minimal risk on the efficient frontier
-equalweights <- Return.portfolio(SimReturnsR,weights = c(0.25,0.25,0.25,0.25)) 
-stdev(equalweights$portfolio.returns)
-```
-
-```{r}
-optweightsR <- c(0.25,0.25,0.25,0.25)
-ModVaR_95_R <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsR, portfolio_method = "component", method = "modified")
-ModVaR_95_R$MVaR
-```
-
-
-```{r}
-
-SimReturnsRvi <- as.timeSeries(myPortfolioReturnsR)
-#returns the portfolio with the minimal risk on the efficient frontier
-equalweightsvi <- Return.portfolio(SimReturnsRvi,weights = c(0.3086148, 0.4442713, 0.1409448, 0.1061691)) 
-stdev(equalweightsvi$portfolio.returns)
-```
-```{r}
-optweightsvi <- c(0.3086148, 0.4442713, 0.1409448, 0.1061691)
-ModVaR_95_vi <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsvi, portfolio_method = "component", method = "modified")
-ModVaR_95_vi$MVaR
-```
-
-
-```{r}
-
-SimReturnsRgarch <- as.timeSeries(myPortfolioReturnsR)
-#returns the portfolio with the minimal risk on the efficient frontier
-equalweightsgarch <- Return.portfolio(SimReturnsRgarch,weights = c(0.2440413, 0.5635348, 0.0229443, 0.1694796)) 
-stdev(equalweightsgarch$portfolio.returns)
-```
-```{r}
-optweightsgarch <- c(0.2440413, 0.5635348, 0.0229443, 0.1694796)
-ModVaR_95_garch <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsgarch, portfolio_method = "component", method = "modified")
-ModVaR_95_garch$MVaR
-```
-
-```{r}
-
-SimReturnsRewma <- as.timeSeries(myPortfolioReturnsR)
-#returns the portfolio with the minimal risk on the efficient frontier
-equalweightsewma <- Return.portfolio(SimReturnsRewma,weights = c(0.2939002, 0.6052965, 0.0698046, 0.0309987)) 
-stdev(equalweightsewma$portfolio.returns)
-```
-```{r}
-optweightsewma <- c(0.2939002, 0.6052965, 0.0698046, 0.0309987)
-ModVaR_95_ewma <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsewma, portfolio_method = "component", method = "modified")
-ModVaR_95_ewma$MVaR
-```
-
-```{r}
-
-RealReturns <- as.timeSeries(myPortfolioReturnsR)
-#returns the portfolio with the minimal risk on the efficient frontier
-minvarRR <- minvariancePortfolio(RealReturns) 
-minvarRR@portfolio
-
-```
 
 
 
