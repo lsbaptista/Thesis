@@ -330,25 +330,20 @@ Os preços das acções seguem habitualmente o que é conhecido por um processo 
 O modelo representado aqui e que será utilizado para simular preços de activos financeiros atravessou vários pressupostos até a sua conclusão final, sendo apresentado de uma forma muito sucinta as principais etapas de desenvolvimento desse modelo.
 
 Um dos primeiros modelos era representado por um processo de Wiener, sendo este um processo particular do processo estocástico Markov, referido como movimento Browniano, descrevendo a evolução de uma variável com distribuição normal padrão. A modelação pressupõe que a variável z possa ser dada pela seguinte equação:
-
 \begin{equation} 
   dz = \varepsilon \sqrt{dt}\qquad   \varepsilon \sim N(0,1);
   \label{eq:wiener}
 \end{equation}
-
 Desta forma a variável z segue um processo de Wiener, sendo uma variável independente e identicamente distribuída (i.i.d).
 
 Como este modelo não preenchia todos os pressupostos, aplicou-se um processo generalizado de Wiener (também conhecido como movimento Browniano (BM)), onde é incluindo um amplificador/redutor na parte aleatória do processo de forma a ajustar o processo a propriedades especificas de cada acção, ilustrado na equação \eqref{eq:gwiener}. Este processo descreve a evolução de um processo de uma variável com distribuição normal, com um desvio \(\mu\) por unidade de tempo e uma taxa de variância de \(\sigma^2\) também por unidade de tempo.
-
 \begin{equation} 
   \delta S = \mu\delta t +\sigma\varepsilon\sqrt{\delta t}\qquad\varepsilon \sim N(0,1);
   \label{eq:gwiener}
 \end{equation}
-
 A diferença relativo a um processo de Wiener é que no processo generalizado de Wiener a taxa de desvio e variância pode ter como valor qualquer constante, sendo que no processo de Wiener esses valores são de 0 e 1 respectivamente.
 
 Outro processo estocástico, conhecido como processo Itô, foi desenvolvido, representando um processo generalizado de Wiener, sendo que neste caso o valor dos parâmetros \(\mu\) e \(\sigma\) são funções do valor subjacente da variável S e do tempo t. Este modelo é o que vai ser utilizado para simulação do preço das acções sendo representado pelas seguintes equações:
-
 \begin{equation} 
   \frac{\delta S}{S} = \mu\delta t +\sigma\varepsilon\sqrt{\delta t}\qquad\varepsilon \sim N(0,1);
   \label{eq:ito}
@@ -361,7 +356,6 @@ Outro processo estocástico, conhecido como processo Itô, foi desenvolvido, rep
   S_1 =S_0 e^{\Big(\mu-\frac{\sigma^2}{2}\Big)\delta t + \sigma\varepsilon\sqrt{\delta t}}
   \label{eq:logprice}
 \end{equation}
-
 Nesta equação o \(\mu\) representa a taxa de retorno anual esperado, sendo que \(\sigma\) representa o desvio padrão ou volatilidade da acção, parâmetro muito importante para a determinação do valor de vários derivados, havendo várias formas de calcular este valor como veremos mais adiante. Estes valores são função do corrente valor de S e do tempo actual t. Numa economia neutra face ao risco \(\mu\) é igual a taxa de juro sem risco. O \(\varepsilon\) representa uma variável com distribuição normal(N(0,1)).
 
 Este processo é conhecido como movimento Browniano geométrico (GBM). De acordo com \citet{AppliedFinancial} um ``GBM pode ser considerado como um movimento probabilístico contínuo no qual o logaritmo da quantidade que varia aleatoriamente segue um movimento Browniano (processo de Wiener) com desvio.'' Este modelo é a base do modelo de Black-Scholes, que será revisto mais adiante, aquando do cálculo da volatilidade implícita nas opções.
@@ -376,6 +370,52 @@ Em simulação, este processo é realizado considerando uma distribuição norma
 A simulação de Monte Carlo consiste na geração de valores a partir de uma determinada distribuição ou amostra, sendo que ``o termo Monte Carlo é usado para se referir a técnicas que envolvem simulação computacional''\citep[pp.457]{ProgSim}.
 
 Ao simular os preços dos activos financeiros iremos utilizar a técnica de Monte Carlo de modo a gerar amostras aleatórias de acordo com a equação \eqref{eq:logprice}. Os preços serão simulados criando várias tentativas com valores aleatórios para \(\varepsilon\) a partir de \(\phi\)(0,1). A precisão dos valores obtidos na simulação depende do número de tentativas efectuadas, sendo considerado 1000 tentativas por cada dia e considerar o valor médio dessas tentativas como o valor simulado para cada um dos dias simulados.
+
+\hypertarget{arma}{%
+\section{ARMA}\label{arma}}
+
+Antes de entrar no tema relativo a volatilidade, vamos introduzir o tema relativo ao modelo auto-regressivo de médias móveis ou ARMA, sendo um modelo que descreve processo estocásticos estacionários, ou seja, processos cujo parâmetros como a média e a variância não mudam ao longo do tempo, combinando dois factores, um relativo à autorregressão (AR) e outro relativo à média móvel (MA), permitindo desta forma que o número de parâmetros seja pequeno e alcançando parcimônia na parametrização (\citet{parcimonia}).
+
+Como a estacionariedade é um pressuposto assente em muitos processo estatísticos utilizados em séries temporais, dados não-estacionários são muitas vezes transformados de modo a tornarem-se estacionários (\citet{stwiki}).
+
+Para podermos entender melhor este processo, vou introduzir o termo da auto-correlação, referindo-se à medida da relação linear entre valores desfasados ou \emph{lagged values} numa serie temporal, medindo a força e a direcção da associação linear, sendo que os coeficientes de correlação são visualizados em gráfico através da função de auto-correlação ou \emph{ACF} (\citet{foregeorge}). Series temporais que não demonstram auto-correlação são designados de \emph{white noise}. O que se pretende ao trabalhar com os retornos nas acções e não com o preço destas, é ter dados que apresentem um processo estocástico estacionário, sendo que os dados não apresentem auto-correlação.
+
+Voltando ao termo ARMA(p,q), onde o p representa a ordem da parte referente à autorregressão, ou seja, ao AR(p), este é útil porque nos fornece um modo de ter dependência em relação ao tempo exibindo um declínio geométrico,sendo que as correlações entre as variáveis mais afastadas no tempo vão diminuindo, podendo ser descrito pela seguinte equação \eqref{eq:ar}
+\begin{equation} 
+  y_t =c+\phi_1y_{y-1}+\phi_2y_{y-2}+...+\phi_py_{y-p}+\varepsilon_t\qquad   -1<\phi<1
+  \label{eq:ar}
+\end{equation}
+\begin{equation} 
+  \nonumber \varepsilon \sim iid N(0,\sigma_{\epsilon}^{2})
+\end{equation}
+onde \(\varepsilon\) representa \emph{white noise} e o \(\phi\) o coeficiente de autorregressão.
+
+O q refere-se à ordem da média móvel, ou MA(q), descrito do seguinte modo:
+\begin{equation} 
+  y_t =c+\varepsilon_t+\phi_1\varepsilon_{t-1}+\phi_2\varepsilon_{t-2}+...+\phi_q\varepsilon_{t-q}\qquad   -\infty<\phi<\infty 
+  \label{eq:ma}
+\end{equation}
+\begin{equation} 
+  \nonumber \varepsilon \sim iid N(0,\sigma_{\epsilon}^{2})
+\end{equation}
+sendo \(\phi\) o coeficiente relativo à média móvel, onde a média móvel utiliza valores referentes aos erros no modelo de regressão. Este modelo é ideal, por exemplo quando se quer criar um modelo que apenas exibe dependência em relação a um período, como em retornos sobrepostos. Este modelo fornece uma boa descrição pra a evolução de taxas de juro e para a taxa crescimento de variáveis macroeconómicas.
+
+O modelo ARMA(p,q) é definido pela equação \eqref{eq:arma}
+\begin{equation} 
+  y_t =\phi_1y_{y-1}+...+\phi_py_{y-p}+c+\phi_1\varepsilon_{t-1}+...+\phi_q\varepsilon_{t-q}
+  \label{eq:arma}
+\end{equation}
+No mundo real, os processos de retorno podem ser estacionários, combinado-se o modelo ARMA e o modelo GARCH, onde usamos ARMA para ajustar a média e GARCH para ajustar a variância, visto que nos modelos ARMA a variância condicional dado o passado é constante.
+
+De acordo com \citet{oscar}:
+
+\begin{spacing}{1}
+\begin{adjustwidth}{28.3464pt}{28.3464pt}\footnotesize
+"Para entender melhor o modelo ARMA-GARCH, devemos esclarecer a distinção entre a média e variância incondicional e a variância e média  condicional de uma série temporal de retornos. A média incondicional e a variância são apenas a média e a variância da distribuição dos retornos, que são assumidos como constantes ao longo do todo o período considerado. Pode ser considerada como a média e a variância média de longo prazo durante esse período. Por exemplo, se o modelo for o simples "os retornos são independentes e distribuídos de forma idêntica (i.i.d.)", podemos desconsiderar a ordenação dos retornos na amostra e apenas estime a média e a variância da amostra.
+Por outro lado, a média condicional e a variância condicional mudarão a cada momento. A média condicional e a variância condicional dependem do histórico de retornos até aquele ponto. Ou seja, nós contamos com as propriedades dinâmicas dos retornos, considerando sua distribuição em qualquer ponto no tempo como sendo condicional a todos as informações até esse ponto. As previsões feitas a partir dos modelos ARMA-GARCH não são iguais às atuais estimativas. Em vez disso, as previsões de retorno e volatilidade podem ser maiores ou menores do que a média no curto prazo, mas a medida que o horizonte de previsão aumenta as previsões de retorno e de volatilidade convergem para a volatilidade incondicional de longo prazo." (p.17)
+\normalsize\end{adjustwidth}
+\end{spacing}
+\medskip
 
 \hypertarget{volatilidade}{%
 \section{Volatilidade}\label{volatilidade}}
@@ -403,21 +443,17 @@ Para o calculo da volatilidade anual utiliza-se os número de dias de negociaç�
 Existem equações para o cálculo da variância que atribuem igual peso aos valores passados independentemente da sua antiguidade. Outros métodos atribuem mais peso aos dados mais recentes, pois pressupõem-se que esses carregam mais informação útil acerca da variável em estudo, criando modelos que prevêem com menor erro os valores futuros em estudo.
 
 Uma das formas de cálculo da volatilidade tendo em consideração os valores mais recentes dos retornos é aplicando a equação
-
 \begin{equation} 
   \sigma_{n}^{2} =\sum_{i=1}^{m}\alpha_i\mu_{n-1}^{2}
   \label{eq:weight}
 \end{equation}
-
 A variável \(\alpha\) representa o peso associado a observação \emph{i} dos retornos, sendo que a soma dos respectivos pesos deve ser igual a 1.
 
 Tendo em consideração \citet{Hull2018} se a média a longo prazo da taxa de variância for considerada e assignado um peso a ela então teremos
-
 \begin{equation} 
   \sigma_{n}^{2} =\gamma\mathcal{V}_{L}+\sum_{i=1}^{m}\alpha_i\mu_{n-1}^{2}
   \label{eq:arch}
 \end{equation}
-
 sendo que \(\mathcal{V}_{L}\) é a taxa de variância de longo prazo e \(\gamma\) é o peso associado a cada \(\mathcal{V}_{L}\), sendo que os repectivos pesos devem somar 1, de acordo com \[\gamma + \sum_{i=1}^{m}\alpha_i = 1\]
 
 A equação \eqref{eq:arch} é conhecida como um modelo \emph{AutoRegressive Conditional Heteroscedasticity} ou ARCH(m)\footnote{Introduzido por Robert F.Engle em 1982, tendo-lhe sido atribuído o prémio Nobel da economia em 2003}, sendo que em finanças é uma das classes de modelos mais utilizada para prever a volatilidade. O \emph{m} representa o número de observações, sendo que a variável aleatória \(\mu\) segue uma distribuição normal, sendo no entanto prática comum considerar outros tipos de distribuições como a distribuição t-student, devido ao factos da distribuição dos retornos apresentarem caudas mais pesadas que uma distribuição normal.
@@ -430,7 +466,6 @@ O pressuposto destes modelos é de que a variância dos retornos seguem um proce
 \subsection{Exponentially weighted moving average (EWMA)}\label{exponentially-weighted-moving-average-ewma}}
 
 O modelo da média móvel exponencial ponderada (EWMA) é um estimador calculado a partir de amostras sequenciais da população onde é atribuindo maior peso aos valores mais recentes, sendo que esse peso diminui exponencialmente a medida que vamos recuando no tempo. A formula utilizada para actualizar o valor para a volatilidade é
-
 \begin{equation} 
   \sigma_{n}^{2} = \lambda\sigma_{n-1}^{2}+(1-\lambda)\mu_{n-1}^{2} 
   \label{eq:ewma}
@@ -438,19 +473,15 @@ O modelo da média móvel exponencial ponderada (EWMA) é um estimador calculado
 sendo um caso particular da equação \eqref{eq:weight}. Neste caso \(\gamma_{i+1} = \lambda\gamma_{i}\), onde 0\textless{}\(\lambda\leq1\) é uma constante, sendo \(\sigma_{n-1}\) a estimativa da volatilidade realizada no dia n-2 para o dia n-1, e \(\mu_{n-1}\) a mudança percentual diária mais recente. Ao valor de \(\lambda\) atribuido ``estudos empíricos mostram que o \emph{decay factor} (\(\lambda\)) 0,94 fornece uma boa estimativa para todos os ativos.''\citep[p.4]{riskmetrics}
 
 De modo a entender porque à volatilidade obtida através da EWMA correspondem pesos que diminuem exponencialmente vamos substituir \(\sigma_{n-1}^{2}\) na equação \eqref{eq:ewma} de modo a obter
-
 \begin{equation} 
   \sigma_{n}^{2} = (1-\lambda)(\mu_{n-1}^{2}+\lambda\mu_{n-2}^{2})+\lambda^{2}\sigma_{n-2}^{2}
   \label{eq:ewma1}
 \end{equation}
-
 Continuando a substituir acabamos por obter
-
 \begin{equation} 
   \sigma_{n}^{2} = (1-\lambda)\sum_{i=1}^{m}\lambda^{i-1}\mu_{n-1}^{2}+\lambda^{m}\mu_{n-m}^{2}
   \label{eq:ewma2}
 \end{equation}
-
 Como podemos ver pela equação \eqref{eq:ewma2} o ``peso de \(\mu_{i}\) decresce a uma taxa \(\lambda\) a medida que vamos recuando no tempo. Cada peso é \(\lambda\) vezes o peso anterior.'' \citep[p.226]{HullRisk2018}. Como os pesos diminuem geometricamente, o EWMA também é referido como média móvel geométrica.
 
 \hypertarget{generalized-autoregressive-conditional-heteroskedasticity-garch}{%
@@ -459,30 +490,40 @@ Como podemos ver pela equação \eqref{eq:ewma2} o ``peso de \(\mu_{i}\) decresc
 Em 1986 um modelo mais flexível que o modelo ARCH foi proposto, sendo este o modelo \emph{Generalized} ARCH\footnote{Introduzido por Bollerslev(1986)}. De acordo com \citet{volatilitymodels} ``Uma grande vantagem dos modelos GARCH é que os retornos não são assumidos independentes, e mesmo se forem assumidos condicionais gaussianos para retornos anteriores, incondicionalmente, eles não são gaussianos, porque o agrupamento de volatilidade gera leptocurtose''(p.2). Também, e de acordo com \citet{portanalyse}, ``A volatilidade agora depende de ambos, uma combinação linear dos erros quadráticos da previsão (um termo autoregressivo) e variâncias condicional passada (um termo de média móvel).''(p.136)
 
 A equação que define o modelo GARCH(1,1) é
-
 \begin{equation} 
   \sigma_{n}^{2} = \gamma\mathcal{V}_{L} + \alpha\mu_{n-1}^{2} + \beta\sigma_{n-1}^{2}
   \label{eq:garch}
 \end{equation}
-
 Nesta equação, verifica-se que \(\sigma_{n}^{2}\) é calculado a partir da taxa de variação média de longo prazo \(\mathcal{V}_{L}\), como também a partir de \(\sigma_{n-1}\) e \(\mu_{n-1}\), sendo que o modelo EWMA é um caso particular do modelo GARCH(1,1) onde \(\gamma=0\), \(\alpha=1-\lambda\) e \(\beta=\lambda\). Tal como referido nos modelos anteriores, a soma dos diferentes pesos deve ser igual a 1, sendo \[\gamma+\sigma+\beta=1\]
 
 O modelo genérico de GARCH é GARCH(p,q) onde o modelo calcula \(\sigma_{n}^{2}\) a partir das observações \emph{p} mais recentes de \(\mu^2\) e as mais recentes estimações \emph{q} da taxa de variância. Desta forma, o modelo "``(1,1) em GARCH(1,1) indica que \(\sigma_{n}^{2}\) é baseado nas mais recentes observações de \(\mu^2\) e nas mais recentes estimações da taxa de variância.''\citep[p.227]{Hull2018}
 
 Considerando \(\omega=\gamma\mathcal{V}_{L}\), o modelo GARCH(1,1) pode ser definido como
-
 \begin{equation} 
   \sigma_{n}^{2} = \omega + \alpha\mu_{n-1}^{2} + \beta\sigma_{n-1}^{2}
   \label{eq:garch2}
 \end{equation}
-
 A equação \eqref{eq:garch2} é a que costuma ser utilizada de forma a estimar os parâmetros. De notar de que para obter um processo estável GARCH(1,1) é necessário que \(\sigma+\beta<1\), ou então o peso aplicado a variância de longo prazo é negativa.
 A estimação dos parâmetros, tanto para o modelo EWMA como para o modelo GARCH(1,1), é realizado utilizando um processo conhecido como \emph{maximum likelihood method}, onde se utilizam os dados históricos de modo a escolher os parâmetros que maximizem a probabilidade de ocorrência dos dados, de acordo com a equação
-
 \begin{equation} 
   \sum_{i=1}^{m}=\bigg[-ln(\sigma_{i}^{2})-\frac{\mu_{i}^{2}}{\sigma_{i}^{2}}\bigg]
   \label{eq:mgarch}
 \end{equation}
+Os modelos standard GARCH não apresentam resposta adequada em modelos onde os dados tenham diferenças significativas devido ao impacto de boas ou más noticias, por exemplo, no comportamento da variável em estudo, sendo que existem outros modelos desenvolvidos com base no modelo standard GARCH para dar resposta a essas oscilações, como o modelo EGARCH.
+
+\hypertarget{exponential-generalized-autoregressive-conditional-heteroscedastic-egarch}{%
+\subsection{-- Exponential Generalized Autoregressive Conditional Heteroscedastic (EGARCH)}\label{exponential-generalized-autoregressive-conditional-heteroscedastic-egarch}}
+
+O modelo EGARCH será utilizado na modelação da volatilidade da cotação de uma das empresas aqui em análise, sendo importante uma breve descrição do modelo.
+
+Este modelo foi desenvolvido para capturar as assimetrias na volatilidade induzidas por grandes oscilações positivas e negativas nos retornos dos activos.
+
+De acordo com \citet{marta} este modelo é expresso pela equação onde a variância condicionada, \(\sigma_t^2\) é uma função assimétrica dos valores passados de \(\mu_t\), ou seja:
+\begin{equation} 
+  Ln \sigma_{t}^{2}= \alpha_0+\sum_{i=1}^n\beta_iln\sigma_{t-1}^2+\sum_{i=1}^n\alpha_i(\frac{|\mu_{t-i}|}{\sigma_{t-i}})+\sum_{i=1}^n\gamma_i(\frac{|\mu_{t-i}|}{\sigma_{t-i}})
+  \label{eq:egarch}
+\end{equation}
+sendo que \(\alpha\) é uma constante, o \(\beta\), \(\alpha\) e \(\gamma\) parâmetros do modelo, \(\mu_{t-i}\) o erro observado em t-i e \(\sigma_{t-i}\) o desvio padrão observado em t-i. Também, e de acordo com \citet{marta} o ``modelo EGARCH garante que a variância será sempre positiva, por ser apresentada em logaritmos, sendo isto um fator vantajoso''(p.17).No entanto, e devido a sua extrutura exponencial, o modelo pode sobrestimar o impacto de observações anómalas na volatilidade.
 
 \hypertarget{volatilidade-impluxedcita}{%
 \subsection{Volatilidade implícita}\label{volatilidade-impluxedcita}}
@@ -494,7 +535,6 @@ De entre os pressupostos\footnote{Para mais informação ver \citet{BlackScholes
 O processo que se assume ser aplicado ao preço dos activos é o descrito pela equação \eqref{eq:ito}. De salientar de que nenhumas das variáveis da equação é afectada pelas preferências de risco dos investidores, sendo que as variáveis que aparecem na equação são o valor presente do activo financeiro, tempo, volatilidade e a taxa de juro sem risco.
 
 As soluções obtidas a partir da equação diferenciável de interesse para calculo da volatilidade implícita, são as aqui apresentadas para valorizar opções de compra (\emph{call}) e opções de venda (\emph{put}) do tipo europeias:
-
 \begin{equation} 
   c = S_0N(d_1) - Ke^{-rT}N(d_2);
   \label{eq:call}
@@ -513,7 +553,6 @@ onde
   d_2 = \frac{In(S_0/K)+(r-\sigma^2/2)T}{\sigma\sqrt{T}}=d_1-\sigma\sqrt{T}
   \label{eq:d2}
 \end{equation}
-
 A função N(x) representa a função distribuição para uma distribuição normal padrão, sendo a probabilidade de uma variável ser menor que x (ver exemplo na figura \ref{fig:fdistribuicao}). O valor de N(x) pode ser obtido com a função do R pnorm(). A variável T representa o tempo medido em dias de negociação que faltam até a expiração da opção dividido pelos dias de negociação nesse ano, sendo S\textsubscript{0} o valor do activo subjacente no tempo 0, r a taxa de juro sem risco, \(\sigma\) a volatilidade anual e K o preço de exercício da opção.
 
 \begin{figure}
@@ -583,47 +622,36 @@ Para aplicação deste modelo deve-se obter os seguintes dados dos instrumentos 
 O retorno esperado vai depender de vários factores, essencialmente a taxa de retorno sem risco que se verifica no mercado, a taxa de inflação e o risco a que o investidor estará sujeito, sendo que quanto maior o risco, maior será o retorno esperado.
 
 As séries dos retornos diários para cada um dos activos é calculada de acordo com a seguinte formula:
-
 \begin{equation} 
   R_i = ln\Big(\frac{S_f}{S_i}\Big)
   \label{eq:logRet}
 \end{equation}
-
 A média dos retornos de cada um dos activos é calculada de acordo com a sua média aritmética:
-
 \begin{equation} 
   \overline{R} = \frac{\displaystyle\sum_{i=1}^n R_i}{n}
   \label{eq:meanRet}
-\end{equation}
-
+\end{equation}\\
 O retorno de um portfolio de activos financeiros será uma média ponderada do retorno dos activos individuais, de acordo com a seguinte equação
-
 \begin{equation} 
     R_{p} = \sum_{i=1}^{N}(X_{i}R_{ij})
   \label{eq:retp}
 \end{equation}
 onde \(X_{i}\) representa a fracção investida no activo \emph{i}.
-
 O desvio padrão representa a volatilidade, ou risco, associada ao activo. Considerando que essa volatilidade é calculada com base nos dados históricos e nas formulas acima, então a estatística da amostra para o desvio padrão representa-se pela seguinte formula:
-
 \begin{equation} 
   \hat{\sigma} = \sqrt\frac{\displaystyle\sum_{i=1}^n (R_i-\overline{R})^2}{n-1}
   \label{eq:estdesviopadrao}
 \end{equation}
-
 A variância para o portfolio é um pouco mais complicada a calcular do que o calculo para o retorno e para as variância individuais de cada um dos activos, como podemos verificar pela seguinte equação
-
 \begin{equation} 
   \sigma_{p}^{2} = \sum_{j=1}^{N}(X_{j}^{2}\sigma_{j}^{2})+\sum_{j=1}^{N}\sum_{k=1}^{N}(X_{j}X_{k}\sigma_{jk})
   \label{eq:estdesviopadraop}
 \end{equation}
 onde \(k\neq j\). O termo \(\sigma_{jk}\) designa-se por covariância representando o modo como 2 activos se movem conjuntamente, sendo o valor calculado do seguinte modo,
-
 \begin{equation} 
   Cov(R_{i},R_{j}) = E([R_{i}-E(R_{i})][R_{j}-E(R_{j})])
   \label{eq:covariancia}
 \end{equation}
-
 Se todos os termos forem independentes, isto é, a covariância for igual a 0, então apenas se mantêm o primeiro termo/somátorio na equação\#ref(eq:estdesviopadraop).
 
 Quando se pretende interpretar o valor da covariância é prática comum utilizar o que se designa por coeficiente de correlação, sendo que o valor obtido varia entre -1 e +1, sendo que o -1 representa uma correlação negativa perfeita e o +1 uma correlação positiva perfeita. Se o valor for 0 então não existe relação linear entre as variáveis. De forma genérica podemos afirmar que a correlação mede a força da relação linear entre 2 variáveis, sendo a sua forma matemática \[\rho_{ij}=\frac{\sigma_{ij}}{\sigma_{i}\sigma_{j}}\]
@@ -657,14 +685,12 @@ Fonte: \citep[pp.58]{Goetzmann2014}
 \bigskip
 
 Com base no apresentado até agora, o que se propõe é optimizar um portfolio em que os activos que o constituem apresentem pesos de modo a minimizar o risco, ou seja, minimizar a variância total, sem a possibilidade de vendas a descoberto e de activo sem risco, determinando a carteira eficiente. O problema a que se propõe é minimizar \(\sigma_{p}^{2}\) de acordo com a equação \eqref{eq:estdesviopadraop}, sujeito ás seguintes restrições:
-
 \begin{equation} 
   \sum_{i=1}^{N}X_{i}\overline{R}_{i}=\overline{R}_{p}
   \label{eq:und}
 \end{equation}
 \[X_{i}\geq0\] e \[\sum_{i=1}^{N}X_{i}=1\]
 O problema pode ser resolvido construindo a função Lagrangeana
-
 \begin{equation} 
   \mathcal{L} = \sum_{j=1}^{N}\sum_{k=1}^{N}(X_{j}X_{k}\sigma_{jk})+\lambda_{1}(\overline{R}_{p}-\sum_{j=1}^{N}X_{j}\overline{R}_{j})+\lambda_{2}(1-\sum_{j=1}^{N}X_{j})
   \label{eq:lagrangeana}
@@ -738,13 +764,11 @@ O \emph{Daily Value at Risk} (DEaR) é o valor diariamente em risco, sendo calcu
   €DEaR = € \textnormal{Valor de mercado do investimento} * VaR
   \label{eq:dear}  
 \end{equation}
-
 O valor do VaR a mais de um dia pode-se calcular a partir do DEaR a um dia, de acordo com a equação \eqref{eq:vardays}, onde N representa o número de dias.
 \begin{equation} 
   VaR = DEaR*\sqrt{N}
   \label{eq:vardays}
 \end{equation}
-
 Se estivermos a analisar o VaR de um portfolio, esse é calculado da mesma forma que a variância de um portfolio (equação \eqref{eq:varport}), considerando o DEaR individual de cada componente.
 \begin{equation} 
   DEaR_{portfolio}^{2} = \sum_{i=1}^{N}\sum_{j=1}^{N}Cov(DEaR_i,DEaR_j)
@@ -755,7 +779,6 @@ onde
   Cov(DEaR_i,DEaR_j) = DEaR_{i}DEaR_{j}\rho(DEaR_i,DEaR_j)
   \label{eq:covport}
 \end{equation}
-
 Por exemplo, considerando 2 activos, A e B, constituintes de um portfolio, teríamos:
 \begin{equation} 
   DEaR_{A+B}^{2} = DEar_{A}^{2}+DEaR_{B}^{2}+2\rho_{AB} DEaR_{A} DEaR_B
@@ -792,7 +815,6 @@ onde
   CF_{p}^{-1} = \Phi_{p}^{-1} + \frac{\zeta_{1}}{6}[(\Phi_{p}^{-1})^2-1] + \frac{\zeta_{2}}{24}[(\Phi_{p}^{-1})^3-3\Phi_{p}^{-1}] - \frac{\zeta_{1}^{2}}{36}[2(\Phi_{p}^{-1})^3-5\Phi_{p}^{-1}]
   \label{eq:cf}
 \end{equation}
-
 Os parâmetros referentes a \(\zeta_1\) e \(\zeta_2\) são respectivamente os valores da assimetria e do excesso de curtose. Esses valores são obtidos de acordo com as equações \eqref{eq:assimetria} e \eqref{eq:curtose}.
 \begin{equation} 
  \zeta_1 = \frac{1}{n}\sum\bigg[\frac{X_i - \overline{X}}{\sigma}\bigg]^3
@@ -817,9 +839,7 @@ O R é uma linguagem de programação \emph{open source} bastante utilizada para
 
 Desta forma, e havendo uma grande disponibilidade de pacotes desenvolvidos para o sector financeiro, optou-se pela sua utilização no desenvolvimento deste trabalho, sendo parte essencial para extração, tratamento e análise dos dados. Também foi parte basilar da construção do documento, sendo utilizado o BOOKDOWN, pacote para desenvolvimento e escrita de HTML, PDF, EPub e livros (\citet{R-bookdown}).
 
-A versão utilizada no desenvolvimento do trabalho foi o R-4.0.3\footnote{Disponível em ``\url{https://cran.r-project.org/bin/windows/base/}''}, sendo utilizado como IDE o RStudio versão 1.3.1093\footnote{Disponível em ``\url{https://rstudio.com/products/rstudio/download/\#download}''}.
-
-O presente trabalho, o código R utilizado, assim como os dados analisados, encontram-se disponíveis no repositório \emph{online} GitHub, em ``\url{https://github.com/lsbaptista/Thesis}''.
+A versão utilizada no desenvolvimento do trabalho foi o R-4.0.3\footnote{Disponível em ``\url{https://cran.r-project.org/bin/windows/base/}''}, sendo utilizado como IDE o RStudio versão 1.3.1093\footnote{Disponível em ``\url{https://rstudio.com/products/rstudio/download/\#download}''}. O presente trabalho, o código R utilizado, assim como os dados analisados, encontram-se disponíveis no repositório \emph{online} GitHub, em ``\url{https://github.com/lsbaptista/Thesis}''.
 
 \hypertarget{finanuxe7as-e-r}{%
 \section{Finanças e R}\label{finanuxe7as-e-r}}
@@ -862,13 +882,7 @@ O \emph{RQuantLib} é desenvolvido pelo QuantLib, sendo uma biblioteca de códig
 \hypertarget{tidyquant}{%
 \subsection{Tidyquant}\label{tidyquant}}
 
-O pacote \emph{Tidyquant} é uma colecção de outros pacotes financeiros, fornecendo deste modo de uma só vez vários pacotes utilizados para o sector financeiro e de gestão (\citet{tidyquant}). Alguns desses pacotes são o \emph{lubridate}, contendo funções para lidar com datas e tempos, \emph{zoo} para series temporais regulares e irregulares, o pacote \emph{xts} que se pode considerar como uma extensão do pacote \emph{zoo} para lidar com \emph{timestamps} em series temporais.
-
-O \emph{PerformanceAnalytics} é uma colecção de funções econométricas para performance e análise de risco (\citet{PerformanceAnalytics}). Uma das funções utilizadas foi a do \emph{VaR()}, permitindo definir o tipo de método a aplicar no cálculo do \emph{Value at Risk}.
-
-O \emph{quantmod} é uma \emph{framework} para modelos de finanças quantitativas, contendo funções para aceder a várias \emph{api} para obter dados de cotações, como no yahoo finance, assim como para o cálculo de retornos e visualização dos dados (\citet{quantmod}).
-
-O \emph{TTR} providencia uma colecção de mais de 50 indicadores técnicos para criar regras de \emph{trading} (\citet{TTR}).
+O pacote \emph{Tidyquant} é uma colecção de outros pacotes financeiros, fornecendo deste modo de uma só vez vários pacotes utilizados para o sector financeiro e de gestão (\citet{tidyquant}). Temos o \emph{PerformanceAnalytics} sendo uma colecção de funções econométricas para performance e análise de risco (\citet{PerformanceAnalytics}). Uma das funções utilizadas foi a do \emph{VaR()}, permitindo definir o tipo de método a aplicar no cálculo do \emph{Value at Risk}. O \emph{quantmod} é uma \emph{framework} para modelos de finanças quantitativas, contendo funções para aceder a várias \emph{api} para obter dados de cotações, como no yahoo finance, assim como para o cálculo de retornos e visualização dos dados (\citet{quantmod}). O \emph{TTR} providencia uma colecção de mais de 50 indicadores técnicos para criar regras de \emph{trading} (\citet{TTR}). Outros pacotes, como o \emph{lubridate}, contêm funções para lidar com datas e tempos, o \emph{zoo} utilizado para series temporais regulares e irregulares e o pacote \emph{xts} que se pode considerar como uma extensão do pacote \emph{zoo} para lidar com \emph{timestamps} em series temporais.
 
 \hypertarget{aplicauxe7uxe3o-a-dados-do-modelo}{%
 \chapter{Aplicação a dados do modelo}\label{aplicauxe7uxe3o-a-dados-do-modelo}}
@@ -1612,6 +1626,65 @@ Fonte:Elaboração própria.
 \hypertarget{sociuxe9tuxe9-guxe9nuxe9rale}{%
 \subsection{SOCIÉTÉ GÉNÉRALE}\label{sociuxe9tuxe9-guxe9nuxe9rale}}
 
+\begin{verbatim}
+## 
+## Title:
+##  GARCH Modelling 
+## 
+## Call:
+##  garchFit(formula = ~arma(1, 0) + garch(1, 1), data = returns$GLE.RET, 
+##     cond.dist = "std", trace = FALSE) 
+## 
+## Mean and Variance Equation:
+##  data ~ arma(1, 0) + garch(1, 1)
+## <environment: 0x0000000022f37e50>
+##  [data = returns$GLE.RET]
+## 
+## Conditional Distribution:
+##  std 
+## 
+## Coefficient(s):
+##          mu          ar1        omega       alpha1        beta1        shape  
+## -2.0617e-04   1.0585e-01   6.4553e-06   8.2622e-02   9.0615e-01   4.5868e+00  
+## 
+## Std. Errors:
+##  based on Hessian 
+## 
+## Error Analysis:
+##          Estimate  Std. Error  t value Pr(>|t|)    
+## mu     -2.062e-04   4.398e-04   -0.469 0.639235    
+## ar1     1.059e-01   3.111e-02    3.403 0.000667 ***
+## omega   6.455e-06   3.185e-06    2.027 0.042655 *  
+## alpha1  8.262e-02   2.395e-02    3.450 0.000560 ***
+## beta1   9.062e-01   2.581e-02   35.113  < 2e-16 ***
+## shape   4.587e+00   6.399e-01    7.167 7.64e-13 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Log Likelihood:
+##  2672.815    normalized:  2.641121 
+## 
+## Description:
+##  Sat Feb 06 21:49:43 2021 by user: lsbap 
+## 
+## 
+## Standardised Residuals Tests:
+##                                 Statistic p-Value  
+##  Jarque-Bera Test   R    Chi^2  2097.954  0        
+##  Shapiro-Wilk Test  R    W      0.9420664 0        
+##  Ljung-Box Test     R    Q(10)  5.878758  0.8253445
+##  Ljung-Box Test     R    Q(15)  7.740314  0.9337712
+##  Ljung-Box Test     R    Q(20)  14.42703  0.8082015
+##  Ljung-Box Test     R^2  Q(10)  6.727048  0.7509375
+##  Ljung-Box Test     R^2  Q(15)  8.145806  0.9178041
+##  Ljung-Box Test     R^2  Q(20)  8.431973  0.9886019
+##  LM Arch Test       R    TR^2   7.471313  0.8249624
+## 
+## Information Criterion Statistics:
+##       AIC       BIC       SIC      HQIC 
+## -5.270385 -5.241216 -5.270454 -5.259305
+\end{verbatim}
+
 \begin{table}[!h]
 
 \caption{\label{tab:unnamed-chunk-27}GLE coeficientes}
@@ -1704,6 +1777,122 @@ Fonte:Elaboração própria.
 
 \hypertarget{airbus}{%
 \subsection{AIRBUS}\label{airbus}}
+
+\begin{verbatim}
+## 
+## *---------------------------------*
+## *          GARCH Model Fit        *
+## *---------------------------------*
+## 
+## Conditional Variance Dynamics    
+## -----------------------------------
+## GARCH Model  : eGARCH(2,2)
+## Mean Model   : ARFIMA(1,0,1)
+## Distribution : std 
+## 
+## Optimal Parameters
+## ------------------------------------
+##         Estimate  Std. Error  t value Pr(>|t|)
+## mu      0.000378    0.000256   1.4787 0.139229
+## ar1    -0.690353    0.049772 -13.8702 0.000000
+## ma1     0.713683    0.048171  14.8155 0.000000
+## omega  -0.420511    0.129163  -3.2557 0.001131
+## alpha1 -0.146353    0.028249  -5.1807 0.000000
+## alpha2 -0.135647    0.029636  -4.5771 0.000005
+## beta1   0.022517    0.015512   1.4516 0.146612
+## beta2   0.925715    0.009439  98.0743 0.000000
+## gamma1  0.054007    0.049166   1.0985 0.272003
+## gamma2  0.176758    0.052157   3.3890 0.000701
+## shape   5.904549    1.113789   5.3013 0.000000
+## 
+## Robust Standard Errors:
+##         Estimate  Std. Error   t value Pr(>|t|)
+## mu      0.000378    0.000138   2.74472 0.006056
+## ar1    -0.690353    0.010743 -64.26143 0.000000
+## ma1     0.713683    0.011891  60.01769 0.000000
+## omega  -0.420511    0.156300  -2.69042 0.007136
+## alpha1 -0.146353    0.031549  -4.63899 0.000004
+## alpha2 -0.135647    0.031375  -4.32338 0.000015
+## beta1   0.022517    0.015368   1.46521 0.142863
+## beta2   0.925715    0.004781 193.60838 0.000000
+## gamma1  0.054007    0.061697   0.87536 0.381377
+## gamma2  0.176758    0.064717   2.73127 0.006309
+## shape   5.904549    0.881043   6.70177 0.000000
+## 
+## LogLikelihood : 2745.818 
+## 
+## Information Criteria
+## ------------------------------------
+##                     
+## Akaike       -5.4048
+## Bayes        -5.3513
+## Shibata      -5.4050
+## Hannan-Quinn -5.3845
+## 
+## Weighted Ljung-Box Test on Standardized Residuals
+## ------------------------------------
+##                         statistic p-value
+## Lag[1]                     0.0673  0.7953
+## Lag[2*(p+q)+(p+q)-1][5]    0.8889  1.0000
+## Lag[4*(p+q)+(p+q)-1][9]    1.4109  0.9980
+## d.o.f=2
+## H0 : No serial correlation
+## 
+## Weighted Ljung-Box Test on Standardized Squared Residuals
+## ------------------------------------
+##                          statistic p-value
+## Lag[1]                      0.4834  0.4869
+## Lag[2*(p+q)+(p+q)-1][11]    6.6550  0.3524
+## Lag[4*(p+q)+(p+q)-1][19]    8.9388  0.5686
+## d.o.f=4
+## 
+## Weighted ARCH LM Tests
+## ------------------------------------
+##             Statistic Shape Scale P-Value
+## ARCH Lag[5]    0.2603 0.500 2.000  0.6099
+## ARCH Lag[7]    0.7132 1.473 1.746  0.8382
+## ARCH Lag[9]    1.1072 2.402 1.619  0.9161
+## 
+## Nyblom stability test
+## ------------------------------------
+## Joint Statistic:  1.9829
+## Individual Statistics:              
+## mu     0.09417
+## ar1    0.17862
+## ma1    0.17888
+## omega  0.16295
+## alpha1 0.10253
+## alpha2 0.52807
+## beta1  0.12539
+## beta2  0.12589
+## gamma1 0.18074
+## gamma2 0.09270
+## shape  0.07825
+## 
+## Asymptotic Critical Values (10% 5% 1%)
+## Joint Statistic:          2.49 2.75 3.27
+## Individual Statistic:     0.35 0.47 0.75
+## 
+## Sign Bias Test
+## ------------------------------------
+##                    t-value   prob sig
+## Sign Bias           0.5383 0.5905    
+## Negative Sign Bias  1.2697 0.2045    
+## Positive Sign Bias  0.4799 0.6314    
+## Joint Effect        1.9439 0.5841    
+## 
+## 
+## Adjusted Pearson Goodness-of-Fit Test:
+## ------------------------------------
+##   group statistic p-value(g-1)
+## 1    20     16.85       0.5998
+## 2    30     19.80       0.8991
+## 3    40     40.25       0.4146
+## 4    50     45.41       0.6194
+## 
+## 
+## Elapsed time : 0.8288021
+\end{verbatim}
 
 \begin{table}[!h]
 

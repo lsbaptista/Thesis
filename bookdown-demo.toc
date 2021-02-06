@@ -7,43 +7,45 @@
 \contentsline {section}{\numberline {1.1}Series Temporais}{6}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Modelação do preço de acções}{6}{subsection.1.1.1}%
 \contentsline {subsection}{\numberline {1.1.2}Simulação de Monte Carlo}{8}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}Volatilidade}{9}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}AutoRegressive Conditional Heteroscedasticity (ARCH)}{10}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Exponentially weighted moving average (EWMA)}{11}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Generalized autoregressive conditional heteroskedasticity (GARCH)}{12}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}Volatilidade implícita}{14}{subsection.1.2.4}%
-\contentsline {section}{\numberline {1.3}Portfolios média-variância}{17}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Value at Risk}{21}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}VaR Paramétrico (Gaussiana)}{22}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}VaR Paramétrico (Aproximação Cornish-Fisher)}{23}{subsection.1.4.2}%
-\contentsline {chapter}{\numberline {2}Software R}{25}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introdução}{26}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Finanças e R}{27}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}fGarch}{27}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}fPortfolio}{28}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}portes}{28}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}RQuantLib}{29}{subsection.2.2.4}%
-\contentsline {subsection}{\numberline {2.2.5}rugarch}{29}{subsection.2.2.5}%
-\contentsline {subsection}{\numberline {2.2.6}Tidyquant}{29}{subsection.2.2.6}%
-\contentsline {chapter}{\numberline {3}Aplicação a dados do modelo}{31}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introdução}{32}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Análise descritiva dos dados}{33}{section.3.2}%
-\contentsline {section}{\numberline {3.3}EWMA}{40}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Simulação EWMA}{41}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Portfolio EWMA}{43}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}GARCH}{44}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}TELEFÓNICA}{44}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}ENEL}{46}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}SOCIÉTÉ GÉNÉRALE}{48}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}AIRBUS}{50}{subsection.3.4.4}%
-\contentsline {subsection}{\numberline {3.4.5}Simulação GARCH}{52}{subsection.3.4.5}%
-\contentsline {subsection}{\numberline {3.4.6}Portfolio GARCH}{53}{subsection.3.4.6}%
-\contentsline {section}{\numberline {3.5}Volatilidade implicita}{54}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Simulação Volatilidade implicita}{55}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Portfolio volatilidade ímplicita}{56}{subsection.3.5.2}%
-\contentsline {chapter}{\numberline {4}Apresentação dos resultados}{58}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Apresentação dos resultados}{59}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}BENCHMARK}{60}{subsection.4.1.1}%
-\contentsline {chapter}{Conclusão}{64}{chapter*.58}%
-\contentsline {chapter}{Bibliografia}{65}{chapter*.59}%
-\contentsline {part}{Apêndices}{70}{part*.60}%
+\contentsline {section}{\numberline {1.2}ARMA}{9}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Volatilidade}{11}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}AutoRegressive Conditional Heteroscedasticity (ARCH)}{12}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Exponentially weighted moving average (EWMA)}{13}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Generalized autoregressive conditional heteroskedasticity (GARCH)}{14}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}-- Exponential Generalized Autoregressive Conditional Heteroscedastic (EGARCH)}{16}{subsection.1.3.4}%
+\contentsline {subsection}{\numberline {1.3.5}Volatilidade implícita}{16}{subsection.1.3.5}%
+\contentsline {section}{\numberline {1.4}Portfolios média-variância}{19}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Value at Risk}{24}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}VaR Paramétrico (Gaussiana)}{25}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}VaR Paramétrico (Aproximação Cornish-Fisher)}{26}{subsection.1.5.2}%
+\contentsline {chapter}{\numberline {2}Software R}{28}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introdução}{29}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Finanças e R}{30}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}fGarch}{30}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}fPortfolio}{31}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}portes}{31}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}RQuantLib}{32}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}rugarch}{32}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Tidyquant}{32}{subsection.2.2.6}%
+\contentsline {chapter}{\numberline {3}Aplicação a dados do modelo}{34}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introdução}{35}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Análise descritiva dos dados}{36}{section.3.2}%
+\contentsline {section}{\numberline {3.3}EWMA}{43}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Simulação EWMA}{44}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Portfolio EWMA}{46}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}GARCH}{47}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}TELEFÓNICA}{47}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}ENEL}{49}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}SOCIÉTÉ GÉNÉRALE}{51}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}AIRBUS}{54}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}Simulação GARCH}{60}{subsection.3.4.5}%
+\contentsline {subsection}{\numberline {3.4.6}Portfolio GARCH}{61}{subsection.3.4.6}%
+\contentsline {section}{\numberline {3.5}Volatilidade implicita}{62}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Simulação Volatilidade implicita}{63}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Portfolio volatilidade ímplicita}{64}{subsection.3.5.2}%
+\contentsline {chapter}{\numberline {4}Apresentação dos resultados}{66}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Apresentação dos resultados}{67}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}BENCHMARK}{68}{subsection.4.1.1}%
+\contentsline {chapter}{Conclusão}{72}{chapter*.58}%
+\contentsline {chapter}{Bibliografia}{73}{chapter*.59}%
+\contentsline {part}{Apêndices}{78}{part*.60}%

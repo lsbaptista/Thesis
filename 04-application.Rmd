@@ -679,7 +679,7 @@ ENELvol <- tail(ENELsd,1)
 
 ```{r,echo=FALSE,warning = FALSE}
 GLE<-garchFit(formula = ~ arma(1,0) + garch(1,1),data=returns$GLE.RET,cond.dist = "std", trace=FALSE)
-
+summary(GLE)
 GLEcoef <- round(GLE@fit$matcoef,6)
 
 GLEcoefk<- knitr::kable(
@@ -754,7 +754,7 @@ GLEvol <- tail(GLEsd,1)
 AIR.spec <- ugarchspec(variance.model=list(model="eGARCH",garchOrder=c(2,2)),
                             mean.model=list(armaOrder=c(1,1)),distribution.model="std") 
 AIR <- ugarchfit(AIR.spec, returns$AIR.RET) 
-
+AIR
 AIRcoef <- round(AIR@fit$matcoef,6)
 
 AIRcoefk<- knitr::kable(
