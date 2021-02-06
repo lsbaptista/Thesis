@@ -487,10 +487,17 @@ Na definição do portfolio vamos utilizar os dados referentes às simulações 
 \scriptsize
 ```{r}
 SimReturns <- as.timeSeries(myPortfolioReturns)
+FronteiraEff <- portfolioFrontier(SimReturns, constraints = "LongOnly")
+
 minvarewma <- minvariancePortfolio(SimReturns) 
 minew<-getPortfolio(minvarewma)
 ```
 \normalsize
+
+```{r,frontewma,echo=FALSE, fig.cap='EWMA - Fronteira eficiente',fig.topcaption = TRUE,out.width = "45%"}
+plot(FronteiraEff,c(1,2,3,4))
+```
+
 
 ```{r,pewma,echo=FALSE}
 minewma<- as.data.frame(minew$weights)
@@ -524,7 +531,7 @@ Analisando o valor calculado para a portfolio, pode-se verificar que para um ní
 ### TELEFÓNICA
 
 ```{r,echo=FALSE,warning = FALSE}
-TEF<-garchFit(formula = ~ garch(1,1),data=returns$TEF.RET,cond.dist = "std", trace=FALSE)
+TEF<-garchFit(formula = ~ garch(1,1),data=returns$TEF.RET,cond.dist = "norm", trace=FALSE)
 
 TEFcoef <- round(TEF@fit$matcoef,6)
 
@@ -532,6 +539,7 @@ TEFcoefk<- knitr::kable(
   TEFcoef, caption = "TEF coeficientes",
   booktabs = TRUE)
 kable_styling(TEFcoefk , latex_options = "hold_position", position = "center")
+
 ```
 \FloatBarrier
 \centering 
@@ -971,12 +979,18 @@ colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 
 \scriptsize
 ```{r}
-SimReturns <- as.timeSeries(myPortfolioReturns)
+SimReturnsG <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
-minvarGARCH <- minvariancePortfolio(SimReturns) 
+
+minvarGARCH <- minvariancePortfolio(SimReturnsG) 
 minew<-getPortfolio(minvarGARCH)
 ```
 \normalsize
+
+```{r,frontgarch,echo=FALSE, fig.cap='GARCH - Fronteira eficiente',fig.topcaption = TRUE,out.width = "45%"}
+FronteiraEff <- portfolioFrontier(SimReturnsG, constraints = "LongOnly")
+plot(FronteiraEff,c(1,2,3,4))
+```
 
 ```{r,echo=FALSE}
 minGARCH<- as.data.frame(minew$weights)
@@ -1190,12 +1204,18 @@ colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 \scriptsize
 ```{r}
 
-SimReturns <- as.timeSeries(myPortfolioReturns)
+SimReturnsVI <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
-minvarVI <- minvariancePortfolio(SimReturns) 
+minvarVI <- minvariancePortfolio(SimReturnsVI) 
 minew<-getPortfolio(minvarVI)
 ```
 \normalsize
+
+```{r,frontVI,echo=FALSE, fig.cap='Volatilidade Implícita - Fronteira eficiente',fig.topcaption = TRUE,out.width = "45%"}
+FronteiraEff <- portfolioFrontier(SimReturnsVI, constraints = "LongOnly")
+plot(FronteiraEff,c(1,2,3,4))
+```
+
 
 ```{r,echo=FALSE}
 minVI<- as.data.frame(minew$weights)

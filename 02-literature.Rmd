@@ -320,7 +320,7 @@ O problema pode ser resolvido construindo a função Lagrangeana
 
 \begin{equation} 
   \mathcal{L} = \sum_{j=1}^{N}\sum_{k=1}^{N}(X_{j}X_{k}\sigma_{jk})+\lambda_{1}(\overline{R}_{p}-\sum_{j=1}^{N}X_{j}\overline{R}_{j})+\lambda_{2}(1-\sum_{j=1}^{N}X_{j})
-  (\#eq:estdesviopadraop)
+  (\#eq:lagrangeana)
 \end{equation} 
 embora a sua resolução envolva normalmente métodos computacionais. 
 

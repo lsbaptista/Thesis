@@ -118,7 +118,6 @@
 
 \usepackage{changepage}
 
-\usepackage{graphicx}
 \usepackage{placeins}
 
 \usepackage{makeidx}
@@ -668,7 +667,7 @@ O problema pode ser resolvido construindo a função Lagrangeana
 
 \begin{equation} 
   \mathcal{L} = \sum_{j=1}^{N}\sum_{k=1}^{N}(X_{j}X_{k}\sigma_{jk})+\lambda_{1}(\overline{R}_{p}-\sum_{j=1}^{N}X_{j}\overline{R}_{j})+\lambda_{2}(1-\sum_{j=1}^{N}X_{j})
-  \label{eq:estdesviopadraop}
+  \label{eq:lagrangeana}
 \end{equation}
 embora a sua resolução envolva normalmente métodos computacionais.
 
@@ -816,78 +815,60 @@ O presente trabalho foi elaborado tendo como apoio na análise dos dados a lingu
 
 O R é uma linguagem de programação \emph{open source} bastante utilizada para computação estatística, havendo uma grande comunidade de suporte à linguagem, assim como uma grande diversidade de pacotes de software para várias áreas de matemática e estatística aplicada, sendo bastante utilizada em \emph{data mining} e \emph{machine learning}. A capacidade do R deve-se em grande parte a extensão dada à linguagem através dos pacotes desenvolvidos pela comunidade R, sendo \emph{open source}, que desta forma vão dando resposta aos desafios presentes na resolução de problemas estatísticos e na análise de dados, tornando esta linguagem de fácil utilização , não sendo necessário grandes conhecimentos de programação para aplicar esses modelos a casos práticos.
 
-Desta forma, e havendo uma grande disponibilidade de pacotes desenvolvidos para o sector financeiro, optou-se pela sua utilização no desenvolvimento deste trabalho, sendo parte essencial para extração, tratamento e analise dos dados. Também foi parte basilar da construção do documento, sendo utilizado o BOOKDOWN, pacote para desenvolvimento e escrita de HTML, PDF, EPub e livros (\citet{R-bookdown}).
+Desta forma, e havendo uma grande disponibilidade de pacotes desenvolvidos para o sector financeiro, optou-se pela sua utilização no desenvolvimento deste trabalho, sendo parte essencial para extração, tratamento e análise dos dados. Também foi parte basilar da construção do documento, sendo utilizado o BOOKDOWN, pacote para desenvolvimento e escrita de HTML, PDF, EPub e livros (\citet{R-bookdown}).
 
-A versão utilizada no desenvolvimento do trabalho foi o R-4.0.3\footnote{Disponível em ``\url{https://cran.r-project.org/bin/windows/base/}''}, sendo utilizado como IDE o RStudio versão 1.3.1093\footnote{Disponível em ``\url{https://rstudio.com/products/rstudio/download/\#download}''}
+A versão utilizada no desenvolvimento do trabalho foi o R-4.0.3\footnote{Disponível em ``\url{https://cran.r-project.org/bin/windows/base/}''}, sendo utilizado como IDE o RStudio versão 1.3.1093\footnote{Disponível em ``\url{https://rstudio.com/products/rstudio/download/\#download}''}.
+
+O presente trabalho, o código R utilizado, assim como os dados analisados, encontram-se disponíveis no repositório \emph{online} GitHub, em ``\url{https://github.com/lsbaptista/Thesis}''.
 
 \hypertarget{finanuxe7as-e-r}{%
 \section{Finanças e R}\label{finanuxe7as-e-r}}
 
-O R disponibiliza uma grande variedade de pacotes desenvolvidos pela sua comunidade. No entanto, devido a essa diversidade torna-se às vezes complicado saber qual o mais adequado para utilizar em cada uma das situações. A opção ao longo do trabalho prendeu-se essencialmente por optar por aqueles que deram uma melhor resposta ao problema em análise, havendo utilização de pacotes diferentes dentro de um mesmo tipo de análise, por de alguma forma um se adequar melhor que o outro, nem que fosse apenas na extração dos dados para posterior apresentação em tabelas. Salienta-se o facto de muitos destes pacotes dependerem de outros, sendo que ao serem instalados essas dependências também são instaladas.Dito isto passo seguidamente a apresentar e descrever de forma sumaria os principais pacotes aplicados na analise e modelação dos dados.
+O R disponibiliza uma grande variedade de pacotes desenvolvidos pela sua comunidade. No entanto, devido a essa diversidade torna-se às vezes complicado saber qual o mais adequado para utilizar em cada uma das situações. A opção ao longo do trabalho prendeu-se essencialmente por optar por aqueles que deram uma melhor resposta ao problema em análise, havendo utilização de pacotes diferentes dentro de um mesmo tipo de análise, por de alguma forma um se adequar melhor que o outro, nem que fosse apenas na extração dos dados para posterior apresentação em tabelas. Salienta-se o facto de muitos destes pacotes dependerem de outros, sendo que ao serem instalados essas dependências também são instaladas.Dito isto passo seguidamente a apresentar e descrever de forma sumaria os principais pacotes aplicados na análise e modelação dos dados.
 
 \hypertarget{fgarch}{%
 \subsection{fGarch}\label{fgarch}}
 
-O pacote fGarch faz parte da organização Rmetrics, sendo este um projecto de software de desenvolvimento livre para o ensino de finanças computacionais\footnote{Disponível em ``\url{https://www.rmetrics.org/}''}. O fGarch disponibiliza uma colecção de funções para analisar e modelar comportamento que apresentam heteroscedasticidade em modelos de séries temporais.@fGarch
+O pacote \emph{fGarch} faz parte da organização Rmetrics, sendo este um projecto de software de desenvolvimento livre para o ensino de finanças computacionais\footnote{Disponível em ``\url{https://www.rmetrics.org/}''}. O \emph{fGarch} disponibiliza uma colecção de funções para analisar e modelar comportamento que apresentam heteroscedasticidade em modelos de séries temporais (\citet{fGarch}).
 
-Uma das funções utilizadas foi o garchFit
+Uma das funções utilizadas foi o \emph{garchFit()}, que estima os parâmetros de um processo univariado ARMA-GARCH. Na função pode-se definir os parâmetros \emph{p} e \emph{q} relativos a ordem, sendo que GARCH(1,1) representa um modelo de primeira ordem. O tipo de distribuição dos dados pode ser escolhida de entre um grupo, sendo que o valor por defeito é o de uma distribuição normal. Vários valores podem ser extraidos, como um vector numérico dos resíduos ou dos respectivos desvio padrão calculados. Com a função \emph{summary()} obtemos descrição estatística do modelo e podemos obter vários gráficos de interesse com a função \emph{plot()}.
 
 \hypertarget{fportfolio}{%
 \subsection{fPortfolio}\label{fportfolio}}
 
-\hypertarget{fbasis}{%
-\subsubsection{fBasis}\label{fbasis}}
+O pacote \emph{fPortfolio} é mais um pacote de análise financeira disponibilizado pela Rmetrics, sendo que disponibiliza uma colecção de funções para optimizar portfolios a para analisa-los de diferentes pontos de vista (\citet{fPortfolio}).
 
-\hypertarget{mftsr}{%
-\subsubsection{MFTSR}\label{mftsr}}
+Um dos métodos utilizados para a definição de portfolios foi o \emph{minvariancePortfolio()} que retorna um portfolio com a mínima variância na fronteira eficiente, minimizando o risco. Nesta função pode-se definir as restrições impostas na definição do portfolio, como a possibilidade de vendas a descoberto.
 
-\hypertarget{fassets}{%
-\subsubsection{fAssets}\label{fassets}}
-
-\hypertarget{ggfortify}{%
-\subsection{ggfortify}\label{ggfortify}}
+Este pacote apresenta depêndencias com outros, designadamente \emph{fBasics}, pacote desenvolvido pela Rmetrics tendo como finalidade disponibilizar funções gerais de análise estatística para o sector financeiro, como estimação de parâmetros, testes de hipótese e várias funções para distribuições de retornos financeiros como a Distribuição Hiperbólica Generalizada (\citet{fBasics}), o \emph{MFTSR}, pacote para modelar series temporais financeiras sendo parte integrante do livro ``\emph{Modelling Financial Time Series with R}'' (\citet{MFTSR}). Uma das funções utilizadas foi a do cálculo do \emph{EWMA}, utilizando o ewmaVol() e o \emph{fAssets}, pacote desenvolvido pela Rmetrics, que providência uma colecção de funções para gerir, investigar e analisar um conjunto de dados de activos financeiros (\citet{fAssets}).
 
 \hypertarget{portes}{%
 \subsection{portes}\label{portes}}
 
-\hypertarget{parallel}{%
-\subsubsection{parallel}\label{parallel}}
+Pacote que contêm univariados e multivariados \emph{portmanteau} testes estatísticos de series temporais baseados em distribuição assintótica e em testes de significância de Monte Carlo (\citet{portes}). Um dos testes \emph{portmanteau} utilizados foi o teste Ljun-Box para testar a autocorrelação. Estes testes são bastante úteis ao trabalhar com modelos ARIMA.
 
-\hypertarget{forecast}{%
-\subsubsection{forecast}\label{forecast}}
+Este pacote têm como uma das depêndencias o pacote \emph{forecast} que contêm métodos e ferramentas para analisar e prever series temporais univariadas como modelos automáticos ARIMA.
 
 \hypertarget{rquantlib}{%
 \subsection{RQuantLib}\label{rquantlib}}
 
+O \emph{RQuantLib} é desenvolvido pelo QuantLib, sendo uma biblioteca de código aberto para finanças quantitativas (\citet{RQuantLib}). A função utilizada foi a \emph{EuropeanOptionImpliedVolatility()} para cálculo da volatilidade implícita nas opções em análise.
+
 \hypertarget{rugarch}{%
 \subsection{rugarch}\label{rugarch}}
+
+\emph{Rugarch} é um pacote que contêm uma grande variedade de modelos unívariados GARCH, com métodos para simulação, inferência e criar gráficos (\citet{rugarch}). Neste caso foi utilizada a função \emph{ugarchspec()} para utilizar o método eGARCH, que fornecia uma melhor resposta no modelo em análise do que utilizando o modelo generalista GARCH. Este modelo disponibiliza toda a informação estatística necessária para validar o modelo e seus pressupostos, sendo que comparativamente com o pacote fGarch, permite aplicação de outros modelos GARCG.
 
 \hypertarget{tidyquant}{%
 \subsection{Tidyquant}\label{tidyquant}}
 
-\hypertarget{lubridate}{%
-\subsubsection{lubridate}\label{lubridate}}
+O pacote \emph{Tidyquant} é uma colecção de outros pacotes financeiros, fornecendo deste modo de uma só vez vários pacotes utilizados para o sector financeiro e de gestão (\citet{tidyquant}). Alguns desses pacotes são o \emph{lubridate}, contendo funções para lidar com datas e tempos, \emph{zoo} para series temporais regulares e irregulares, o pacote \emph{xts} que se pode considerar como uma extensão do pacote \emph{zoo} para lidar com \emph{timestamps} em series temporais.
 
-\hypertarget{performanceanalytics}{%
-\subsubsection{PerformanceAnalytics}\label{performanceanalytics}}
+O \emph{PerformanceAnalytics} é uma colecção de funções econométricas para performance e análise de risco (\citet{PerformanceAnalytics}). Uma das funções utilizadas foi a do \emph{VaR()}, permitindo definir o tipo de método a aplicar no cálculo do \emph{Value at Risk}.
 
-\hypertarget{xts}{%
-\subsubsection{xts}\label{xts}}
+O \emph{quantmod} é uma \emph{framework} para modelos de finanças quantitativas, contendo funções para aceder a várias \emph{api} para obter dados de cotações, como no yahoo finance, assim como para o cálculo de retornos e visualização dos dados (\citet{quantmod}).
 
-\hypertarget{zoo}{%
-\subsubsection{zoo}\label{zoo}}
-
-\hypertarget{performanceanalytics-1}{%
-\subsubsection{PerformanceAnalytics}\label{performanceanalytics-1}}
-
-\hypertarget{quantmod}{%
-\subsubsection{quantmod}\label{quantmod}}
-
-\hypertarget{ttr}{%
-\subsubsection{TTR}\label{ttr}}
-
-\hypertarget{timeseries}{%
-\subsection{timeSeries}\label{timeseries}}
+O \emph{TTR} providencia uma colecção de mais de 50 indicadores técnicos para criar regras de \emph{trading} (\citet{TTR}).
 
 \hypertarget{aplicauxe7uxe3o-a-dados-do-modelo}{%
 \chapter{Aplicação a dados do modelo}\label{aplicauxe7uxe3o-a-dados-do-modelo}}
@@ -1387,12 +1368,23 @@ Na definição do portfolio vamos utilizar os dados referentes às simulações 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{SimReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
+\NormalTok{FronteiraEff \textless{}{-}}\StringTok{ }\KeywordTok{portfolioFrontier}\NormalTok{(SimReturns, }\DataTypeTok{constraints =} \StringTok{"LongOnly"}\NormalTok{)}
+
 \NormalTok{minvarewma \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturns) }
 \NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarewma)}
 \end{Highlighting}
 \end{Shaded}
 
 \normalsize
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/frontewma-1} 
+
+}
+
+\caption{EWMA - Fronteira eficiente}\label{fig:frontewma}
+\end{figure}
 
 \begin{table}[!h]
 
@@ -1441,17 +1433,16 @@ Analisando o valor calculado para a portfolio, pode-se verificar que para um ní
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-18}TEF coeficientes}
+\caption{\label{tab:unnamed-chunk-19}TEF coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & -0.000275 & 0.000349 & -0.786996 & 0.431284\\
-omega & 0.000009 & 0.000003 & 2.626875 & 0.008617\\
-alpha1 & 0.094462 & 0.028183 & 3.351714 & 0.000803\\
-beta1 & 0.862275 & 0.035908 & 24.013557 & 0.000000\\
-shape & 4.849731 & 0.699459 & 6.933546 & 0.000000\\
+mu & -0.000244 & 0.000378 & -0.644835 & 0.519034\\
+omega & 0.000010 & 0.000003 & 2.962776 & 0.003049\\
+alpha1 & 0.166445 & 0.033505 & 4.967829 & 0.000001\\
+beta1 & 0.808793 & 0.038337 & 21.097141 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1465,16 +1456,16 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-19}Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-20}Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & x\\
 \midrule
-AIC & -5.880106\\
-BIC & -5.855799\\
-SIC & -5.880154\\
-HQIC & -5.870873\\
+AIC & -5.745172\\
+BIC & -5.725727\\
+SIC & -5.745203\\
+HQIC & -5.737786\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1488,19 +1479,19 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-20}Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-21}Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 5.365586 & 0.8654579\\
-Ljung-Box Test 15 & 15 & 6.370089 & 0.9728383\\
-Ljung-Box Test 20 & 20 & 9.016115 & 0.9827199\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 3.984322 & 0.9480515\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 4.641853 & 0.9947489\\
+Ljung-Box Test 10 & 10 & 5.623161 & 0.8458681\\
+Ljung-Box Test 15 & 15 & 6.811688 & 0.9626660\\
+Ljung-Box Test 20 & 20 & 9.675106 & 0.9736878\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 4.578309 & 0.9175120\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 5.584305 & 0.9859170\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 5.629360 & 0.9993135\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 6.884495 & 0.9970470\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1532,7 +1523,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-22}ENEL coeficientes}
+\caption{\label{tab:unnamed-chunk-23}ENEL coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1556,7 +1547,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-23}ENEL Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-24}ENEL Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1579,7 +1570,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-24}ENEL Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-25}ENEL Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1623,7 +1614,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-26}GLE coeficientes}
+\caption{\label{tab:unnamed-chunk-27}GLE coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1649,7 +1640,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-27}GLE Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-28}GLE Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1672,7 +1663,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-28}GLE Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-29}GLE Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1716,7 +1707,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-30}AIR coeficientes}
+\caption{\label{tab:unnamed-chunk-31}AIR coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1748,7 +1739,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-31}AIR Information Criterion Statistics}
+\caption{\label{tab:unnamed-chunk-32}AIR Information Criterion Statistics}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -1771,7 +1762,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-32}AIR Standardized Residuals Tests}
+\caption{\label{tab:unnamed-chunk-33}AIR Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -1844,19 +1835,19 @@ Fonte:Elaboração própria.
 \normalsize
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-40}GARCH - Valores simulados}
+\caption{\label{tab:unnamed-chunk-41}GARCH - Valores simulados}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
 \midrule
-75 & 4.317201 & 6.962290 & 13.66729 & 60.00318\\
-76 & 4.323147 & 6.964033 & 13.69626 & 59.93394\\
-77 & 4.328549 & 6.959366 & 13.74518 & 60.06126\\
-78 & 4.323386 & 6.959086 & 13.74053 & 60.09178\\
-79 & 4.324565 & 6.957337 & 13.81596 & 60.17193\\
+75 & 4.309044 & 6.962290 & 13.66729 & 60.00318\\
+76 & 4.315630 & 6.964033 & 13.69626 & 59.93394\\
+77 & 4.321610 & 6.959366 & 13.74518 & 60.06126\\
+78 & 4.315777 & 6.959086 & 13.74053 & 60.09178\\
+79 & 4.316880 & 6.957337 & 13.81596 & 60.17193\\
 \addlinespace
-80 & 4.319850 & 6.961215 & 13.80471 & 60.18599\\
+80 & 4.311740 & 6.961215 & 13.80471 & 60.18599\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1875,27 +1866,37 @@ Fonte:Elaboração própria.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{SimReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
+\NormalTok{SimReturnsG \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
 \CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
-\NormalTok{minvarGARCH \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturns) }
+
+\NormalTok{minvarGARCH \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturnsG) }
 \NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarGARCH)}
 \end{Highlighting}
 \end{Shaded}
 
 \normalsize
 
+\begin{figure}
+
+{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/frontgarch-1} 
+
+}
+
+\caption{GARCH - Fronteira eficiente}\label{fig:frontgarch}
+\end{figure}
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-43}GARCH - Pesos no portfolio}
+\caption{\label{tab:unnamed-chunk-44}GARCH - Pesos no portfolio}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & Pesos\\
 \midrule
-SimTEF & 0.2079913\\
-SimENEL & 0.6288714\\
+SimTEF & 0.1797113\\
+SimENEL & 0.6520239\\
 SimGLE & 0.0000000\\
-SimAIR & 0.1631372\\
+SimAIR & 0.1682648\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1912,7 +1913,7 @@ SimAIR & 0.1631372\\
 
 \begin{verbatim}
 ##       SimTEF      SimENEL       SimGLE       SimAIR 
-## 2.212796e-04 3.776863e-04 4.074302e-05 7.616810e-05
+## 2.617402e-04 3.694242e-04 3.985761e-05 6.960479e-05
 \end{verbatim}
 
 \begin{Shaded}
@@ -1944,7 +1945,7 @@ Fonte:Elaboração própria.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-45}Volatilidade Implícita}
+\caption{\label{tab:unnamed-chunk-46}Volatilidade Implícita}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1996,7 +1997,7 @@ Fonte:Elaboração própria.
 \normalsize
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-52}Vol. Implicita - Valores simulados}
+\caption{\label{tab:unnamed-chunk-53}Vol. Implicita - Valores simulados}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -2027,18 +2028,27 @@ Fonte:Elaboração própria.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{SimReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
+\NormalTok{SimReturnsVI \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
 \CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
-\NormalTok{minvarVI \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturns) }
+\NormalTok{minvarVI \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturnsVI) }
 \NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarVI)}
 \end{Highlighting}
 \end{Shaded}
 
 \normalsize
 
+\begin{figure}
+
+{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/frontVI-1} 
+
+}
+
+\caption{Volatilidade Implícita - Fronteira eficiente}\label{fig:frontVI}
+\end{figure}
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-55}Vol Implicita- Pesos no portfolio}
+\caption{\label{tab:unnamed-chunk-56}Vol Implicita- Pesos no portfolio}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -2102,7 +2112,7 @@ SimAIR & 0.1442238\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-57-1} \end{center}
+\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-58-1} \end{center}
 
 \hypertarget{benchmark}{%
 \subsection{BENCHMARK}\label{benchmark}}
