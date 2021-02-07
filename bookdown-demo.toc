@@ -38,14 +38,13 @@
 \contentsline {subsection}{\numberline {3.4.2}ENEL}{50}{subsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.4.3}SOCIÉTÉ GÉNÉRALE}{52}{subsection.3.4.3}%
 \contentsline {subsection}{\numberline {3.4.4}AIRBUS}{55}{subsection.3.4.4}%
-\contentsline {subsection}{\numberline {3.4.5}Simulação GARCH}{61}{subsection.3.4.5}%
-\contentsline {subsection}{\numberline {3.4.6}Portfolio GARCH}{62}{subsection.3.4.6}%
-\contentsline {section}{\numberline {3.5}Volatilidade implicita}{63}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Simulação Volatilidade implicita}{64}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Portfolio volatilidade ímplicita}{65}{subsection.3.5.2}%
-\contentsline {chapter}{\numberline {4}Apresentação dos resultados}{67}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Apresentação dos resultados}{68}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}BENCHMARK}{69}{subsection.4.1.1}%
-\contentsline {chapter}{Conclusão}{73}{chapter*.57}%
-\contentsline {chapter}{Bibliografia}{74}{chapter*.58}%
-\contentsline {part}{Apêndices}{79}{part*.59}%
+\contentsline {subsection}{\numberline {3.4.5}Simulação GARCH}{58}{subsection.3.4.5}%
+\contentsline {subsection}{\numberline {3.4.6}Portfolio GARCH}{59}{subsection.3.4.6}%
+\contentsline {section}{\numberline {3.5}Volatilidade implicita}{61}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Simulação Volatilidade implicita}{62}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Portfolio volatilidade ímplicita}{63}{subsection.3.5.2}%
+\contentsline {chapter}{\numberline {4}Apresentação dos resultados}{65}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Apresentação dos resultados}{66}{section.4.1}%
+\contentsline {chapter}{Conclusão}{68}{chapter*.54}%
+\contentsline {chapter}{Bibliografia}{69}{chapter*.55}%
+\contentsline {part}{Apêndices}{74}{part*.56}%

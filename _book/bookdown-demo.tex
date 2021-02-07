@@ -330,20 +330,25 @@ Os preços das acções seguem habitualmente o que é conhecido por um processo 
 O modelo representado aqui e que será utilizado para simular preços de activos financeiros atravessou vários pressupostos até a sua conclusão final, sendo apresentado de uma forma muito sucinta as principais etapas de desenvolvimento desse modelo.
 
 Um dos primeiros modelos era representado por um processo de Wiener, sendo este um processo particular do processo estocástico Markov, referido como movimento Browniano, descrevendo a evolução de uma variável com distribuição normal padrão. A modelação pressupõe que a variável z possa ser dada pela seguinte equação:
+
 \begin{equation} 
   dz = \varepsilon \sqrt{dt}\qquad   \varepsilon \sim N(0,1);
   \label{eq:wiener}
 \end{equation}
+
 Desta forma a variável z segue um processo de Wiener, sendo uma variável independente e identicamente distribuída (i.i.d).
 
 Como este modelo não preenchia todos os pressupostos, aplicou-se um processo generalizado de Wiener (também conhecido como movimento Browniano (BM)), onde é incluindo um amplificador/redutor na parte aleatória do processo de forma a ajustar o processo a propriedades especificas de cada acção, ilustrado na equação \eqref{eq:gwiener}. Este processo descreve a evolução de um processo de uma variável com distribuição normal, com um desvio \(\mu\) por unidade de tempo e uma taxa de variância de \(\sigma^2\) também por unidade de tempo.
+
 \begin{equation} 
   \delta S = \mu\delta t +\sigma\varepsilon\sqrt{\delta t}\qquad\varepsilon \sim N(0,1);
   \label{eq:gwiener}
 \end{equation}
+
 A diferença relativo a um processo de Wiener é que no processo generalizado de Wiener a taxa de desvio e variância pode ter como valor qualquer constante, sendo que no processo de Wiener esses valores são de 0 e 1 respectivamente.
 
 Outro processo estocástico, conhecido como processo Itô, foi desenvolvido, representando um processo generalizado de Wiener, sendo que neste caso o valor dos parâmetros \(\mu\) e \(\sigma\) são funções do valor subjacente da variável S e do tempo t. Este modelo é o que vai ser utilizado para simulação do preço das acções sendo representado pelas seguintes equações:
+
 \begin{equation} 
   \frac{\delta S}{S} = \mu\delta t +\sigma\varepsilon\sqrt{\delta t}\qquad\varepsilon \sim N(0,1);
   \label{eq:ito}
@@ -356,6 +361,7 @@ Outro processo estocástico, conhecido como processo Itô, foi desenvolvido, rep
   S_1 =S_0 e^{\Big(\mu-\frac{\sigma^2}{2}\Big)\delta t + \sigma\varepsilon\sqrt{\delta t}}
   \label{eq:logprice}
 \end{equation}
+
 Nesta equação o \(\mu\) representa a taxa de retorno anual esperado, sendo que \(\sigma\) representa o desvio padrão ou volatilidade da acção, parâmetro muito importante para a determinação do valor de vários derivados, havendo várias formas de calcular este valor como veremos mais adiante. Estes valores são função do corrente valor de S e do tempo actual t. Numa economia neutra face ao risco \(\mu\) é igual a taxa de juro sem risco. O \(\varepsilon\) representa uma variável com distribuição normal(N(0,1)).
 
 Este processo é conhecido como movimento Browniano geométrico (GBM). De acordo com \citet{AppliedFinancial} um ``GBM pode ser considerado como um movimento probabilístico contínuo no qual o logaritmo da quantidade que varia aleatoriamente segue um movimento Browniano (processo de Wiener) com desvio.'' Este modelo é a base do modelo de Black-Scholes, que será revisto mais adiante, aquando do cálculo da volatilidade implícita nas opções.
@@ -381,6 +387,7 @@ Como a estacionariedade é um pressuposto assente em muitos processo estatístic
 Para podermos entender melhor este processo, vou introduzir o termo da auto-correlação, referindo-se à medida da relação linear entre valores desfasados ou \emph{lagged values} numa serie temporal, medindo a força e a direcção da associação linear, sendo que os coeficientes de correlação são visualizados em gráfico através da função de auto-correlação ou \emph{ACF} (\citet{foregeorge}). Series temporais que não demonstram auto-correlação são designados de \emph{white noise}. O que se pretende ao trabalhar com os retornos nas acções e não com o preço destas, é ter dados que apresentem um processo estocástico estacionário, sendo que os dados não apresentem auto-correlação.
 
 Voltando ao termo ARMA(p,q), onde o p representa a ordem da parte referente ao processo autoregressivo, ou seja, ao AR(p), este é útil porque nos fornece um modo de ter dependência em relação ao tempo exibindo um declínio geométrico,sendo que as correlações entre as variáveis mais afastadas no tempo vão diminuindo, podendo ser descrito pela seguinte equação \eqref{eq:ar}
+
 \begin{equation} 
   y_t =c+\phi_1y_{y-1}+\phi_2y_{y-2}+...+\phi_py_{y-p}+\varepsilon_t\qquad   -1<\phi<1
   \label{eq:ar}
@@ -391,6 +398,7 @@ Voltando ao termo ARMA(p,q), onde o p representa a ordem da parte referente ao p
 onde \(\varepsilon\) representa \emph{white noise} e o \(\phi\) o coeficiente de autorregressão. Ou seja, esta equação diz-nos que os valores presentes da variável dependem do seu valor passado.
 
 O q refere-se à ordem da média móvel, ou MA(q), descrito do seguinte modo:
+
 \begin{equation} 
   y_t =c+\varepsilon_t+\phi_1\varepsilon_{t-1}+\phi_2\varepsilon_{t-2}+...+\phi_q\varepsilon_{t-q}\qquad   -\infty<\phi<\infty 
   \label{eq:ma}
@@ -398,13 +406,16 @@ O q refere-se à ordem da média móvel, ou MA(q), descrito do seguinte modo:
 \begin{equation} 
   \nonumber \varepsilon \sim iid N(0,\sigma_{\epsilon}^{2})
 \end{equation}
+
 A variável \(y_t\) é uma série de variáveis aleatórias não correlacionadas com média zero e variância constante, sendo \(\phi\) o coeficiente relativo à média móvel, onde a média móvel utiliza valores referentes aos erros no modelo de regressão. Este modelo é ideal, por exemplo quando se quer criar um modelo que apenas exibe dependência em relação a um período, como em retornos sobrepostos. Este modelo fornece uma boa descrição pra a evolução de taxas de juro e para a taxa crescimento de variáveis macroeconómicas.
 
 O modelo ARMA(p,q) é definido pela equação \eqref{eq:arma}
+
 \begin{equation} 
   y_t =\phi_1y_{y-1}+...+\phi_py_{y-p}+c+\phi_1\varepsilon_{t-1}+...+\phi_q\varepsilon_{t-q}
   \label{eq:arma}
 \end{equation}
+
 No mundo real, os processos de retorno podem ser estacionários, combinado-se o modelo ARMA e o modelo GARCH, onde usamos ARMA para ajustar a média e GARCH para ajustar a variância, visto que nos modelos ARMA a variância condicional dado o passado é constante.
 
 De acordo com \citet{oscar}:
@@ -443,6 +454,7 @@ Para o calculo da volatilidade anual utiliza-se os número de dias de negociaç�
 Existem equações para o cálculo da variância que atribuem igual peso aos valores passados independentemente da sua antiguidade. Outros métodos atribuem mais peso aos dados mais recentes, pois pressupõem-se que esses carregam mais informação útil acerca da variável em estudo, criando modelos que prevêem com menor erro os valores futuros em estudo.
 
 Uma das formas de cálculo da volatilidade tendo em consideração os valores mais recentes dos retornos é aplicando a equação
+
 \begin{equation} 
   \sigma_{n}^{2} =\sum_{i=1}^{m}\alpha_i\mu_{n-1}^{2}
   \label{eq:weight}
@@ -450,6 +462,7 @@ Uma das formas de cálculo da volatilidade tendo em consideração os valores ma
 A variável \(\alpha\) representa o peso associado a observação \emph{i} dos retornos, sendo que a soma dos respectivos pesos deve ser igual a 1.
 
 Tendo em consideração \citet{Hull2018} se a média a longo prazo da taxa de variância for considerada e assignado um peso a ela então teremos
+
 \begin{equation} 
   \sigma_{n}^{2} =\gamma\mathcal{V}_{L}+\sum_{i=1}^{m}\alpha_i\mu_{n-1}^{2}
   \label{eq:arch}
@@ -466,6 +479,7 @@ O pressuposto destes modelos é de que a variância dos retornos seguem um proce
 \subsection{Exponentially weighted moving average (EWMA)}\label{exponentially-weighted-moving-average-ewma}}
 
 O modelo da média móvel exponencial ponderada (EWMA) é um estimador calculado a partir de amostras sequenciais da população onde é atribuindo maior peso aos valores mais recentes, sendo que esse peso diminui exponencialmente a medida que vamos recuando no tempo. A formula utilizada para actualizar o valor para a volatilidade é
+
 \begin{equation} 
   \sigma_{n}^{2} = \lambda\sigma_{n-1}^{2}+(1-\lambda)\mu_{n-1}^{2} 
   \label{eq:ewma}
@@ -473,6 +487,7 @@ O modelo da média móvel exponencial ponderada (EWMA) é um estimador calculado
 sendo um caso particular da equação \eqref{eq:weight}. Neste caso \(\gamma_{i+1} = \lambda\gamma_{i}\), onde 0\textless{}\(\lambda\leq1\) é uma constante, sendo \(\sigma_{n-1}\) a estimativa da volatilidade realizada no dia n-2 para o dia n-1, e \(\mu_{n-1}\) a mudança percentual diária mais recente. Ao valor de \(\lambda\) atribuido ``estudos empíricos mostram que o \emph{decay factor} (\(\lambda\)) 0,94 fornece uma boa estimativa para todos os ativos.''\citep[p.4]{riskmetrics}
 
 De modo a entender porque à volatilidade obtida através da EWMA correspondem pesos que diminuem exponencialmente vamos substituir \(\sigma_{n-1}^{2}\) na equação \eqref{eq:ewma} de modo a obter
+
 \begin{equation} 
   \sigma_{n}^{2} = (1-\lambda)(\mu_{n-1}^{2}+\lambda\mu_{n-2}^{2})+\lambda^{2}\sigma_{n-2}^{2}
   \label{eq:ewma1}
@@ -482,6 +497,7 @@ Continuando a substituir acabamos por obter
   \sigma_{n}^{2} = (1-\lambda)\sum_{i=1}^{m}\lambda^{i-1}\mu_{n-1}^{2}+\lambda^{m}\mu_{n-m}^{2}
   \label{eq:ewma2}
 \end{equation}
+
 Como podemos ver pela equação \eqref{eq:ewma2} o ``peso de \(\mu_{i}\) decresce a uma taxa \(\lambda\) a medida que vamos recuando no tempo. Cada peso é \(\lambda\) vezes o peso anterior.'' \citep[p.226]{HullRisk2018}. Como os pesos diminuem geometricamente, o EWMA também é referido como média móvel geométrica.
 
 \hypertarget{generalized-autoregressive-conditional-heteroskedasticity-garch}{%
@@ -490,26 +506,32 @@ Como podemos ver pela equação \eqref{eq:ewma2} o ``peso de \(\mu_{i}\) decresc
 Em 1986 um modelo mais flexível que o modelo ARCH foi proposto, sendo este o modelo \emph{Generalized} ARCH\footnote{Introduzido por Bollerslev(1986)}. De acordo com \citet{volatilitymodels} ``Uma grande vantagem dos modelos GARCH é que os retornos não são assumidos independentes, e mesmo se forem assumidos condicionais gaussianos para retornos anteriores, incondicionalmente, eles não são gaussianos, porque o agrupamento de volatilidade gera leptocurtose''(p.2). Também, e de acordo com \citet{portanalyse}, ``A volatilidade agora depende de ambos, uma combinação linear dos erros quadráticos da previsão (um termo autoregressivo) e variâncias condicional passada (um termo de média móvel).''(p.136)
 
 A equação que define o modelo GARCH(1,1) é
+
 \begin{equation} 
   \sigma_{n}^{2} = \gamma\mathcal{V}_{L} + \alpha\mu_{n-1}^{2} + \beta\sigma_{n-1}^{2}
   \label{eq:garch}
 \end{equation}
+
 Nesta equação, verifica-se que \(\sigma_{n}^{2}\) é calculado a partir da taxa de variação média de longo prazo \(\mathcal{V}_{L}\), como também a partir de \(\sigma_{n-1}\) e \(\mu_{n-1}\), sendo que o modelo EWMA é um caso particular do modelo GARCH(1,1) onde \(\gamma=0\), \(\alpha=1-\lambda\) e \(\beta=\lambda\). Tal como referido nos modelos anteriores, a soma dos diferentes pesos deve ser igual a 1, sendo \[\gamma+\sigma+\beta=1\]
 
 O modelo genérico de GARCH é GARCH(p,q) onde o modelo calcula \(\sigma_{n}^{2}\) a partir das observações \emph{p} mais recentes de \(\mu^2\) e as mais recentes estimações \emph{q} da taxa de variância. Desta forma, o modelo "``(1,1) em GARCH(1,1) indica que \(\sigma_{n}^{2}\) é baseado nas mais recentes observações de \(\mu^2\) e nas mais recentes estimações da taxa de variância.''\citep[p.227]{Hull2018}
 
 Considerando \(\omega=\gamma\mathcal{V}_{L}\), o modelo GARCH(1,1) pode ser definido como
+
 \begin{equation} 
   \sigma_{n}^{2} = \omega + \alpha\mu_{n-1}^{2} + \beta\sigma_{n-1}^{2}
   \label{eq:garch2}
 \end{equation}
+
 A equação \eqref{eq:garch2} é a que costuma ser utilizada de forma a estimar os parâmetros. De notar de que para obter um processo estável GARCH(1,1) é necessário que \(\sigma+\beta<1\), ou então o peso aplicado a variância de longo prazo é negativa. A soma \(\sigma+\beta\) representa o que é conhecido como a persistência. A persistência num modelo GARCH representa o modo como a volatilidades decai rapidamente após um grande choque.
 
 A estimação dos parâmetros, tanto para o modelo EWMA como para o modelo GARCH(1,1), é realizado utilizando um processo conhecido como \emph{maximum likelihood method}, onde se utilizam os dados históricos de modo a escolher os parâmetros que maximizem a probabilidade de ocorrência dos dados, de acordo com a equação
+
 \begin{equation} 
   \sum_{i=1}^{m}=\bigg[-ln(\sigma_{i}^{2})-\frac{\mu_{i}^{2}}{\sigma_{i}^{2}}\bigg]
   \label{eq:mgarch}
 \end{equation}
+
 Os modelos standard GARCH não apresentam resposta adequada em modelos onde os dados tenham diferenças significativas devido ao impacto de boas ou más noticias, por exemplo, no comportamento da variável em estudo, sendo que existem outros modelos desenvolvidos com base no modelo standard GARCH para dar resposta a essas oscilações, como o modelo EGARCH.
 
 \hypertarget{exponential-generalized-autoregressive-conditional-heteroscedastic-egarch}{%
@@ -520,11 +542,12 @@ O modelo EGARCH será utilizado na modelação da volatilidade da cotação de u
 Este modelo foi desenvolvido para capturar as assimetrias na volatilidade induzidas por grandes oscilações positivas e negativas nos retornos dos activos.
 
 De acordo com \citet{marta} este modelo é expresso pela equação onde a variância condicionada, \(\sigma_t^2\) é uma função assimétrica dos valores passados de \(\mu_t\), ou seja:
+
 \begin{equation} 
-  Ln \sigma_{t}^{2}= \alpha_0+\sum_{i=1}^n\beta_iln\sigma_{t-1}^2+\sum_{i=1}^n\alpha_i(\frac{|\mu_{t-i}|}{\sigma_{t-i}})+\sum_{i=1}^n\gamma_i(\frac{|\mu_{t-i}|}{\sigma_{t-i}})
+  Ln \sigma_{t}^{2}= \omega+\sum_{i=1}^n\beta_iln\sigma_{t-1}^2+\sum_{i=1}^n\alpha_i(\frac{|\mu_{t-i}|}{\sigma_{t-i}})+\sum_{i=1}^n\gamma_i(\frac{|\mu_{t-i}|}{\sigma_{t-i}})
   \label{eq:egarch}
 \end{equation}
-sendo que \(\alpha\) é uma constante, o \(\beta\), \(\alpha\) e \(\gamma\) parâmetros do modelo, \(\mu_{t-i}\) o erro observado em t-i e \(\sigma_{t-i}\) o desvio padrão observado em t-i. Também, e de acordo com \citet{marta} o ``modelo EGARCH garante que a variância será sempre positiva, por ser apresentada em logaritmos, sendo isto um fator vantajoso''(p.17).No entanto, e devido a sua extrutura exponencial, o modelo pode sobrestimar o impacto de observações anómalas na volatilidade.
+sendo que \(\alpha_0\) é uma constante, o \(\beta_i\), \(\alpha_i\) e \(\gamma_i\) parâmetros do modelo, \(\mu_{t-i}\) o erro observado em t-i e \(\sigma_{t-i}\) o desvio padrão observado em t-i. Também, e de acordo com \citet{marta} o ``modelo EGARCH garante que a variância será sempre positiva, por ser apresentada em logaritmos, sendo isto um fator vantajoso''(p.17).No entanto, e devido a sua extrutura exponencial, o modelo pode sobrestimar o impacto de observações anómalas na volatilidade.
 
 \hypertarget{volatilidade-impluxedcita}{%
 \subsection{Volatilidade implícita}\label{volatilidade-impluxedcita}}
@@ -536,6 +559,7 @@ De entre os pressupostos\footnote{Para mais informação ver \citet{BlackScholes
 O processo que se assume ser aplicado ao preço dos activos é o descrito pela equação \eqref{eq:ito}. De salientar de que nenhumas das variáveis da equação é afectada pelas preferências de risco dos investidores, sendo que as variáveis que aparecem na equação são o valor presente do activo financeiro, tempo, volatilidade e a taxa de juro sem risco.
 
 As soluções obtidas a partir da equação diferenciável de interesse para calculo da volatilidade implícita, são as aqui apresentadas para valorizar opções de compra (\emph{call}) e opções de venda (\emph{put}) do tipo europeias:
+
 \begin{equation} 
   c = S_0N(d_1) - Ke^{-rT}N(d_2);
   \label{eq:call}
@@ -554,6 +578,7 @@ onde
   d_2 = \frac{In(S_0/K)+(r-\sigma^2/2)T}{\sigma\sqrt{T}}=d_1-\sigma\sqrt{T}
   \label{eq:d2}
 \end{equation}
+
 A função N(x) representa a função distribuição para uma distribuição normal padrão, sendo a probabilidade de uma variável ser menor que x (ver exemplo na figura \ref{fig:fdistribuicao}). O valor de N(x) pode ser obtido com a função do R pnorm(). A variável T representa o tempo medido em dias de negociação que faltam até a expiração da opção dividido pelos dias de negociação nesse ano, sendo S\textsubscript{0} o valor do activo subjacente no tempo 0, r a taxa de juro sem risco, \(\sigma\) a volatilidade anual e K o preço de exercício da opção.
 
 \begin{figure}
@@ -623,6 +648,7 @@ Para aplicação deste modelo deve-se obter os seguintes dados dos instrumentos 
 O retorno esperado vai depender de vários factores, essencialmente a taxa de retorno sem risco que se verifica no mercado, a taxa de inflação e o risco a que o investidor estará sujeito, sendo que quanto maior o risco, maior será o retorno esperado.
 
 As séries dos retornos diários para cada um dos activos é calculada de acordo com a seguinte formula:
+
 \begin{equation} 
   R_i = ln\Big(\frac{S_f}{S_i}\Big)
   \label{eq:logRet}
@@ -639,20 +665,25 @@ O retorno de um portfolio de activos financeiros será uma média ponderada do r
 \end{equation}
 onde \(X_{i}\) representa a fracção investida no activo \emph{i}.
 O desvio padrão representa a volatilidade, ou risco, associada ao activo. Considerando que essa volatilidade é calculada com base nos dados históricos e nas formulas acima, então a estatística da amostra para o desvio padrão representa-se pela seguinte formula:
+
 \begin{equation} 
   \hat{\sigma} = \sqrt\frac{\displaystyle\sum_{i=1}^n (R_i-\overline{R})^2}{n-1}
   \label{eq:estdesviopadrao}
 \end{equation}
+
 A variância para o portfolio é um pouco mais complicada a calcular do que o calculo para o retorno e para as variância individuais de cada um dos activos, como podemos verificar pela seguinte equação
+
 \begin{equation} 
   \sigma_{p}^{2} = \sum_{j=1}^{N}(X_{j}^{2}\sigma_{j}^{2})+\sum_{j=1}^{N}\sum_{k=1}^{N}(X_{j}X_{k}\sigma_{jk})
   \label{eq:estdesviopadraop}
 \end{equation}
 onde \(k\neq j\). O termo \(\sigma_{jk}\) designa-se por covariância representando o modo como 2 activos se movem conjuntamente, sendo o valor calculado do seguinte modo,
+
 \begin{equation} 
   Cov(R_{i},R_{j}) = E([R_{i}-E(R_{i})][R_{j}-E(R_{j})])
   \label{eq:covariancia}
 \end{equation}
+
 Se todos os termos forem independentes, isto é, a covariância for igual a 0, então apenas se mantêm o primeiro termo/somátorio na equação\#ref(eq:estdesviopadraop).
 
 Quando se pretende interpretar o valor da covariância é prática comum utilizar o que se designa por coeficiente de correlação, sendo que o valor obtido varia entre -1 e +1, sendo que o -1 representa uma correlação negativa perfeita e o +1 uma correlação positiva perfeita. Se o valor for 0 então não existe relação linear entre as variáveis. De forma genérica podemos afirmar que a correlação mede a força da relação linear entre 2 variáveis, sendo a sua forma matemática \[\rho_{ij}=\frac{\sigma_{ij}}{\sigma_{i}\sigma_{j}}\]
@@ -686,12 +717,14 @@ Fonte: \citep[pp.58]{Goetzmann2014}
 \bigskip
 
 Com base no apresentado até agora, o que se propõe é optimizar um portfolio em que os activos que o constituem apresentem pesos de modo a minimizar o risco, ou seja, minimizar a variância total, sem a possibilidade de vendas a descoberto e de activo sem risco, determinando a carteira eficiente. O problema a que se propõe é minimizar \(\sigma_{p}^{2}\) de acordo com a equação \eqref{eq:estdesviopadraop}, sujeito ás seguintes restrições:
+
 \begin{equation} 
   \sum_{i=1}^{N}X_{i}\overline{R}_{i}=\overline{R}_{p}
   \label{eq:und}
 \end{equation}
 \[X_{i}\geq0\] e \[\sum_{i=1}^{N}X_{i}=1\]
 O problema pode ser resolvido construindo a função Lagrangeana
+
 \begin{equation} 
   \mathcal{L} = \sum_{j=1}^{N}\sum_{k=1}^{N}(X_{j}X_{k}\sigma_{jk})+\lambda_{1}(\overline{R}_{p}-\sum_{j=1}^{N}X_{j}\overline{R}_{j})+\lambda_{2}(1-\sum_{j=1}^{N}X_{j})
   \label{eq:lagrangeana}
@@ -736,6 +769,7 @@ O cálculo do VaR pode ser realizado de modos diferentes, existindo vários mét
 \subsection{VaR Paramétrico (Gaussiana)}\label{var-paramuxe9trico-gaussiana}}
 
 O VaR paramétrico pressupõe que os retornos diários apresentem uma distribuição normal (figura \ref{fig:var}), sendo que a sua representação matemática se encontra definida na equação \eqref{eq:var}.
+
 \begin{equation} 
   VaR_{t+1}^{p} = -\sigma_{t+1}\Phi_{p}^{-1}
   \label{eq:var}
@@ -761,16 +795,21 @@ Fonte: \citep[pp.13]{phdthesis}
 O \(\Phi (p)\) representa a função distribuição e \(\Phi^{-1} (p)\) a sua inversa, sendo que, por exemplo, para um intervalo de confiança de 99\% o valor de \(\Phi^{-1} (p)\) corresponde a -2.33. Se considerarmos que a volatilidade prevista a 1 dia é de 2\%, teremos um VaR = -0.020*(-2.33), o que corresponde a um valor de 0.0466. Podemos interpretar o VaR como sendo a existência de 1\% de probabilidade de perder mais do que 4.66\% do valor investido no activo no dia de hoje.
 
 O \emph{Daily Value at Risk} (DEaR) é o valor diariamente em risco, sendo calculado de acordo com a equação \eqref{eq:dear}.
+
 \begin{equation} 
   €DEaR = € \textnormal{Valor de mercado do investimento} * VaR
   \label{eq:dear}  
 \end{equation}
+
 O valor do VaR a mais de um dia pode-se calcular a partir do DEaR a um dia, de acordo com a equação \eqref{eq:vardays}, onde N representa o número de dias.
+
 \begin{equation} 
   VaR = DEaR*\sqrt{N}
   \label{eq:vardays}
 \end{equation}
+
 Se estivermos a analisar o VaR de um portfolio, esse é calculado da mesma forma que a variância de um portfolio (equação \eqref{eq:varport}), considerando o DEaR individual de cada componente.
+
 \begin{equation} 
   DEaR_{portfolio}^{2} = \sum_{i=1}^{N}\sum_{j=1}^{N}Cov(DEaR_i,DEaR_j)
   \label{eq:varport}
@@ -780,7 +819,9 @@ onde
   Cov(DEaR_i,DEaR_j) = DEaR_{i}DEaR_{j}\rho(DEaR_i,DEaR_j)
   \label{eq:covport}
 \end{equation}
+
 Por exemplo, considerando 2 activos, A e B, constituintes de um portfolio, teríamos:
+
 \begin{equation} 
   DEaR_{A+B}^{2} = DEar_{A}^{2}+DEaR_{B}^{2}+2\rho_{AB} DEaR_{A} DEaR_B
   \label{eq:ab}
@@ -807,6 +848,7 @@ Fonte: \citep[pp.46]{quant}
 \justifying
 
 O cálculo do VaR com aproximação Cornish-Fisher efectua-se de acordo com a equação \eqref{eq:varcf}, sendo que para calcular o valor referente a CF se aplica a equação \eqref{eq:cf}.
+
 \begin{equation} 
   VaR_{t+1}^{p} = -\sigma_{t+1}*CF_{p}^{-1}
   \label{eq:varcf}
@@ -816,7 +858,9 @@ onde
   CF_{p}^{-1} = \Phi_{p}^{-1} + \frac{\zeta_{1}}{6}[(\Phi_{p}^{-1})^2-1] + \frac{\zeta_{2}}{24}[(\Phi_{p}^{-1})^3-3\Phi_{p}^{-1}] - \frac{\zeta_{1}^{2}}{36}[2(\Phi_{p}^{-1})^3-5\Phi_{p}^{-1}]
   \label{eq:cf}
 \end{equation}
+
 Os parâmetros referentes a \(\zeta_1\) e \(\zeta_2\) são respectivamente os valores da assimetria e do excesso de curtose. Esses valores são obtidos de acordo com as equações \eqref{eq:assimetria} e \eqref{eq:curtose}.
+
 \begin{equation} 
  \zeta_1 = \frac{1}{n}\sum\bigg[\frac{X_i - \overline{X}}{\sigma}\bigg]^3
   \label{eq:assimetria}
@@ -1404,7 +1448,7 @@ A figura \ref{fig:frontewma} representa o gráfico referente a fronteira eficien
 
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/frontewma-1} 
+{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/frontewma-1} 
 
 }
 
@@ -1469,7 +1513,9 @@ Analisando o valor calculado para a portfolio, pode-se verificar que para um ní
 \hypertarget{garch}{%
 \section{GARCH}\label{garch}}
 
-A aplicação do modelo GARCH para estimar a volatilidade será aplicado de acordo com a verificação dos pressupostos e da estimação dos parâmetros, sendo inicialmente utilizado o modelo genérico GARCH(1,1), e só caso não se verifique que o modelo responde adequadamente é que se tentará analizar a volatilidade com outros modelos, como o ARMA-GARCH e o EGARCH, optando pelo modelo que demonstre se adequar melhor aos dados.
+A aplicação do modelo GARCH para estimar a volatilidade será aplicado de acordo com a verificação dos pressupostos e da estimação dos parâmetros, sendo inicialmente utilizado o modelo genérico GARCH(1,1), e só caso não se verifique que o modelo responde adequadamente é que se tentará analisar a volatilidade com outros modelos, como o ARMA-GARCH e o EGARCH, optando pelo modelo que demonstre se adequar melhor aos dados. As tabelas relativas aos \emph{outputs} dos modelos encontram-se no apêndice I.
+
+Nos modelos utilizados pelo pacotes rugarch e fGARCH o LM-ARCH teste é um teste \emph{portmanteau} ponderado onde se testa a hipótese nula do processo ARCH estar adequadamente ajustado, enquanto o teste Ljung-Box é outro \emph{portmanteau} teste que testa a hipótese nula da adequação do ajuste ARMA.
 
 \hypertarget{telefuxf3nica}{%
 \subsection{TELEFÓNICA}\label{telefuxf3nica}}
@@ -1560,11 +1606,11 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-Na figura \ref{fig:TELplot} temos representados 3 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95\%, assim como o gráfico relativo à função de auto-correlação para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. De acordo com \citet{foregeorge}, ``Se um ou mais picos grandes estiverem fora desses limites, ou se substancialmente mais de 5\% dos picos estiverem fora desses limites, a série provavelmente não é \emph{white noise}''. Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
+Na figura \ref{fig:TELplot} temos representados 4 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95\%, assim como o gráfico relativo à função de auto-correlação (ACF) para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. De acordo com \citet{foregeorge}, ``Se um ou mais picos grandes estiverem fora desses limites, ou se substancialmente mais de 5\% dos picos estiverem fora desses limites, a série provavelmente não é \emph{white noise}''. Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
 
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/TELplot-1} 
+{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/TELplot-1} 
 
 }
 
@@ -1578,24 +1624,39 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-O valor de desvio padrão que vamos utilizar para efeitos de simulação, é o valor de 0.0292922, sendo este o valor representativo da volatilidade condicional no último dia de cotação.
+O valor de desvio padrão diário que vamos utilizar para efeitos de simulação, é o valor de 0.029292, sendo este o valor representativo da volatilidade condicional no último dia de cotação.
 
 \hypertarget{enel}{%
 \subsection{ENEL}\label{enel}}
 
+A aplicação do modelo neste caso continua a ser realizado com um modelo GARCH de primeira ordem, aplicando-se uma distribuição condicional dos retornos standardizados do tipo \emph{t de Student}, sendo que o teste Jarque-Bera e o Shapiro-Wilk rejeitam para um nível de significância de 5\% a normalidade dos dados, pois o valor \emph{p-value} é inferior ao nível de significância, rejeitando-se deste modo \(H_0\), ou seja, que os dados apresentam uma distribuição normal (ver Apêndice).
+
+A estimação do modelo GARCH(1,1) obteve uma boa resposta na modelação da volatilidade, sendo que todos os parâmetros do modelo, nomeadamente o \(\omega\), o \(\alpha\) e o \(\beta\) apresentam \emph{p-values} extremamente fortes, sendo significantes a um nível inferior a 5\%, evidenciando que o modelo com os parâmetros apresentados providenciam o melhor ajuste aos dados, como podemos ver na tabela \ref{tab:ENELcoef}.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#R CODE}
+\NormalTok{ENEL\textless{}{-}}\KeywordTok{garchFit}\NormalTok{(}\DataTypeTok{formula =} \OperatorTok{\textasciitilde{}}\StringTok{ }\KeywordTok{garch}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{data=}\NormalTok{returns}\OperatorTok{$}\NormalTok{ENEL.RET,}\DataTypeTok{cond.dist =} \StringTok{"std"}\NormalTok{, }\DataTypeTok{include.mean=}\OtherTok{FALSE}\NormalTok{, }
+               \DataTypeTok{trace=}\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-23}ENEL coeficientes}
+\caption{\label{tab:ENELcoef}ENEL coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & 0.001136 & 0.000341 & 3.327331 & 0.000877\\
-omega & 0.000015 & 0.000006 & 2.452925 & 0.014170\\
-alpha1 & 0.101807 & 0.034761 & 2.928744 & 0.003403\\
-beta1 & 0.820593 & 0.054752 & 14.987439 & 0.000000\\
-shape & 4.505741 & 0.641796 & 7.020522 & 0.000000\\
+omega & 0.000015 & 0.000006 & 2.354472 & 0.018549\\
+alpha1 & 0.094757 & 0.033815 & 2.802232 & 0.005075\\
+beta1 & 0.827381 & 0.055900 & 14.801095 & 0.000000\\
+shape & 4.496901 & 0.642043 & 7.004055 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1607,44 +1668,27 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-\begin{table}[!h]
+o valor referente a persistência apresenta um valor de 0.9 sendo inferior a 1, apresentando deste modo uma regressão à média e um processo GARCH(1,1) estável.
 
-\caption{\label{tab:unnamed-chunk-24}ENEL Information Criterion Statistics}
-\centering
-\begin{tabular}[t]{lr}
-\toprule
-  & x\\
-\midrule
-AIC & -5.924634\\
-BIC & -5.900327\\
-SIC & -5.924682\\
-HQIC & -5.915401\\
-\bottomrule
-\end{tabular}
-\end{table}
-\FloatBarrier
-\centering
+Os dados referentes aos critérios de informação estatísticos, como o critério de informação Akaike (AIC), apresentam valores bastante baixos.
 
-Fonte:Elaboração própria.
-
-\justifying
-\bigskip
+Na tabela \ref{tab:ENELLjunk} podemos verificar que as estatísticas para o teste Ljung-Box demonstram que o modelo integrou a volatilidade dos retornos, sendo que não se pode rejeitar a hipótese nula de que não existe auto-correlação entre os resíduos estandardizados, ou seja, as especificações são adequadas para capturar a auto-correlação e a variação da volatilidade no tempo nas series dos retornos.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-25}ENEL Standardized Residuals Tests}
+\caption{\label{tab:ENELLjunk}ENEL Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 7.094059 & 0.7165364\\
-Ljung-Box Test 15 & 15 & 10.856248 & 0.7627166\\
-Ljung-Box Test 20 & 20 & 14.205137 & 0.8199445\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 14.667299 & 0.1446705\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 21.005772 & 0.1366450\\
+Ljung-Box Test 10 & 10 & 7.259108 & 0.7007780\\
+Ljung-Box Test 15 & 15 & 10.814754 & 0.7656122\\
+Ljung-Box Test 20 & 20 & 14.053311 & 0.8277827\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 16.609755 & 0.0834576\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 23.083781 & 0.0823772\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 21.869880 & 0.3476129\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 24.007764 & 0.2420532\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1652,6 +1696,8 @@ Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 21.869880 & 0.3476129\\
 \centering
 
 Fonte:Elaboração própria.
+
+Na figura \ref{fig:ENELplot} temos representados 4 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95\%, assim como o gráfico relativo à função de auto-correlação (ACF) para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
 
 \justifying
 \bigskip
@@ -1671,83 +1717,40 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
+O valor de desvio padrão diário que vamos utilizar para efeitos de simulação, é o valor de 0.017321, sendo este o valor representativo da volatilidade condicional no último dia de cotação.
+
 \hypertarget{sociuxe9tuxe9-guxe9nuxe9rale}{%
 \subsection{SOCIÉTÉ GÉNÉRALE}\label{sociuxe9tuxe9-guxe9nuxe9rale}}
 
-\begin{verbatim}
-## 
-## Title:
-##  GARCH Modelling 
-## 
-## Call:
-##  garchFit(formula = ~arma(1, 0) + garch(1, 1), data = returns$GLE.RET, 
-##     cond.dist = "std", trace = FALSE) 
-## 
-## Mean and Variance Equation:
-##  data ~ arma(1, 0) + garch(1, 1)
-## <environment: 0x000000002189f420>
-##  [data = returns$GLE.RET]
-## 
-## Conditional Distribution:
-##  std 
-## 
-## Coefficient(s):
-##          mu          ar1        omega       alpha1        beta1        shape  
-## -2.0617e-04   1.0585e-01   6.4553e-06   8.2622e-02   9.0615e-01   4.5868e+00  
-## 
-## Std. Errors:
-##  based on Hessian 
-## 
-## Error Analysis:
-##          Estimate  Std. Error  t value Pr(>|t|)    
-## mu     -2.062e-04   4.398e-04   -0.469 0.639235    
-## ar1     1.059e-01   3.111e-02    3.403 0.000667 ***
-## omega   6.455e-06   3.185e-06    2.027 0.042655 *  
-## alpha1  8.262e-02   2.395e-02    3.450 0.000560 ***
-## beta1   9.062e-01   2.581e-02   35.113  < 2e-16 ***
-## shape   4.587e+00   6.399e-01    7.167 7.64e-13 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Log Likelihood:
-##  2672.815    normalized:  2.641121 
-## 
-## Description:
-##  Sun Feb 07 13:27:48 2021 by user: lsbap 
-## 
-## 
-## Standardised Residuals Tests:
-##                                 Statistic p-Value  
-##  Jarque-Bera Test   R    Chi^2  2097.954  0        
-##  Shapiro-Wilk Test  R    W      0.9420664 0        
-##  Ljung-Box Test     R    Q(10)  5.878758  0.8253445
-##  Ljung-Box Test     R    Q(15)  7.740314  0.9337712
-##  Ljung-Box Test     R    Q(20)  14.42703  0.8082015
-##  Ljung-Box Test     R^2  Q(10)  6.727048  0.7509375
-##  Ljung-Box Test     R^2  Q(15)  8.145806  0.9178041
-##  Ljung-Box Test     R^2  Q(20)  8.431973  0.9886019
-##  LM Arch Test       R    TR^2   7.471313  0.8249624
-## 
-## Information Criterion Statistics:
-##       AIC       BIC       SIC      HQIC 
-## -5.270385 -5.241216 -5.270454 -5.259305
-\end{verbatim}
+A aplicação do modelo neste caso contemplou também o modelo AR(1) de modo a que o modelo respondesse melhor a auto-correlação, sendo que ao utilizar apenas o modelo GARCH(1,1) o teste Ljung-Box rejeitava a hipótese nula de que as autocorrelações até lag k são iguais a zero, para um nível de significância de 5\%.
+
+No modelo GARCH(1,1) continuou-se a aplicar uma distribuição condicional dos retornos standardizados do tipo \emph{t de Student}, sendo que o teste Jarque-Bera e o Shapiro-Wilk rejeitam para um nível de significância de 5\% a normalidade dos dados.
+
+Ao realizar o ajuste do modelo GARCH(1,1) com o modelo AR(1) a estimação do modelo obteve uma boa resposta na modelação da volatilidade, sendo que todos os parâmetros do modelo, nomeadamente o \(\alpha\) e o \(\beta\) apresentam \emph{p-values} extremamente fortes, sendo significantes a um nível inferior a 5\%, evidenciando que o modelo com os parâmetros apresentados providenciam um bom ajuste aos dados, como podemos ver na tabela \ref{tab:EGLEcoefk}.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{GLE\textless{}{-}}\KeywordTok{garchFit}\NormalTok{(}\DataTypeTok{formula =} \OperatorTok{\textasciitilde{}}\StringTok{ }\KeywordTok{arma}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{garch}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{data=}\NormalTok{returns}\OperatorTok{$}\NormalTok{GLE.RET,}\DataTypeTok{cond.dist =} \StringTok{"std"}\NormalTok{,}\DataTypeTok{include.mean=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{trace=}\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-27}GLE coeficientes}
+\caption{\label{tab:GLEcoefk}GLE coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   &  Estimate &  Std. Error &  t value & Pr(>|t|)\\
 \midrule
-mu & -0.000206 & 0.000440 & -0.468768 & 0.639235\\
-ar1 & 0.105854 & 0.031107 & 3.402874 & 0.000667\\
-omega & 0.000006 & 0.000003 & 2.027070 & 0.042655\\
-alpha1 & 0.082622 & 0.023947 & 3.450161 & 0.000560\\
-beta1 & 0.906152 & 0.025807 & 35.112916 & 0.000000\\
-\addlinespace
-shape & 4.586812 & 0.639949 & 7.167466 & 0.000000\\
+ar1 & 0.105966 & 0.031112 & 3.405979 & 0.000659\\
+omega & 0.000006 & 0.000003 & 2.031093 & 0.042246\\
+alpha1 & 0.082746 & 0.023940 & 3.456358 & 0.000548\\
+beta1 & 0.905877 & 0.025835 & 35.064369 & 0.000000\\
+shape & 4.598190 & 0.641739 & 7.165205 & 0.000000\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1759,44 +1762,27 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-\begin{table}[!h]
+o valor referente a persistência apresenta um valor de 0.9 sendo inferior a 1, apresentando deste modo uma regressão à média e um processo GARCH(1,1) estável.
 
-\caption{\label{tab:unnamed-chunk-28}GLE Information Criterion Statistics}
-\centering
-\begin{tabular}[t]{lr}
-\toprule
-  & x\\
-\midrule
-AIC & -5.270385\\
-BIC & -5.241217\\
-SIC & -5.270454\\
-HQIC & -5.259305\\
-\bottomrule
-\end{tabular}
-\end{table}
-\FloatBarrier
-\centering
+Os dados referentes aos critérios de informação estatísticos, como o critério de informação Akaike (AIC), foram analisados no comparativo com vários modelos, sendo que este modelo apresentava valores bastante baixos.
 
-Fonte:Elaboração própria.
-
-\justifying
-\bigskip
+Na tabela \ref{tab:GLELjunk} podemos verificar que as estatísticas para o teste Ljung-Box demonstram que o modelo integrou a volatilidade dos retornos, sendo que não se pode rejeitar a hipótese nula de que não existe auto-correlação entre os resíduos estandardizados, ou seja, as especificações são adequadas para capturar a auto-correlação e a variação da volatilidade no tempo nas series dos retornos.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-29}GLE Standardized Residuals Tests}
+\caption{\label{tab:GLELjunk}GLE Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
   & lags & statistic & p-value\\
 \midrule
-Ljung-Box Test 10 & 10 & 5.878758 & 0.8253445\\
-Ljung-Box Test 15 & 15 & 7.740314 & 0.9337712\\
-Ljung-Box Test 20 & 20 & 14.427032 & 0.8082015\\
-Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 6.727049 & 0.7509375\\
-Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 8.145806 & 0.9178041\\
+Ljung-Box Test 10 & 10 & 5.825066 & 0.8297400\\
+Ljung-Box Test 15 & 15 & 7.686251 & 0.9357445\\
+Ljung-Box Test 20 & 20 & 14.408783 & 0.8091798\\
+Ljung-Box Test 10 R\textasciicircum{}2 & 10 & 6.637454 & 0.7591706\\
+Ljung-Box Test 15 R\textasciicircum{}2 & 15 & 8.022346 & 0.9228837\\
 \addlinespace
-Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 8.431973 & 0.9886019\\
+Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 8.300829 & 0.9896830\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1807,6 +1793,11 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+Do mesmo na figura @ref\{fig:GLEplot\} podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95\%, verificando-se uma boa resposta por parte do modelo.
+
+Os gráficos ACF vêm complementar a informação relativa aos teste Ljung-Box.
+
 \begin{figure}
 
 {\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/GLEplot-1} 
@@ -1823,128 +1814,32 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
+O valor de desvio padrão diário que vamos utilizar para efeitos de simulação, é o valor de 0.075983, sendo este o valor representativo da volatilidade condicional no último dia de cotação.
+
 \hypertarget{airbus}{%
 \subsection{AIRBUS}\label{airbus}}
 
-\begin{verbatim}
-## 
-## *---------------------------------*
-## *          GARCH Model Fit        *
-## *---------------------------------*
-## 
-## Conditional Variance Dynamics    
-## -----------------------------------
-## GARCH Model  : eGARCH(2,2)
-## Mean Model   : ARFIMA(1,0,1)
-## Distribution : std 
-## 
-## Optimal Parameters
-## ------------------------------------
-##         Estimate  Std. Error  t value Pr(>|t|)
-## mu      0.000378    0.000256   1.4787 0.139229
-## ar1    -0.690353    0.049772 -13.8702 0.000000
-## ma1     0.713683    0.048171  14.8155 0.000000
-## omega  -0.420511    0.129163  -3.2557 0.001131
-## alpha1 -0.146353    0.028249  -5.1807 0.000000
-## alpha2 -0.135647    0.029636  -4.5771 0.000005
-## beta1   0.022517    0.015512   1.4516 0.146612
-## beta2   0.925715    0.009439  98.0743 0.000000
-## gamma1  0.054007    0.049166   1.0985 0.272003
-## gamma2  0.176758    0.052157   3.3890 0.000701
-## shape   5.904549    1.113789   5.3013 0.000000
-## 
-## Robust Standard Errors:
-##         Estimate  Std. Error   t value Pr(>|t|)
-## mu      0.000378    0.000138   2.74472 0.006056
-## ar1    -0.690353    0.010743 -64.26143 0.000000
-## ma1     0.713683    0.011891  60.01769 0.000000
-## omega  -0.420511    0.156300  -2.69042 0.007136
-## alpha1 -0.146353    0.031549  -4.63899 0.000004
-## alpha2 -0.135647    0.031375  -4.32338 0.000015
-## beta1   0.022517    0.015368   1.46521 0.142863
-## beta2   0.925715    0.004781 193.60838 0.000000
-## gamma1  0.054007    0.061697   0.87536 0.381377
-## gamma2  0.176758    0.064717   2.73127 0.006309
-## shape   5.904549    0.881043   6.70177 0.000000
-## 
-## LogLikelihood : 2745.818 
-## 
-## Information Criteria
-## ------------------------------------
-##                     
-## Akaike       -5.4048
-## Bayes        -5.3513
-## Shibata      -5.4050
-## Hannan-Quinn -5.3845
-## 
-## Weighted Ljung-Box Test on Standardized Residuals
-## ------------------------------------
-##                         statistic p-value
-## Lag[1]                     0.0673  0.7953
-## Lag[2*(p+q)+(p+q)-1][5]    0.8889  1.0000
-## Lag[4*(p+q)+(p+q)-1][9]    1.4109  0.9980
-## d.o.f=2
-## H0 : No serial correlation
-## 
-## Weighted Ljung-Box Test on Standardized Squared Residuals
-## ------------------------------------
-##                          statistic p-value
-## Lag[1]                      0.4834  0.4869
-## Lag[2*(p+q)+(p+q)-1][11]    6.6550  0.3524
-## Lag[4*(p+q)+(p+q)-1][19]    8.9388  0.5686
-## d.o.f=4
-## 
-## Weighted ARCH LM Tests
-## ------------------------------------
-##             Statistic Shape Scale P-Value
-## ARCH Lag[5]    0.2603 0.500 2.000  0.6099
-## ARCH Lag[7]    0.7132 1.473 1.746  0.8382
-## ARCH Lag[9]    1.1072 2.402 1.619  0.9161
-## 
-## Nyblom stability test
-## ------------------------------------
-## Joint Statistic:  1.9829
-## Individual Statistics:              
-## mu     0.09417
-## ar1    0.17862
-## ma1    0.17888
-## omega  0.16295
-## alpha1 0.10253
-## alpha2 0.52807
-## beta1  0.12539
-## beta2  0.12589
-## gamma1 0.18074
-## gamma2 0.09270
-## shape  0.07825
-## 
-## Asymptotic Critical Values (10% 5% 1%)
-## Joint Statistic:          2.49 2.75 3.27
-## Individual Statistic:     0.35 0.47 0.75
-## 
-## Sign Bias Test
-## ------------------------------------
-##                    t-value   prob sig
-## Sign Bias           0.5383 0.5905    
-## Negative Sign Bias  1.2697 0.2045    
-## Positive Sign Bias  0.4799 0.6314    
-## Joint Effect        1.9439 0.5841    
-## 
-## 
-## Adjusted Pearson Goodness-of-Fit Test:
-## ------------------------------------
-##   group statistic p-value(g-1)
-## 1    20     16.85       0.5998
-## 2    30     19.80       0.8991
-## 3    40     40.25       0.4146
-## 4    50     45.41       0.6194
-## 
-## 
-## Elapsed time : 0.836761
-\end{verbatim}
+O modelo aplicado aos retornos da empresa Airbus foi o EGARCH(2,2), conjuntamente com o ARIMA(1,1), sendo este que apresentava melhor reposta ao modelo ajustado. A tentativa de aplicação de outros modelos como o GARCH(1,1) não permitia extrair nenhum parâmetro do modelo que apresenta-se significância a um nível inferior a 5\%. Outros modelos com ordem de 1 falhavam no teste ARCH, embora no teste Ljung-Box apresentassem uma resposta razoável.
+
+Assim, aceita-se o modelo ARIMA(1,1)-EGARCH(2,2), sendo que se conseguem extrair vários parâmetros significantes a um nível inferior a 5\%, de acordo com a tabela \citet{ref}(tab:AIRcoefk).
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#R CODE}
+\NormalTok{AIR.spec \textless{}{-}}\StringTok{ }\KeywordTok{ugarchspec}\NormalTok{(}\DataTypeTok{variance.model=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{model=}\StringTok{"eGARCH"}\NormalTok{,}\DataTypeTok{garchOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)),}
+                           \DataTypeTok{mean.model=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{armaOrder=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)),}\DataTypeTok{distribution.model=}\StringTok{"std"}\NormalTok{)}
+
+\NormalTok{AIR \textless{}{-}}\StringTok{ }\KeywordTok{ugarchfit}\NormalTok{(AIR.spec, returns}\OperatorTok{$}\NormalTok{AIR.RET) }
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-31}AIR coeficientes}
+\caption{\label{tab:AIRcoefk}AIR coeficientes}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -1974,32 +1869,15 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-\begin{table}[!h]
+o valor referente a persistência apresenta um valor de 0.9482316 sendo inferior a 1, apresentando deste modo uma regressão à média e um processo estável.
 
-\caption{\label{tab:unnamed-chunk-32}AIR Information Criterion Statistics}
-\centering
-\begin{tabular}[t]{lr}
-\toprule
-  & \\
-\midrule
-Akaike & -5.404779\\
-Bayes & -5.351304\\
-Shibata & -5.405012\\
-Hannan-Quinn & -5.384466\\
-\bottomrule
-\end{tabular}
-\end{table}
-\FloatBarrier
-\centering
+Os dados referentes aos critérios de informação estatísticos, como o critério de informação Akaike (AIC), foram analisados no comparativo com vários modelos, sendo que este modelo apresentava valores bastante baixos.
 
-Fonte:Elaboração própria.
-
-\justifying
-\bigskip
+Na tabela \ref{tab:AIRLjunk} podemos verificar que as estatísticas para o teste Ljung-Box demonstram que o modelo integrou a volatilidade dos retornos. No apêndice I, na tabela referente ao \emph{output} do modelo o teste referente ao LM-ARCH também podemos confirmar que os resíduos estandardizados se comportam como um \emph{white noise}, não se podendo rejeitar a hipótese nula visto não haver evidência de auto-correlação.
 
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-33}AIR Standardized Residuals Tests}
+\caption{\label{tab:AIRLjunk}AIR Standardized Residuals Tests}
 \centering
 \begin{tabular}[t]{lrrr}
 \toprule
@@ -2022,6 +1900,11 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+Na figura @ref\{fig:AIRplot\} podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95\%, verificando-se uma boa resposta por parte do modelo.
+
+Os gráficos ACF vêm complementar a informação relativa aos teste Ljung-Box.
+
 \begin{figure}
 
 {\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/AIRplot-1} 
@@ -2038,16 +1921,14 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
+O valor de desvio padrão diário que vamos utilizar para efeitos de simulação, é o valor de 0.038301, sendo este o valor representativo da volatilidade condicional no último dia de cotação.
+
 \hypertarget{simulauxe7uxe3o-garch}{%
 \subsection{Simulação GARCH}\label{simulauxe7uxe3o-garch}}
 
-\scriptsize
+A simulação será efectuada tendo em consideração os mesmos parâmetros utilizados pelo modelo EWMA, excepto para os valores calculados para o desvio padrão no último dia de cotação, sendo esses valores integrados no modelo.
 
-\normalsize
-
-\scriptsize
-
-\normalsize
+Na figura \ref{fig:simgarch} temos a simulação efectuada 1000 vezes ao logo de 80 dias para as 4 empresas em análise.
 
 \begin{figure}
 
@@ -2058,8 +1939,6 @@ Fonte:Elaboração própria.
 \caption{Simulação Monte Carlo para 80 dias}\label{fig:simgarch}
 \end{figure}
 
-\scriptsize
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, mean)}
@@ -2069,22 +1948,23 @@ Fonte:Elaboração própria.
 \end{Highlighting}
 \end{Shaded}
 
-\normalsize
+A partir dos valores simulados calcula-se a média para cada um dos dias obtendo-se desta forma os dados ilustrados na tabela \ref{tab:simtabgarch} referente aos últimos 5 dias.
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-41}GARCH - Valores simulados}
+\caption{\label{tab:simtabgarch}GARCH - Valores simulados}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
   & M.TEF.MC & M.ENEL.MI & M.GLE.PA & M.AIR.PA\\
 \midrule
-75 & 4.317329 & 6.962290 & 13.66729 & 60.00318\\
-76 & 4.323265 & 6.964033 & 13.69626 & 59.93394\\
-77 & 4.328658 & 6.959366 & 13.74518 & 60.06126\\
-78 & 4.323505 & 6.959086 & 13.74053 & 60.09178\\
-79 & 4.324685 & 6.957337 & 13.81596 & 60.17193\\
+75 & 4.317329 & 6.961774 & 13.66742 & 60.00317\\
+76 & 4.323265 & 6.963564 & 13.69637 & 59.93394\\
+77 & 4.328658 & 6.958801 & 13.74526 & 60.06126\\
+78 & 4.323505 & 6.958524 & 13.74061 & 60.09178\\
+79 & 4.324685 & 6.956716 & 13.81597 & 60.17193\\
 \addlinespace
-80 & 4.319977 & 6.961215 & 13.80471 & 60.18599\\
+80 & 4.319977 & 6.960680 & 13.80472 & 60.18599\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -2099,7 +1979,7 @@ Fonte:Elaboração própria.
 \hypertarget{portfolio-garch}{%
 \subsection{Portfolio GARCH}\label{portfolio-garch}}
 
-\scriptsize
+Da mesma forma que realizado aquando da definição do portfólio para o modelo EWMA, vamos utilizar os dados referentes às simulações realizadas, aplicando a mesma função R, com o objectivo de apresentar o portfolio que minimize a variância total. Os valores apurados pra os pesos de cada um dos activos que irão integrar o portfolio encontram-se na tabela \ref{tab:pgarchw}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2111,38 +1991,40 @@ Fonte:Elaboração própria.
 \end{Highlighting}
 \end{Shaded}
 
-\normalsize
+A fronteira eficiente está representada na figura \ref{fig:frontgarch} sendo que o ponto a vermelho é onde se obtêm a mínima variância ou risco.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/frontgarch-1} 
+{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/frontgarch-1} 
 
 }
 
 \caption{GARCH - Fronteira eficiente}\label{fig:frontgarch}
 \end{figure}
 
+Neste modelo a empresa que apresenta maior peso continua a ser a ENEL com cerca de 61\%, sendo que a Société Générale não é integrada no portfólio.
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-44}GARCH - Pesos no portfolio}
+\caption{\label{tab:pgarchw}GARCH - Pesos no portfolio}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
   & Pesos\\
 \midrule
-SimTEF & 0.2084834\\
-SimENEL & 0.6284691\\
+SimTEF & 0.2136498\\
+SimENEL & 0.6196197\\
 SimGLE & 0.0000000\\
-SimAIR & 0.1630475\\
+SimAIR & 0.1667305\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\scriptsize
+Definidos as ponderações de cada empresa no portfolio podemos calcula o VaR assim como as contribuições individuais de cada um dos activos, podendo-se verificar nos dados abaixo que a maior contribuição continua a pertencer a empresa ENEL. O calculo do VaR foi efectuado considerando a aproximação Cornish-Fisher.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{garchweights \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2440413}\NormalTok{, }\FloatTok{0.5635348}\NormalTok{, }\FloatTok{0.0229443}\NormalTok{, }\FloatTok{0.1694796}\NormalTok{)}
+\NormalTok{garchweights \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2136498}\NormalTok{, }\FloatTok{0.6196197}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.1667305}\NormalTok{)}
 \NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_GARCH \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturns, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{garchweights, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
 \NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_GARCH}\OperatorTok{$}\NormalTok{contribution }
 \end{Highlighting}
@@ -2150,19 +2032,23 @@ SimAIR & 0.1630475\\
 
 \begin{verbatim}
 ##       SimTEF      SimENEL       SimGLE       SimAIR 
-## 2.206738e-04 3.778063e-04 4.075602e-05 7.626937e-05
+## 0.0001772924 0.0004493635 0.0000000000 0.0000754417
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{MVaRGARCH\_VaR \textless{}{-}}\StringTok{ }\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_GARCH}\OperatorTok{$}\NormalTok{MVaR}
+\NormalTok{MVaRGARCH\_VaR \textless{}{-}}\StringTok{ }\KeywordTok{round}\NormalTok{(ModVaR\_}\DecValTok{95}\NormalTok{\_GARCH}\OperatorTok{$}\NormalTok{MVaR,}\DecValTok{6}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\normalsize
+Para um nível de confiança 95\%, o VaR a 1 dia para dados simulados a 80 dias é de \ensuremath{7.02\times 10^{-4}}, ou seja, existe uma probabilidade de 5\% de ocorrer uma perda igual ou superior a este valor no montante total do portfolio investido.
 
 \hypertarget{volatilidade-implicita}{%
 \section{Volatilidade implicita}\label{volatilidade-implicita}}
+
+A volatilidade implícita é calculada de acordo com o modelo de Black-Scholes para opções europeias, sendo que o cálculo foi efectuado utilizando os valores presentes na tabela @ref\{tab:opcao\}. Os valores apresentados referem-se ao valor de opções de compra, \emph{call}\footnote{\url{https://www.eurexchange.com/exchange-en/products/equ/opt}}, para \emph{strike price} próximos ou iguais aos valores das acções, ou seja, \emph{at-the-money}. A data de vencimento das opções, ou maturidade, é a 18/09/2020.
+
+No calculo da volatilidade implícita através da função R \emph{EuropeanOptionImpliedVolatility()} utilizou-se a mesma taxa de juro sem risco que anteriormente, tendo que ser incluído o valor percentual referente ao dividendo pago no periodo de tempo em análise, sempre que as empresas o disponibilizaram aos acionistas.
 
 \begin{figure}
 
@@ -2180,9 +2066,33 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#R CODE}
+\NormalTok{TEFImp \textless{}{-}}\StringTok{ }\KeywordTok{EuropeanOptionImpliedVolatility}\NormalTok{(}\DataTypeTok{type=}\StringTok{"call"}\NormalTok{, }\DataTypeTok{value =} \FloatTok{0.27}\NormalTok{, }\DataTypeTok{underlying =} \FloatTok{4.40}\NormalTok{, }\DataTypeTok{strike =} \FloatTok{4.40}\NormalTok{,}
+                                          \DataTypeTok{dividendYield =} \FloatTok{0.0407}\NormalTok{, }\DataTypeTok{riskFreeRate =} \FloatTok{{-}0.575}\NormalTok{, }
+                                          \DataTypeTok{maturity =} \FloatTok{0.31746}\NormalTok{, }\DataTypeTok{volatility =} \FloatTok{0.1}\NormalTok{)}
+\NormalTok{ENELImp \textless{}{-}}\StringTok{ }\KeywordTok{EuropeanOptionImpliedVolatility}\NormalTok{(}\DataTypeTok{type=}\StringTok{"call"}\NormalTok{, }\DataTypeTok{value =} \FloatTok{0.26}\NormalTok{, }\DataTypeTok{underlying =} \DecValTok{7}\NormalTok{, }\DataTypeTok{strike =} \FloatTok{7.2}\NormalTok{,}
+                                           \DataTypeTok{dividendYield =} \FloatTok{0.012}\NormalTok{, }\DataTypeTok{riskFreeRate =} \FloatTok{{-}0.575}\NormalTok{,}
+                                           \DataTypeTok{maturity =} \FloatTok{0.31746}\NormalTok{, }\DataTypeTok{volatility =} \FloatTok{0.1}\NormalTok{)}
+\NormalTok{SOGImp \textless{}{-}}\StringTok{ }\KeywordTok{EuropeanOptionImpliedVolatility}\NormalTok{(}\DataTypeTok{type=}\StringTok{"call"}\NormalTok{, }\DataTypeTok{value =} \FloatTok{1.62}\NormalTok{, }\DataTypeTok{underlying =} \FloatTok{13.82}\NormalTok{, }\DataTypeTok{strike =} \DecValTok{14}\NormalTok{,}
+                                          \DataTypeTok{dividendYield =} \DecValTok{0}\NormalTok{, }\DataTypeTok{riskFreeRate =} \FloatTok{{-}0.575}\NormalTok{, }\DataTypeTok{maturity =} \FloatTok{0.31746}\NormalTok{, }
+                                          \DataTypeTok{volatility =} \FloatTok{0.1}\NormalTok{)}
+\NormalTok{AIRImp \textless{}{-}}\StringTok{ }\KeywordTok{EuropeanOptionImpliedVolatility}\NormalTok{(}\DataTypeTok{type=}\StringTok{"call"}\NormalTok{, }\DataTypeTok{value =} \FloatTok{6.91}\NormalTok{, }\DataTypeTok{underlying =} \FloatTok{59.44}\NormalTok{, }
+                                          \DataTypeTok{strike =} \DecValTok{60}\NormalTok{,}\DataTypeTok{dividendYield =} \DecValTok{0}\NormalTok{, }\DataTypeTok{riskFreeRate =} \FloatTok{{-}0.575}\NormalTok{, }
+                                          \DataTypeTok{maturity =} \FloatTok{0.31746}\NormalTok{, }\DataTypeTok{volatility =} \FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+Na tabela \ref{tab:tablevi} podemos ver os valores calculados para a volatilidade que permitem igualar os valores para as cotações das opções no dia 01/06/2020.
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-46}Volatilidade Implícita}
+\caption{\label{tab:tablevi}Volatilidade Implícita}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -2203,13 +2113,7 @@ Fonte:Elaboração própria.
 \hypertarget{simulauxe7uxe3o-volatilidade-implicita}{%
 \subsection{Simulação Volatilidade implicita}\label{simulauxe7uxe3o-volatilidade-implicita}}
 
-\scriptsize
-
-\normalsize
-
-\scriptsize
-
-\normalsize
+Simulação na figura @ref\{fig:simvi\} para os 80 dias de cotação, utilizando os valores referentes a volatilidade implícita.
 
 \begin{figure}
 
@@ -2220,8 +2124,6 @@ Fonte:Elaboração própria.
 \caption{Simulação Monte Carlo para 80 dias}\label{fig:simvi}
 \end{figure}
 
-\scriptsize
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, mean)}
@@ -2231,10 +2133,11 @@ Fonte:Elaboração própria.
 \end{Highlighting}
 \end{Shaded}
 
-\normalsize
+Da mesma forma que nos outros modelos, calcula-se a média referente aos valores simulados para cada uma das empresas, estando os últimos 5 valores de cada uma representadas na tabela @ref\{tab:SimVIk\}.
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-53}Vol. Implicita - Valores simulados}
+\caption{\label{tab:SimVIk}Vol. Implicita - Valores simulados}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
@@ -2261,31 +2164,22 @@ Fonte:Elaboração própria.
 \hypertarget{portfolio-volatilidade-uxedmplicita}{%
 \subsection{Portfolio volatilidade ímplicita}\label{portfolio-volatilidade-uxedmplicita}}
 
-\scriptsize
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{SimReturnsVI \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
-\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
-\NormalTok{minvarVI \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturnsVI) }
-\NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarVI)}
-\end{Highlighting}
-\end{Shaded}
-
-\normalsize
+A definição do portfólio de acordo com o método da mínima variância encontra-se definido na tabela @ref\{tab:minVIk\}, sendo que a figura @ref\{fig:frontVI\} representa a fronteira eficiente para esse mesmo modelo.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.45\linewidth]{bookdown-demo_files/figure-latex/frontVI-1} 
+{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/frontVI-1} 
 
 }
 
 \caption{Volatilidade Implícita - Fronteira eficiente}\label{fig:frontVI}
 \end{figure}
 
+Como podemos ver neste modelo, a empresa ENEL é a que continua a ter mais peso no portfolio com cerca de 40\%, não tendo no entanto tanto peso como nos outros modelos, sendo que a empresa telefónica representa cerca de 32\%, sendo o restante repartido pelas outras 2 empresas.
+
 \begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-56}Vol Implicita- Pesos no portfolio}
+\caption{\label{tab:minVIk}Vol Implicita- Pesos no portfolio}
 \centering
 \begin{tabular}[t]{lr}
 \toprule
@@ -2299,28 +2193,12 @@ SimAIR & 0.1442238\\
 \end{tabular}
 \end{table}
 
-\scriptsize
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{viweights \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.3086148}\NormalTok{, }\FloatTok{0.4442713}\NormalTok{, }\FloatTok{0.1409448}\NormalTok{, }\FloatTok{0.1061691}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_VI \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturns, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{viweights, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_VI}\OperatorTok{$}\NormalTok{contribution }
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##       SimTEF      SimENEL       SimGLE       SimAIR 
-## 3.595976e-04 6.189773e-04 1.526014e-04 9.428342e-05
+## 0.0004108999 0.0005071254 0.0001274677 0.0001702760
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{MVaRVI\_VaR \textless{}{-}}\StringTok{ }\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_VI}\OperatorTok{$}\NormalTok{MVaR}
-\end{Highlighting}
-\end{Shaded}
-
-\normalsize
+No cálculo do VaR foi utilizado o VaR paramétrico com aproximação Cornish-Fisher, pois é mais representativo da realidade da distribuição dos retornos dos activos financeiros, sendo que para um nível de confiança 95\%, o VaR a 1 dia para dados simulados a 80 dias é de 0.001216, ou seja, existe uma probabilidade de 5\% de ocorrer uma perda igual ou superior a este valor no montante total do portfolio investido.
 
 \hypertarget{apresentauxe7uxe3o-dos-resultados}{%
 \chapter{Apresentação dos resultados}\label{apresentauxe7uxe3o-dos-resultados}}
@@ -2330,29 +2208,6 @@ SimAIR & 0.1442238\\
 
 \hypertarget{apresentauxe7uxe3o-dos-resultados-1}{%
 \section{Apresentação dos resultados}\label{apresentauxe7uxe3o-dos-resultados-1}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow  =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.TEF.MC,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.ENEL.MI,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.GLE.PA,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
-\KeywordTok{plot}\NormalTok{(SimVI}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimEWMA}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
-  \KeywordTok{lines}\NormalTok{(SimGARCH}\OperatorTok{$}\NormalTok{M.AIR.PA,}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-58-1} \end{center}
-
-\hypertarget{benchmark}{%
-\subsection{BENCHMARK}\label{benchmark}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2375,142 +2230,89 @@ SimAIR & 0.1442238\\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{SimReturnsR \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
-\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
-\NormalTok{equalweights \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsR,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{)) }
-\KeywordTok{stdev}\NormalTok{(equalweights}\OperatorTok{$}\NormalTok{portfolio.returns)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.02259565
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{optweightsR \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.25}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_R \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsR, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_R}\OperatorTok{$}\NormalTok{MVaR}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.03482475
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{SimReturnsRvi \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
-\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
-\NormalTok{equalweightsvi \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRvi,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.3086148}\NormalTok{, }\FloatTok{0.4442713}\NormalTok{, }\FloatTok{0.1409448}\NormalTok{, }\FloatTok{0.1061691}\NormalTok{)) }
+\NormalTok{equalweightsvi \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRvi,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.3278427}\NormalTok{, }\FloatTok{0.4001305}\NormalTok{, }\FloatTok{0.1278029}\NormalTok{, }\FloatTok{0.1442238}\NormalTok{)) }
 \KeywordTok{stdev}\NormalTok{(equalweightsvi}\OperatorTok{$}\NormalTok{portfolio.returns)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.01835064
+## [1] 0.0189834
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{optweightsvi \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.3086148}\NormalTok{, }\FloatTok{0.4442713}\NormalTok{, }\FloatTok{0.1409448}\NormalTok{, }\FloatTok{0.1061691}\NormalTok{)}
+\NormalTok{optweightsvi \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.3278427}\NormalTok{, }\FloatTok{0.4001305}\NormalTok{, }\FloatTok{0.1278029}\NormalTok{, }\FloatTok{0.1442238}\NormalTok{)}
 \NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_vi \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsvi, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
 \NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_vi}\OperatorTok{$}\NormalTok{MVaR}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.02912507
+## [1] 0.02994267
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{SimReturnsRgarch \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
-\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
-\NormalTok{equalweightsgarch \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRgarch,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.2440413}\NormalTok{, }\FloatTok{0.5635348}\NormalTok{, }\FloatTok{0.0229443}\NormalTok{, }\FloatTok{0.1694796}\NormalTok{)) }
+\NormalTok{equalweightsgarch \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRgarch,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.2136498}\NormalTok{, }\FloatTok{0.6196197}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.1667305}\NormalTok{)) }
 \KeywordTok{stdev}\NormalTok{(equalweightsgarch}\OperatorTok{$}\NormalTok{portfolio.returns)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.01748715
+## [1] 0.01704112
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{optweightsgarch \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2440413}\NormalTok{, }\FloatTok{0.5635348}\NormalTok{, }\FloatTok{0.0229443}\NormalTok{, }\FloatTok{0.1694796}\NormalTok{)}
+\NormalTok{optweightsgarch \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2136498}\NormalTok{, }\FloatTok{0.6196197}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.1667305}\NormalTok{)}
 \NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_garch \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsgarch, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
 \NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_garch}\OperatorTok{$}\NormalTok{MVaR}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.02680972
+## [1] 0.02593275
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{SimReturnsRewma \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
-\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
-\NormalTok{equalweightsewma \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRewma,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.2939002}\NormalTok{, }\FloatTok{0.6052965}\NormalTok{, }\FloatTok{0.0698046}\NormalTok{, }\FloatTok{0.0309987}\NormalTok{)) }
+\NormalTok{equalweightsewma \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRewma,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.2502928}\NormalTok{, }\FloatTok{0.5540359}\NormalTok{, }\FloatTok{0.1141192}\NormalTok{, }\FloatTok{0.0815521}\NormalTok{)) }
 \KeywordTok{stdev}\NormalTok{(equalweightsewma}\OperatorTok{$}\NormalTok{portfolio.returns)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.01623324
+## [1] 0.01718991
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{optweightsewma \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2939002}\NormalTok{, }\FloatTok{0.6052965}\NormalTok{, }\FloatTok{0.0698046}\NormalTok{, }\FloatTok{0.0309987}\NormalTok{)}
+\NormalTok{optweightsewma \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2502928}\NormalTok{, }\FloatTok{0.5540359}\NormalTok{, }\FloatTok{0.1141192}\NormalTok{, }\FloatTok{0.0815521}\NormalTok{)}
 \NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_ewma \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsewma, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
 \NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_ewma}\OperatorTok{$}\NormalTok{MVaR}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0259623
+## [1] 0.0271172
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{RealReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
-\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
 \NormalTok{minvarRR \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(RealReturns) }
-\NormalTok{minvarRR}\OperatorTok{@}\NormalTok{portfolio}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## An object of class "fPFOLIOVAL"
-## Slot "portfolio":
-## $weights
-##    RealTEF   RealENEL    RealGLE    RealAIR 
-## 0.08775736 0.91224264 0.00000000 0.00000000 
-## 
-## $covRiskBudgets
-##    RealTEF   RealENEL    RealGLE    RealAIR 
-## 0.08775736 0.91224264 0.00000000 0.00000000 
-## 
-## $targetReturn
-##         mean           mu 
-## 0.0006914969 0.0006914969 
-## 
-## $targetRisk
-##        Cov      Sigma       CVaR        VaR 
-## 0.01510150 0.01510150 0.02651413 0.02380063 
-## 
-## $targetAlpha
-## [1] 0.05
-## 
-## $status
-## [1] 0
-## 
-## 
-## Slot "messages":
-## list()
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RealReturns2 \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(returns)}
+\NormalTok{minvarRR2 \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(RealReturns2) }
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{conclusuxe3o}{%
 \chapter*{Conclusão}\label{conclusuxe3o}}

@@ -504,7 +504,7 @@ minew<-getPortfolio(minvarewma)
 
 A figura \@ref(fig:frontewma) representa o gráfico referente a fronteira eficiente para o portfolio de empresas em análise, sendo que o ponto a vermelho é onde se obtêm a mínima variância ou risco.
 
-```{r,frontewma,echo=FALSE, fig.cap='EWMA - Fronteira eficiente',fig.topcaption = TRUE,out.width = "100%"}
+```{r,frontewma,echo=FALSE, fig.cap='EWMA - Fronteira eficiente',fig.topcaption = TRUE,out.width = "80%"}
 plot(FronteiraEff,c(1,2,3,4))
 ```
 \FloatBarrier
@@ -551,7 +551,9 @@ Analisando o valor calculado para a portfolio, pode-se verificar que para um ní
 
 ## GARCH
 
-A aplicação do modelo GARCH para estimar a volatilidade será aplicado de acordo com a verificação dos pressupostos e da estimação dos parâmetros, sendo inicialmente utilizado o modelo genérico GARCH(1,1), e só caso não se verifique que o modelo responde adequadamente é que se tentará analizar a volatilidade com outros modelos, como o ARMA-GARCH e o EGARCH, optando pelo modelo que demonstre se adequar melhor aos dados.
+A aplicação do modelo GARCH para estimar a volatilidade será aplicado de acordo com a verificação dos pressupostos e da estimação dos parâmetros, sendo inicialmente utilizado o modelo genérico GARCH(1,1), e só caso não se verifique que o modelo responde adequadamente é que se tentará analisar a volatilidade com outros modelos, como o ARMA-GARCH e o EGARCH, optando pelo modelo que demonstre se adequar melhor aos dados. As tabelas relativas aos *outputs* dos modelos encontram-se no apêndice I.
+
+Nos modelos utilizados pelo pacotes rugarch e fGARCH o LM-ARCH teste é um teste *portmanteau* ponderado onde se testa a hipótese nula do processo ARCH estar adequadamente ajustado, enquanto o teste Ljung-Box é outro *portmanteau* teste que testa a hipótese nula da adequação do ajuste ARMA.
 
 ### TELEFÓNICA
 
@@ -619,7 +621,7 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-Na figura \@ref(fig:TELplot) temos representados 3 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95%, assim como o gráfico relativo à função de auto-correlação (ACF) para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. De acordo com @foregeorge, "Se um ou mais picos grandes estiverem fora desses limites, ou se substancialmente mais de 5% dos picos estiverem fora desses limites, a série provavelmente não é *white noise*". Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
+Na figura \@ref(fig:TELplot) temos representados 4 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95%, assim como o gráfico relativo à função de auto-correlação (ACF) para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. De acordo com @foregeorge, "Se um ou mais picos grandes estiverem fora desses limites, ou se substancialmente mais de 5% dos picos estiverem fora desses limites, a série provavelmente não é *white noise*". Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
 ```{r,TELplot,echo=FALSE, fig.cap='Telefónica',fig.topcaption = TRUE,out.width = "80%"}
 par(mfrow  = c(2,2))
 plot(TEF,which= 2)
@@ -642,9 +644,19 @@ O valor de desvio padrão diário que vamos utilizar para efeitos de simulação
 
 ### ENEL
 
-```{r,echo=FALSE,warning = FALSE}
-ENEL<-garchFit(formula = ~ garch(1,1),data=returns$ENEL.RET,cond.dist = "std", trace=FALSE)
+A aplicação do modelo neste caso continua a ser realizado com um modelo GARCH de primeira ordem, aplicando-se uma distribuição condicional dos retornos standardizados do tipo *t de Student*, sendo que o teste Jarque-Bera e o Shapiro-Wilk rejeitam para um nível de significância de 5% a normalidade dos dados, pois o valor *p-value* é inferior ao nível de significância, rejeitando-se deste modo $H_0$, ou seja, que os dados apresentam uma distribuição normal (ver Apêndice).
 
+A estimação do modelo GARCH(1,1) obteve uma boa resposta na modelação da volatilidade, sendo que todos os parâmetros do modelo, nomeadamente o $\omega$, o $\alpha$ e o $\beta$ apresentam *p-values* extremamente fortes, sendo significantes a um nível inferior a 5%, evidenciando que o modelo com os parâmetros apresentados providenciam o melhor ajuste aos dados, como podemos ver na tabela \@ref(tab:ENELcoef).
+
+\scriptsize
+```{r,  warning = FALSE}
+#R CODE
+ENEL<-garchFit(formula = ~ garch(1,1),data=returns$ENEL.RET,cond.dist = "std", include.mean=FALSE, 
+               trace=FALSE)
+```
+\normalsize
+
+```{r,ENELcoef, echo=FALSE}
 ENELcoef <- round(ENEL@fit$matcoef,6)
 
 ENELcoefk<- knitr::kable(
@@ -659,23 +671,16 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-```{r,echo=FALSE}
-ENELics <- ENEL@fit$ics
-ENELicsk<- knitr::kable(
-  ENELics, caption = "ENEL Information Criterion Statistics",
-  booktabs = TRUE)
-kable_styling(ENELicsk , latex_options = "hold_position", position = "center")
-
+```{r,ENELpers,echo=FALSE}
 ENELpers <- ENEL@fit$params$persistence
 ```
-\FloatBarrier
-\centering 
-Fonte:Elaboração própria.
+o valor referente a persistência apresenta um valor de `r ENELpers` sendo inferior a 1, apresentando deste modo uma regressão à média e um processo GARCH(1,1) estável.
 
-\justifying
-\bigskip
+Os dados referentes aos critérios de informação estatísticos, como o critério de informação Akaike (AIC), apresentam valores bastante baixos.
 
-```{r,echo=FALSE}
+Na tabela \@ref(tab:ENELLjunk) podemos verificar que as estatísticas para o teste Ljung-Box demonstram que o modelo integrou a volatilidade dos retornos, sendo que não se pode rejeitar a hipótese nula de que não existe auto-correlação entre os resíduos estandardizados, ou seja, as especificações são adequadas para capturar a auto-correlação e a variação da volatilidade no tempo nas series dos retornos.
+
+```{r,ENELLjunk, echo=FALSE}
 ENELr <-residuals(ENEL, standardize = T)
 ENELres <- as.data.frame(LjungBox(ENELr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
 ENELsre <- as.data.frame(LjungBox(ENELr^2, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
@@ -691,6 +696,8 @@ kable_styling(ENELLjunk , latex_options = "hold_position", position = "center")
 \FloatBarrier
 \centering 
 Fonte:Elaboração própria.
+
+Na figura \@ref(fig:ENELplot) temos representados 4 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95%, assim como o gráfico relativo à função de auto-correlação (ACF) para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
 
 \justifying
 \bigskip
@@ -710,14 +717,26 @@ Fonte:Elaboração própria.
 
 ```{r,echo=FALSE}
 ENELsd <- ENEL@sigma.t
-ENELvol <- tail(ENELsd,1)
+ENELvol <- round(tail(ENELsd,1),6)
 ```
+
+O valor de desvio padrão diário que vamos utilizar para efeitos de simulação, é o valor de `r ENELvol`, sendo este o valor representativo da volatilidade condicional no último dia de cotação.
 
 ### SOCIÉTÉ GÉNÉRALE
 
-```{r,echo=FALSE,warning = FALSE}
-GLE<-garchFit(formula = ~ arma(1,0) + garch(1,1),data=returns$GLE.RET,cond.dist = "std", trace=FALSE)
-summary(GLE)
+A aplicação do modelo neste caso contemplou também o modelo AR(1) de modo a que o modelo respondesse melhor a auto-correlação, sendo que ao utilizar apenas o modelo GARCH(1,1) o teste Ljung-Box rejeitava a hipótese nula de que as autocorrelações até lag k são iguais a zero, para um nível de significância de 5%. 
+
+No modelo GARCH(1,1) continuou-se a aplicar uma distribuição condicional dos retornos standardizados do tipo *t de Student*, sendo que o teste Jarque-Bera e o Shapiro-Wilk rejeitam para um nível de significância de 5% a normalidade dos dados.
+
+Ao realizar o ajuste do modelo GARCH(1,1) com o modelo AR(1) a estimação do modelo obteve uma boa resposta na modelação da volatilidade, sendo que todos os parâmetros do modelo, nomeadamente o $\alpha$ e o $\beta$ apresentam *p-values* extremamente fortes, sendo significantes a um nível inferior a 5%, evidenciando que o modelo com os parâmetros apresentados providenciam um bom ajuste aos dados, como podemos ver na tabela \@ref(tab:EGLEcoefk).
+
+\scriptsize
+```{r,warning = FALSE}
+GLE<-garchFit(formula = ~ arma(1,0) + garch(1,1),data=returns$GLE.RET,cond.dist = "std",include.mean=FALSE, trace=FALSE)
+```
+\normalsize
+
+```{r,GLEcoefk,echo=FALSE}
 GLEcoef <- round(GLE@fit$matcoef,6)
 
 GLEcoefk<- knitr::kable(
@@ -733,22 +752,15 @@ Fonte:Elaboração própria.
 \bigskip
 
 ```{r,echo=FALSE}
-GLEics <- GLE@fit$ics
-GLEicsk<- knitr::kable(
-  GLEics, caption = "GLE Information Criterion Statistics",
-  booktabs = TRUE)
-kable_styling(GLEicsk , latex_options = "hold_position", position = "center")
-
 GLEpers <- GLE@fit$params$persistence
 ```
-\FloatBarrier
-\centering 
-Fonte:Elaboração própria.
+o valor referente a persistência apresenta um valor de `r GLEpers` sendo inferior a 1, apresentando deste modo uma regressão à média e um processo GARCH(1,1) estável.
 
-\justifying
-\bigskip
+Os dados referentes aos critérios de informação estatísticos, como o critério de informação Akaike (AIC), foram analisados no comparativo com vários modelos, sendo que este modelo apresentava valores bastante baixos.
 
-```{r,echo=FALSE}
+Na tabela \@ref(tab:GLELjunk) podemos verificar que as estatísticas para o teste Ljung-Box demonstram que o modelo integrou a volatilidade dos retornos, sendo que não se pode rejeitar a hipótese nula de que não existe auto-correlação entre os resíduos estandardizados, ou seja, as especificações são adequadas para capturar a auto-correlação e a variação da volatilidade no tempo nas series dos retornos.
+
+```{r,GLELjunk,echo=FALSE}
 GLEr <-residuals(GLE, standardize = T)
 GLEres <- as.data.frame(LjungBox(GLEr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
 GLEsre <- as.data.frame(LjungBox(GLEr^2, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
@@ -767,6 +779,11 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+Do mesmo na figura \@ref{fig:GLEplot} podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95%, verificando-se uma boa resposta por parte do modelo.
+
+Os gráficos ACF vêm complementar a informação relativa aos teste Ljung-Box.
+
 ```{r,GLEplot,echo=FALSE, fig.cap='SOCIÉTÉ GÉNÉRALE',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
 plot(GLE,which= 2)
@@ -783,16 +800,28 @@ Fonte:Elaboração própria.
 
 ```{r,echo=FALSE}
 GLEsd <- GLE@sigma.t
-GLEvol <- tail(GLEsd,1)
+GLEvol <- round(tail(GLEsd,1),6)
 ```
+
+O valor de desvio padrão diário que vamos utilizar para efeitos de simulação, é o valor de `r GLEvol`, sendo este o valor representativo da volatilidade condicional no último dia de cotação.
 
 ### AIRBUS
 
-```{r,echo=FALSE,warning = FALSE}
+O modelo aplicado aos retornos da empresa Airbus foi o EGARCH(2,2), conjuntamente com o ARIMA(1,1), sendo este que apresentava melhor reposta ao modelo ajustado. A tentativa de aplicação de outros modelos como o  GARCH(1,1) não permitia extrair nenhum parâmetro do modelo que apresenta-se significância a um nível inferior a 5%. Outros modelos com ordem de 1 falhavam no teste ARCH, embora no teste Ljung-Box apresentassem uma resposta razoável.
+
+Assim, aceita-se o modelo ARIMA(1,1)-EGARCH(2,2), sendo que se conseguem extrair vários parâmetros significantes a um nível inferior a 5%, de acordo com a tabela @ref(tab:AIRcoefk).
+
+\scriptsize
+```{r,warning = FALSE}
+#R CODE
 AIR.spec <- ugarchspec(variance.model=list(model="eGARCH",garchOrder=c(2,2)),
-                            mean.model=list(armaOrder=c(1,1)),distribution.model="std") 
+                           mean.model=list(armaOrder=c(1,1)),distribution.model="std")
+
 AIR <- ugarchfit(AIR.spec, returns$AIR.RET) 
-AIR
+```
+\normalsize
+
+```{r,AIRcoefk, echo=FALSE}
 AIRcoef <- round(AIR@fit$matcoef,6)
 
 AIRcoefk<- knitr::kable(
@@ -808,22 +837,15 @@ Fonte:Elaboração própria.
 \bigskip
 
 ```{r,echo=FALSE}
-AIRics <- infocriteria(AIR)
-AIRicsk<- knitr::kable(
-  AIRics, caption = "AIR Information Criterion Statistics",
-  booktabs = TRUE)
-kable_styling(AIRicsk , latex_options = "hold_position", position = "center")
-
 AIRpers <- AIR@fit$persistence
 ```
-\FloatBarrier
-\centering 
-Fonte:Elaboração própria.
+o valor referente a persistência apresenta um valor de `r AIRpers` sendo inferior a 1, apresentando deste modo uma regressão à média e um processo estável.
 
-\justifying
-\bigskip
+Os dados referentes aos critérios de informação estatísticos, como o critério de informação Akaike (AIC), foram analisados no comparativo com vários modelos, sendo que este modelo apresentava valores bastante baixos.
 
-```{r,echo=FALSE}
+Na tabela \@ref(tab:AIRLjunk) podemos verificar que as estatísticas para o teste Ljung-Box demonstram que o modelo integrou a volatilidade dos retornos. No apêndice I, na tabela referente ao *output* do modelo o teste referente ao LM-ARCH também podemos confirmar que os resíduos estandardizados se comportam como um *white noise*, não se podendo rejeitar a hipótese nula visto não haver evidência de auto-correlação.
+
+```{r,AIRLjunk, echo=FALSE}
 AIRr <-as.numeric(residuals(AIR, standardize = T))
 AIRres <-as.matrix(LjungBox(AIRr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
 AIRsre <- as.data.frame(LjungBox(AIRr, lags=c(10,15,20), order=0, season=1, squared.residuals=TRUE))
@@ -842,13 +864,16 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
+
+Na figura \@ref{fig:AIRplot} podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95%, verificando-se uma boa resposta por parte do modelo.
+
+Os gráficos ACF vêm complementar a informação relativa aos teste Ljung-Box.
 ```{r,AIRplot,echo=FALSE, fig.cap='AIRBUS',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
 plot(AIR,which= 1)
 plot(AIR,which= 3)
-plot(AIR,which=4)
-plot(AIR,which=5)
-
+plot(AIR,which=10)
+plot(AIR,which=11)
 ```
 \FloatBarrier
 \centering 
@@ -859,21 +884,13 @@ Fonte:Elaboração própria.
 
 ```{r,echo=FALSE}
 AIRsd <- AIR@fit$sigma
-AIRvol <- tail(AIRsd,1)
+AIRvol <- round(tail(AIRsd,1),6)
 ```
+
+O valor de desvio padrão diário que vamos utilizar para efeitos de simulação, é o valor de `r AIRvol`, sendo este o valor representativo da volatilidade condicional no último dia de cotação.
 
 ### Simulação GARCH
 
-\scriptsize
-```{r,echo=FALSE}
-N <- 80
-dia <- 1:N
-M <- 1000
-mu <- -0.00575
-```
-\normalsize
-
-\scriptsize
 ```{r,echo=FALSE, warning=FALSE}
 TEF.preco_inicial <- TEF.MC$Close[[nrow(TEF.MC$Close)]]
 TEF.MC.sigma <- TEFvol*sqrt(252)
@@ -896,7 +913,7 @@ w <- c('Dia',w)
 names(TEF.MC_MC_sim) <- w
 TEF.MC_MC_sim <- gather(TEF.MC_MC_sim, key='Simulation', value = 'Preço',-(Dia))
 ```
-\normalsize
+
 
 ```{r,echo=FALSE, warning=FALSE}
 ENEL.preco_inicial <- ENEL.MI$Close[[nrow(ENEL.MI$Close)]]
@@ -958,9 +975,11 @@ names(AIR.PA_MC_sim) <- w3
 AIR.PA_MC_sim <- gather(AIR.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia))
 ```
 
+A simulação será efectuada tendo em consideração os mesmos parâmetros utilizados pelo modelo EWMA, excepto para os valores calculados para o desvio padrão no último dia de cotação, sendo esses valores integrados no modelo.
+
+Na figura \@ref(fig:simgarch) temos a simulação efectuada 1000 vezes ao logo de 80 dias para as 4 empresas em análise.
 
 ```{r,simgarch,echo=FALSE, fig.cap='Simulação Monte Carlo para 80 dias',fig.topcaption = TRUE,out.width = "45%"}
-
 par(mfrow  = c(2,2))
 ggplot(TEF.MC_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = 'darkgreen'
 ) + ggtitle(str_c("TEF: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
@@ -971,7 +990,7 @@ ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(a
 ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour="deeppink") + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
 
-\scriptsize
+
 ```{r}
 M.TEF.MC <- apply(monte_carlo_sim, 1, mean)
 M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,mean )
@@ -979,8 +998,9 @@ M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,mean )
 M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,mean )
 ```
 
-\normalsize
-```{r,echo=FALSE}
+A partir dos valores simulados calcula-se a média para cada um dos dias obtendo-se desta forma os dados ilustrados na tabela \@ref(tab:simtabgarch) referente aos últimos 5 dias.
+
+```{r,simtabgarch,echo=FALSE}
 SimGARCH <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
 SimGARCHk<- knitr::kable(
   tail(SimGARCH), caption = "GARCH - Valores simulados",
@@ -995,6 +1015,8 @@ Fonte:Elaboração própria.
 \bigskip
 
 ### Portfolio GARCH
+
+Da mesma forma que realizado aquando da definição do portfólio para o modelo EWMA, vamos utilizar os dados referentes às simulações realizadas, aplicando a mesma função R, com o objectivo de apresentar o portfolio que minimize a variância total. Os valores apurados pra os pesos de cada um dos activos que irão integrar o portfolio encontram-se na tabela \@ref(tab:pgarchw).
 
 ```{r,echo=FALSE}
 SimDate<-read_xlsx ("data/date.xlsx")
@@ -1014,8 +1036,6 @@ myPortfolioReturns <- ROC(myPortfolio,type="discrete")[-1,]
 colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 ```
 
-
-\scriptsize
 ```{r}
 SimReturnsG <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
@@ -1023,14 +1043,17 @@ SimReturnsG <- as.timeSeries(myPortfolioReturns)
 minvarGARCH <- minvariancePortfolio(SimReturnsG) 
 minew<-getPortfolio(minvarGARCH)
 ```
-\normalsize
 
-```{r,frontgarch,echo=FALSE, fig.cap='GARCH - Fronteira eficiente',fig.topcaption = TRUE,out.width = "45%"}
+A fronteira eficiente está representada na figura \@ref(fig:frontgarch) sendo que o ponto a vermelho é onde se obtêm a mínima variância ou risco.
+
+```{r,frontgarch,echo=FALSE, fig.cap='GARCH - Fronteira eficiente',fig.topcaption = TRUE,out.width = "80%"}
 FronteiraEff <- portfolioFrontier(SimReturnsG, constraints = "LongOnly")
 plot(FronteiraEff,c(1,2,3,4))
 ```
 
-```{r,echo=FALSE}
+Neste modelo a empresa que apresenta maior peso continua a ser a ENEL com cerca de 61%, sendo que a Société Générale não é integrada no portfólio.
+
+```{r,pgarchw,echo=FALSE}
 minGARCH<- as.data.frame(minew$weights)
 colnames(minGARCH)<- c("Pesos")
 minGARCHk<- knitr::kable(
@@ -1039,16 +1062,22 @@ minGARCHk<- knitr::kable(
 kable_styling(minGARCHk , latex_options = "hold_position", position = "center")
 ```
 
-\scriptsize
+Definidos as ponderações de cada empresa no portfolio podemos calcula o VaR assim como as contribuições individuais de cada um dos activos, podendo-se verificar nos dados abaixo que a maior contribuição continua a pertencer a empresa ENEL. O calculo do VaR foi efectuado considerando a aproximação Cornish-Fisher.
+
 ```{r}
-garchweights <- c(0.2440413, 0.5635348, 0.0229443, 0.1694796)
+garchweights <- c(0.2136498, 0.6196197, 0, 0.1667305)
 ModVaR_95_GARCH <- VaR(myPortfolioReturns, p=0.95,weights=garchweights, portfolio_method = "component", method = "modified")
 ModVaR_95_GARCH$contribution 
-MVaRGARCH_VaR <- ModVaR_95_GARCH$MVaR
+MVaRGARCH_VaR <- round(ModVaR_95_GARCH$MVaR,6)
 ```
-\normalsize
+
+Para um nível de confiança 95%, o VaR a 1 dia para dados simulados a 80 dias é de `r MVaRGARCH_VaR`, ou seja, existe uma probabilidade de 5% de ocorrer uma perda igual ou superior a este valor no montante total do portfolio investido.
 
 ## Volatilidade implicita
+
+A volatilidade implícita é calculada de acordo com o modelo de Black-Scholes para opções europeias, sendo que o cálculo foi efectuado utilizando os valores presentes na tabela \@ref{tab:opcao}. Os valores apresentados referem-se ao valor de opções de compra, *call*^[https://www.eurexchange.com/exchange-en/products/equ/opt], para *strike price* próximos ou iguais aos valores das acções, ou seja, *at-the-money*. A data de vencimento das opções, ou maturidade, é a 18/09/2020.
+
+No calculo da volatilidade implícita através da função R *EuropeanOptionImpliedVolatility()* utilizou-se a mesma taxa de juro sem risco que anteriormente, tendo que ser incluído o valor percentual referente ao dividendo pago no periodo de tempo em análise, sempre que as empresas o disponibilizaram aos acionistas.
 
 ```{r, opcao,echo=FALSE,fig.cap="Opções call sobre as empresas ",out.width="100%"}
 knitr::include_graphics("image/opcao.png")
@@ -1060,13 +1089,27 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-```{r,echo=FALSE}
-TEFImp <- EuropeanOptionImpliedVolatility(type="call", value = 0.27, underlying = 4.40, strike = 4.40,dividendYield = 0.0407, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
-#time is in trading days
-ENELImp <- EuropeanOptionImpliedVolatility(type="call", value = 0.26, underlying = 7, strike = 7.2,dividendYield = 0.012, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
-SOGImp <- EuropeanOptionImpliedVolatility(type="call", value = 1.62, underlying = 13.82, strike = 14,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
-AIRImp <- EuropeanOptionImpliedVolatility(type="call", value = 6.91, underlying = 59.44, strike = 60,dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, volatility = 0.1)
+\scriptsize
+```{r}
+#R CODE
+TEFImp <- EuropeanOptionImpliedVolatility(type="call", value = 0.27, underlying = 4.40, strike = 4.40,
+                                          dividendYield = 0.0407, riskFreeRate = -0.575, 
+                                          maturity = 0.31746, volatility = 0.1)
+ENELImp <- EuropeanOptionImpliedVolatility(type="call", value = 0.26, underlying = 7, strike = 7.2,
+                                           dividendYield = 0.012, riskFreeRate = -0.575,
+                                           maturity = 0.31746, volatility = 0.1)
+SOGImp <- EuropeanOptionImpliedVolatility(type="call", value = 1.62, underlying = 13.82, strike = 14,
+                                          dividendYield = 0, riskFreeRate = -0.575, maturity = 0.31746, 
+                                          volatility = 0.1)
+AIRImp <- EuropeanOptionImpliedVolatility(type="call", value = 6.91, underlying = 59.44, 
+                                          strike = 60,dividendYield = 0, riskFreeRate = -0.575, 
+                                          maturity = 0.31746, volatility = 0.1)
+```
+\normalsize
 
+Na tabela \@ref(tab:tablevi) podemos ver os valores calculados para a volatilidade que permitem igualar os valores para as cotações das opções no dia 01/06/2020.
+
+```{r, tablevi,echo=FALSE}
 TEFImp <- round(TEFImp[]/sqrt(252),6)
 ENELImp<-round(ENELImp[]/sqrt(252),6)
 SOGImp<-round(SOGImp[]/sqrt(252),6)
@@ -1091,16 +1134,6 @@ Fonte:Elaboração própria.
 
 ### Simulação Volatilidade implicita
 
-\scriptsize
-```{r,echo=FALSE}
-N <- 80
-dia <- 1:N
-M <- 1000
-mu <- -0.00575
-```
-\normalsize
-
-\scriptsize
 ```{r,echo=FALSE, warning=FALSE}
 TEF.preco_inicial <- TEF.MC$Close[[nrow(TEF.MC$Close)]]
 TEF.MC.sigma <- pimpvol$TEF.RET*sqrt(252)
@@ -1123,7 +1156,6 @@ w <- c('Dia',w)
 names(TEF.MC_MC_sim) <- w
 TEF.MC_MC_sim <- gather(TEF.MC_MC_sim, key='Simulation', value = 'Preço',-(Dia))
 ```
-\normalsize
 
 ```{r,echo=FALSE, warning=FALSE}
 ENEL.preco_inicial <- ENEL.MI$Close[[nrow(ENEL.MI$Close)]]
@@ -1185,6 +1217,7 @@ names(AIR.PA_MC_sim) <- w3
 AIR.PA_MC_sim <- gather(AIR.PA_MC_sim, key='Simulation', value = 'Preço',-(Dia))
 ```
 
+Simulação na figura \@ref{fig:simvi} para os 80 dias de cotação, utilizando os valores referentes a volatilidade implícita.
 
 ```{r,simvi,echo=FALSE, fig.cap='Simulação Monte Carlo para 80 dias',fig.topcaption = TRUE,out.width = "45%"}
 
@@ -1195,7 +1228,7 @@ ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(a
 ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour="deeppink") + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
 
-\scriptsize
+
 ```{r}
 M.TEF.MC <- apply(monte_carlo_sim, 1, mean)
 M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,mean )
@@ -1203,8 +1236,8 @@ M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,mean )
 M.AIR.PA <- apply(AIR_monte_carlo_sim, 1,mean )
 ```
 
-\normalsize
-```{r,echo=FALSE}
+Da mesma forma que nos outros modelos, calcula-se a média referente aos valores simulados para cada uma das empresas, estando os últimos 5 valores de cada uma representadas na tabela \@ref{tab:SimVIk}.
+```{r,SimVIk,echo=FALSE}
 SimVI <- as.data.frame(cbind(M.TEF.MC,M.ENEL.MI,M.GLE.PA,M.AIR.PA))
 SimVIk<- knitr::kable(
   tail(SimVI), caption = "Vol. Implicita - Valores simulados",
@@ -1238,24 +1271,22 @@ myPortfolioReturns <- ROC(myPortfolio,type="discrete")[-1,]
 colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 ```
 
-
-\scriptsize
-```{r}
-
+```{r, echo=FALSE}
 SimReturnsVI <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
 minvarVI <- minvariancePortfolio(SimReturnsVI) 
 minew<-getPortfolio(minvarVI)
 ```
-\normalsize
 
-```{r,frontVI,echo=FALSE, fig.cap='Volatilidade Implícita - Fronteira eficiente',fig.topcaption = TRUE,out.width = "45%"}
+A definição do portfólio de acordo com o método da mínima variância encontra-se definido na tabela \@ref{tab:minVIk}, sendo que a figura \@ref{fig:frontVI} representa a fronteira eficiente para esse mesmo modelo.
+
+```{r,frontVI,echo=FALSE, fig.cap='Volatilidade Implícita - Fronteira eficiente',fig.topcaption = TRUE,out.width = "80%"}
 FronteiraEff <- portfolioFrontier(SimReturnsVI, constraints = "LongOnly")
 plot(FronteiraEff,c(1,2,3,4))
 ```
+Como podemos ver neste modelo, a empresa ENEL é a que continua a ter mais peso no portfolio com cerca de 40%, não tendo no entanto tanto peso como nos outros modelos, sendo que a empresa telefónica representa cerca de 32%, sendo o restante repartido pelas outras 2 empresas.
 
-
-```{r,echo=FALSE}
+```{r,minVIk,echo=FALSE}
 minVI<- as.data.frame(minew$weights)
 colnames(minVI)<- c("Pesos")
 minVIk<- knitr::kable(
@@ -1264,32 +1295,12 @@ minVIk<- knitr::kable(
 kable_styling(minVIk , latex_options = "hold_position", position = "center")
 ```
 
-\scriptsize
-```{r}
-viweights <- c(0.3086148, 0.4442713, 0.1409448, 0.1061691)
+
+```{r,echo=FALSE}
+viweights <- c(0.3278427, 0.4001305, 0.1278029, 0.1442238)
 ModVaR_95_VI <- VaR(myPortfolioReturns, p=0.95,weights=viweights, portfolio_method = "component", method = "modified")
 ModVaR_95_VI$contribution 
-MVaRVI_VaR <- ModVaR_95_VI$MVaR
+MVaRVI_VaR <- round(ModVaR_95_VI$MVaR,6)
 ```
-\normalsize
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ No cálculo do VaR foi utilizado o VaR paramétrico com aproximação Cornish-Fisher, pois é mais representativo da realidade da distribuição dos retornos dos activos financeiros, sendo que para um nível de confiança 95%, o VaR a 1 dia para dados simulados a 80 dias é de `r MVaRVI_VaR`, ou seja, existe uma probabilidade de 5% de ocorrer uma perda igual ou superior a este valor no montante total do portfolio investido.

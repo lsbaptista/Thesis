@@ -4,23 +4,7 @@
 
 ## Apresentação dos resultados
 
-```{r}
-par(mfrow  = c(2,2))
-plot(SimVI$M.TEF.MC,type="l", col="blue")
-  lines(SimEWMA$M.TEF.MC,col="red")
-  lines(SimGARCH$M.TEF.MC,col="green")
-plot(SimVI$M.ENEL.MI,type="l", col="blue")
-  lines(SimEWMA$M.ENEL.MI,col="red")
-  lines(SimGARCH$M.ENEL.MI,col="green")
-plot(SimGARCH$M.GLE.PA,type="l", col="blue")
-  lines(SimEWMA$M.GLE.PA,col="red")
-  lines(SimVI$M.GLE.PA,col="green")
-plot(SimVI$M.AIR.PA,type="l", col="blue")
-  lines(SimEWMA$M.AIR.PA,col="red")
-  lines(SimGARCH$M.AIR.PA,col="green")
-```
 
-### BENCHMARK
 
 ```{r}
 
@@ -40,30 +24,15 @@ myPortfolioReturnsR <- ROC(myPortfolioR,type="discrete")[-1,]
 colnames(myPortfolioReturnsR) <- c("RealTEF","RealENEL","RealGLE","RealAIR")
 ```
 
-```{r}
-
-SimReturnsR <- as.timeSeries(myPortfolioReturnsR)
-#returns the portfolio with the minimal risk on the efficient frontier
-equalweights <- Return.portfolio(SimReturnsR,weights = c(0.25,0.25,0.25,0.25)) 
-stdev(equalweights$portfolio.returns)
-```
-
-```{r}
-optweightsR <- c(0.25,0.25,0.25,0.25)
-ModVaR_95_R <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsR, portfolio_method = "component", method = "modified")
-ModVaR_95_R$MVaR
-```
 
 
-```{r}
-
+```{r,warning = FALSE}
 SimReturnsRvi <- as.timeSeries(myPortfolioReturnsR)
-#returns the portfolio with the minimal risk on the efficient frontier
-equalweightsvi <- Return.portfolio(SimReturnsRvi,weights = c(0.3086148, 0.4442713, 0.1409448, 0.1061691)) 
+equalweightsvi <- Return.portfolio(SimReturnsRvi,weights = c(0.3278427, 0.4001305, 0.1278029, 0.1442238)) 
 stdev(equalweightsvi$portfolio.returns)
 ```
 ```{r}
-optweightsvi <- c(0.3086148, 0.4442713, 0.1409448, 0.1061691)
+optweightsvi <- c(0.3278427, 0.4001305, 0.1278029, 0.1442238)
 ModVaR_95_vi <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsvi, portfolio_method = "component", method = "modified")
 ModVaR_95_vi$MVaR
 ```
@@ -72,12 +41,11 @@ ModVaR_95_vi$MVaR
 ```{r}
 
 SimReturnsRgarch <- as.timeSeries(myPortfolioReturnsR)
-#returns the portfolio with the minimal risk on the efficient frontier
-equalweightsgarch <- Return.portfolio(SimReturnsRgarch,weights = c(0.2440413, 0.5635348, 0.0229443, 0.1694796)) 
+equalweightsgarch <- Return.portfolio(SimReturnsRgarch,weights = c(0.2136498, 0.6196197, 0, 0.1667305)) 
 stdev(equalweightsgarch$portfolio.returns)
 ```
 ```{r}
-optweightsgarch <- c(0.2440413, 0.5635348, 0.0229443, 0.1694796)
+optweightsgarch <- c(0.2136498, 0.6196197, 0, 0.1667305)
 ModVaR_95_garch <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsgarch, portfolio_method = "component", method = "modified")
 ModVaR_95_garch$MVaR
 ```
@@ -85,25 +53,24 @@ ModVaR_95_garch$MVaR
 ```{r}
 
 SimReturnsRewma <- as.timeSeries(myPortfolioReturnsR)
-#returns the portfolio with the minimal risk on the efficient frontier
-equalweightsewma <- Return.portfolio(SimReturnsRewma,weights = c(0.2939002, 0.6052965, 0.0698046, 0.0309987)) 
+equalweightsewma <- Return.portfolio(SimReturnsRewma,weights = c(0.2502928, 0.5540359, 0.1141192, 0.0815521)) 
 stdev(equalweightsewma$portfolio.returns)
 ```
 ```{r}
-optweightsewma <- c(0.2939002, 0.6052965, 0.0698046, 0.0309987)
+optweightsewma <- c(0.2502928, 0.5540359, 0.1141192, 0.0815521)
 ModVaR_95_ewma <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsewma, portfolio_method = "component", method = "modified")
 ModVaR_95_ewma$MVaR
 ```
 
 ```{r}
-
 RealReturns <- as.timeSeries(myPortfolioReturnsR)
-#returns the portfolio with the minimal risk on the efficient frontier
 minvarRR <- minvariancePortfolio(RealReturns) 
-minvarRR@portfolio
-
 ```
 
 
 
+```{r}
+RealReturns2 <- as.timeSeries(returns)
+minvarRR2 <- minvariancePortfolio(RealReturns2) 
+```
 
