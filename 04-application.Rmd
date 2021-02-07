@@ -31,9 +31,9 @@ Fonte: Elaboração própria.
 \justifying
 \bigskip
 O intervalo temporal utilizado na obtenção dos dados foi de 01/06/2016 a 01/06/2020, contemplando 4
-anos de dados históricos, tendo sido obtidos a partir do Yahoo.finance, perfazendo 1014 dias de negociação. De acordo com @NG2006 "...recomenda-se usar 1000 amostras para a estimação do modelo GARCH convencional". Ainda considerando @smallsample "...foi demonstrado que um nível elevado de persistência obtido em modelos GARCH(1,1) usando um número elevado de observações têm autocorrelação menor do que as estimações sugeridas com amostras pequenas"
+anos de dados históricos, tendo sido obtidos a partir do Yahoo.finance, perfazendo 1014 dias de negociação. De acordo com @NG2006 "...recomenda-se usar 1000 amostras para a estimação do modelo GARCH convencional". Ainda considerando @smallsample "...foi demonstrado que um nível elevado de persistência obtido em modelos GARCH(1,1) usando um número elevado de observações têm auto-correlação menor do que as estimações sugeridas com amostras pequenas"
 
-Resumindo as várias etapas e de acordo com a figura \@ref(fig:processo), após a obtenção e tratamento dos dados é realizada uma análise descritiva dos mesmos, sendo depois estimada a volatilidade para o último dia de acordo com os modelos em estudo. O modelo de simulação integra esses valores obtidos de variância para cada um dos activos e de acordo com o modelo utilizado, sendo constítuido um portfolio que minimize a variância com base em 80 dias de simulação de preços, sendo as restrições aplicáveis ao modelo a não possibilidade de posições curtas, investir em activos sem risco e empréstimo de capital.
+Resumindo as várias etapas e de acordo com a figura \@ref(fig:processo), após a obtenção e tratamento dos dados é realizada uma análise descritiva dos mesmos, sendo depois estimada a volatilidade para o último dia de acordo com os modelos em estudo. O modelo de simulação integra esses valores obtidos de variância para cada um dos activos e de acordo com o modelo utilizado, sendo constituído um portfolio que minimize a variância com base em 80 dias de simulação de preços, sendo as restrições aplicáveis ao modelo a não possibilidade de posições curtas, investir em activos sem risco e empréstimo de capital.
  
 ```{r, processo,echo=FALSE,fig.cap='Modelação do processo',out.width="60%"}
 knitr::include_graphics("image/modelação.png")
@@ -43,7 +43,7 @@ knitr::include_graphics("image/modelação.png")
 Fonte: Elaboração própria.
 
 \justifying
-Ao longo do trabalho e sempre que se verifique necessário será disponibilizado no próprio conteúdo do trabalho o código R utilizado para obtenção dos dados. As tabelas originadas que contemplam todo o *output* de um determinado código serão colocadas em anexo.
+Ao longo do trabalho e sempre que se verifique necessário será disponibilizado no próprio conteúdo do trabalho o código R utilizado para tratamento e obtenção dos dados apresentados. As tabelas originadas que contemplam todo o *output* de um determinado código serão colocadas em anexo.
 
 ## Análise descritiva dos dados
 
@@ -98,7 +98,8 @@ colnames(newdata) <- c("TEF.MC","ENEL.MI","GLE.PA","AIR.PA")
 Com a função *summary* agrega-se na tabela \@ref(tab:estcot) algumas estatísticas referentes a variação das cotações, apresentando os valores mínimos e máximos, assim como quartis e a média. Os valores referentes a média e mediana ilustram que existem empresas cuja distribuição dos valores apresentam uma cauda mais à direita(ENI), enquanto outras apresentam uma cauda mais a esquerda (GLE), de acordo com os dados dos últimos 4 anos.
 
 \scriptsize
-```{r,estcot}
+```{r,estcot, wrapper=TRUE}
+#R CODE
 pt <-summary(as.data.frame(newdata))
 p <- knitr::kable(
   pt, caption = "Estatísticas das cotações",
@@ -117,6 +118,7 @@ O cálculo dos retornos diários é efectuado com a função *dailyreturn*, send
 
 \scriptsize
 ```{r}
+#R CODE
 returns <- as.xts(data.frame(round(dailyReturn(newdata$TEF.MC,type="log"),4),
                              round(dailyReturn(newdata$ENEL.MI,type="log"),4),
                              round(dailyReturn(newdata$GLE.PA,type="log"),4),
@@ -148,6 +150,7 @@ Na matrix de correlações \@ref(tab:correl) dos retornos podemos verificar que 
 
 \scriptsize
 ```{r}
+#R CODE
 retcor <- cor(returns,method = "pearson")
 ```
 \normalsize
@@ -165,12 +168,13 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-A analise descritiva dos retornos é apresentada na tabela \@ref(tab:statret), sendo que todos apresentam uma assimetria negativa ou à esquerda, sendo que a cauda da distribuição nestes casos aponta para a esquerda. A curtose apresenta valores elevados e superiores a 3, sendo que as distribuições tem cauda mais pesadas do que a da distribuição normal. Neste caso as distribuições são ditas *leptokurtic* sendo uma caracteridtica comum na distribuição dos retornos das acções. 
+A analise descritiva dos retornos é apresentada na tabela \@ref(tab:statret), sendo que todos apresentam uma assimetria negativa ou à esquerda, em que a cauda da distribuição nestes casos aponta para a esquerda. A curtose apresenta valores elevados e superiores a 3, sendo que as distribuições tem cauda mais pesadas do que a da distribuição normal. Neste caso as distribuições são ditas *leptokurtic* sendo uma característica comum na distribuição dos retornos das acções. 
 
-As volatilidades apresentadas, assim como o retorno, são valores anuais e com peso igual atríbuido a cada uma das observações.
+As volatilidades apresentadas, assim como o retorno, são valores anuais e com peso igual atribuído a cada uma das observações.
 
 \scriptsize
 ```{r}
+#R CODE
 retannual <- function(x) {  
   Return.annualized(x,geometric = FALSE)}
 retvol <- function(x) {  
@@ -203,7 +207,7 @@ Fonte:Elaboração própria.
 
 Na análise ao tipo de distribuição dos retornos estes não apresentam distribuição normal, sendo que os pressupostos subjacentes a normalidade dos dados não se verificam.
 
-Nos histogramas (figura \@ref(fig:distr)), a linha a azul representa uma distribuição normal (com média 0 e desvio padrão igual ao valor dos dados (rendibilidades log)) de modo a comparar com o histograma, sendo que se verifica distribuição leptocúrticas nas rendibilidades log dos vários índices, como verificado anteriormente.
+Nos histogramas (figura \@ref(fig:distr)), a linha a azul representa uma distribuição normal (com média 0 e desvio padrão igual ao valor dos dados (retornos log)) de modo a comparar com o histograma, sendo que se verifica distribuição leptocúrticas nos retornos log dos vários índices, como verificado anteriormente.
 
 ```{r,distr,echo=FALSE, fig.cap='Distribuição dos retornos',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
@@ -250,6 +254,7 @@ Por fim, o teste Shapiro-Wilk (teste á normalidade) na tabela \@ref(tab:shapiro
 
 \scriptsize
 ```{r}
+#R CODE
 lshap<- lapply(as.data.frame(returns), shapiro.test)
 lres <- sapply(lshap, "[", c("statistic","p.value"))
 ```
@@ -275,7 +280,7 @@ O *exponential weighted moving average* (EWMA) é calculado com um *decay factor
 
 \scriptsize
 ```{r}
-set.seed(89)
+#R CODE
 ewma <- function(x) {  
   x<-ewmaVol(x,lambda = 0.94)
   return(tail(x$sigma,1))
@@ -331,10 +336,11 @@ Fonte:Elaboração própria.
 
 O procedimento para a simulação de Monte Carlo será o mesmo para todos os diferentes métodos de calculo de volatilidade, sendo que aqui apenas se apresenta o código R utilizado para a primeira simulação, sendo depois igual para todos as outras situações, onde apenas se altera o valor relativo ao desvio padrão.
 
-A simulação será efectuada para um total de 80 dias de negociação, sendo efectuada um total de 1000 vezes. A equação utilizada para a simulação é a equação \@ref(eq:logprice), em que $\mu$ representa a taxa de juro sem risco referente a obrigações do tesouro alemão a 3 meses^[Germany 3 Month Bond Yield Historical Data - https://www.investing.com/rates-bonds/germany-3-month-bond-yield-historical-data], sendo este o prazo mais próximo do espaço temporal do investimento. 
+A simulação será efectuada para um total de 80 dias de negociação, repetindo 1000 vezes. A equação utilizada para a simulação é a equação \@ref(eq:logprice), em que $\mu$ representa a taxa de juro sem risco referente a obrigações do tesouro alemão a 3 meses^[Germany 3 Month Bond Yield Historical Data - https://www.investing.com/rates-bonds/germany-3-month-bond-yield-historical-data], sendo este o prazo mais próximo do espaço temporal do investimento. 
 
 \scriptsize
 ```{r,warning=FALSE}
+#R CODE
 dfewma <- as.data.frame(pewma)
 
 N <- 80
@@ -437,10 +443,11 @@ ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(a
 ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour="deeppink") + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
 
-A partir dos valores simulados calcula-se a mediana para cada um dos dias de acordo com o código R abaixo, obtendo-se desta forma os dados ilustrados na tabela \@ref(tab:simtabewma) referente aos últimos 5 dias.
+A partir dos valores simulados calcula-se a média para cada um dos dias de acordo com o código R abaixo, obtendo-se desta forma os dados ilustrados na tabela \@ref(tab:simtabewma) referente aos últimos 5 dias.
 
 \scriptsize
 ```{r}
+#R CODE
 M.TEF.MC <- apply(monte_carlo_sim, 1, mean)
 M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,mean )
 M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,mean )
@@ -482,10 +489,11 @@ myPortfolioReturns <- ROC(myPortfolio,type="discrete")[-1,]
 colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 ```
 
-Na definição do portfolio vamos utilizar os dados referentes às simulações realizadas, considerando que o objectivo é minimizar o risco, ou seja minimizar a variância. A função utilizada pelo R é *minvariancePortfolio*, sendo desta forma definido os pesos de cada um dos activos que irão constituir o portfolio, especificados na tabela \@ref(tab:pewma). ENEL será a empresa com maior peso no portfolio com cerca de 60%, seguida pela TELEFONICA com cerca de 30%. As outras terão uma ponderação mais residual.
+Na definição do portfolio vamos utilizar os dados referentes às simulações realizadas, considerando que o objectivo é minimizar o risco, ou seja minimizar a variância. A função utilizada pelo R é *minvariancePortfolio*, sendo desta forma definido os pesos de cada um dos activos que irão constituir o portfolio, apresentados na tabela \@ref(tab:pewma).
 
 \scriptsize
 ```{r}
+# R CODE
 SimReturns <- as.timeSeries(myPortfolioReturns)
 FronteiraEff <- portfolioFrontier(SimReturns, constraints = "LongOnly")
 
@@ -494,10 +502,19 @@ minew<-getPortfolio(minvarewma)
 ```
 \normalsize
 
-```{r,frontewma,echo=FALSE, fig.cap='EWMA - Fronteira eficiente',fig.topcaption = TRUE,out.width = "45%"}
+A figura \@ref(fig:frontewma) representa o gráfico referente a fronteira eficiente para o portfolio de empresas em análise, sendo que o ponto a vermelho é onde se obtêm a mínima variância ou risco.
+
+```{r,frontewma,echo=FALSE, fig.cap='EWMA - Fronteira eficiente',fig.topcaption = TRUE,out.width = "100%"}
 plot(FronteiraEff,c(1,2,3,4))
 ```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
+\justifying
+\bigskip
+
+Como se pode ver a empresa ENEL será a empresa com maior peso no portfolio com cerca de 55%, seguida pela TELEFONICA com cerca de 25%. As outras terão uma ponderação mais residual.
 
 ```{r,pewma,echo=FALSE}
 minewma<- as.data.frame(minew$weights)
@@ -507,39 +524,56 @@ minewmak<- knitr::kable(
   booktabs = TRUE)
 kable_styling(minewmak , latex_options = "hold_position", position = "center")
 ```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
 
-Definidos as ponderações de cada empresa no portfolio podemos calcula o VaR assim como as contribuições individuais de cada um dos activos, podendo-se verificar nos dados abaixo que a maior contribuição é dada pela ENEL, sendo natural, pois apresenta um grande peso no portfolio. No cálculo do VaR foi utilizado o VaR paramétrico com aproximação Cornish-Fisher, pois é mais representativo da realidade da
-distribuição dos retornos dos activos financeiros.
+\justifying
+\bigskip
+
+Definidos as ponderações de cada empresa no portfolio podemos calcula o VaR assim como as contribuições individuais de cada um dos activos, podendo-se verificar nos dados abaixo que a maior contribuição é dada pela ENEL, sendo natural, pois apresenta um grande peso no portfolio. No cálculo do VaR foi utilizado o VaR paramétrico com aproximação Cornish-Fisher, pois é mais representativo da realidade da distribuição dos retornos dos activos financeiros.
 
 \scriptsize
 ```{r}
-optweights <- c(0.2939002, 0.6052965, 0.0698046, 0.0309987)
-ModVaR_95_ewma <- VaR(myPortfolioReturns, p=0.95,weights=optweights, 
+#R CODE
+ewmaweights <- c(0.2502928, 0.5540359, 0.1141192, 0.0815521)
+ModVaR_95_ewma <- VaR(myPortfolioReturns, p=0.95,weights=ewmaweights, 
                       portfolio_method = "component", method = "modified")
 ModVaR_95_ewma$contribution 
 ```
 \normalsize
 
 ```{r,echo=FALSE}
-MVaRewma_VaR <- ModVaR_95_ewma$MVaR
+MVaRewma_VaR <- round(ModVaR_95_ewma$MVaR,6)
 ```
 
 Analisando o valor calculado para a portfolio, pode-se verificar que para um nível de confiança 95%, o VaR a 1 dia para dados simulados a 80 dias é de `r MVaRewma_VaR`, ou seja, existe uma probabilidade de 5% de ocorrer uma perda igual ou superior a este valor no montante total do portfolio investido.
 
 ## GARCH
 
+A aplicação do modelo GARCH para estimar a volatilidade será aplicado de acordo com a verificação dos pressupostos e da estimação dos parâmetros, sendo inicialmente utilizado o modelo genérico GARCH(1,1), e só caso não se verifique que o modelo responde adequadamente é que se tentará analizar a volatilidade com outros modelos, como o ARMA-GARCH e o EGARCH, optando pelo modelo que demonstre se adequar melhor aos dados.
+
 ### TELEFÓNICA
 
-```{r,echo=FALSE,warning = FALSE}
-TEF<-garchFit(formula = ~ garch(1,1),data=returns$TEF.RET,cond.dist = "norm", trace=FALSE)
+A aplicação do modelo é realizado com um modelo GARCH de primeira ordem, aplicando-se uma distribuição condicional dos retornos standardizados do tipo *t de Student*, sendo que o teste Jarque-Bera e o Shapiro-Wilk rejeitam para um nível de significância de 5% a normalidade dos dados, pois o valor *p-value* é inferior ao nível de significância, rejeitando-se deste modo $H_0$, ou seja, que os dados apresentam uma distribuição normal (ver Apêndice). A escolha deste tipo de distribuição prendem-se com o facto dos retornos apresentarem uma densidade do tipo *leptokurtic*.(@rvol)
 
+A estimação do modelo GARCH(1,1) obteve uma boa resposta na modelação da volatilidade, sendo que todos os parâmetros do modelo, nomeadamente o $\omega$, o $\alpha$ e o $\beta$ apresentam *p-values* extremamente fortes, sendo significantes a um nível inferior a 5%, evidenciando que o modelo com os parâmetros apresentados providenciam o melhor ajuste aos dados, como podemos ver na tabela \@ref(tab:tefcoefgarch).
+
+\scriptsize
+```{r,warning = FALSE}
+#R CODE
+TEF<-garchFit(formula = ~ garch(1,1),data=returns$TEF.RET,cond.dist = "std",  include.mean=FALSE, 
+              trace=FALSE)
+```
+\normalsize
+
+```{r,tefcoefgarch, echo=FALSE}
 TEFcoef <- round(TEF@fit$matcoef,6)
 
 TEFcoefk<- knitr::kable(
   TEFcoef, caption = "TEF coeficientes",
   booktabs = TRUE)
 kable_styling(TEFcoefk , latex_options = "hold_position", position = "center")
-
 ```
 \FloatBarrier
 \centering 
@@ -548,26 +582,27 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-```{r,echo=FALSE}
-TEFics <- TEF@fit$ics
-TEFicsk<- knitr::kable(
-  TEFics, caption = "Information Criterion Statistics",
-  booktabs = TRUE)
-kable_styling(TEFicsk , latex_options = "hold_position", position = "center")
-
+```{r, echo=FALSE}
 pers <- TEF@fit$params$persistence
 ```
-\FloatBarrier
-\centering 
-Fonte:Elaboração própria.
+o valor referente a persistência apresenta um valor de `r pers` sendo inferior a 1, apresentando deste modo uma regressão à média, ou seja que os valores referentes à volatilidade vão eventualmente regressar ao valores médios a longo prazo. 
 
-\justifying
-\bigskip
+O modelo também disponibiliza os dados referentes aos critérios de informação estatísticos, como o critério de informação Akaike (AIC), sendo um modelo que estima a quantidade de informação perdida para um determinado modelo. Estes indicadores são adequados na comparação de vários modelos, sendo que quanto menor o valor deste indicador melhor o modelo. Neste caso este indicador foi utilizado sempre que se verificou que o modelo não apresentava uma boa resposta, comparando-se os vários modelos alternativos. A informação relativa a estes indicadores encontra-se no apêndice I.
 
-```{r,echo=FALSE}
+O modelo também disponibiliza informação relativa aos resíduos estandardizados para verificação de auto-correlação. De acordo com (@rvol) " se a evidência sugerir auto-correlação nos resíduos estandardizados, então o modelo GARCH(1,1) não capturou toda a dinâmica da volatilidade dos retornos". 
+
+Na tabela \@ref(tab:TEFLjunk) podemos verificar que as estatísticas para o teste Ljung-Box demonstram que o modelo integrou a volatilidade dos retornos, sendo que não se pode rejeitar a hipótese nula de que não existe auto-correlação entre os resíduos estandardizados, ou seja, as especificações são adequadas para capturar a auto-correlação e a variação da volatilidade no tempo nas series dos retornos.
+
+\scriptsize
+```{r}
+#R CODE
 TEFr <-residuals(TEF, standardize = T)
 TEFres <- as.data.frame(LjungBox(TEFr, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
 TEFsre <- as.data.frame(LjungBox(TEFr^2, lags=c(10,15,20), order=0, season=1, squared.residuals=FALSE))
+```
+\normalsize
+
+```{r,TEFLjunk,echo=FALSE}
 TEFLjun <- rbind(TEFres,TEFsre)
 rownames(TEFLjun)<-c( "Ljung-Box Test 10","Ljung-Box Test 15","Ljung-Box Test 20","Ljung-Box Test 10 R^2 ","Ljung-Box Test 15 R^2","Ljung-Box Test 20 R^2")
 TEFLjun$df<-NULL
@@ -583,7 +618,9 @@ Fonte:Elaboração própria.
 
 \justifying
 \bigskip
-```{r,TELplot,echo=FALSE, fig.cap='Telefónica',fig.topcaption = TRUE,out.width = "100%"}
+
+Na figura \@ref(fig:TELplot) temos representados 3 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95%, assim como o gráfico relativo à função de auto-correlação (ACF) para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. De acordo com @foregeorge, "Se um ou mais picos grandes estiverem fora desses limites, ou se substancialmente mais de 5% dos picos estiverem fora desses limites, a série provavelmente não é *white noise*". Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
+```{r,TELplot,echo=FALSE, fig.cap='Telefónica',fig.topcaption = TRUE,out.width = "80%"}
 par(mfrow  = c(2,2))
 plot(TEF,which= 2)
 plot(TEF,which= 3)
@@ -599,8 +636,9 @@ Fonte:Elaboração própria.
 
 ```{r,echo=FALSE}
 TEFsd <- TEF@sigma.t
-TEFvol <- tail(TEFsd,1)
+TEFvol <- round(tail(TEFsd,1),6)
 ```
+O valor de desvio padrão diário que vamos utilizar para efeitos de simulação, é o valor de `r TEFvol`, sendo este o valor representativo da volatilidade condicional no último dia de cotação.
 
 ### ENEL
 
@@ -1003,8 +1041,8 @@ kable_styling(minGARCHk , latex_options = "hold_position", position = "center")
 
 \scriptsize
 ```{r}
-optweights <- c(0.2440413, 0.5635348, 0.0229443, 0.1694796)
-ModVaR_95_GARCH <- VaR(myPortfolioReturns, p=0.95,weights=optweights, portfolio_method = "component", method = "modified")
+garchweights <- c(0.2440413, 0.5635348, 0.0229443, 0.1694796)
+ModVaR_95_GARCH <- VaR(myPortfolioReturns, p=0.95,weights=garchweights, portfolio_method = "component", method = "modified")
 ModVaR_95_GARCH$contribution 
 MVaRGARCH_VaR <- ModVaR_95_GARCH$MVaR
 ```
@@ -1228,8 +1266,8 @@ kable_styling(minVIk , latex_options = "hold_position", position = "center")
 
 \scriptsize
 ```{r}
-optweights <- c(0.3086148, 0.4442713, 0.1409448, 0.1061691)
-ModVaR_95_VI <- VaR(myPortfolioReturns, p=0.95,weights=optweights, portfolio_method = "component", method = "modified")
+viweights <- c(0.3086148, 0.4442713, 0.1409448, 0.1061691)
+ModVaR_95_VI <- VaR(myPortfolioReturns, p=0.95,weights=viweights, portfolio_method = "component", method = "modified")
 ModVaR_95_VI$contribution 
 MVaRVI_VaR <- ModVaR_95_VI$MVaR
 ```

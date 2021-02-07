@@ -59,13 +59,13 @@ A simulação de Monte Carlo consiste na geração de valores a partir de uma de
 Ao simular os preços dos activos financeiros iremos utilizar a técnica de Monte Carlo de modo a gerar amostras aleatórias de acordo com a equação \@ref(eq:logprice). Os preços serão simulados criando várias tentativas com valores aleatórios para $\varepsilon$ a partir de $\phi$(0,1). A precisão dos valores obtidos na simulação depende do número de tentativas efectuadas, sendo considerado 1000 tentativas por cada dia e considerar o valor médio dessas tentativas como o valor simulado para cada um dos dias simulados.
 
 ## ARMA
-Antes de entrar no tema relativo a volatilidade, vamos introduzir o tema relativo ao modelo auto-regressivo de médias móveis ou ARMA, sendo um modelo que descreve processo estocásticos estacionários, ou seja, processos cujo parâmetros como a média e a variância não mudam ao longo do tempo, combinando dois factores, um relativo à autorregressão (AR) e outro relativo à média móvel (MA), permitindo desta forma que o número de parâmetros seja pequeno e alcançando parcimônia na parametrização (@parcimonia).
+Antes de entrar no tema relativo a volatilidade, vamos introduzir o tema relativo ao modelo auto-regressivo de médias móveis ou ARMA, sendo um modelo que descreve processo estocásticos estacionários, ou seja, processos cujo parâmetros como a média e a variância não mudam ao longo do tempo, combinando dois factores, um relativo ao processo autoregressivo (AR) de ordem *p* e outro relativo à média móvel (MA) de orfem*q*, permitindo desta forma que o número de parâmetros seja pequeno e alcançando parcimônia na parametrização (@parcimonia).
 
 Como a estacionariedade é um pressuposto assente em muitos processo estatísticos utilizados em séries temporais, dados não-estacionários são muitas vezes transformados de modo a tornarem-se estacionários (@stwiki).
 
 Para podermos entender melhor este processo, vou introduzir o termo da auto-correlação, referindo-se à medida da relação linear entre valores desfasados ou *lagged values* numa serie temporal, medindo a força e a direcção da associação linear, sendo que os coeficientes de correlação são visualizados em gráfico através da função de auto-correlação ou *ACF* (@foregeorge). Series temporais que não demonstram auto-correlação são designados de *white noise*. O que se pretende ao trabalhar com os retornos nas acções e não com o preço destas, é ter dados que apresentem um processo estocástico estacionário, sendo que os dados não apresentem auto-correlação.
 
-Voltando ao termo ARMA(p,q), onde o p representa a ordem da parte referente à autorregressão, ou seja, ao AR(p), este é útil porque nos fornece um modo de ter dependência em relação ao tempo exibindo um declínio geométrico,sendo que as correlações entre as variáveis mais afastadas no tempo vão diminuindo, podendo ser descrito pela seguinte equação \@ref(eq:ar)
+Voltando ao termo ARMA(p,q), onde o p representa a ordem da parte referente ao processo autoregressivo, ou seja, ao AR(p), este é útil porque nos fornece um modo de ter dependência em relação ao tempo exibindo um declínio geométrico,sendo que as correlações entre as variáveis mais afastadas no tempo vão diminuindo, podendo ser descrito pela seguinte equação \@ref(eq:ar)
 \begin{equation} 
   y_t =c+\phi_1y_{y-1}+\phi_2y_{y-2}+...+\phi_py_{y-p}+\varepsilon_t\qquad   -1<\phi<1
   (\#eq:ar)
@@ -73,7 +73,7 @@ Voltando ao termo ARMA(p,q), onde o p representa a ordem da parte referente à a
 \begin{equation} 
   \nonumber \varepsilon \sim iid N(0,\sigma_{\epsilon}^{2})
 \end{equation}
-onde $\varepsilon$ representa *white noise* e o $\phi$ o coeficiente de autorregressão.
+onde $\varepsilon$ representa *white noise* e o $\phi$ o coeficiente de autorregressão. Ou seja, esta equação diz-nos que os valores presentes da variável dependem do seu valor passado.
 
 O q refere-se à ordem da média móvel, ou MA(q), descrito do seguinte modo:
 \begin{equation} 
@@ -83,7 +83,7 @@ O q refere-se à ordem da média móvel, ou MA(q), descrito do seguinte modo:
 \begin{equation} 
   \nonumber \varepsilon \sim iid N(0,\sigma_{\epsilon}^{2})
 \end{equation} 
-sendo $\phi$ o coeficiente relativo à média móvel, onde a média móvel utiliza valores referentes aos erros no modelo de regressão. Este modelo é ideal, por exemplo quando se quer criar um modelo que apenas exibe dependência em relação a um período, como em retornos sobrepostos. Este modelo fornece uma boa descrição pra a evolução de taxas de juro e para a taxa crescimento de variáveis macroeconómicas.
+A variável $y_t$ é uma série de variáveis aleatórias não correlacionadas com média zero e variância constante, sendo $\phi$ o coeficiente relativo à média móvel, onde a média móvel utiliza valores referentes aos erros no modelo de regressão. Este modelo é ideal, por exemplo quando se quer criar um modelo que apenas exibe dependência em relação a um período, como em retornos sobrepostos. Este modelo fornece uma boa descrição pra a evolução de taxas de juro e para a taxa crescimento de variáveis macroeconómicas.
 
 O modelo ARMA(p,q) é definido pela equação \@ref(eq:arma)
 \begin{equation} 
@@ -178,7 +178,8 @@ Considerando $\omega=\gamma\mathcal{V}_{L}$, o modelo GARCH(1,1) pode ser defini
   \sigma_{n}^{2} = \omega + \alpha\mu_{n-1}^{2} + \beta\sigma_{n-1}^{2}
   (\#eq:garch2)
 \end{equation}
-A equação \@ref(eq:garch2) é a que costuma ser utilizada de forma a estimar os parâmetros. De notar de que para obter um processo estável GARCH(1,1) é necessário que $\sigma+\beta<1$, ou então o peso aplicado a variância de longo prazo é negativa.
+A equação \@ref(eq:garch2) é a que costuma ser utilizada de forma a estimar os parâmetros. De notar de que para obter um processo estável GARCH(1,1) é necessário que $\sigma+\beta<1$, ou então o peso aplicado a variância de longo prazo é negativa. A soma $\sigma+\beta$ representa o que é conhecido como a persistência. A persistência num modelo GARCH representa o modo como  a volatilidades decai rapidamente após um grande choque.
+
 A estimação dos parâmetros, tanto para o modelo EWMA como para o modelo GARCH(1,1), é realizado utilizando um processo conhecido como *maximum likelihood method*, onde se utilizam os dados históricos de modo a escolher os parâmetros que maximizem a probabilidade de ocorrência dos dados, de acordo com a equação
 \begin{equation} 
   \sum_{i=1}^{m}=\bigg[-ln(\sigma_{i}^{2})-\frac{\mu_{i}^{2}}{\sigma_{i}^{2}}\bigg]
@@ -186,7 +187,7 @@ A estimação dos parâmetros, tanto para o modelo EWMA como para o modelo GARCH
 \end{equation}
 Os modelos standard GARCH não apresentam resposta adequada em modelos onde os dados tenham diferenças significativas devido ao impacto de boas ou más noticias, por exemplo, no comportamento da variável em estudo, sendo que existem outros modelos desenvolvidos com base no modelo standard GARCH para dar resposta a essas oscilações, como o modelo EGARCH.
 
-### – Exponential Generalized Autoregressive Conditional Heteroscedastic (EGARCH)
+### Exponential Generalized Autoregressive Conditional Heteroscedastic (EGARCH)
 O modelo EGARCH será utilizado na modelação da volatilidade da cotação de uma das empresas aqui em análise, sendo importante uma breve descrição do modelo. 
 
 Este modelo foi desenvolvido para capturar as assimetrias na volatilidade induzidas por grandes oscilações positivas e negativas nos retornos dos activos.

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.30)  6 FEB 2021 21:50
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.1.30)  7 FEB 2021 13:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1529,54 +1529,54 @@ LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
 [6]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[7] [8] [9] [10] [11]
-Underfull \vbox (badness 1117) has occurred while \output is active []
-
-[12] [13]
+[7] [8] [9] [10] [11] [12] [13]
 Underfull \hbox (badness 1642) in paragraph at lines 488--488
 |[]\TU/Arial(0)/b/n/14.4 Generalized autoregressive conditional heteroskedasti-
 
  []
 
-
-Underfull \vbox (badness 1776) has occurred while \output is active []
-
 [14]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[15] [16]
+[15]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[16] [17]
 File: image/fdistribuicao.png Graphic file (type bmp)
 <image/fdistribuicao.png>
-[17]
+[18]
 File: image/volatilitysmile.png Graphic file (type bmp)
 <image/volatilitysmile.png>
-[18] [19] [20]
-Overfull \hbox (9.45297pt too wide) in paragraph at lines 654--656
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[19] [20]
+Overfull \hbox (9.45297pt too wide) in paragraph at lines 655--657
 \TU/Arial(0)/m/n/12 apenas se mantêm o primeiro termo/somátorio na equação#ref(
 eq:estdesviopadraop). 
  []
 
-[21]
-File: image/covusa.png Graphic file (type bmp)
-<image/covusa.png>
-[22]
-File: image/eficient.png Graphic file (type bmp)
-<image/eficient.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+[21]
+File: image/covusa.png Graphic file (type bmp)
+<image/covusa.png>
+
+Underfull \vbox (badness 1642) has occurred while \output is active []
+
+[22]
+File: image/eficient.png Graphic file (type bmp)
+<image/eficient.png>
 [23] [24]
 File: image/VaR.png Graphic file (type bmp)
 <image/VaR.png>
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 764.
-
-Underfull \vbox (badness 1565) has occurred while \output is active []
-
-[25]
+(Font)              scaled to size 6.0pt on input line 765.
+[25] [26]
 File: image/kurtosis.png Graphic file (type bmp)
 <image/kurtosis.png>
-[26] [27]
+[27]
 Cap\'{\i }tulo 2.
 [28
 
@@ -1586,12 +1586,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [29] [30]
 Underfull \vbox (badness 3009) has occurred while \output is active []
 
-[31] [32] [33]
+[31] [32]
 Cap\'{\i }tulo 3.
-[34
+[33
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 895--895
+Underfull \hbox (badness 10000) in paragraph at lines 896--896
 [][][][]$[][][][][] [] [] [] [][][] [] [][][][][][][] [] [][][] [] [][] [] [][]
 [][][][][][][][][][][] [] [][] [] [][][][][][][] [] [][][][][][][] [][] [][][][
 ] [][] [][][][][] [][] [][] [][] [][][][][] [][] [][][] [][] [][][] [] [][][][]
@@ -1600,13 +1600,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 895--895
 
 File: image/cotacao.png Graphic file (type bmp)
 <image/cotacao.png>
-[35]
+[34]
 File: image/modelação.png Graphic file (type bmp)
 <image/modelação.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[36]
+[35]
 File: bookdown-demo_files/figure-latex/cotacao-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/cotacao-1.pdf>
 File: bookdown-demo_files/figure-latex/cotacao-2.pdf Graphic file (type pdf)
@@ -1615,11 +1615,11 @@ File: bookdown-demo_files/figure-latex/cotacao-3.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/cotacao-3.pdf>
 File: bookdown-demo_files/figure-latex/cotacao-4.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/cotacao-4.pdf>
-[37]
+[36]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 986.
+(Font)              scaled to size 8.0pt on input line 987.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 990.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 992.
 File: bookdown-demo_files/figure-latex/volatilidade-1.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/volatilidade-1.pdf>
@@ -1632,22 +1632,22 @@ f)
 File: bookdown-demo_files/figure-latex/volatilidade-4.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/volatilidade-4.pdf>
-[38]
-Underfull \hbox (badness 2941) in paragraph at lines 1058--1058
+[37]
+Underfull \hbox (badness 2941) in paragraph at lines 1061--1061
 [][][]\TU/Arial(0)/m/n/10 De acordo com os valores apresentados em []$[][][][][
 ] [] [] [] [][] [] [][][][][][][][][] [] [][][] [] [][][][] [] [][][][][][][][]
 [][][] [] [][] []
  []
 
-[39] [40]
+[38] [39]
 File: bookdown-demo_files/figure-latex/distr-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/distr-1.pdf>
 File: bookdown-demo_files/figure-latex/teste-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/teste-1.pdf>
-[41] [42]
+[40] [41]
 File: bookdown-demo_files/figure-latex/gewma-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/gewma-1.pdf>
-[43] [44]
+[42] [43]
 File: bookdown-demo_files/figure-latex/sim-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/sim-1.pdf>
 File: bookdown-demo_files/figure-latex/sim-2.pdf Graphic file (type pdf)
@@ -1656,40 +1656,33 @@ File: bookdown-demo_files/figure-latex/sim-3.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/sim-3.pdf>
 File: bookdown-demo_files/figure-latex/sim-4.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/sim-4.pdf>
-[45]
+[44]
 File: bookdown-demo_files/figure-latex/frontewma-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/frontewma-1.pdf>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[46]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[47]
+[45] [46] [47] [48]
 File: bookdown-demo_files/figure-latex/TELplot-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/TELplot-1.pdf>
-[48]
+[49]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[49]
+[50]
 File: bookdown-demo_files/figure-latex/ENELplot-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ENELplot-1.pdf>
-[50]
-Overfull \hbox (10.12213pt too wide) in paragraph at lines 1686--1686
+[51]
+Overfull \hbox (10.12213pt too wide) in paragraph at lines 1734--1734
 []\TU/lmtt/m/n/12 ##  garchFit(formula = ~arma(1, 0) + garch(1, 1), data = retu
 rns$GLE.RET,[] 
  []
 
-[51]
-Overfull \hbox (47.20189pt too wide) in paragraph at lines 1686--1686
+[52]
+Overfull \hbox (47.20189pt too wide) in paragraph at lines 1734--1734
 []\TU/lmtt/m/n/12 ##          mu          ar1        omega       alpha1        
 beta1        shape[] 
  []
 
 
-Overfull \hbox (47.1182pt too wide) in paragraph at lines 1686--1686
+Overfull \hbox (47.1182pt too wide) in paragraph at lines 1734--1734
 []\TU/lmtt/m/n/12 ## -2.0617e-04   1.0585e-01   6.4553e-06   8.2622e-02   9.061
 5e-01   4.5868e+00[] 
  []
@@ -1697,26 +1690,26 @@ Overfull \hbox (47.1182pt too wide) in paragraph at lines 1686--1686
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[52]
+[53]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[53]
+[54]
 File: bookdown-demo_files/figure-latex/GLEplot-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/GLEplot-1.pdf>
-[54]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [55]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [56]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[57] [58]
+[57]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[58] [59]
 File: bookdown-demo_files/figure-latex/AIRplot-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/AIRplot-1.pdf>
-[59]
+[60]
 File: bookdown-demo_files/figure-latex/simgarch-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/simgarch-1.pdf>
 File: bookdown-demo_files/figure-latex/simgarch-2.pdf Graphic file (type pdf)
@@ -1728,20 +1721,20 @@ File: bookdown-demo_files/figure-latex/simgarch-4.pdf Graphic file (type pdf)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[60]
+[61]
 File: bookdown-demo_files/figure-latex/frontgarch-1.pdf Graphic file (type pdf)
 
 <use bookdown-demo_files/figure-latex/frontgarch-1.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[61]
+[62]
 File: image/opcao.png Graphic file (type bmp)
 <image/opcao.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[62]
+[63]
 File: bookdown-demo_files/figure-latex/simvi-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/simvi-1.pdf>
 File: bookdown-demo_files/figure-latex/simvi-2.pdf Graphic file (type pdf)
@@ -1753,20 +1746,20 @@ File: bookdown-demo_files/figure-latex/simvi-4.pdf Graphic file (type pdf)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[63]
+[64]
 File: bookdown-demo_files/figure-latex/frontVI-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/frontVI-1.pdf>
-[64] [65]
+[65] [66]
 Cap\'{\i }tulo 4.
-[66
+[67
 
 ]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2288.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2336.
 File: bookdown-demo_files/figure-latex/unnamed-chunk-58-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/unnamed-chunk-58-1.pdf>
-[67] [68] [69] [70] [71] (./bookdown-demo.bbl [72
+[68] [69] [70] [71] [72] (./bookdown-demo.bbl [73
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 31--36
@@ -1782,7 +1775,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--36
 ] [][][][] []
  []
 
-[73
+[74
 
 ]
 Underfull \hbox (badness 1205) in paragraph at lines 64--70
@@ -1809,7 +1802,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 64--70
 [] [][][][][] []
  []
 
-[74]
+[75]
 Underfull \hbox (badness 1377) in paragraph at lines 142--146
 []\TU/Arial(0)/m/n/12 Marques, M. I. G. (2017).  Aplicação dos modelos garch, e
 garch e tgarch
@@ -1833,45 +1826,45 @@ Underfull \hbox (badness 10000) in paragraph at lines 142--146
  [][][][][] [] [][][][] [] [][] [][]
  []
 
-[75]) [76] [77
+[76]) [77] [78
 
-] [78
+] [79
 
 ]
 File: image/ewmaport.png Graphic file (type bmp)
 <image/ewmaport.png>
-[79]
+[80]
 File: image/garchtef.png Graphic file (type bmp)
 <image/garchtef.png>
-[80]
+[81]
 File: image/garchenel.png Graphic file (type bmp)
 <image/garchenel.png>
-[81]
+[82]
 File: image/garchgle.png Graphic file (type bmp)
 <image/garchgle.png>
-[82]
+[83]
 File: image/air1.png Graphic file (type bmp)
 <image/air1.png>
-[83]
+[84]
 File: image/air2.png Graphic file (type bmp)
 <image/air2.png>
-[84]
+[85]
 File: image/garchport.png Graphic file (type bmp)
 <image/garchport.png>
-[85]
+[86]
 File: image/vi.png Graphic file (type bmp)
 <image/vi.png>
-[86] (./bookdown-demo.aux)
+[87] (./bookdown-demo.aux)
 Package rerunfilecheck Info: File `bookdown-demo.out' has not changed.
-(rerunfilecheck)             Checksum: 95EB5FCFEC13E814BC757EC2392E9A48;8166.
+(rerunfilecheck)             Checksum: 3A14F38A6A95FC07958C49C3E9A83FC5;8150.
  ) 
 Here is how much of TeX's memory you used:
- 23689 strings out of 479234
- 416092 string characters out of 5874137
- 912010 words of memory out of 5000000
- 42736 multiletter control sequences out of 15000+600000
+ 23693 strings out of 479234
+ 416126 string characters out of 5874137
+ 911949 words of memory out of 5000000
+ 42740 multiletter control sequences out of 15000+600000
  431738 words of font info for 119 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 98i,10n,125p,1844b,766s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,10n,125p,1844b,768s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (97 pages).
+Output written on bookdown-demo.pdf (98 pages).
