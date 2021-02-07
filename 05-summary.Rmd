@@ -4,7 +4,9 @@
 
 ## Apresentação dos resultados
 
-
+```{r, processo,echo=FALSE,fig.cap='Modelação do processo',out.width="60%"}
+knitr::include_graphics("image/modelação.png")
+```
 
 ```{r}
 
@@ -63,14 +65,20 @@ ModVaR_95_ewma$MVaR
 ```
 
 ```{r}
-RealReturns <- as.timeSeries(myPortfolioReturnsR)
-minvarRR <- minvariancePortfolio(RealReturns) 
-```
-
-
-
-```{r}
 RealReturns2 <- as.timeSeries(returns)
 minvarRR2 <- minvariancePortfolio(RealReturns2) 
+minvarRR2@portfolio
 ```
 
+```{r}
+
+SimReturnsRewma <- as.timeSeries(myPortfolioReturnsR)
+equalweightsewma <- Return.portfolio(SimReturnsRewma,weights = c(0.3452717,0.5028658, 0, 0.1518625)) 
+stdev(equalweightsewma$portfolio.returns)
+```
+
+```{r}
+histstd <- c(0.3452717,0.5028658, 0, 0.1518625)
+ModVaR_95_ewma <- VaR(myPortfolioReturnsR, p=0.95,weights=histstd , portfolio_method = "component", method = "modified")
+ModVaR_95_ewma$MVaR
+```
