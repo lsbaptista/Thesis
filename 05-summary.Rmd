@@ -4,12 +4,7 @@
 
 ## Apresentação dos resultados
 
-```{r, processo,echo=FALSE,fig.cap='Modelação do processo',out.width="60%"}
-knitr::include_graphics("image/modelação.png")
-```
-
-```{r}
-
+```{r, echo=FALSE}
 TEF.MC.R <-read_xlsx ("data/TEF.MC.R.xlsx")
 TEF.MC.R <- xts(TEF.MC.R[, -1], order.by=as.Date(TEF.MC.R$Date))
 GLE.PA.R <-read_xlsx ("data/GLE.PA.R.xlsx")
@@ -26,59 +21,143 @@ myPortfolioReturnsR <- ROC(myPortfolioR,type="discrete")[-1,]
 colnames(myPortfolioReturnsR) <- c("RealTEF","RealENEL","RealGLE","RealAIR")
 ```
 
+Os resultados obtidos estão ilustrados nas tabelas e gráfico apresentados seguidamente, em que na figura \@ref(fig:umdesvio) se apresentam os valores obtidos de desvio padrão para os retornos de cada uma das empresas em estudo. Este valores são da maior importância, pois têm grande impacto na simulação de monte carlo realizada e, deste modo, nos valores obtidos para os 80 dias em estudo.
 
+Os valore de desvio padrão são os obtidos ao dia 01/06/2020 de acordo com dados históricos para os modelos EWMA e GARCH, sendo que os obtidos pelo modelo da volatilidade implícita são os valores esperados pelos participantes no mercado financeiro para as opções do activos em estudo. Todos os valore são valores diários.
 
-```{r,warning = FALSE}
+Ao analisar os valores para cada um dos métodos vs empresas não se pode afirmar que um dos métodos tivesse fornecido valores de desvio padrão superiores ao de outro método. O que se verifica é que, por exemplo, a empresa Société Générale é a que apresenta valores mais elevados de desvio padrão diário, seguida pela empresa Airbus. A empresa Enel apresenta valores de desvio padrão diários inferiores ás restantes empresas. Como o modelo de portfolio é minimizar a variância total, é de esperar um maior peso da empresa Enel em todos os modelos desenvolvidos.
+
+```{r,umdesvio,echo=FALSE,fig.cap='Valores de desvio padrão calculados por modelo',out.width="80%"}
+knitr::include_graphics("image/desvio.png")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+A figura \@ref(fig:umpeso) apresenta os pesos de cada um dos activos para cada modelo de portfólio. Como seria de esperar em todos eles a empresa ENEL é a que apresenta uma maior representação, sendo que a empresa Société Générale, devido ao risco acrescido que apresenta é a que menos representação têm, sendo que no modelo GARCH nem é parte integrante do mesmo.
+
+```{r,umpeso,echo=FALSE,fig.cap='Pesos de cada um dos activos nos portfólios',out.width="80%"}
+knitr::include_graphics("image/pesos.png")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+Na obtenção dos vários modelos pretendíamos também analisar qual é que seria o modelo que apresentaria menos risco para o investidor através da análise do VaR. Como o VaR está relacionado com o desvio padrão, quanto maior o valor deste último, maior o valor em risco para o investidor. Nos portfólios obtidos com os dados simulados, e de acordo com a figura \@ref(fig:umsim), o modelo GARCH é o que apresenta valores mais baixos, tanto para a variância como para o VaR a um dia. Tendo em consideração que um dos objectivos é a optimização de um portfólio minimizando o risco, de acordo com os dados apresentados, o modelo GARCH é o que apresenta uma melhor resposta ao risco, sendo que o VaR é o menor de entre os vários modelos.
+
+```{r,umsim,echo=FALSE,fig.cap='Estatísticas dos portfólios com dados simulados',out.width="80%"}
+knitr::include_graphics("image/simulação.png")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+A apresentação dos valores nas tabelas acima, recaíram sobre os dados obtidos pelos vários modelos, assim como pelas simulações. Na figura \@ref(fig:dias) temos a aplicação dos pesos obtidos pelas simulações aos valores reais ao longo dos 80 dias de cotação, ou seja, até ao vencimento das opções a 18/09/2020.
+
+Nesses dados podemos verificar que a aplicação do pesos obtidos pelo modelo GARCH continua a ser o que apresenta menor risco para o investidor, sendo que o modelo obtido através da volatilidade implícita apresenta o maior risco. A coluna referente aos dados reais são referentes a obtenção de um portfólio que minimize a variância, utilizando os dados das cotações das empresa nesses 80 dias, comparando deste modo com os valores obtidos pelos portfólios das simulações quando aplicados aos dados reais. 
+
+```{r,dias,echo=FALSE,fig.cap='Estatísticas do modelo aplicando dados cotações',out.width="80%"}
+knitr::include_graphics("image/dadosreais80dias.png")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+Na figura \@ref(fig:grafico) podemos ver a evolução do valor dos vários portfólios versus o modelo obtido através dos dados reais. A tendência ao longo do tempo dos 3 modelos versus o modelo dos dados reais parecem em sintonia, sendo que apenas no inicio a tendência do portfólio real apresenta uma menor oscilação, sendo que depois se sobrepõe aos modelos. 
+
+De uma forma geral a tendência parece ser bastante similar ao longo dos 80 dias. 
+
+```{r,grafico,echo=FALSE,fig.cap='Evolução dos portfolios ao longo dos 80 dias',out.width="80%"}
+knitr::include_graphics("image/graficofinal.png")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+Quando analisamos os erros dos vários modelos comparativamente ao modelo real (figura \@ref(ref:mae), verificamos que o modelo que se aproxima mais do modelo real é o modelo desenvolvimento através da simulação GARCH. A previsão que apresenta uma maior discrepância relativo ao modelo real é o modelo da volatilidade implícita. 
+
+```{r,mae,echo=FALSE,fig.cap='Métricas para qualidade do ajuste',out.width="80%"}
+knitr::include_graphics("image/mae.png")
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+A evolução dos retornos diários encontra-se ilustrados na figura \@ref(fig:retggplot) para os vários modelos, apresentando, como verificado anteriormente a mesma tendência oa longo do tempo, havendo mesmo vários pontos de sobreposição.
+
+```{r, echo=FALSE,warning = FALSE}
 SimReturnsRvi <- as.timeSeries(myPortfolioReturnsR)
 equalweightsvi <- Return.portfolio(SimReturnsRvi,weights = c(0.3278427, 0.4001305, 0.1278029, 0.1442238)) 
-stdev(equalweightsvi$portfolio.returns)
-```
-```{r}
-optweightsvi <- c(0.3278427, 0.4001305, 0.1278029, 0.1442238)
-ModVaR_95_vi <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsvi, portfolio_method = "component", method = "modified")
-ModVaR_95_vi$MVaR
+realvi <- equalweightsvi$portfolio.returns
 ```
 
 
-```{r}
-
+```{r, echo=FALSE}
 SimReturnsRgarch <- as.timeSeries(myPortfolioReturnsR)
 equalweightsgarch <- Return.portfolio(SimReturnsRgarch,weights = c(0.2136498, 0.6196197, 0, 0.1667305)) 
-stdev(equalweightsgarch$portfolio.returns)
-```
-```{r}
-optweightsgarch <- c(0.2136498, 0.6196197, 0, 0.1667305)
-ModVaR_95_garch <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsgarch, portfolio_method = "component", method = "modified")
-ModVaR_95_garch$MVaR
+realgarch<-equalweightsgarch$portfolio.returns
 ```
 
-```{r}
+
+```{r, echo=FALSE}
 
 SimReturnsRewma <- as.timeSeries(myPortfolioReturnsR)
 equalweightsewma <- Return.portfolio(SimReturnsRewma,weights = c(0.2502928, 0.5540359, 0.1141192, 0.0815521)) 
-stdev(equalweightsewma$portfolio.returns)
-```
-```{r}
-optweightsewma <- c(0.2502928, 0.5540359, 0.1141192, 0.0815521)
-ModVaR_95_ewma <- VaR(myPortfolioReturnsR, p=0.95,weights=optweightsewma, portfolio_method = "component", method = "modified")
-ModVaR_95_ewma$MVaR
+realewma<-equalweightsewma$portfolio.returns
 ```
 
-```{r}
-RealReturns2 <- as.timeSeries(returns)
-minvarRR2 <- minvariancePortfolio(RealReturns2) 
-minvarRR2@portfolio
+```{r, echo=FALSE}
+RealReturns <- as.timeSeries(myPortfolioReturnsR)
+minvarRR <- minvariancePortfolio(RealReturns) 
 ```
 
-```{r}
-
-SimReturnsRewma <- as.timeSeries(myPortfolioReturnsR)
-equalweightsewma <- Return.portfolio(SimReturnsRewma,weights = c(0.3452717,0.5028658, 0, 0.1518625)) 
-stdev(equalweightsewma$portfolio.returns)
+```{r, echo=FALSE}
+SimReturnsReal <- as.timeSeries(myPortfolioReturnsR)
+equalweightreal <- Return.portfolio(SimReturnsReal,weights = c(0.08775736, 0.91224264, 0, 0)) 
+real<-equalweightreal$portfolio.returns
 ```
 
-```{r}
-histstd <- c(0.3452717,0.5028658, 0, 0.1518625)
-ModVaR_95_ewma <- VaR(myPortfolioReturnsR, p=0.95,weights=histstd , portfolio_method = "component", method = "modified")
-ModVaR_95_ewma$MVaR
+```{r,echo=FALSE}
+realones <-na.omit(merge(real$portfolio.returns,realewma$portfolio.returns,realgarch$portfolio.returns,realvi$portfolio.returns))
+colnames(realones) <- c("Real","Realewma","Realgarch","Realvi")
 ```
+
+```{r,retggplot,echo=FALSE, fig.cap='Retornos dos portfólios - 80 dias',fig.topcaption = TRUE,out.width = "80%"}
+realones<-data.frame(date = index(realones),realones, row.names=NULL)
+
+ggplot(data=realones)+
+  geom_line(mapping=aes(y=Real,x= date,color="real"),size=1 ) +
+  geom_line(mapping=aes(y=Realgarch,x=date,color="garch"),size=1) +
+  geom_line(mapping=aes(y=Realewma,x=date,color="ewma"),size=1) +
+  geom_line(mapping=aes(y=Realvi,x=date,color="vi"),size=1,linetype="dashed") +
+  scale_color_manual(values = c(
+    'real' = "black",
+    'garch' = 'darkblue',
+    'ewma' = 'darkred',
+    "vi"="springgreen")) +
+  labs(color = 'Y series')
+```
+\FloatBarrier
+\centering 
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip

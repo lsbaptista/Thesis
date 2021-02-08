@@ -1,6 +1,12 @@
 # Conclusão {-}
 
+O objectivo deste trabalho era analisar o impacto da escolha do modelo de calculo da volatilidade na optimização de portfólios, pretendendo-se minimizar o risco para o investidor, assim como a aplicabilidade do software R na resolução de problemas de análise financeira, nomeadamente definição de portfólios e modelos para análise de series temporais.
 
+No que diz respeito ao software R podemos concluir que é uma ferramenta que disponibiliza toda uma panóplia de pacotes para análise financeira, sendo que facilmente se poderá equiparar a muitos softwares para análise financeiros pagos, sendo que o R têm uma comunidade bem implementada que partilha conhecimento em múltiplas áreas de conhecimentos, havendo mesmo anualmente um fórum de partilha de conhecimento dedicado exclusivamente ao software R aplicado ao sector financeiro. 
+
+Quanto aos modelos desenvolvidos, podemos verificar que existe uma boa respostas dos vários modelos aos dados em estudo, embora aparentemente o modelo GARCH fosse o que apresenta-se uma melhor resposta. No entanto, recomenda-se realizar mais analise, partindo dos mesmos pressuposto de modo a verificar a coerência dos modelos e se eles realmente são resilientes quando aplicados a outros conjuntos de dados. De salientar que estes modelos são adequados para prever oscilações no mercado a curto prazo, sendo que quanto maior o tempo de simulação, maior a probabilidade do o modelo se comportar de forma anómala.Também de salientar que os modelos comportaram uma enorme oscilação na volatilidade que se verificou nos últimos meses de cotação, sendo que esses valores acabaram por ter maior impacto nos resultados obtidos para a obtenção dos valores referentes ao desvio padrão e consequentes simulações.
+
+Outro factor a ter em consideração é que todo os modelos comportam simulações onde o valor da volatilidade se mantêm constante ao logo dos 80 dias, sendo que na realidade isso não se verifica, sendo um factor negativo nestas análise. Já o retorno, como foi utilizado a taxa de juro sem risco a 3 meses, as oscilações aqui são mínimas, sendo que no entanto se ocorresse uma variação brusca nesse valor isso também acabaria por ter um impacto no modelo.
 
 
 

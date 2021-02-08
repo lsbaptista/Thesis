@@ -442,6 +442,12 @@ ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(a
 ) + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour="deeppink") + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
+\FloatBarrier
+\centering 
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
 
 A partir dos valores simulados calcula-se a média para cada um dos dias de acordo com o código R abaixo, obtendo-se desta forma os dados ilustrados na tabela \@ref(tab:simtabewma) referente aos últimos 5 dias.
 
@@ -697,10 +703,11 @@ kable_styling(ENELLjunk , latex_options = "hold_position", position = "center")
 \centering 
 Fonte:Elaboração própria.
 
-Na figura \@ref(fig:ENELplot) temos representados 4 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95%, assim como o gráfico relativo à função de auto-correlação (ACF) para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
-
 \justifying
 \bigskip
+
+Na figura \@ref(fig:ENELplot) temos representados 4 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95%, assim como o gráfico relativo à função de auto-correlação (ACF) para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
+
 ```{r,ENELplot,echo=FALSE, fig.cap='ENEL',fig.topcaption = TRUE,out.width = "100%"}
 par(mfrow  = c(2,2))
 plot(ENEL,which= 2)
@@ -732,7 +739,9 @@ Ao realizar o ajuste do modelo GARCH(1,1) com o modelo AR(1) a estimação do mo
 
 \scriptsize
 ```{r,warning = FALSE}
-GLE<-garchFit(formula = ~ arma(1,0) + garch(1,1),data=returns$GLE.RET,cond.dist = "std",include.mean=FALSE, trace=FALSE)
+#R CODE
+GLE<-garchFit(formula = ~ arma(1,0) + garch(1,1),data=returns$GLE.RET,
+              cond.dist = "std",include.mean=FALSE, trace=FALSE)
 ```
 \normalsize
 
@@ -780,11 +789,11 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-Do mesmo na figura \@ref{fig:GLEplot} podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95%, verificando-se uma boa resposta por parte do modelo.
+Do mesmo na figura \@ref(fig:GLEplot) podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95%, verificando-se uma boa resposta por parte do modelo.
 
 Os gráficos ACF vêm complementar a informação relativa aos teste Ljung-Box.
 
-```{r,GLEplot,echo=FALSE, fig.cap='SOCIÉTÉ GÉNÉRALE',fig.topcaption = TRUE,out.width = "100%"}
+```{r,GLEplot,echo=FALSE, fig.cap='SOCIÉTÉ GÉNÉRALE',fig.topcaption = TRUE,out.width = "80%"}
 par(mfrow  = c(2,2))
 plot(GLE,which= 2)
 plot(GLE,which= 3)
@@ -865,7 +874,7 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-Na figura \@ref{fig:AIRplot} podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95%, verificando-se uma boa resposta por parte do modelo.
+Na figura \@ref(fig:AIRplot) podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95%, verificando-se uma boa resposta por parte do modelo.
 
 Os gráficos ACF vêm complementar a informação relativa aos teste Ljung-Box.
 ```{r,AIRplot,echo=FALSE, fig.cap='AIRBUS',fig.topcaption = TRUE,out.width = "100%"}
@@ -989,9 +998,14 @@ ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(a
 ) + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour="deeppink") + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
+\FloatBarrier
+\centering 
+Fonte: Elaboração própria.
 
+\justifying
+\bigskip
 
-```{r}
+```{r,echo=FALSE}
 M.TEF.MC <- apply(monte_carlo_sim, 1, mean)
 M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,mean )
 M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,mean )
@@ -1036,7 +1050,7 @@ myPortfolioReturns <- ROC(myPortfolio,type="discrete")[-1,]
 colnames(myPortfolioReturns) <- c("SimTEF","SimENEL","SimGLE","SimAIR")
 ```
 
-```{r}
+```{r,echo=FALSE}
 SimReturnsG <- as.timeSeries(myPortfolioReturns)
 #returns the portfolio with the minimal risk on the efficient frontier
 
@@ -1046,10 +1060,16 @@ minew<-getPortfolio(minvarGARCH)
 
 A fronteira eficiente está representada na figura \@ref(fig:frontgarch) sendo que o ponto a vermelho é onde se obtêm a mínima variância ou risco.
 
-```{r,frontgarch,echo=FALSE, fig.cap='GARCH - Fronteira eficiente',fig.topcaption = TRUE,out.width = "80%"}
+```{r,frontgarch,echo=FALSE, fig.cap='GARCH - Fronteira eficiente',fig.topcaption = TRUE,out.width = "70%"}
 FronteiraEff <- portfolioFrontier(SimReturnsG, constraints = "LongOnly")
 plot(FronteiraEff,c(1,2,3,4))
 ```
+\FloatBarrier
+\centering 
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
 
 Neste modelo a empresa que apresenta maior peso continua a ser a ENEL com cerca de 61%, sendo que a Société Générale não é integrada no portfólio.
 
@@ -1061,10 +1081,16 @@ minGARCHk<- knitr::kable(
   booktabs = TRUE)
 kable_styling(minGARCHk , latex_options = "hold_position", position = "center")
 ```
+\FloatBarrier
+\centering 
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
 
 Definidos as ponderações de cada empresa no portfolio podemos calcula o VaR assim como as contribuições individuais de cada um dos activos, podendo-se verificar nos dados abaixo que a maior contribuição continua a pertencer a empresa ENEL. O calculo do VaR foi efectuado considerando a aproximação Cornish-Fisher.
 
-```{r}
+```{r,echo=FALSE}
 garchweights <- c(0.2136498, 0.6196197, 0, 0.1667305)
 ModVaR_95_GARCH <- VaR(myPortfolioReturns, p=0.95,weights=garchweights, portfolio_method = "component", method = "modified")
 ModVaR_95_GARCH$contribution 
@@ -1227,9 +1253,14 @@ ggplot(ENEL.MI_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(
 ggplot(GLE.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour = "darkorange") + ggtitle(str_c("GLE: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ggplot(AIR.PA_MC_sim,aes(x = Dia, y = Preço, Group = Simulation)) + geom_line(alpha = 0.1,colour="deeppink") + ggtitle(str_c("AIR: ", M, " Simulações de Monte Carlo ao longo de ", N," dias negociação"))
 ```
+\FloatBarrier
+\centering 
+Fonte: Elaboração própria.
 
+\justifying
+\bigskip
 
-```{r}
+```{r,echo=FALSE}
 M.TEF.MC <- apply(monte_carlo_sim, 1, mean)
 M.ENEL.MI <- apply(ENEL_monte_carlo_sim, 1,mean )
 M.GLE.PA <- apply(GLE_monte_carlo_sim, 1,mean )
@@ -1278,12 +1309,19 @@ minvarVI <- minvariancePortfolio(SimReturnsVI)
 minew<-getPortfolio(minvarVI)
 ```
 
-A definição do portfólio de acordo com o método da mínima variância encontra-se definido na tabela \@ref{tab:minVIk}, sendo que a figura \@ref{fig:frontVI} representa a fronteira eficiente para esse mesmo modelo.
+A definição do portfólio de acordo com o método da mínima variância encontra-se definido na tabela \@ref(tab:minVIk), sendo que a figura \@ref(fig:frontVI) representa a fronteira eficiente para esse mesmo modelo.
 
 ```{r,frontVI,echo=FALSE, fig.cap='Volatilidade Implícita - Fronteira eficiente',fig.topcaption = TRUE,out.width = "80%"}
 FronteiraEff <- portfolioFrontier(SimReturnsVI, constraints = "LongOnly")
 plot(FronteiraEff,c(1,2,3,4))
 ```
+\FloatBarrier
+\centering 
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
+
 Como podemos ver neste modelo, a empresa ENEL é a que continua a ter mais peso no portfolio com cerca de 40%, não tendo no entanto tanto peso como nos outros modelos, sendo que a empresa telefónica representa cerca de 32%, sendo o restante repartido pelas outras 2 empresas.
 
 ```{r,minVIk,echo=FALSE}
@@ -1294,7 +1332,12 @@ minVIk<- knitr::kable(
   booktabs = TRUE)
 kable_styling(minVIk , latex_options = "hold_position", position = "center")
 ```
+\FloatBarrier
+\centering 
+Fonte: Elaboração própria.
 
+\justifying
+\bigskip
 
 ```{r,echo=FALSE}
 viweights <- c(0.3278427, 0.4001305, 0.1278029, 0.1442238)

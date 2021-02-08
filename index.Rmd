@@ -31,4 +31,25 @@ lot: True
 
 # Simbologia e notações{.unnumbered}
 
+
+**ARMA** - Autoregressive–moving-average; \
+
+**ARCH** - Autoregressive conditional heteroscedasticity; \
+
+**CMP** - Capital market line; \
+
+**DEaR** - Daily Value at Risk; \
+
+**EWMA** - Exponentially Weighted Moving Average (EWMA); \
+
+**EGARC** - Exponential generalized autoregressive conditional heteroscedastic; \
+
+**GARCH** - Generalized autoregressive conditional heteroskedasticity; \
+
+**VaR** - Value at Risk; \
+
+**VI** - Volatilidade Implícita; \
+
+
+
 \mainmatter 

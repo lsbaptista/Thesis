@@ -36,7 +36,7 @@ Este pacote têm como uma das depêndencias o pacote *forecast* que contêm mét
 ### RQuantLib
 O *RQuantLib* é desenvolvido pelo QuantLib, sendo uma biblioteca de código aberto para finanças quantitativas (@RQuantLib). A função utilizada foi a *EuropeanOptionImpliedVolatility()* para cálculo da volatilidade implícita nas opções em análise.
 
-### rugarch
+### Rugarch
 *Rugarch* é um pacote que contêm uma grande variedade de modelos unívariados GARCH, com métodos para simulação, inferência e criar gráficos (@rugarch). Neste caso foi utilizada a função *ugarchspec()* para utilizar o método eGARCH, que fornecia uma melhor resposta no modelo em análise do que utilizando o modelo generalista GARCH. Este modelo disponibiliza toda a informação estatística necessária para validar o modelo e seus pressupostos, sendo que comparativamente com o pacote fGarch, permite aplicação de outros modelos GARCG.
 
 ### Tidyquant

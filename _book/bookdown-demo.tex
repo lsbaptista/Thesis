@@ -220,13 +220,12 @@ A presente dissertação têm como âmbito a análise de três métodos diferent
 
 Os métodos analisados para calculo da volatilidade são a Média Movel Exponencial (EWMA), o modelo da heteroscedasticidade condicional auto-regressiva generalizada (GARCH) e a volatilidade implícita. Os dois primeiros métodos têm como subjacentes dados históricos dos instrumentos financeiros, sendo que a volatilidade implícita é a volatilidade esperada pelo mercado, sendo obtida através da cotação das opções dos respetivos subjacentes.
 
-A análise de risco é efetuada aplicando dois métodos complementares de análise. O Value at Risk (VaR), que contempla a percentagem de perdas que excedem o VaR e o Expected shortfall (ES), que contempla a magnitude dessas perdas.
+A análise de risco é efetuada aplicando o método Value at Risk (VaR), que contempla a percentagem de perdas que excedem o VaR.
 
-Este trabalho é realizado tendo como ferramenta de apoio a linguagem de programação R.
+Este trabalho é realizado tendo como ferramenta de apoio a linguagem de programação R, sendo que se pretende também analisar a adequabilidade e disponibilização de pacotes no R para análise financeira.
 \bigbreak
 
-\noindent\textbf{Palavras chave:} Volatilidade, portfolio, rentabilidade, risco, R
-
+\noindent\textbf{Palavras chave:} Séries temporais, Volatilidade, portfolio, rentabilidade, risco, R
 
 
 
@@ -239,13 +238,13 @@ The scope of this dissertation is to analyze three different methods of obtainin
 
 The methods analyzed for calculating the volatility are the Exponential Moving Average (EWMA), the generalized autoregressive conditional heteroscedasticity model (GARCH) and the implied volatility. The first two methods are based on historical data on financial instruments, the implied volatility being the volatility expected by the market, being obtained through the quotation of the options of the respective underlying.
 
-The risk analysis is carried out using two complementary methods of analysis. Value at Risk (VaR), which includes the percentage of losses that exceed VaR and Expected shortfall (ES), which considers the magnitude of these losses.
+The risk analysis is carried out using one methods of analysis, the Value at Risk (VaR), which includes the percentage of losses that exceed VaR.
 
-This work is carried out using the R programming language as a support tool.
+This work is carried out using the R programming language as a support tool, being also analyzed the suitability and availability of packages in R for financial analysis.
 
 \bigbreak
 
-\noindent\textbf{Keywords:} Volatility, portfolio, profitability, risk, R
+\noindent\textbf{Keywords:} Time series, Volatility, portfolio, profitability, risk, R
 
 \newenvironment{dedication}
   {\clearpage           % we want a new page
@@ -274,6 +273,24 @@ This work is carried out using the R programming language as a support tool.
 \chapter*{Simbologia e notações}\label{simbologia-e-notauxe7uxf5es}}
 \addcontentsline{toc}{chapter}{Simbologia e notações}
 
+\textbf{ARMA} - Autoregressive--moving-average;\\
+
+\textbf{ARCH} - Autoregressive conditional heteroscedasticity;\\
+
+\textbf{CMP} - Capital market line;\\
+
+\textbf{DEaR} - Daily Value at Risk;\\
+
+\textbf{EWMA} - Exponentially Weighted Moving Average (EWMA);\\
+
+\textbf{EGARC} - Exponential generalized autoregressive conditional heteroscedastic;\\
+
+\textbf{GARCH} - Generalized autoregressive conditional heteroskedasticity;\\
+
+\textbf{VaR} - Value at Risk;\\
+
+\textbf{VI} - Volatilidade Implícita;\\
+
 \mainmatter
 
 \hypertarget{intro}{%
@@ -296,13 +313,13 @@ Os vários modelos apresentados têm como finalidade contribuir para uma decisã
 
 Todos estes modelos têm tido aplicabilidade na análise quantitativa financeira, sendo que novos modelos foram sendo desenvolvidos ou apenas melhorados de modo a dar resposta à realidade verificada no mercado. Como podemos subentender uma das disciplinas fundamentais na definição destes modelos é o conhecimento de estatística e a sua aplicação prática, quer através de técnicas paramétricas, onde se assume um pressuposto forte de que os valores de uma variável têm uma distribuição normal, seja através de técnicas não paramétricas, onde não se assume que a distribuição dos valores de uma variável apresentam distribuição normal.
 
-O trabalho desenvolvido ao longo desta tese, propõem-se analisar o impacto que poderá ter o método de calculo da volatilidade sobre a definição de um portfolio, o seu retorno esperado assim como quantificar o risco a que se estará exposto. Desde os primeiros trabalhos de \citet{Markowitz1952} acerca da otimização de portfolios que vários outros trabalhos foram desenvolvidos para constituição e otimização de portfolios, sendo que nesta dissertação se irá aplicar o método introduzido por \citet{Markowitz1952}, utilizando a teoria da média-variância para a constituição de um portfolio. O mesmo se poderá afirmar acerca do cálculo da exposição ao risco por um portfolio, sendo, no entanto, o VaR e o CVaR dois dos métodos mais utilizados para quantificar essa métrica, sendo que de acordo com \citet{OptVaR2000} o CVaR é conhecido por ter melhores propriedades que o VaR. Como iremos ver existem diferentes métodos de calculo do VaR e CVaR, sendo que neste trabalho iremos utilizar a que for mais adequada ao tipo de dados em análise.
+O trabalho desenvolvido ao longo desta tese, propõem-se analisar o impacto que poderá ter o método de calculo da volatilidade sobre a definição de um portfolio, o seu retorno esperado assim como quantificar o risco a que se estará exposto. Desde os primeiros trabalhos de \citet{Markowitz1952} acerca da otimização de portfolios que vários outros trabalhos foram desenvolvidos para constituição e otimização de portfolios, sendo que nesta dissertação se irá aplicar o método introduzido por \citet{Markowitz1952}, utilizando a teoria da média-variância para a constituição de um portfolio. O mesmo se poderá afirmar acerca do cálculo da exposição ao risco por um portfolio, sendo, no entanto, o VaR e o CVaR dois dos métodos mais utilizados para quantificar essa métrica, sendo que de acordo com \citet{OptVaR2000} o CVaR é conhecido por ter melhores propriedades que o VaR. No entanto neste trabalho iremos utilizar o modelo referente ao VaR, sendo que existem diferentes métodos de calculo, utilizando na elaboração deste trabalho o que for mais adequada ao tipo de dados em análise. De salientar que o VaR continua a ser a ferramenta de análise de risco exigida pelas autoridades de supervisão bancária e seguradora.
 
 Como inicialmente referido, o objetivo é analisar as diferentes formas de calcular a variância, sendo que iremos focar-nos em três formas diferentes de calcular esse valor, análisar a sua implicação no resultado final, assim como o valor que resulta da quantificação de risco e o seu impacto na perceção pelo investidor.
 
-A investigação decorrerá aplicando-se os diferentes métodos de calculo da variância a dados do mercado, assim como os pressupostos teóricos de cada um dos métodos, sendo constituída uma carteira de ações integrantes do Euro Stoxx 50, calculando o seu retorno final para cada uma das volatilidades, assim como o risco a que está exposto um investidor. O retorno obtido será também comparado com um \emph{benchmark}, neste caso o Euro Stoxx 50.
+A investigação decorrerá aplicando-se os diferentes métodos de calculo da variância a dados do mercado, assim como os pressupostos teóricos de cada um dos métodos, sendo constituída uma carteira de ações integrantes do Euro Stoxx 50, calculando o seu retorno final para cada uma das volatilidades, assim como o risco a que está exposto um investidor. O modelo obtido será também comparado com um \emph{benchmark}, neste caso o modelo obtido com base nos valores reais das cotações no espaço temporal referente aos 80 dias das simulações.
 
-Ao longo deste percurso será também analisada a forma como é constituídos um portfolio, a teoria subjacente a média-variância, as retrições aplicáveis ao modelo desenvolvido, assim como a teoria subjacente aos vários métodos para análise da exposição ao risco aquando da constituição de um portfolio.
+Ao longo deste percurso será também analisada a forma como é constituídos um portfolio, a teoria subjacente a média-variância, as restrições aplicáveis ao modelo desenvolvido, assim como a teoria subjacente aos vários métodos para análise da exposição ao risco aquando da constituição de um portfolio.
 
 A aplicação pratica dos métodos aos dados do mercado será realizado com o apoio da linguagem de programação R, utilizando para esse efeito os vários ``packages'' disponíveis para aplicação ao sector financeiro. Um dos capítulos será dedicado a apresentação e descrição dos principais ``packages'' utilizados para análise dos dados, sendo que o R é parte integrante desta dissertação como ferramenta de análise estatísticas e aplicabilidade ao sector financeiro.
 
@@ -920,7 +937,7 @@ Este pacote têm como uma das depêndencias o pacote \emph{forecast} que contêm
 O \emph{RQuantLib} é desenvolvido pelo QuantLib, sendo uma biblioteca de código aberto para finanças quantitativas (\citet{RQuantLib}). A função utilizada foi a \emph{EuropeanOptionImpliedVolatility()} para cálculo da volatilidade implícita nas opções em análise.
 
 \hypertarget{rugarch}{%
-\subsection{rugarch}\label{rugarch}}
+\subsection{Rugarch}\label{rugarch}}
 
 \emph{Rugarch} é um pacote que contêm uma grande variedade de modelos unívariados GARCH, com métodos para simulação, inferência e criar gráficos (\citet{rugarch}). Neste caso foi utilizada a função \emph{ugarchspec()} para utilizar o método eGARCH, que fornecia uma melhor resposta no modelo em análise do que utilizando o modelo generalista GARCH. Este modelo disponibiliza toda a informação estatística necessária para validar o modelo e seus pressupostos, sendo que comparativamente com o pacote fGarch, permite aplicação de outros modelos GARCG.
 
@@ -1381,6 +1398,13 @@ Na figura \ref{fig:sim} encontram-se as simulações efectuadas para cada uma da
 
 \caption{Simulação Monte Carlo para 80 dias}\label{fig:sim}
 \end{figure}
+\FloatBarrier
+\centering
+
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
 
 A partir dos valores simulados calcula-se a média para cada um dos dias de acordo com o código R abaixo, obtendo-se desta forma os dados ilustrados na tabela \ref{tab:simtabewma} referente aos últimos 5 dias.
 
@@ -1697,10 +1721,11 @@ Ljung-Box Test 20 R\textasciicircum{}2 & 20 & 24.007764 & 0.2420532\\
 
 Fonte:Elaboração própria.
 
-Na figura \ref{fig:ENELplot} temos representados 4 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95\%, assim como o gráfico relativo à função de auto-correlação (ACF) para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
-
 \justifying
 \bigskip
+
+Na figura \ref{fig:ENELplot} temos representados 4 gráficos, um com o desvio padrão estimado pelo modelo, outro com o ajuste da volatilidade estimada com um intervalo de confiança para 95\%, assim como o gráfico relativo à função de auto-correlação (ACF) para os resíduos estandardizados e os resíduos estandardizados ao quadrado, sendo que se verifica que a auto-correlação se encontra próximo de 0. Estes gráficos apenas vêm confirmar o que já tinha sido verificado com o teste Ljung-Box.
+
 \begin{figure}
 
 {\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/ENELplot-1} 
@@ -1732,7 +1757,9 @@ Ao realizar o ajuste do modelo GARCH(1,1) com o modelo AR(1) a estimação do mo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{GLE\textless{}{-}}\KeywordTok{garchFit}\NormalTok{(}\DataTypeTok{formula =} \OperatorTok{\textasciitilde{}}\StringTok{ }\KeywordTok{arma}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{garch}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{data=}\NormalTok{returns}\OperatorTok{$}\NormalTok{GLE.RET,}\DataTypeTok{cond.dist =} \StringTok{"std"}\NormalTok{,}\DataTypeTok{include.mean=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{trace=}\OtherTok{FALSE}\NormalTok{)}
+\CommentTok{\#R CODE}
+\NormalTok{GLE\textless{}{-}}\KeywordTok{garchFit}\NormalTok{(}\DataTypeTok{formula =} \OperatorTok{\textasciitilde{}}\StringTok{ }\KeywordTok{arma}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{garch}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{data=}\NormalTok{returns}\OperatorTok{$}\NormalTok{GLE.RET,}
+              \DataTypeTok{cond.dist =} \StringTok{"std"}\NormalTok{,}\DataTypeTok{include.mean=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{trace=}\OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1794,13 +1821,13 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-Do mesmo na figura @ref\{fig:GLEplot\} podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95\%, verificando-se uma boa resposta por parte do modelo.
+Do mesmo na figura \ref{fig:GLEplot} podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95\%, verificando-se uma boa resposta por parte do modelo.
 
 Os gráficos ACF vêm complementar a informação relativa aos teste Ljung-Box.
 
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth]{bookdown-demo_files/figure-latex/GLEplot-1} 
+{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/GLEplot-1} 
 
 }
 
@@ -1901,7 +1928,7 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-Na figura @ref\{fig:AIRplot\} podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95\%, verificando-se uma boa resposta por parte do modelo.
+Na figura \ref{fig:AIRplot} podemos visualizar o gráfico referente aos desvios padrão calculados pelo modelo, assim como a volatilidade para um intervalo de confiança a 95\%, verificando-se uma boa resposta por parte do modelo.
 
 Os gráficos ACF vêm complementar a informação relativa aos teste Ljung-Box.
 
@@ -1938,15 +1965,13 @@ Na figura \ref{fig:simgarch} temos a simulação efectuada 1000 vezes ao logo de
 
 \caption{Simulação Monte Carlo para 80 dias}\label{fig:simgarch}
 \end{figure}
+\FloatBarrier
+\centering
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
-\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
-\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
-\end{Highlighting}
-\end{Shaded}
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
 
 A partir dos valores simulados calcula-se a média para cada um dos dias obtendo-se desta forma os dados ilustrados na tabela \ref{tab:simtabgarch} referente aos últimos 5 dias.
 
@@ -1981,26 +2006,23 @@ Fonte:Elaboração própria.
 
 Da mesma forma que realizado aquando da definição do portfólio para o modelo EWMA, vamos utilizar os dados referentes às simulações realizadas, aplicando a mesma função R, com o objectivo de apresentar o portfolio que minimize a variância total. Os valores apurados pra os pesos de cada um dos activos que irão integrar o portfolio encontram-se na tabela \ref{tab:pgarchw}.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{SimReturnsG \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturns)}
-\CommentTok{\#returns the portfolio with the minimal risk on the efficient frontier}
-
-\NormalTok{minvarGARCH \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(SimReturnsG) }
-\NormalTok{minew\textless{}{-}}\KeywordTok{getPortfolio}\NormalTok{(minvarGARCH)}
-\end{Highlighting}
-\end{Shaded}
-
 A fronteira eficiente está representada na figura \ref{fig:frontgarch} sendo que o ponto a vermelho é onde se obtêm a mínima variância ou risco.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/frontgarch-1} 
+{\centering \includegraphics[width=0.7\linewidth]{bookdown-demo_files/figure-latex/frontgarch-1} 
 
 }
 
 \caption{GARCH - Fronteira eficiente}\label{fig:frontgarch}
 \end{figure}
+\FloatBarrier
+\centering
+
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
 
 Neste modelo a empresa que apresenta maior peso continua a ser a ENEL com cerca de 61\%, sendo que a Société Générale não é integrada no portfólio.
 
@@ -2019,27 +2041,20 @@ SimAIR & 0.1667305\\
 \bottomrule
 \end{tabular}
 \end{table}
+\FloatBarrier
+\centering
+
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
 
 Definidos as ponderações de cada empresa no portfolio podemos calcula o VaR assim como as contribuições individuais de cada um dos activos, podendo-se verificar nos dados abaixo que a maior contribuição continua a pertencer a empresa ENEL. O calculo do VaR foi efectuado considerando a aproximação Cornish-Fisher.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{garchweights \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2136498}\NormalTok{, }\FloatTok{0.6196197}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.1667305}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_GARCH \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturns, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{garchweights, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_GARCH}\OperatorTok{$}\NormalTok{contribution }
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ##       SimTEF      SimENEL       SimGLE       SimAIR 
 ## 0.0001772924 0.0004493635 0.0000000000 0.0000754417
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{MVaRGARCH\_VaR \textless{}{-}}\StringTok{ }\KeywordTok{round}\NormalTok{(ModVaR\_}\DecValTok{95}\NormalTok{\_GARCH}\OperatorTok{$}\NormalTok{MVaR,}\DecValTok{6}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 Para um nível de confiança 95\%, o VaR a 1 dia para dados simulados a 80 dias é de \ensuremath{7.02\times 10^{-4}}, ou seja, existe uma probabilidade de 5\% de ocorrer uma perda igual ou superior a este valor no montante total do portfolio investido.
 
@@ -2123,15 +2138,13 @@ Simulação na figura @ref\{fig:simvi\} para os 80 dias de cotação, utilizando
 
 \caption{Simulação Monte Carlo para 80 dias}\label{fig:simvi}
 \end{figure}
+\FloatBarrier
+\centering
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{M.TEF.MC \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(monte\_carlo\_sim, }\DecValTok{1}\NormalTok{, mean)}
-\NormalTok{M.ENEL.MI \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(ENEL\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
-\NormalTok{M.GLE.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(GLE\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
-\NormalTok{M.AIR.PA \textless{}{-}}\StringTok{ }\KeywordTok{apply}\NormalTok{(AIR\_monte\_carlo\_sim, }\DecValTok{1}\NormalTok{,mean )}
-\end{Highlighting}
-\end{Shaded}
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
 
 Da mesma forma que nos outros modelos, calcula-se a média referente aos valores simulados para cada uma das empresas, estando os últimos 5 valores de cada uma representadas na tabela @ref\{tab:SimVIk\}.
 
@@ -2164,7 +2177,7 @@ Fonte:Elaboração própria.
 \hypertarget{portfolio-volatilidade-uxedmplicita}{%
 \subsection{Portfolio volatilidade ímplicita}\label{portfolio-volatilidade-uxedmplicita}}
 
-A definição do portfólio de acordo com o método da mínima variância encontra-se definido na tabela @ref\{tab:minVIk\}, sendo que a figura @ref\{fig:frontVI\} representa a fronteira eficiente para esse mesmo modelo.
+A definição do portfólio de acordo com o método da mínima variância encontra-se definido na tabela \ref{tab:minVIk}, sendo que a figura \ref{fig:frontVI} representa a fronteira eficiente para esse mesmo modelo.
 
 \begin{figure}
 
@@ -2174,6 +2187,13 @@ A definição do portfólio de acordo com o método da mínima variância encont
 
 \caption{Volatilidade Implícita - Fronteira eficiente}\label{fig:frontVI}
 \end{figure}
+\FloatBarrier
+\centering
+
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
 
 Como podemos ver neste modelo, a empresa ENEL é a que continua a ter mais peso no portfolio com cerca de 40\%, não tendo no entanto tanto peso como nos outros modelos, sendo que a empresa telefónica representa cerca de 32\%, sendo o restante repartido pelas outras 2 empresas.
 
@@ -2192,6 +2212,13 @@ SimAIR & 0.1442238\\
 \bottomrule
 \end{tabular}
 \end{table}
+\FloatBarrier
+\centering
+
+Fonte: Elaboração própria.
+
+\justifying
+\bigskip
 
 \begin{verbatim}
 ##       SimTEF      SimENEL       SimGLE       SimAIR 
@@ -2209,114 +2236,151 @@ No cálculo do VaR foi utilizado o VaR paramétrico com aproximação Cornish-Fi
 \hypertarget{apresentauxe7uxe3o-dos-resultados-1}{%
 \section{Apresentação dos resultados}\label{apresentauxe7uxe3o-dos-resultados-1}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{TEF.MC.R \textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/TEF.MC.R.xlsx"}\NormalTok{)}
-\NormalTok{TEF.MC.R \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(TEF.MC.R[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(TEF.MC.R}\OperatorTok{$}\NormalTok{Date))}
-\NormalTok{GLE.PA.R \textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/GLE.PA.R.xlsx"}\NormalTok{)}
-\NormalTok{GLE.PA.R \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(GLE.PA.R[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(GLE.PA.R}\OperatorTok{$}\NormalTok{Date))}
-\NormalTok{ENEL.MI.R \textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/ENEL.MI.R.xlsx"}\NormalTok{)}
-\NormalTok{ENEL.MI.R \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(ENEL.MI.R[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(ENEL.MI.R}\OperatorTok{$}\NormalTok{Date))}
-\NormalTok{AIR.PA.R \textless{}{-}}\KeywordTok{read\_xlsx}\NormalTok{ (}\StringTok{"data/AIR.PA.R.xlsx"}\NormalTok{)}
-\NormalTok{AIR.PA.R \textless{}{-}}\StringTok{ }\KeywordTok{xts}\NormalTok{(AIR.PA.R[, }\DecValTok{{-}1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(AIR.PA.R}\OperatorTok{$}\NormalTok{Date))}
+Os resultados obtidos estão ilustrados nas tabelas e gráfico apresentados seguidamente, em que na figura \ref{fig:umdesvio} se apresentam os valores obtidos de desvio padrão para os retornos de cada uma das empresas em estudo. Este valores são da maior importância, pois têm grande impacto na simulação de monte carlo realizada e, deste modo, nos valores obtidos para os 80 dias em estudo.
 
-\NormalTok{myPortfolioR \textless{}{-}}\KeywordTok{na.omit}\NormalTok{(}\KeywordTok{merge}\NormalTok{(TEF.MC.R}\OperatorTok{$}\StringTok{\textasciigrave{}}\DataTypeTok{Adj Close}\StringTok{\textasciigrave{}}\NormalTok{,ENEL.MI.R}\OperatorTok{$}\StringTok{\textasciigrave{}}\DataTypeTok{Adj Close}\StringTok{\textasciigrave{}}\NormalTok{,GLE.PA.R}\OperatorTok{$}\StringTok{\textasciigrave{}}\DataTypeTok{Adj Close}\StringTok{\textasciigrave{}}\NormalTok{,}
-\NormalTok{                             AIR.PA.R}\OperatorTok{$}\StringTok{\textasciigrave{}}\DataTypeTok{Adj Close}\StringTok{\textasciigrave{}}\NormalTok{))}
+Os valore de desvio padrão são os obtidos ao dia 01/06/2020 de acordo com dados históricos para os modelos EWMA e GARCH, sendo que os obtidos pelo modelo da volatilidade implícita são os valores esperados pelos participantes no mercado financeiro para as opções do activos em estudo. Todos os valore são valores diários.
 
-\NormalTok{myPortfolioReturnsR \textless{}{-}}\StringTok{ }\KeywordTok{ROC}\NormalTok{(myPortfolioR,}\DataTypeTok{type=}\StringTok{"discrete"}\NormalTok{)[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{,]}
-\KeywordTok{colnames}\NormalTok{(myPortfolioReturnsR) \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"RealTEF"}\NormalTok{,}\StringTok{"RealENEL"}\NormalTok{,}\StringTok{"RealGLE"}\NormalTok{,}\StringTok{"RealAIR"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+Ao analisar os valores para cada um dos métodos vs empresas não se pode afirmar que um dos métodos tivesse fornecido valores de desvio padrão superiores ao de outro método. O que se verifica é que, por exemplo, a empresa Société Générale é a que apresenta valores mais elevados de desvio padrão diário, seguida pela empresa Airbus. A empresa Enel apresenta valores de desvio padrão diários inferiores ás restantes empresas. Como o modelo de portfolio é minimizar a variância total, é de esperar um maior peso da empresa Enel em todos os modelos desenvolvidos.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{SimReturnsRvi \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
-\NormalTok{equalweightsvi \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRvi,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.3278427}\NormalTok{, }\FloatTok{0.4001305}\NormalTok{, }\FloatTok{0.1278029}\NormalTok{, }\FloatTok{0.1442238}\NormalTok{)) }
-\KeywordTok{stdev}\NormalTok{(equalweightsvi}\OperatorTok{$}\NormalTok{portfolio.returns)}
-\end{Highlighting}
-\end{Shaded}
+\begin{figure}
 
-\begin{verbatim}
-## [1] 0.0189834
-\end{verbatim}
+{\centering \includegraphics[width=0.8\linewidth]{image/desvio} 
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{optweightsvi \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.3278427}\NormalTok{, }\FloatTok{0.4001305}\NormalTok{, }\FloatTok{0.1278029}\NormalTok{, }\FloatTok{0.1442238}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_vi \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsvi, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_vi}\OperatorTok{$}\NormalTok{MVaR}
-\end{Highlighting}
-\end{Shaded}
+}
 
-\begin{verbatim}
-## [1] 0.02994267
-\end{verbatim}
+\caption{Valores de desvio padrão calculados por modelo}\label{fig:umdesvio}
+\end{figure}
+\FloatBarrier
+\centering
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{SimReturnsRgarch \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
-\NormalTok{equalweightsgarch \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRgarch,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.2136498}\NormalTok{, }\FloatTok{0.6196197}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.1667305}\NormalTok{)) }
-\KeywordTok{stdev}\NormalTok{(equalweightsgarch}\OperatorTok{$}\NormalTok{portfolio.returns)}
-\end{Highlighting}
-\end{Shaded}
+Fonte:Elaboração própria.
 
-\begin{verbatim}
-## [1] 0.01704112
-\end{verbatim}
+\justifying
+\bigskip
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{optweightsgarch \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2136498}\NormalTok{, }\FloatTok{0.6196197}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.1667305}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_garch \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsgarch, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_garch}\OperatorTok{$}\NormalTok{MVaR}
-\end{Highlighting}
-\end{Shaded}
+A figura \ref{fig:umpeso} apresenta os pesos de cada um dos activos para cada modelo de portfólio. Como seria de esperar em todos eles a empresa ENEL é a que apresenta uma maior representação, sendo que a empresa Société Générale, devido ao risco acrescido que apresenta é a que menos representação têm, sendo que no modelo GARCH nem é parte integrante do mesmo.
 
-\begin{verbatim}
-## [1] 0.02593275
-\end{verbatim}
+\begin{figure}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{SimReturnsRewma \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
-\NormalTok{equalweightsewma \textless{}{-}}\StringTok{ }\KeywordTok{Return.portfolio}\NormalTok{(SimReturnsRewma,}\DataTypeTok{weights =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.2502928}\NormalTok{, }\FloatTok{0.5540359}\NormalTok{, }\FloatTok{0.1141192}\NormalTok{, }\FloatTok{0.0815521}\NormalTok{)) }
-\KeywordTok{stdev}\NormalTok{(equalweightsewma}\OperatorTok{$}\NormalTok{portfolio.returns)}
-\end{Highlighting}
-\end{Shaded}
+{\centering \includegraphics[width=0.8\linewidth]{image/pesos} 
 
-\begin{verbatim}
-## [1] 0.01718991
-\end{verbatim}
+}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{optweightsewma \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.2502928}\NormalTok{, }\FloatTok{0.5540359}\NormalTok{, }\FloatTok{0.1141192}\NormalTok{, }\FloatTok{0.0815521}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_ewma \textless{}{-}}\StringTok{ }\KeywordTok{VaR}\NormalTok{(myPortfolioReturnsR, }\DataTypeTok{p=}\FloatTok{0.95}\NormalTok{,}\DataTypeTok{weights=}\NormalTok{optweightsewma, }\DataTypeTok{portfolio\_method =} \StringTok{"component"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"modified"}\NormalTok{)}
-\NormalTok{ModVaR\_}\DecValTok{95}\NormalTok{\_ewma}\OperatorTok{$}\NormalTok{MVaR}
-\end{Highlighting}
-\end{Shaded}
+\caption{Pesos de cada um dos activos nos portfólios}\label{fig:umpeso}
+\end{figure}
+\FloatBarrier
+\centering
 
-\begin{verbatim}
-## [1] 0.0271172
-\end{verbatim}
+Fonte:Elaboração própria.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{RealReturns \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(myPortfolioReturnsR)}
-\NormalTok{minvarRR \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(RealReturns) }
-\end{Highlighting}
-\end{Shaded}
+\justifying
+\bigskip
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{RealReturns2 \textless{}{-}}\StringTok{ }\KeywordTok{as.timeSeries}\NormalTok{(returns)}
-\NormalTok{minvarRR2 \textless{}{-}}\StringTok{ }\KeywordTok{minvariancePortfolio}\NormalTok{(RealReturns2) }
-\end{Highlighting}
-\end{Shaded}
+Na obtenção dos vários modelos pretendíamos também analisar qual é que seria o modelo que apresentaria menos risco para o investidor através da análise do VaR. Como o VaR está relacionado com o desvio padrão, quanto maior o valor deste último, maior o valor em risco para o investidor. Nos portfólios obtidos com os dados simulados, e de acordo com a figura \ref{fig:umsim}, o modelo GARCH é o que apresenta valores mais baixos, tanto para a variância como para o VaR a um dia. Tendo em consideração que um dos objectivos é a optimização de um portfólio minimizando o risco, de acordo com os dados apresentados, o modelo GARCH é o que apresenta uma melhor resposta ao risco, sendo que o VaR é o menor de entre os vários modelos.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{image/simulação} 
+
+}
+
+\caption{Estatísticas dos portfólios com dados simulados}\label{fig:umsim}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+A apresentação dos valores nas tabelas acima, recaíram sobre os dados obtidos pelos vários modelos, assim como pelas simulações. Na figura \ref{fig:dias} temos a aplicação dos pesos obtidos pelas simulações aos valores reais ao longo dos 80 dias de cotação, ou seja, até ao vencimento das opções a 18/09/2020.
+
+Nesses dados podemos verificar que a aplicação do pesos obtidos pelo modelo GARCH continua a ser o que apresenta menor risco para o investidor, sendo que o modelo obtido através da volatilidade implícita apresenta o maior risco. A coluna referente aos dados reais são referentes a obtenção de um portfólio que minimize a variância, utilizando os dados das cotações das empresa nesses 80 dias, comparando deste modo com os valores obtidos pelos portfólios das simulações quando aplicados aos dados reais.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{image/dadosreais80dias} 
+
+}
+
+\caption{Estatísticas do modelo aplicando dados cotações}\label{fig:dias}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+Na figura \ref{fig:grafico} podemos ver a evolução do valor dos vários portfólios versus o modelo obtido através dos dados reais. A tendência ao longo do tempo dos 3 modelos versus o modelo dos dados reais parecem em sintonia, sendo que apenas no inicio a tendência do portfólio real apresenta uma menor oscilação, sendo que depois se sobrepõe aos modelos.
+
+De uma forma geral a tendência parece ser bastante similar ao longo dos 80 dias.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{image/graficofinal} 
+
+}
+
+\caption{Evolução dos portfolios ao longo dos 80 dias}\label{fig:grafico}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+Quando analisamos os erros dos vários modelos comparativamente ao modelo real (figura \ref{ref:mae}, verificamos que o modelo que se aproxima mais do modelo real é o modelo desenvolvimento através da simulação GARCH. A previsão que apresenta uma maior discrepância relativo ao modelo real é o modelo da volatilidade implícita.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{image/mae} 
+
+}
+
+\caption{Métricas para qualidade do ajuste}\label{fig:mae}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
+
+A evolução dos retornos diários encontra-se ilustrados na figura \ref{fig:retggplot} para os vários modelos, apresentando, como verificado anteriormente a mesma tendência oa longo do tempo, havendo mesmo vários pontos de sobreposição.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/retggplot-1} 
+
+}
+
+\caption{Retornos dos portfólios - 80 dias}\label{fig:retggplot}
+\end{figure}
+\FloatBarrier
+\centering
+
+Fonte:Elaboração própria.
+
+\justifying
+\bigskip
 
 \hypertarget{conclusuxe3o}{%
 \chapter*{Conclusão}\label{conclusuxe3o}}
 \addcontentsline{toc}{chapter}{Conclusão}
+
+O objectivo deste trabalho era analisar o impacto da escolha do modelo de calculo da volatilidade na optimização de portfólios, pretendendo-se minimizar o risco para o investidor, assim como a aplicabilidade do software R na resolução de problemas de análise financeira, nomeadamente definição de portfólios e modelos para análise de series temporais.
+
+No que diz respeito ao software R podemos concluir que é uma ferramenta que disponibiliza toda uma panóplia de pacotes para análise financeira, sendo que facilmente se poderá equiparar a muitos softwares para análise financeiros pagos, sendo que o R têm uma comunidade bem implementada que partilha conhecimento em múltiplas áreas de conhecimentos, havendo mesmo anualmente um fórum de partilha de conhecimento dedicado exclusivamente ao software R aplicado ao sector financeiro.
+
+Quanto aos modelos desenvolvidos, podemos verificar que existe uma boa respostas dos vários modelos aos dados em estudo, embora aparentemente o modelo GARCH fosse o que apresenta-se uma melhor resposta. No entanto, recomenda-se realizar mais analise, partindo dos mesmos pressuposto de modo a verificar a coerência dos modelos e se eles realmente são resilientes quando aplicados a outros conjuntos de dados. De salientar que estes modelos são adequados para prever oscilações no mercado a curto prazo, sendo que quanto maior o tempo de simulação, maior a probabilidade do o modelo se comportar de forma anómala.Também de salientar que os modelos comportaram uma enorme oscilação na volatilidade que se verificou nos últimos meses de cotação, sendo que esses valores acabaram por ter maior impacto nos resultados obtidos para a obtenção dos valores referentes ao desvio padrão e consequentes simulações.
+
+Outro factor a ter em consideração é que todo os modelos comportam simulações onde o valor da volatilidade se mantêm constante ao logo dos 80 dias, sendo que na realidade isso não se verifica, sendo um factor negativo nestas análise. Já o retorno, como foi utilizado a taxa de juro sem risco a 3 meses, as oscilações aqui são mínimas, sendo que no entanto se ocorresse uma variação brusca nesse valor isso também acabaria por ter um impacto no modelo.
 
   \bibliography{book.bib,packages.bib}
 
@@ -2426,6 +2490,20 @@ No cálculo do VaR foi utilizado o VaR paramétrico com aproximação Cornish-Fi
 \begin{minipage}{0.90\linewidth}
     \centering
     \includegraphics[width=2\textwidth]{image/vi.png}
+\end{minipage}
+\end{center}
+
+
+\newpage
+
+\begin{center}
+ {\normalfont\Large\bfseries Dados cotações reais 80 dias -  estatísticas do portfolio}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.90\linewidth}
+    \centering
+    \includegraphics[width=2\textwidth]{image/realport.png}
 \end{minipage}
 \end{center}
 
