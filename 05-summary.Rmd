@@ -21,11 +21,11 @@ myPortfolioReturnsR <- ROC(myPortfolioR,type="discrete")[-1,]
 colnames(myPortfolioReturnsR) <- c("RealTEF","RealENEL","RealGLE","RealAIR")
 ```
 
-Os resultados obtidos estão ilustrados nas tabelas e gráfico apresentados seguidamente, em que na figura \@ref(fig:umdesvio) se apresentam os valores obtidos de desvio padrão para os retornos de cada uma das empresas em estudo. Este valores são da maior importância, pois têm grande impacto na simulação de monte carlo realizada e, deste modo, nos valores obtidos para os 80 dias em estudo.
+Os resultados obtidos estão ilustrados nas tabelas e gráficos apresentados seguidamente, em que na figura \@ref(fig:umdesvio) se apresentam os valores de desvio padrão para os retornos de cada uma das empresas em estudo. Este valores são da maior importância, pois têm grande impacto na simulação de monte carlo realizada e, deste modo, nos valores obtidos para os 80 dias em estudo.
 
-Os valore de desvio padrão são os obtidos ao dia 01/06/2020 de acordo com dados históricos para os modelos EWMA e GARCH, sendo que os obtidos pelo modelo da volatilidade implícita são os valores esperados pelos participantes no mercado financeiro para as opções do activos em estudo. Todos os valore são valores diários.
+Os valore de desvio padrão são os obtidos ao dia 01/06/2020 de acordo com dados históricos para os modelos EWMA e GARCH, sendo que os obtidos pelo modelo da volatilidade implícita são os valores esperados pelos participantes no mercado financeiro para as opções do activos em estudo.
 
-Ao analisar os valores para cada um dos métodos vs empresas não se pode afirmar que um dos métodos tivesse fornecido valores de desvio padrão superiores ao de outro método. O que se verifica é que, por exemplo, a empresa Société Générale é a que apresenta valores mais elevados de desvio padrão diário, seguida pela empresa Airbus. A empresa Enel apresenta valores de desvio padrão diários inferiores ás restantes empresas. Como o modelo de portfolio é minimizar a variância total, é de esperar um maior peso da empresa Enel em todos os modelos desenvolvidos.
+Ao analisar os valores para cada um dos métodos não se pode afirmar que um dos métodos tivesse fornecido valores de desvio padrão superiores ao de outro método. Ao analisar por empresas, Société Générale é a que apresenta valores mais elevados de desvio padrão diário, sendo que a empresa Enel apresenta valores de desvio padrão diários inferiores às restantes empresas. Como o objectivo na modelação do portfolio é minimizar a variância total, é de esperar um maior peso da empresa Enel em todos os modelos desenvolvidos.
 
 ```{r,umdesvio,echo=FALSE,fig.cap='Valores de desvio padrão calculados por modelo',out.width="80%"}
 knitr::include_graphics("image/desvio.png")
@@ -37,7 +37,7 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-A figura \@ref(fig:umpeso) apresenta os pesos de cada um dos activos para cada modelo de portfólio. Como seria de esperar em todos eles a empresa ENEL é a que apresenta uma maior representação, sendo que a empresa Société Générale, devido ao risco acrescido que apresenta é a que menos representação têm, sendo que no modelo GARCH nem é parte integrante do mesmo.
+A figura \@ref(fig:umpeso) apresenta os pesos de cada um dos activos para cada modelo de portfólio. Como seria de esperar em todos eles a empresa Enel é a que apresenta uma maior representação, sendo que a empresa Société Générale, devido ao risco acrescido que apresenta é a que menos representação têm, não estando presente no portefólio desenvolvido a partir dos valores obtidos pelo modelo GARCH.
 
 ```{r,umpeso,echo=FALSE,fig.cap='Pesos de cada um dos activos nos portfólios',out.width="80%"}
 knitr::include_graphics("image/pesos.png")
@@ -49,7 +49,7 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-Na obtenção dos vários modelos pretendíamos também analisar qual é que seria o modelo que apresentaria menos risco para o investidor através da análise do VaR. Como o VaR está relacionado com o desvio padrão, quanto maior o valor deste último, maior o valor em risco para o investidor. Nos portfólios obtidos com os dados simulados, e de acordo com a figura \@ref(fig:umsim), o modelo GARCH é o que apresenta valores mais baixos, tanto para a variância como para o VaR a um dia. Tendo em consideração que um dos objectivos é a optimização de um portfólio minimizando o risco, de acordo com os dados apresentados, o modelo GARCH é o que apresenta uma melhor resposta ao risco, sendo que o VaR é o menor de entre os vários modelos.
+Na obtenção dos vários modelos pretendíamos também analisar qual é que seria o modelo que apresentaria menos risco para o investidor através da análise do VaR. Como o VaR está relacionado com o desvio padrão, quanto maior o valor deste último, maior o valor em risco para o investidor. Nos portefólios obtidos com os dados simulados, e de acordo com a figura \@ref(fig:umsim), o modelo GARCH é o que apresenta valores mais baixos, tanto para a variância como para o VaR a um dia. Tendo em consideração que um dos objectivos é a optimização de um portfólio minimizando o risco, de acordo com os dados apresentados, o modelo GARCH é o que apresenta uma melhor resposta ao risco, sendo que o VaR é o menor de entre os vários modelos.
 
 ```{r,umsim,echo=FALSE,fig.cap='Estatísticas dos portfólios com dados simulados',out.width="80%"}
 knitr::include_graphics("image/simulação.png")
@@ -63,7 +63,7 @@ Fonte:Elaboração própria.
 
 A apresentação dos valores nas tabelas acima, recaíram sobre os dados obtidos pelos vários modelos, assim como pelas simulações. Na figura \@ref(fig:dias) temos a aplicação dos pesos obtidos pelas simulações aos valores reais ao longo dos 80 dias de cotação, ou seja, até ao vencimento das opções a 18/09/2020.
 
-Nesses dados podemos verificar que a aplicação do pesos obtidos pelo modelo GARCH continua a ser o que apresenta menor risco para o investidor, sendo que o modelo obtido através da volatilidade implícita apresenta o maior risco. A coluna referente aos dados reais são referentes a obtenção de um portfólio que minimize a variância, utilizando os dados das cotações das empresa nesses 80 dias, comparando deste modo com os valores obtidos pelos portfólios das simulações quando aplicados aos dados reais. 
+Nesses dados podemos verificar que a aplicação do pesos obtidos pelo modelo GARCH continua a ser o que apresenta menor risco para o investidor, sendo que o modelo obtido através da volatilidade implícita apresenta o maior risco. A coluna referente aos dados reais são referentes a obtenção de um portefólio que minimize a variância, utilizando os dados das cotações das empresa nesses 80 dias, comparando deste modo com os valores obtidos pelos portefólios das simulações quando aplicados aos dados reais das cotações das empresas em estudo. 
 
 ```{r,dias,echo=FALSE,fig.cap='Estatísticas do modelo aplicando dados cotações',out.width="80%"}
 knitr::include_graphics("image/dadosreais80dias.png")
@@ -79,7 +79,7 @@ Na figura \@ref(fig:grafico) podemos ver a evolução do valor dos vários portf
 
 De uma forma geral a tendência parece ser bastante similar ao longo dos 80 dias. 
 
-```{r,grafico,echo=FALSE,fig.cap='Evolução dos portfolios ao longo dos 80 dias',out.width="80%"}
+```{r,grafico,echo=FALSE,fig.cap='Evolução dos portfolios ao longo dos 80 dias',out.width="100%"}
 knitr::include_graphics("image/graficofinal.png")
 ```
 \FloatBarrier
@@ -89,7 +89,7 @@ Fonte:Elaboração própria.
 \justifying
 \bigskip
 
-Quando analisamos os erros dos vários modelos comparativamente ao modelo real (figura \@ref(ref:mae), verificamos que o modelo que se aproxima mais do modelo real é o modelo desenvolvimento através da simulação GARCH. A previsão que apresenta uma maior discrepância relativo ao modelo real é o modelo da volatilidade implícita. 
+Quando analisamos os erros dos vários modelos comparativamente ao modelo real (figura \@ref{ref:mae}, verificamos que o modelo que se aproxima mais do modelo real é o modelo desenvolvimento através da simulação GARCH. A previsão que apresenta uma maior discrepância relativo ao modelo real é o modelo da volatilidade implícita. 
 
 ```{r,mae,echo=FALSE,fig.cap='Métricas para qualidade do ajuste',out.width="80%"}
 knitr::include_graphics("image/mae.png")
@@ -140,7 +140,7 @@ realones <-na.omit(merge(real$portfolio.returns,realewma$portfolio.returns,realg
 colnames(realones) <- c("Real","Realewma","Realgarch","Realvi")
 ```
 
-```{r,retggplot,echo=FALSE, fig.cap='Retornos dos portfólios - 80 dias',fig.topcaption = TRUE,out.width = "80%"}
+```{r,retggplot,echo=FALSE, fig.cap='Retornos dos portfólios - 80 dias',fig.topcaption = TRUE,out.width = "100%"}
 realones<-data.frame(date = index(realones),realones, row.names=NULL)
 
 ggplot(data=realones)+

@@ -1,36 +1,35 @@
 \babel@toc {portuguese}{}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Função distribuição N(x)\relax }}{18}{figure.caption.9}%
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Volatility Smile\relax }}{19}{figure.caption.10}%
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Evolução da covariância ao aumentar a diversificação no portfolio.\relax }}{22}{figure.caption.11}%
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Fronteira eficiente\relax }}{23}{figure.caption.12}%
-\contentsline {figure}{\numberline {1.5}{\ignorespaces VaR com intervalo confiança 95\% e 99\%.\relax }}{25}{figure.caption.13}%
-\contentsline {figure}{\numberline {1.6}{\ignorespaces Kurtosis\relax }}{27}{figure.caption.14}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Função distribuição N(d)\relax }}{20}{figure.caption.9}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Volatility Smile\relax }}{21}{figure.caption.10}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Evolução da covariância ao aumentar a diversificação no portefólio.\relax }}{24}{figure.caption.11}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Fronteira eficiente\relax }}{25}{figure.caption.12}%
+\contentsline {figure}{\numberline {1.5}{\ignorespaces VaR com intervalo confiança 95\% e 99\%.\relax }}{27}{figure.caption.13}%
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Curtosis\relax }}{29}{figure.caption.14}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Empresas extraidas do Euro Stoxx 50\relax }}{34}{figure.caption.15}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Modelação do processo\relax }}{35}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Evolução das cotações nos últimos 5 anos\relax }}{36}{figure.caption.18}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Volatilidade nos últimos 4 anos\relax }}{38}{figure.caption.20}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Distribuição dos retornos\relax }}{40}{figure.caption.23}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Teste a normalidade das distribuições\relax }}{41}{figure.caption.24}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces EWMA\relax }}{42}{figure.caption.26}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Simulação Monte Carlo para 80 dias\relax }}{44}{figure.caption.28}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces EWMA - Fronteira eficiente\relax }}{46}{figure.caption.30}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Telefónica\relax }}{50}{figure.caption.34}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces ENEL\relax }}{52}{figure.caption.37}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces SOCIÉTÉ GÉNÉRALE\relax }}{54}{figure.caption.40}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces AIRBUS\relax }}{57}{figure.caption.43}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Simulação Monte Carlo para 80 dias\relax }}{58}{figure.caption.44}%
-\contentsline {figure}{\numberline {3.15}{\ignorespaces GARCH - Fronteira eficiente\relax }}{59}{figure.caption.46}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Opções call sobre as empresas \relax }}{60}{figure.caption.48}%
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Simulação Monte Carlo para 80 dias\relax }}{62}{figure.caption.50}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Volatilidade Implícita - Fronteira eficiente\relax }}{63}{figure.caption.52}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Empresas extraidas do Euro Stoxx 50\relax }}{36}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Modelação do processo\relax }}{37}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Evolução das cotações nos últimos 5 anos\relax }}{38}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Volatilidade nos últimos 4 anos\relax }}{40}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Distribuição dos retornos logarítmicos\relax }}{42}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Média móvel exponencial ponderada (EWMA)\relax }}{44}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Simulação Monte Carlo para 80 dias\relax }}{46}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces EWMA - Fronteira eficiente\relax }}{47}{figure.caption.29}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Telefónica - Análise gráfica do modelo GARCH\relax }}{52}{figure.caption.33}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Enel- Análise gráfica do modelo GARCH\relax }}{54}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Société Générale - Análise gráfica do modelo GARCH\relax }}{57}{figure.caption.39}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Airbus - Análise gráfica do modelo GARCH\relax }}{59}{figure.caption.42}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Simulação Monte Carlo para 80 dias\relax }}{60}{figure.caption.43}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces GARCH - Fronteira eficiente\relax }}{61}{figure.caption.45}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Opções call sobre as empresas \relax }}{63}{figure.caption.47}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Simulação Monte Carlo para 80 dias\relax }}{64}{figure.caption.49}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Volatilidade Implícita - Fronteira eficiente\relax }}{65}{figure.caption.51}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Valores de desvio padrão calculados por modelo\relax }}{66}{figure.caption.54}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Pesos de cada um dos activos nos portfólios\relax }}{67}{figure.caption.55}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Estatísticas dos portfólios com dados simulados\relax }}{67}{figure.caption.56}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Estatísticas do modelo aplicando dados cotações\relax }}{68}{figure.caption.57}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Evolução dos portfolios ao longo dos 80 dias\relax }}{68}{figure.caption.58}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Métricas para qualidade do ajuste\relax }}{69}{figure.caption.59}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Retornos dos portfólios - 80 dias\relax }}{69}{figure.caption.60}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Valores de desvio padrão calculados por modelo\relax }}{68}{figure.caption.53}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Pesos de cada um dos activos nos portfólios\relax }}{69}{figure.caption.54}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Estatísticas dos portfólios com dados simulados\relax }}{69}{figure.caption.55}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Estatísticas do modelo aplicando dados cotações\relax }}{70}{figure.caption.56}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Evolução dos portfolios ao longo dos 80 dias\relax }}{70}{figure.caption.57}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Métricas para qualidade do ajuste\relax }}{71}{figure.caption.58}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Retornos dos portfólios - 80 dias\relax }}{71}{figure.caption.59}%

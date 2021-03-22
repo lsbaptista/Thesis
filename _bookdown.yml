@@ -1,5 +1,7 @@
 book_filename: "bookdown-demo"
 language:
+  label:
+    prp: "Propriedade "
   ui:
     chapter_name: "Capitulo "
 delete_merged_file: true

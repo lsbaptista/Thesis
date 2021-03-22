@@ -2,25 +2,25 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Société Générale.Euronext Paris-25-05-2020/01-06-2020\relax }}{36}{table.caption.17}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Estatísticas das cotações\relax }}{37}{table.caption.19}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Matrix correlação dos retornos\relax }}{38}{table.caption.21}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Estatísticas dos retornos\relax }}{39}{table.caption.22}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Teste normalidade Shapiro-Wilk\relax }}{41}{table.caption.25}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces EWMA\relax }}{43}{table.caption.27}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces EWMA - Valores simulados\relax }}{45}{table.caption.29}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces EWMA - Pesos no portfolio\relax }}{46}{table.caption.31}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces TEF coeficientes\relax }}{48}{table.caption.32}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces Standardized Residuals Tests\relax }}{49}{table.caption.33}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces ENEL coeficientes\relax }}{51}{table.caption.35}%
-\contentsline {table}{\numberline {3.12}{\ignorespaces ENEL Standardized Residuals Tests\relax }}{51}{table.caption.36}%
-\contentsline {table}{\numberline {3.13}{\ignorespaces GLE coeficientes\relax }}{53}{table.caption.38}%
-\contentsline {table}{\numberline {3.14}{\ignorespaces GLE Standardized Residuals Tests\relax }}{54}{table.caption.39}%
-\contentsline {table}{\numberline {3.15}{\ignorespaces AIR coeficientes\relax }}{55}{table.caption.41}%
-\contentsline {table}{\numberline {3.16}{\ignorespaces AIR Standardized Residuals Tests\relax }}{56}{table.caption.42}%
-\contentsline {table}{\numberline {3.17}{\ignorespaces GARCH - Valores simulados\relax }}{58}{table.caption.45}%
-\contentsline {table}{\numberline {3.18}{\ignorespaces GARCH - Pesos no portfolio\relax }}{59}{table.caption.47}%
-\contentsline {table}{\numberline {3.19}{\ignorespaces Volatilidade Implícita\relax }}{61}{table.caption.49}%
-\contentsline {table}{\numberline {3.20}{\ignorespaces Vol. Implicita - Valores simulados\relax }}{62}{table.caption.51}%
-\contentsline {table}{\numberline {3.21}{\ignorespaces Vol Implicita- Pesos no portfolio\relax }}{63}{table.caption.53}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Cotação Société Générale na Euronext-25-05-2020/01-06-2020\relax }}{38}{table.caption.17}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Estatísticas das cotações\relax }}{39}{table.caption.19}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Matrix correlação dos retornos\relax }}{40}{table.caption.21}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Estatísticas dos retornos\relax }}{41}{table.caption.22}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Teste normalidade Shapiro-Wilk\relax }}{43}{table.caption.24}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Média móvel exponencial ponderada (EWMA)\relax }}{44}{table.caption.26}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Valores simulados com a variância obtida pelo método EWMA\relax }}{46}{table.caption.28}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces Método EWMA - Pesos no portefólio\relax }}{48}{table.caption.30}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Telefónica - Coeficientes do modelo GARCH\relax }}{50}{table.caption.31}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Telefónica - Teste de resíduos padronizados\relax }}{51}{table.caption.32}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Enel - Coeficientes do modelo GARCH\relax }}{53}{table.caption.34}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Enel - Teste de resíduos padronizados\relax }}{54}{table.caption.35}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces Société Générale - Coeficientes do modelo GARCH\relax }}{55}{table.caption.37}%
+\contentsline {table}{\numberline {3.14}{\ignorespaces Société Générale - Teste de resíduos padronizados \relax }}{56}{table.caption.38}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces Airbus - Coeficientes do modelo GARCH\relax }}{58}{table.caption.40}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces Airbus - Teste de resíduos padronizados\relax }}{59}{table.caption.41}%
+\contentsline {table}{\numberline {3.17}{\ignorespaces Valores simulados com a variância obtida pelo método GARCH\relax }}{61}{table.caption.44}%
+\contentsline {table}{\numberline {3.18}{\ignorespaces GARCH - Pesos no portefólio\relax }}{62}{table.caption.46}%
+\contentsline {table}{\numberline {3.19}{\ignorespaces Volatilidade Implícita\relax }}{63}{table.caption.48}%
+\contentsline {table}{\numberline {3.20}{\ignorespaces Valores simulados com a variância obtida pelo método da volatilidade implicita\relax }}{65}{table.caption.50}%
+\contentsline {table}{\numberline {3.21}{\ignorespaces Volatilidade Implicita- Pesos no portefólio\relax }}{66}{table.caption.52}%
 \addvspace {10\p@ }

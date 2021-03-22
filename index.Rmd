@@ -31,24 +31,76 @@ lot: True
 
 # Simbologia e notações{.unnumbered}
 
+ACF - Função de auto-correlação; \
 
-**ARMA** - Autoregressive–moving-average; \
+ARMA - Auto-regressivo de médias móveis; \
 
-**ARCH** - Autoregressive conditional heteroscedasticity; \
+ARCH - Heteroscedasticidade condicional auto-regressiva; \
 
-**CMP** - Capital market line; \
+CMP - Reta do mercado capital; \
 
-**DEaR** - Daily Value at Risk; \
+DEaR - Daily Value at Risk; \
 
-**EWMA** - Exponentially Weighted Moving Average (EWMA); \
+EWMA - Média móvel exponencial ponderada  (EWMA); \
 
-**EGARC** - Exponential generalized autoregressive conditional heteroscedastic; \
+EGARCH - Heteroscedasticidade condicional auto-regressiva generalizada exponencial; \
 
-**GARCH** - Generalized autoregressive conditional heteroskedasticity; \
+GARCH - Heteroscedasticidade condicional auto-regressiva generalizada ; \
 
-**VaR** - Value at Risk; \
+i.i.d - independente e identicamente distribuída; \
 
-**VI** - Volatilidade Implícita; \
+K - Preço de exercício da opção; \
+
+MAE - Erro absoluto médio; \
+
+MSE - Erro quadrático médio; \
+
+RMSE - Desvio padrão empírico (amostral) generalizado; \
+
+r - Retorno; \
+
+$r_j$ - Taxa de juro sem risco; \
+
+S - Valor do activo; \
+
+VaR - Value at Risk; \
+
+VI - Volatilidade Implícita; \
+
+X - Fracção investida no activo; \
+
+$\mu$ - Média; \
+
+$\sigma$ - Desvio padrão; \
+
+$\sigma^2$ - Variância; \
+
+$\sigma_{ij}$ - Covariância; \
+
+$\varepsilon$ - variável com distribuição normal N(0,1); \
+
+$\phi$ - Parâmetros do modelo AR; \
+
+$\theta$ - Parâmetros do modelo MA; \
+
+$\mathcal{V}$ - Taxa de variância de longo prazo; \
+
+$\gamma\ \alpha\ \beta$ - Pesos atribuídos no modelo GARCH; \
+
+$\omega$ - o mesmo que $\gamma\mathcal{V}$; \
+
+$\rho$ - Correlação; \
+
+$\zeta_1$ - Valor da assimetria; \
+
+$\zeta_2$ - Valor do excesso de curtose; \
+
+
+
+
+
+
+
 
 
 
